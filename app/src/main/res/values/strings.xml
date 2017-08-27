@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PikerFree</string>
+    <string name="text_summary">Home</string>
+    <string name="text_quest">News</string>
+    <string name="text_message">Messages</string>
+    <string name="text_setting">Setting</string>
+
+    <string name="intro_1">A wise man once said that "One man's trash is another man treasure"</string>
+    <string name="intro_2">Some intro sentence</string>
+    <string name="intro_3">Some intro sentence </string>
+    <string name="intro_4">Some intro sentence </string>
+    <string name="do_fast_test">Some intro sentence </string>
+    <string name="do_test">Start</string>
+    <string name="dummy_string">My old laptop still work fine but i just bough new one so i want to give away this old one. Please feel free to message me. Im ready to call at any time.</string>
+    <string name="title_of_item_hint">Title of item...</string>
+    <string name="short_description">A short description ...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

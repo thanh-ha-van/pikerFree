@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4299E9</color>
+    <color name="colorPrimaryDark">#4299E9</color>
+    <color name="colorAccent">#5C0804</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#E2E2E2</color>
+    <color name="gray_2">#C2C2C2</color>
+    <color name="colorBlackLight">#EEEEEE</color>
+    <color name="green">#55A01A</color>
+    <color name="orange">#EC5D10</color><!--#-->
+    <color name="colorDeepSaffron">#4299E9</color> <!--#FFA726-->
+    <color name="colorGamboge">#C2C2C2</color> <!--#FFA726-->
+    <color name="colorRobinEggBlue">#4299E9</color>
+</resources>
