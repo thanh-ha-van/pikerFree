@@ -33,5 +33,7 @@
     <!-- for status of post -->
 
     <string name="status_open">Opening</string>
+    <string name="post">Post this</string>
+    <string name="new_post">New post</string>
     <string name="status_close">Closed</string>
 </resources>
