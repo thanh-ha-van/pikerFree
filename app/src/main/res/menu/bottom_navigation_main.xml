@@ -6,23 +6,23 @@
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="@string/text_summary"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/action_quest"
         android:enabled="true"
         android:icon="@drawable/ic_cube"
         android:title="@string/text_quest"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/action_message"
         android:enabled="true"
         android:icon="@drawable/ic_messenger"
         android:title="@string/text_message"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/action_setting"
         android:enabled="true"
         android:icon="@drawable/ic_controls"
         android:title="@string/text_setting"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|withText" />
 </menu>

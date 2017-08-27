@@ -9,9 +9,8 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 
 /**
- * Created by NGUYENHUONG on 6/28/17.
+ * Created by HaVan on 6/1/2017.
  */
-
 public class HandleAnimationView {
     public void slideExitView(final View currentView, final View comingView) {
         comingView.setTranslationX(comingView.getWidth());

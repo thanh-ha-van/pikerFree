@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.DummyData;
-import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.objects.Post;
+import ha.thanh.pikerfree.utils.Utils;
 
 /**
  * Created by HaVan on 8/27/2017.
@@ -42,8 +44,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         ImageView imgPostImage;
         @BindView(R.id.tv_title)
         TextView tvTitle;
-        @BindView(R.id.tv_description)
-        TextView tvDescription;
+        @BindView(R.id.tv_day)
+        TextView tvDay;
+        @BindView(R.id.tv_status)
+        TextView tvStatus;
 
         MyViewHolder(View view) {
             super(view);
@@ -90,10 +94,33 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 .into(holder.imgPostImage);
 
         holder.tvTitle.setText(post.getTitle());
-        holder.tvDescription.setText(post.getDescription());
+        holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
+        holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
+        holder.tvStatus.setBackground(getDrawFromStatus(post.getStatus()));
 
     }
 
+    private String getTextFromStatus(int status) {
+        switch (status) {
+            case 1:
+                return mConText.getResources().getString(R.string.status_open);
+            case 2:
+                return mConText.getResources().getString(R.string.status_close);
+            default:
+                return "";
+        }
+    }
+
+    private Drawable getDrawFromStatus(int status) {
+        switch (status) {
+            case 1:
+                return mConText.getResources().getDrawable(R.drawable.plate_fill_green);
+            case 2:
+                return mConText.getResources().getDrawable(R.drawable.plate_fill_orange);
+            default:
+                return null;
+        }
+    }
 
     @Override
     public int getItemCount() {

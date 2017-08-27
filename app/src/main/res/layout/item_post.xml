@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:background="@drawable/plate"
     android:layout_margin="8dp"
+    android:background="@drawable/plate"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/img_post_image"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
         android:background="@color/gray_2"
@@ -17,10 +17,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingRight="16dp"
-        android:weightSum="5">
+        android:weightSum="4">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
@@ -31,18 +31,31 @@
             android:gravity="center_vertical"
             android:lines="1"
             android:text="Old Laptop Acer"
-            android:textSize="18sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_day"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="4"
-            android:paddingRight="16dp"
-            android:text="My old laptop still work fine but i just bough new one so i want to give away this old one. Please feel free to message me. I'm ready to call at any time."
-            android:textSize="14sp" />
+            android:text="77/08/2017"
+            android:textSize="16sp" />
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:id="@+id/tv_status"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/plate_fill_green"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="4"
+            android:text="Open"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

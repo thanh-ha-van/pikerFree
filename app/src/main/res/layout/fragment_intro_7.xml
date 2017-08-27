@@ -22,7 +22,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="@string/do_fast_test"
+            android:text="@string/intro_5"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:font="Trebuchet.ttf" />
@@ -35,7 +35,7 @@
         android:layout_gravity="center"
         android:background="@drawable/plate"
         android:gravity="center"
-        android:text="@string/do_test"
+        android:text="@string/start"
         android:textAllCaps="false"
         android:textColor="@color/orange"
         android:textSize="20sp"

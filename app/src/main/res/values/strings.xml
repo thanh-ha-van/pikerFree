@@ -1,20 +1,37 @@
 <resources>
     <string name="app_name">PikerFree</string>
+
+    <!-- for the bottom navigation -->
     <string name="text_summary">Home</string>
     <string name="text_quest">News</string>
-    <string name="text_message">Messages</string>
+    <string name="text_message">Message</string>
     <string name="text_setting">Setting</string>
 
+    <!-- for intro messages -->
     <string name="intro_1">A wise man once said that "One man's trash is another man treasure"</string>
     <string name="intro_2">Some intro sentence</string>
     <string name="intro_3">Some intro sentence </string>
     <string name="intro_4">Some intro sentence </string>
-    <string name="do_fast_test">Some intro sentence </string>
-    <string name="do_test">Start</string>
+    <string name="intro_5">Some intro sentence </string>
+    <string name="start">Start</string>
+
+    <!-- dummy string. must be removed later -->
     <string name="dummy_string">My old laptop still work fine but i just bough new one so i want to give away this old one. Please feel free to message me. Im ready to call at any time.</string>
     <string name="title_of_item_hint">Title of item...</string>
     <string name="short_description">A short description ...</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- for login/out/ sign ... -->
+    <string name="input_username">Username...</string>
+    <string name="input_phone">Phone number...</string>
+    <string name="password">Password...</string>
+    <string name="password_confirm">Confirm password...</string>
+    <string name="login">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="dont_have_account">Don\'t have an account? just sign up</string>
+    <string name="already_have_an_account">Already have an account? just log in</string>
+    <string name="forgot_password">Forgot password</string>
+    <!-- for status of post -->
+
+    <string name="status_open">Opening</string>
+    <string name="status_close">Closed</string>
 </resources>

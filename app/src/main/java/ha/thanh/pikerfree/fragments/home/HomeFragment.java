@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.PostAdapter;
-import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.objects.Post;
 
 public class HomeFragment extends Fragment implements HomeInterface.RequiredViewOps {
     @BindView(R.id.rv_my_post)

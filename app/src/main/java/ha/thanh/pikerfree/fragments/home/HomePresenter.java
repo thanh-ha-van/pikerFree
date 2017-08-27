@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.objects.Post;
 
 /**
  * Created by HaVan on 8/27/2017.

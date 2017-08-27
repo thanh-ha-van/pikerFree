@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         viewPager.addOnPageChangeListener(onPageChangeListener);
         setupViewPager(viewPager);
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
     }
 
 

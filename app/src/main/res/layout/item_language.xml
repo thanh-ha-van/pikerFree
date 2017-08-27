@@ -29,7 +29,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1">
 
-            <thanh.ha.gifted.customviews.CustomTextView
+            <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/tv_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

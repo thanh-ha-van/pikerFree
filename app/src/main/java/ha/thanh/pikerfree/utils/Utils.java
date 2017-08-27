@@ -1,27 +1,15 @@
 package ha.thanh.pikerfree.utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Utils {
 
-    public static String md5(String md5) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes());
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException ignored) {
-        }
-        return "";
-    }
 
-    public static int getCurrentTimestamp() {
-        return (int) (System.currentTimeMillis() / 1000);
+    public static long getCurrentTimestamp() {
+        return  System.currentTimeMillis();
     }
 
     public static int startTimeToday(int timestamp) {
@@ -41,10 +29,19 @@ public class Utils {
     }
 
 
-    public static int get30DaysBefore() {
-        return startTimeToday(getCurrentTimestamp()) - 30 * 86400;
+    public static String getTimeString(long timestamp) {
+        try{
+            Calendar calendar = Calendar.getInstance();
+            TimeZone tz = calendar.getTimeZone();
+            calendar.setTimeInMillis(timestamp);
+            calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            Date currentTimeZone = calendar.getTime();
+            return sdf.format(currentTimeZone);
+        }catch (Exception e) {
+        }
+        return "";
     }
-
 
     public static String getFormatTime(int timestamp) {
         int h = (timestamp / 3600);
