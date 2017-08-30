@@ -40,6 +40,5 @@ public class CustomAlertDialog{
 
         alertDialog.show();
 
-
     }
 }

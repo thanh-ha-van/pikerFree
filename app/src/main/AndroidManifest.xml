@@ -18,17 +18,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.mainActivity.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.newPostActivity.NewPostActivity" />
-        <activity android:name=".activities.login.LoginActivity" >
+        <activity android:name=".activities.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.signup.SignUpActivity">
-        </activity>
+        <activity android:name=".activities.signup.SignUpActivity"></activity>
+        <activity android:name=".activities.forgetPassword.ForgetPassActivity"></activity>
     </application>
 
 </manifest>

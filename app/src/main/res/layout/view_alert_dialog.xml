@@ -4,11 +4,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/plate_orange_light"
-    android:orientation="vertical"
-    android:padding="20dp"
     android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:layout_marginRight="20dp"
+    android:background="@drawable/plate"
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/tv_content"
@@ -18,7 +18,6 @@
         android:layout_marginTop="20dp"
         android:padding="5dp"
         android:text="Content"
-        android:textColor="@color/white"
         android:textSize="16sp"
         app:font="Trebuchet.ttf" />
 
@@ -28,13 +27,11 @@
         android:layout_height="40dp"
         android:layout_below="@+id/tv_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/plate"
-        android:gravity="center"
         android:layout_marginTop="20dp"
+        android:background="@drawable/plate_big_corner"
+        android:gravity="center"
         android:text="OK"
-        android:textColor="@color/orange"
-        android:textSize="18sp"
-        app:font="Trebuchet.ttf" />
+        android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/tv_title"
@@ -44,7 +41,6 @@
         android:padding="5dp"
         android:text="Title"
         android:textAllCaps="true"
-        android:textColor="@color/white"
         android:textSize="18sp"
         app:font="Trebuchet.ttf" />
 </RelativeLayout>
