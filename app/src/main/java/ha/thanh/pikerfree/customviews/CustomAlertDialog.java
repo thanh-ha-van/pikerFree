@@ -15,14 +15,18 @@ import ha.thanh.pikerfree.R;
  */
 
 public class CustomAlertDialog{
-    public void showAlertDialog(Activity activity, String title, String message) {
+    private Dialog alertDialog;
 
-        final Dialog alertDialog = new Dialog(activity);
+    public CustomAlertDialog(Activity activity) {
+        alertDialog = new Dialog(activity);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         alertDialog.setCanceledOnTouchOutside(true);
         alertDialog.setContentView(R.layout.view_alert_dialog);
+    }
+
+    public void showAlertDialog(String title, String message) {
 
         TextView tvTitle = (TextView) alertDialog.findViewById(R.id.tv_title);
         tvTitle.setText(title);

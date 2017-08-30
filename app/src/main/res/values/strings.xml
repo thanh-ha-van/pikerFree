@@ -6,7 +6,7 @@
     <string name="text_quest">News</string>
     <string name="text_message">Message</string>
     <string name="text_setting">Setting</string>
-
+    <string name="back">Back</string>
     <!-- for intro messages -->
     <string name="intro_1">A wise man once said that "One man's trash is another man treasure"</string>
     <string name="intro_2">Some intro sentence</string>
@@ -28,11 +28,14 @@
     <string name="password_confirm">Confirm password...</string>
     <string name="login">Log in</string>
     <string name="sign_up">Sign up</string>
+    <string name="we_need_email">We just need your registered email to send your password reset instructions.</string>
     <string name="dont_have_account">Don\'t have an account? just sign up</string>
     <string name="already_have_an_account">Already have an account? just log in</string>
-    <string name="forgot_password">Forgot password</string>
+    <string name="forgot_password">Forget password</string>
     <string name="minimum_password">Password must at least 6 characters</string>
     <string name="auth_failed">Sorry! Auth failed.</string>
+    <string name="reset_pass">Reset password</string>
+
     <!-- for status of post -->
 
     <string name="status_open">Opening</string>

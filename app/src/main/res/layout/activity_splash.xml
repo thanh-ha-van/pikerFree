@@ -19,7 +19,7 @@
             android:gravity="bottom"
             android:text="LoL"
             android:textColor="@color/white"
-            android:textSize="100sp" />
+            android:textSize="180sp" />
 
     </LinearLayout>
 

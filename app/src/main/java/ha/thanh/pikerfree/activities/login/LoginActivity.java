@@ -12,7 +12,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,11 +26,11 @@ import ha.thanh.pikerfree.customviews.WaitingDialog;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    @BindView(R.id.et_username)
+    @BindView(R.id.et_email_login)
     EditText etUserName;
     @BindView(R.id.et_pass)
     EditText etPass;
-    CustomAlertDialog alertDialog = new CustomAlertDialog();
+    CustomAlertDialog alertDialog;
     WaitingDialog waitingDialog;
 
     @Override
@@ -40,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         auth = FirebaseAuth.getInstance();
+        alertDialog = new CustomAlertDialog(this);
         waitingDialog = new WaitingDialog(this);
         checkLogIn();
     }
@@ -69,11 +69,11 @@ public class LoginActivity extends AppCompatActivity {
         final String password = etPass.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
-            alertDialog.showAlertDialog(this, "Error", "Enter email address");
+            alertDialog.showAlertDialog("Oop!", "Please enter your registered email address");
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            alertDialog.showAlertDialog(this, "Error", "Enter email address");
+            alertDialog.showAlertDialog("Oop!", "Please enter your password");
             return;
         }
         showWaiting();
@@ -87,9 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                             if (password.length() < 6) {
                                 etPass.setError(getString(R.string.minimum_password));
                                 hideWaiting();
-                            } else {
-                                alertDialog.showAlertDialog(LoginActivity.this, "Error", "Enter email address");
-                                hideWaiting();
                             }
                         } else {
                             hideWaiting();
@@ -102,9 +99,9 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        if (e instanceof FirebaseAuthException) {
+                        {
                             hideWaiting();
-                            alertDialog.showAlertDialog(LoginActivity.this, "Error", e.getMessage());
+                            alertDialog.showAlertDialog("Oop!", e.getMessage());
                         }
                     }
                 });
@@ -113,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     public void showWaiting() {
         waitingDialog.showDialog();
     }
+
     public void hideWaiting() {
         waitingDialog.hideDialog();
     }

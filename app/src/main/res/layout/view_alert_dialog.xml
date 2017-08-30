@@ -18,8 +18,7 @@
         android:layout_marginTop="20dp"
         android:padding="5dp"
         android:text="Content"
-        android:textSize="16sp"
-        app:font="Trebuchet.ttf" />
+        android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/btn_ok_dialog"
@@ -28,8 +27,9 @@
         android:layout_below="@+id/tv_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/plate_big_corner"
+        android:background="@drawable/plate_blue"
         android:gravity="center"
+        android:textColor="@color/colorPrimary"
         android:text="OK"
         android:textSize="18sp" />
 
@@ -41,6 +41,5 @@
         android:padding="5dp"
         android:text="Title"
         android:textAllCaps="true"
-        android:textSize="18sp"
-        app:font="Trebuchet.ttf" />
+        android:textSize="20sp"/>
 </RelativeLayout>
