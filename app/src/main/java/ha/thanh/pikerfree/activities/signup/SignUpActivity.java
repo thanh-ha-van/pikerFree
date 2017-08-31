@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.mainActivity.MainActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
@@ -53,17 +54,17 @@ public class SignUpActivity extends AppCompatActivity {
         String password = etPass.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Enter email address!", Toast.LENGTH_SHORT).show();
+            alertDialog.showAlertDialog("Whoop!", "Email must not be empty");
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Enter password!", Toast.LENGTH_SHORT).show();
+            alertDialog.showAlertDialog("Whoop!", "Password must not be empty");
             return;
         }
 
         if (password.length() < 6) {
-            Toast.makeText(this, "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+            alertDialog.showAlertDialog("Whoop!", "Password must not be empty... and at least 6 characters");
             return;
         }
         waitingDialog.showDialog();
@@ -91,5 +92,11 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @OnClick(R.id.btn_log_in)
+    public void goToLogin() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }

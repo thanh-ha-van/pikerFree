@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ import ha.thanh.pikerfree.fragments.intro.IntroFragment4;
 import ha.thanh.pikerfree.fragments.intro.IntroFragment5;
 
 
-public class IntroActivity extends AppCompatActivity implements IntroInterface.RequiredViewOps{
+public class IntroActivity extends AppCompatActivity implements IntroInterface.RequiredViewOps {
     @BindView(R.id.vp_intro)
     public ViewPager vpIntro;
     private List<Fragment> introFragments;
@@ -34,8 +33,8 @@ public class IntroActivity extends AppCompatActivity implements IntroInterface.R
     public LinearLayout pager_indicator;
     @BindView(R.id.view_title)
     View viewTitle;
-    @BindView(R.id.tv_next)
-    public TextView tvNext;
+    @BindView(R.id.img_next)
+    public ImageView imgNext;
     @BindView(R.id.img_back)
     public ImageView imgBack;
 
@@ -98,15 +97,6 @@ public class IntroActivity extends AppCompatActivity implements IntroInterface.R
         currentPosition = position;
         switchDot();
         animationIntroFragment();
-        if (position == 0) {
-            viewTitle.setVisibility(View.GONE);
-        } else if (position == introFragments.size() - 1) {
-            tvNext.setVisibility(View.INVISIBLE);
-            viewTitle.setVisibility(View.VISIBLE);
-        } else {
-            tvNext.setVisibility(View.VISIBLE);
-            viewTitle.setVisibility(View.VISIBLE);
-        }
     }
 
 
@@ -123,18 +113,18 @@ public class IntroActivity extends AppCompatActivity implements IntroInterface.R
     }
 
     private void switchDot() {
-        for (int i = 1; i < introFragments.size(); i++) {
+        for (int i = 0; i < introFragments.size(); i++) {
             if (i == currentPosition)
-                dots[i - 1].setImageResource(R.drawable.seclected_dot);
+                dots[i].setImageResource(R.drawable.seclected_dot);
             else
-                dots[i - 1].setImageResource(R.drawable.none_seclected_dot);
+                dots[i].setImageResource(R.drawable.none_seclected_dot);
         }
 
     }
 
     private void setUiPageViewController() {
-        dots = new ImageView[introFragments.size() - 1];
-        for (int i = 0; i < introFragments.size() - 1; i++) {
+        dots = new ImageView[introFragments.size()];
+        for (int i = 0; i < introFragments.size(); i++) {
             dots[i] = new ImageView(this);
             dots[i].setImageResource(R.drawable.none_seclected_dot);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -147,7 +137,7 @@ public class IntroActivity extends AppCompatActivity implements IntroInterface.R
         dots[0].setImageResource(R.drawable.seclected_dot);
     }
 
-    @OnClick(R.id.tv_next)
+    @OnClick(R.id.img_next)
     public void btnNextClicked() {
         if (currentPosition < introFragments.size() - 1)
             vpIntro.setCurrentItem(currentPosition + 1);

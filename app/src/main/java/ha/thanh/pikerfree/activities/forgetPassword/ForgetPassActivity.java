@@ -63,8 +63,4 @@ public class ForgetPassActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.btn_back)
-    public void goBack() {
-        onBackPressed();
-    }
 }

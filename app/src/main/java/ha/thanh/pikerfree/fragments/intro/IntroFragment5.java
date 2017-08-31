@@ -11,7 +11,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.login.LoginActivity;
-import ha.thanh.pikerfree.activities.mainActivity.MainActivity;
 
 
 public class IntroFragment5 extends IntroFragment {
@@ -19,7 +18,7 @@ public class IntroFragment5 extends IntroFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_intro_7, container, false);
+        View view = inflater.inflate(R.layout.fragment_intro_5, container, false);
         ButterKnife.bind(this, view);
         return view;
     }

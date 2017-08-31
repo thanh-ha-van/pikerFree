@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorDeepSaffron"
+    android:background="@color/transparent"
     android:orientation="vertical">
 
     <FrameLayout
@@ -16,13 +16,7 @@
             android:layout_width="@dimen/height_layout_image_intro"
             android:layout_height="@dimen/height_layout_image_intro"
             android:layout_gravity="center"
-            android:background="@color/colorGamboge" />
-
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_help" />
+            android:background="@color/transparent" />
 
         <ImageView
             android:id="@+id/iv_planes"
@@ -82,7 +76,7 @@
         android:layout_margin="30dp"
         android:gravity="center"
         android:text="@string/intro_4"
-        android:textColor="@color/white"
+        android:textColor="@color/colorAccent"
         android:textSize="16sp"
         app:font="Trebuchet.ttf" />
 </LinearLayout>
