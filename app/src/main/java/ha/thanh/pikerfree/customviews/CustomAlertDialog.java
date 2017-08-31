@@ -14,7 +14,7 @@ import ha.thanh.pikerfree.R;
  * Created by HaVan on 6/1/2017.
  */
 
-public class CustomAlertDialog{
+public class CustomAlertDialog {
     private Dialog alertDialog;
 
     public CustomAlertDialog(Activity activity) {
