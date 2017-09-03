@@ -15,16 +15,16 @@ import java.util.List;
 import ha.thanh.pikerfree.services.DialogMessage;
 
 public class HandlePermission {
-    private static final String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private static final String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     private Activity mActivity;
     DialogMessage dialogMessage;
-    CallbackRequestPermision callbackRequestPermision;
+    CallbackRequestPermission callbackRequestPermission;
     public static final int REQUEST_ID_PERMISSION = 123;
 
-    public HandlePermission(Activity context, CallbackRequestPermision callbackRequestPermision) {
+    public HandlePermission(Activity context, CallbackRequestPermission callbackRequestPermision) {
         mActivity = context;
         dialogMessage = new DialogMessage(context);
-        this.callbackRequestPermision = callbackRequestPermision;
+        this.callbackRequestPermission = callbackRequestPermision;
         if (!askPermission()) {
             callbackRequestPermision.onRequestPermissionSuccess();
         }
@@ -57,7 +57,7 @@ public class HandlePermission {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
                     boolean showRationale = mActivity.shouldShowRequestPermissionRationale(permissions[i]);
                     if (showRationale) {
-                        callbackRequestPermision.onRequestPermissionFail();
+                        callbackRequestPermission.onRequestPermissionFail();
                     } else {
                         showDialogSetting();
                     }
@@ -66,7 +66,7 @@ public class HandlePermission {
                 }
             }
             if (permissionEnable == permissions.length) {
-                callbackRequestPermision.onRequestPermissionSuccess();
+                callbackRequestPermission.onRequestPermissionSuccess();
             }
         }
     }
@@ -77,7 +77,7 @@ public class HandlePermission {
             @Override
             public void onClickNegative() {
                 mActivity.finish();
-                callbackRequestPermision.onRequestPermissionFail();
+                callbackRequestPermission.onRequestPermissionFail();
             }
 
             @Override
@@ -99,7 +99,7 @@ public class HandlePermission {
         mActivity.startActivityForResult(settingActivity, REQUEST_ID_PERMISSION);
     }
 
-    public interface CallbackRequestPermision {
+    public interface CallbackRequestPermission {
         void onRequestPermissionSuccess();
 
         void onRequestPermissionFail();

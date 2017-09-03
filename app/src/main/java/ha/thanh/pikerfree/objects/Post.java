@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 
 public class Post {
+
     private int postId;
     private String title = "";
     private String description = "No description founded";

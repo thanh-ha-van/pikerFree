@@ -45,5 +45,6 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
 
     @Override
     public void onItemClick(int position) {
+        // add photo from storage
     }
 }

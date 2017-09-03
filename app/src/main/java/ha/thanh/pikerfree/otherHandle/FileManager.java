@@ -6,7 +6,7 @@ import java.io.File;
 
 public class FileManager {
 
-    private static final String ROOT_FOLDER = "/app_name/";
+    private static final String ROOT_FOLDER = "/piker_free/";
 
     public static final String APP_FOLDER_DATA = Environment.getExternalStorageDirectory().getPath() + ROOT_FOLDER;
 

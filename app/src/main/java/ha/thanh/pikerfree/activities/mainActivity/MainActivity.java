@@ -22,7 +22,7 @@ import ha.thanh.pikerfree.fragments.news.NewsFragment;
 import ha.thanh.pikerfree.fragments.settings.SettingFragment;
 import ha.thanh.pikerfree.otherHandle.HandlePermission;
 
-public class MainActivity extends AppCompatActivity implements HandlePermission.CallbackRequestPermision {
+public class MainActivity extends AppCompatActivity implements HandlePermission.CallbackRequestPermission {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
@@ -118,10 +118,12 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     @Override
     public void onRequestPermissionSuccess() {
         Globals.getIns().getConfig().setPermissionWriteFile(true);
+        Globals.getIns().getConfig().setPermissionCamera(true);
     }
 
     @Override
     public void onRequestPermissionFail() {
         Globals.getIns().getConfig().setPermissionWriteFile(false);
+        Globals.getIns().getConfig().setPermissionCamera(false);
     }
 }

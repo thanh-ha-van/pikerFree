@@ -22,10 +22,9 @@ public class CustomYesNoDialog {
     private YesNoInterFace interFace;
 
     @BindView(R.id.tv_title)
-    private TextView tvTitle;
+    public TextView tvTitle;
     @BindView(R.id.tv_content)
-    private TextView tvContent;
-
+    public TextView tvContent;
 
     interface YesNoInterFace {
         void onYesClicked();

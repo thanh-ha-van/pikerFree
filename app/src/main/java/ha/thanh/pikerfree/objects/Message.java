@@ -5,12 +5,14 @@ package ha.thanh.pikerfree.objects;
  */
 
 public class Message {
-    String author;
-    String text;
+    private String author;
+    private String text;
+    private long time;
 
-    public Message(String author, String text) {
+    public Message(String author, String text, long time) {
         this.author = author;
         this.text = text;
+        this.time = time;
     }
 
     public String getAuthor() {
@@ -27,5 +29,13 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

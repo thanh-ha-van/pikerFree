@@ -1,20 +1,26 @@
 package ha.thanh.pikerfree.objects;
 
-import java.util.List;
-
 /**
  * Created by HaVan on 8/27/2017.
  */
 
 public class Conversation {
-    int idUser1;
-    int idUser2;
-    List<Message> messages;
+    private int idUser1;
+    private int idUser2;
+    private int conversationId;
 
-    public Conversation(int idUser1, int idUser2, List<Message> messages) {
+    public Conversation(int idUser1, int idUser2, int coversationId) {
         this.idUser1 = idUser1;
         this.idUser2 = idUser2;
-        this.messages = messages;
+        this.conversationId = coversationId;
+    }
+
+    public int getConversationId() {
+        return conversationId;
+    }
+
+    public void setConversationId(int conversationId) {
+        this.conversationId = conversationId;
     }
 
     public int getIdUser1() {
@@ -33,11 +39,4 @@ public class Conversation {
         this.idUser2 = idUser2;
     }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
 }

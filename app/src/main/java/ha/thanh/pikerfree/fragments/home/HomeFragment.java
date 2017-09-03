@@ -1,5 +1,6 @@
 package ha.thanh.pikerfree.fragments.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +13,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.newPostActivity.NewPostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.objects.Post;
 
@@ -51,5 +54,10 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     }
     private void initList() {
         posts = homePresenter.loadAllMyPost();
+    }
+
+    @OnClick(R.id.btn_new_post)
+    public void doNewPost() {
+        startActivity(new Intent(this.getContext(), NewPostActivity.class));
     }
 }
