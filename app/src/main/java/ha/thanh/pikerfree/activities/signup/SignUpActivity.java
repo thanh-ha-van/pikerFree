@@ -74,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
             alertDialog.showAlertDialog("Whoop!", "Password must not be empty... and at least 6 characters");
             return;
         }
-        if (password != passwordConfirm) {
+        if (!password.equals(passwordConfirm)) {
             alertDialog.showAlertDialog("Whoop!", "Password confirm does not match");
             return;
         }
@@ -91,10 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            waitingDialog.hideDialog();
                             updateUserData();
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-                            finish();
                         }
                     }
                 })
@@ -115,6 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
             user = auth.getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(etUserName.getText().toString())
+                    .setPhotoUri(Uri.parse(""))
                     .build();
 
             user.updateProfile(profileUpdates)
@@ -122,7 +120,10 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                waitingDialog.hideDialog();
                                 Log.d("Lololo", "User profile updated.");
+                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                                finish();
                             }
                         }
                     });
@@ -134,4 +135,5 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
+
 }

@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#4299E9</color>
     <color name="colorPrimaryDark">#060408</color>
-    <color name="colorAccent">#1C3F38</color>
-    <color name="colorAccentShade">#801C3F38</color>
+    <color name="colorAccent">#630C0B</color>
+    <color name="colorAccentShade">#80630C0B</color>
     <color name="white">#FFFFFF</color>
     <color name="shade">#A0FFFFFF</color>
     <color name="gray">#E2E2E2</color>
@@ -19,4 +19,5 @@
     <color name="colorDeepSaffron">#4299E9</color> <!--#FFA726-->
     <color name="colorGamboge">#C2C2C2</color> <!--#FFA726-->
     <color name="colorRobinEggBlue">#4299E9</color>
+    <color name="red">#DC0F06</color>
 </resources>

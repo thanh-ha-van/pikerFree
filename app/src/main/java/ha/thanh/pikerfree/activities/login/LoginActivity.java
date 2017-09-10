@@ -23,7 +23,7 @@ import ha.thanh.pikerfree.activities.signup.SignUpActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginInterface.RequiredViewOps {
 
     private FirebaseAuth auth;
     @BindView(R.id.et_email_login)
@@ -54,16 +54,17 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.btn_log_up)
     public void doSignUp() {
         startActivity(new Intent(this, SignUpActivity.class));
+        finish();
     }
 
     @OnClick(R.id.btn_forget)
     public void doForgetPassword() {
         startActivity(new Intent(LoginActivity.this, ForgetPassActivity.class));
+        finish();
     }
 
     @OnClick(R.id.btn_log_in)
     public void dpLogIn() {
-
 
         String email = etUserName.getText().toString();
         final String password = etPass.getText().toString();
@@ -90,9 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         } else {
                             hideWaiting();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            startMain();
                         }
                     }
                 })
@@ -113,5 +112,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void hideWaiting() {
         waitingDialog.hideDialog();
+    }
+    public void startMain() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
