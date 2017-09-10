@@ -3,6 +3,7 @@ package ha.thanh.pikerfree.constants;
 
 public class Config {
     private static final int DEFAULT_WORD_OF_DATE = 8;
+    public static final String BASE_URL = "https://pikerfree.firebaseio.com/";
 
     private boolean isPermissionWriteFile = false;
     private boolean isPermissionCamera = false;

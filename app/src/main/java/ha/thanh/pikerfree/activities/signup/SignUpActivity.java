@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +28,7 @@ import ha.thanh.pikerfree.activities.mainActivity.MainActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements SignUpInterface.RequiredViewOps {
 
     @BindView(R.id.et_email)
     EditText etEmail;
@@ -41,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseUser user;
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
         }
+        mDatabase.child("users").child(user.getUid()).push().setValue(1);
     }
 
     @OnClick(R.id.btn_log_in)

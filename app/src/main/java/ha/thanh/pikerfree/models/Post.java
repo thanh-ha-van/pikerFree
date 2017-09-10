@@ -22,6 +22,14 @@ public class Post {
     private String topic = "";
 
     public Post() {
+
+    }
+
+    public Post(int postId, String title, String description, int ownerId) {
+        this.postId = postId;
+        this.title = title;
+        this.description = description;
+        this.ownerId = ownerId;
     }
 
     public Post(int postId, String title, String description, ArrayList<Uri> linkImages, int status, int ownerId, Location location, Timestamp timePosted, String topic) {
