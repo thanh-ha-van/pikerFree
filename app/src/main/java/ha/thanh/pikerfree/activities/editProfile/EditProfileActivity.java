@@ -9,8 +9,10 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.customviews.WaitingDialog;
 
 public class EditProfileActivity extends AppCompatActivity implements EditProfileInterface.RequiredViewOps {
 
@@ -41,12 +44,17 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     @OnClick(R.id.btn_change_image)
-    //method to show file chooser
     public void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @OnClick(R.id.btn_save)
+    public void saveEditing() {
+        // // TODO: 9/14/2017 save user Name, User address then back to previous activity
+        uploadFile();
     }
 
     @Override
@@ -57,7 +65,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
-                uploadFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -65,39 +72,24 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     private void uploadFile() {
-
         if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading");
-            progressDialog.show();
-
-            StorageReference riversRef = mStorageRef.child("images/pic.jpg");
+            final WaitingDialog waitingDialog = new WaitingDialog(this);
+            waitingDialog.showDialog();
+            String filename = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            StorageReference riversRef = mStorageRef.child("images/" + filename + ".jpg");
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            waitingDialog.hideDialog();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                            waitingDialog.hideDialog();
                         }
                     });
-        }
-
-        else {
-            Toast.makeText(getApplicationContext(), "lol no file", Toast.LENGTH_LONG).show();
         }
     }
 

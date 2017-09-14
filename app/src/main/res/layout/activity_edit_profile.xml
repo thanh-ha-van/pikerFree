@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBlackLight"
     android:fitsSystemWindows="true"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -28,33 +28,61 @@
             android:layout_height="40dp"
             android:layout_alignBottom="@+id/profile_image"
             android:layout_alignEnd="@+id/profile_image"
-            android:background="@drawable/bg_circle_gray"
+            android:background="@drawable/bg_circle_white"
             android:padding="8dp"
             android:src="@drawable/ic_edit_profile"
-            android:tint="@color/colorPrimary" />
+            android:tint="@color/green" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
 
     <ha.thanh.pikerfree.customviews.CustomEditText
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/plate"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        android:padding="10dp"
+        android:padding="16dp"
         android:text="Ha Van Thanh"
         android:textAlignment="center"
         android:textSize="18sp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray" />
 
     <ha.thanh.pikerfree.customviews.CustomEditText
         android:id="@+id/user_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/plate"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        android:paddingBottom="200dp"
+        android:padding="16dp"
         android:text="KTX khu A, Tan lap, Di an, Binh Duong, TP Ho Chi Minh"
         android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:id="@+id/btn_save"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/plate_fill_green"
+            android:gravity="center"
+            android:text="Save"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
 
