@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.splashActivity;
+package ha.thanh.pikerfree.activities.splash;
 
 import android.content.Context;
 /**

@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.login.LoginActivity;
-import ha.thanh.pikerfree.activities.mainActivity.MainActivity;
+import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 

@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.newPostActivity;
+package ha.thanh.pikerfree.activities.newPost;
 
 import android.content.Context;
 

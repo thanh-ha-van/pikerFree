@@ -1,13 +1,9 @@
-package ha.thanh.pikerfree.activities.newPostActivity;
+package ha.thanh.pikerfree.activities.newPost;
 
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -15,7 +11,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.adapters.ImageAdapter;
 
 
 public class NewPostActivity extends AppCompatActivity implements NewPostInterface.RequiredViewOps {

@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.splashActivity;
+package ha.thanh.pikerfree.activities.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.activities.introActivity.IntroActivity;
+import ha.thanh.pikerfree.activities.intro.IntroActivity;
 
 public class SplashActivity extends AppCompatActivity implements SplashInterface.RequiredViewOps {
 

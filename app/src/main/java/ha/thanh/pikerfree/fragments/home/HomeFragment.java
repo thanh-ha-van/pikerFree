@@ -15,7 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.activities.newPostActivity.NewPostActivity;
+import ha.thanh.pikerfree.activities.editProfile.EditProfileActivity;
+import ha.thanh.pikerfree.activities.newPost.NewPostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.objects.Post;
 
@@ -52,6 +53,7 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
             rvPost.setAdapter(adapter);
         }
     }
+
     private void initList() {
         posts = homePresenter.loadAllMyPost();
     }
@@ -59,5 +61,10 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     @OnClick(R.id.btn_new_post)
     public void doNewPost() {
         startActivity(new Intent(this.getContext(), NewPostActivity.class));
+    }
+
+    @OnClick(R.id.btn_edit_profile)
+    public void editProfile() {
+        startActivity(new Intent(this.getContext(), EditProfileActivity.class));
     }
 }

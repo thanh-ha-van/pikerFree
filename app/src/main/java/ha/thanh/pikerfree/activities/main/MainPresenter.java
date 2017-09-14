@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.mainActivity;
+package ha.thanh.pikerfree.activities.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;

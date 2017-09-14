@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.introActivity;
+package ha.thanh.pikerfree.activities.intro;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
