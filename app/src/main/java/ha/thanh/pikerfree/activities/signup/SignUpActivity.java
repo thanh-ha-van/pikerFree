@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.activities.signup;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.models.User;
 
 public class SignUpActivity extends AppCompatActivity implements SignUpInterface.RequiredViewOps {
 
@@ -38,21 +40,26 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     EditText etPass;
     @BindView(R.id.et_pass_confirm)
     EditText etPassConfirm;
+
+    SignUpPresenter presenter;
     private FirebaseAuth auth;
-    private FirebaseUser user;
+    private FirebaseUser firebaseUser;
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
-    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+        presenter = new SignUpPresenter(this, this);
         auth = FirebaseAuth.getInstance();
         waitingDialog = new WaitingDialog(this);
         alertDialog = new CustomAlertDialog(this);
+
     }
+
 
     @OnClick(R.id.btn_sign_up)
     public void doSignUp() {
@@ -86,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         }
         waitingDialog.showDialog();
 
-        //create user
+        //create firebaseUser
         auth.createUserWithEmailAndPassword(email, password)
 
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -94,6 +101,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             updateUserData();
+                            updateDataBase();
                         }
                     }
                 })
@@ -109,20 +117,39 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
 
     }
 
+    public void updateDataBase() {
+//        User dataUser = new User();
+//        dataUser.setId(firebaseUser.getUid());
+//        dataUser.setName(firebaseUser.getDisplayName());
+//        dataUser.setAdmin(false);
+//        dataUser.setMale(false);
+//        dataUser.setAvatarLink(Uri.parse(""));
+//        dataUser.setAddress("");
+//        dataUser.setLocation(null);
+//        firebaseUser = auth.getCurrentUser();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("users");
+//        myRef.child(firebaseUser.getUid()).setValue(database);
+
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mRef = mDatabase.getReference().child("copyright");
+        mRef.setValue("©2016 Ha Van Thanh. All rights Reserved");
+        waitingDialog.hideDialog();
+    }
+
     public void updateUserData() {
         if (auth != null) {
-            user = auth.getCurrentUser();
+            firebaseUser = auth.getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(etUserName.getText().toString())
                     .setPhotoUri(Uri.parse(""))
                     .build();
 
-            user.updateProfile(profileUpdates)
+            firebaseUser.updateProfile(profileUpdates)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                waitingDialog.hideDialog();
                                 Log.d("Lololo", "User profile updated.");
                                 startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                 finish();
@@ -130,7 +157,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                         }
                     });
         }
-        mDatabase.child("users").child(user.getUid()).push().setValue(1);
     }
 
     @OnClick(R.id.btn_log_in)

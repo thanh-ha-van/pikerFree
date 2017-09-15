@@ -9,7 +9,7 @@ import android.net.Uri;
  */
 
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String address;
     private Location location;
@@ -22,11 +22,21 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public User(String id, String name, String address, Location location, int[] postIds, boolean isAdmin, Uri avatarLink) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.location = location;
+        this.postIds = postIds;
+        this.isAdmin = isAdmin;
+        this.avatarLink = avatarLink;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

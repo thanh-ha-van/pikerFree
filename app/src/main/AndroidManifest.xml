@@ -31,14 +31,14 @@
 
         </activity>
         <activity android:name=".activities.editProfile.EditProfileActivity">
+
+        </activity>
+        <activity android:name=".activities.signup.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".activities.signup.SignUpActivity">
 
         </activity>
         <activity android:name=".activities.forgetPassword.ForgetPassActivity">
