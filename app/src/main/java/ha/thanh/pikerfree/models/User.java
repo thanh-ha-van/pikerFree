@@ -3,11 +3,13 @@ package ha.thanh.pikerfree.models;
 import android.location.Location;
 import android.net.Uri;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 
 /**
  * Created by HaVan on 8/27/2017.
  */
-
+@IgnoreExtraProperties
 public class User {
     private String id;
     private String name;

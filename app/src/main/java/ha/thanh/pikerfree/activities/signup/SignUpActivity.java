@@ -118,23 +118,28 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     }
 
     public void updateDataBase() {
-//        User dataUser = new User();
-//        dataUser.setId(firebaseUser.getUid());
-//        dataUser.setName(firebaseUser.getDisplayName());
-//        dataUser.setAdmin(false);
-//        dataUser.setMale(false);
-//        dataUser.setAvatarLink(Uri.parse(""));
-//        dataUser.setAddress("");
-//        dataUser.setLocation(null);
-//        firebaseUser = auth.getCurrentUser();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("users");
-//        myRef.child(firebaseUser.getUid()).setValue(database);
+        firebaseUser = auth.getCurrentUser();
+        User dataUser = new User();
+        dataUser.setId(firebaseUser.getUid());
+        dataUser.setName(firebaseUser.getDisplayName());
+        dataUser.setAdmin(false);
+        dataUser.setMale(false);
+        dataUser.setAvatarLink(Uri.parse(""));
+        dataUser.setAddress("");
+        dataUser.setLocation(null);
 
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mRef = mDatabase.getReference().child("copyright");
-        mRef.setValue("©2016 Ha Van Thanh. All rights Reserved");
+        mRef.child("users").child(dataUser.getId()).child("name").setValue(dataUser.getName());
+        mRef.child("users").child(dataUser.getId()).child("address").setValue(dataUser.getAddress());
+        mRef.child("users").child(dataUser.getId()).child("avatar").setValue(dataUser.getAvatarLink());
+        mRef.child("users").child(dataUser.getId()).child("location").setValue(dataUser.getLocation());
+        mRef.child("users").child(dataUser.getId()).child("admin").setValue(dataUser.isAdmin());
+        mRef.child("users").child(dataUser.getId()).child("gender").setValue(dataUser.isMale());
+
+
         waitingDialog.hideDialog();
+
     }
 
     public void updateUserData() {
