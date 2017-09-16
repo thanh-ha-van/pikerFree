@@ -5,6 +5,8 @@ import android.net.Uri;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import ha.thanh.pikerfree.constants.Constants;
+
 
 /**
  * Created by HaVan on 8/27/2017.
@@ -14,24 +16,19 @@ public class User {
     private String id;
     private String name;
     private String address;
-    private Location location;
-    private int[] postIds;
-    private boolean isAdmin;
-    private Uri avatarLink;
-    private boolean isMale;
-    private String password;
+    private double lat = 0;
+    private double lng = 0;
+    private boolean isAdmin = false;
+    private String avatarLink = Constants.BASE_STORAGE_URL + "userImages/default_profile.jgp";
+    private String password = "";
 
     public User() {
     }
 
-    public User(String id, String name, String address, Location location, int[] postIds, boolean isAdmin, Uri avatarLink) {
+    public User(String id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.location = location;
-        this.postIds = postIds;
-        this.isAdmin = isAdmin;
-        this.avatarLink = avatarLink;
     }
 
     public String getId() {
@@ -58,20 +55,20 @@ public class User {
         this.address = address;
     }
 
-    public Location getLocation() {
-        return location;
+    public double getLat() {
+        return lat;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
-    public int[] getPostIds() {
-        return postIds;
+    public double getLng() {
+        return lng;
     }
 
-    public void setPostIds(int[] postIds) {
-        this.postIds = postIds;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public boolean isAdmin() {
@@ -82,20 +79,12 @@ public class User {
         isAdmin = admin;
     }
 
-    public Uri getAvatarLink() {
+    public String getAvatarLink() {
         return avatarLink;
     }
 
-    public void setAvatarLink(Uri avatarLink) {
+    public void setAvatarLink(String avatarLink) {
         this.avatarLink = avatarLink;
-    }
-
-    public boolean isMale() {
-        return isMale;
-    }
-
-    public void setMale(boolean male) {
-        isMale = male;
     }
 
     public String getPassword() {

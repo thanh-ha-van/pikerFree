@@ -20,12 +20,17 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.main.MainActivity;
+import ha.thanh.pikerfree.constants.Config;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.User;
@@ -46,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     private FirebaseUser firebaseUser;
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
-    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,22 +127,12 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         User dataUser = new User();
         dataUser.setId(firebaseUser.getUid());
         dataUser.setName(firebaseUser.getDisplayName());
-        dataUser.setAdmin(false);
-        dataUser.setMale(false);
-        dataUser.setAvatarLink(Uri.parse(""));
-        dataUser.setAddress("");
-        dataUser.setLocation(null);
+        dataUser.setAddress("No address was set yet.");
 
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mRef = mDatabase.getReference().child("copyright");
-        mRef.child("users").child(dataUser.getId()).child("name").setValue(dataUser.getName());
-        mRef.child("users").child(dataUser.getId()).child("address").setValue(dataUser.getAddress());
-        mRef.child("users").child(dataUser.getId()).child("avatar").setValue(dataUser.getAvatarLink());
-        mRef.child("users").child(dataUser.getId()).child("location").setValue(dataUser.getLocation());
-        mRef.child("users").child(dataUser.getId()).child("admin").setValue(dataUser.isAdmin());
-        mRef.child("users").child(dataUser.getId()).child("gender").setValue(dataUser.isMale());
-
-
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("users");
+        DatabaseReference usersRef = ref.child(dataUser.getId());
+        usersRef.setValue(dataUser);
         waitingDialog.hideDialog();
 
     }
