@@ -6,6 +6,7 @@ import java.security.Timestamp;
 import java.util.ArrayList;
 
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.constants.DummyData;
 
 /**
  * Created by HaVan on 8/27/2017.
@@ -15,7 +16,7 @@ public class Post {
     private int postId;
     private String title = "";
     private String description = "No description founded";
-    private ArrayList<String> linkImages;
+    private ArrayList<String> linkImages = new ArrayList<>();
     private int status = Constants.STATUS_OPEN;
     private String ownerId;
     private double lat = 0;
@@ -30,6 +31,9 @@ public class Post {
         this.postId = postId;
         this.title = title;
         this.description = description;
+        linkImages.add(DummyData.linkForImagesTemp);
+        linkImages.add(DummyData.linkForImagesTemp);
+        linkImages.add(DummyData.linkForImagesTemp);
     }
 
     public int getPostId() {

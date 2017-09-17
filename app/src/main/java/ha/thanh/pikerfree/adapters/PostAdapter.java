@@ -81,8 +81,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         Post post = dataSet.get(position);
-        String uri = post.getLinkImages().get(0);
-        if (uri == null) uri = DummyData.getIns().getUri();
+        String linkFirstImages = post.getLinkImages().get(0);
+        if (linkFirstImages == null) linkFirstImages = DummyData.getIns().getUri();
 
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.mipmap.ic_launcher);
@@ -90,7 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
         Glide.with(this.mConText)
                 .setDefaultRequestOptions(requestOptions)
-                .load(uri)
+                .load(linkFirstImages)
                 .into(holder.imgPostImage);
 
         holder.tvTitle.setText(post.getTitle());

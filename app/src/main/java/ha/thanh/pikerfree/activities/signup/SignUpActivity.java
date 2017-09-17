@@ -98,8 +98,9 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            updateDataBase();
+                            getData();
                             updateUserData();
+                            updateDataBase();
                         }
                     }
                 })
@@ -115,34 +116,34 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
 
     }
 
-    public void updateDataBase() {
+    public void getData() {
         dataUser = new User();
         firebaseUser = auth.getCurrentUser();
-
         dataUser.setId(firebaseUser.getUid());
         dataUser.setName(firebaseUser.getDisplayName());
-        dataUser.setAddress("No address.");
+        dataUser.setAddress("No address found");
+    }
+
+    public void updateDataBase() {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("users");
         DatabaseReference usersRef = ref.child(dataUser.getId());
         usersRef.setValue(dataUser);
-        waitingDialog.hideDialog();
     }
 
     public void updateUserData() {
         if (auth != null) {
-            firebaseUser = auth.getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(etUserName.getText().toString())
                     .setPhotoUri(Uri.parse(dataUser.getAvatarLink()))
                     .build();
-
             firebaseUser.updateProfile(profileUpdates)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+                                waitingDialog.hideDialog();
                                 startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                 finish();
                             }
