@@ -2,13 +2,13 @@ package ha.thanh.pikerfree.activities.editProfile;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.firebase.client.DataSnapshot;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.Map;
 
 import ha.thanh.pikerfree.models.User;
 
@@ -52,6 +50,8 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     private boolean isUpdatedDatabase = false;
     private boolean isUpdatedAuth = false;
 
+    private Handler handler;
+
     EditProfilePresenter(Context context, EditProfileInterface.RequiredViewOps mView) {
         this.mView = mView;
         mModel = new EditProfileModel(context, this);
@@ -59,6 +59,9 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         mStorageRef = FirebaseStorage.getInstance().getReference();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("users").child(firebaseUser.getUid());
+        handler = new Handler();
         dataUser = new User();
         updateDataUser();
     }
@@ -67,7 +70,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                 dataUser = dataSnapshot.getValue(User.class);
+                dataUser = dataSnapshot.getValue(User.class);
             }
 
             @Override
@@ -81,7 +84,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         this.listener = listener;
     }
 
-    void addTextChangeListener(final EditText etUserAddress, final EditText etUserName) {
+    void addTextChangeListener(final EditText etUserName, final EditText etUserAddress) {
         userAddress = etUserAddress.getText().toString();
         userName = etUserName.getText().toString();
         etUserAddress.addTextChangedListener(new TextWatcher() {
@@ -121,13 +124,16 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     }
 
     void saveDatabaseSetting() {
-        updateDataUser();
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("users").child(firebaseUser.getUid());
-        databaseReference.setValue(dataUser);
-        isUpdatedDatabase = true;
-        Log.e("editProfile", "done save database");
-        checkIfCanHideDialog();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                updateDataUser();
+                databaseReference.setValue(dataUser);
+                isUpdatedDatabase = true;
+                Log.e("editProfile", "done save database");
+                checkIfCanHideDialog();
+            }
+        });
     }
 
     private void updateDataUser() {
@@ -137,51 +143,63 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         dataUser.setName(userName);
     }
 
-    void saveAuthSetting(String username, String linkImages) {
-        if (isTextChanged) {
-            if (auth != null) {
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(username)
-                        .setPhotoUri(Uri.parse(linkImages))
-                        .build();
-                firebaseUser.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    isUpdatedAuth = true;
-                                    checkIfCanHideDialog();
-                                    Log.e("editProfile", "done save auth");
-                                }
-                            }
-                        });
+    void saveAuthSetting(final String username, final String linkImages) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (isTextChanged) {
+                    if (auth != null) {
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(username)
+                                .setPhotoUri(Uri.parse(linkImages))
+                                .build();
+                        firebaseUser.updateProfile(profileUpdates)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            isUpdatedAuth = true;
+                                            checkIfCanHideDialog();
+                                            Log.e("editProfile", "done save auth");
+                                        }
+                                    }
+                                });
+                    }
+                }
             }
-        }
+        });
     }
 
-    void uploadFile(Uri filePath) {
-        listener.showDialog();
-        if (filePath != null) {
+    void uploadFile(final Uri filePath) {
 
-            StorageReference riversRef = mStorageRef.child("userImages/" + userId + ".jpg");
-            riversRef.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            isUploadDone = true;
-                            checkIfCanHideDialog();
-                            Log.e("editProfile", "done upload file to server");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            isUploadDone = true;
-                            checkIfCanHideDialog();
-                            Log.e("editProfile", " upload file to server get error");
-                        }
-                    });
-        }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                listener.showDialog();
+                if (filePath != null) {
+
+                    StorageReference riversRef = mStorageRef.child("userImages/" + userId + ".jpg");
+                    riversRef.putFile(filePath)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    isUploadDone = true;
+                                    checkIfCanHideDialog();
+                                    Log.e("editProfile", "done upload file to server");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    isUploadDone = true;
+                                    checkIfCanHideDialog();
+                                    Log.e("editProfile", " upload file to server get error");
+                                }
+                            });
+                }
+            }
+        });
+
     }
 
     private void checkIfCanHideDialog() {

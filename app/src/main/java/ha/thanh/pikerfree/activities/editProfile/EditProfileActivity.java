@@ -56,6 +56,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @OnClick(R.id.btn_save)
     public void saveEditing() {
+
         profilePresenter.uploadFile(filePath);
         profilePresenter.saveAuthSetting(etUserName.getText().toString(), etUserAddress.getText().toString());
         profilePresenter.saveDatabaseSetting();
