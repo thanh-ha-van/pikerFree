@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/img_item_image"
         android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_height="150dp"
         android:layout_margin="@dimen/item_padding_small"
         app:srcCompat="@drawable/demo" />
 </LinearLayout>
