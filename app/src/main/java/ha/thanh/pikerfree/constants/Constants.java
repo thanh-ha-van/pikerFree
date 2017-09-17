@@ -6,7 +6,10 @@ package ha.thanh.pikerfree.constants;
 
 public class Constants {
 
-    private static final int DEFAULT_WORD_OF_DATE = 8;
+    public static final String SETTING_CONFIG = "pikerfree_setting";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_ADDRESS = "user_address";
+    public static final String USER_PROFILE_PIC_PATH = "user_profile_path";
     public static final String BASE_URL = "https://pikerfree.firebaseio.com/";
     public static final String BASE_STORAGE_URL = "gs://pikerfree.appspot.com/";
     public static final int STATUS_OPEN = 1;

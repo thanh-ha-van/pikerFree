@@ -1,6 +1,9 @@
 package ha.thanh.pikerfree.activities.editProfile;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -8,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,6 +28,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.User;
 
 
@@ -32,6 +43,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     private EditProfileInterface.RequiredViewOps mView;
     private EditProfileModel mModel;
     private EditProfileInterface.RequiredViewOps listener;
+    private Context context;
 
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
@@ -46,6 +58,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     private String userAddress;
 
     private boolean isTextChanged = false;
+    private boolean isImagesChaged = false;
     private boolean isUploadDone = false;
     private boolean isUpdatedDatabase = false;
     private boolean isUpdatedAuth = false;
@@ -54,6 +67,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
     EditProfilePresenter(Context context, EditProfileInterface.RequiredViewOps mView) {
         this.mView = mView;
+        this.context = context;
         mModel = new EditProfileModel(context, this);
         auth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -66,11 +80,28 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         updateDataUser();
     }
 
+    void setImagesChanged() {
+        this.isImagesChaged = true;
+    }
+
     void getDataFromServer() {
+        getLocalData();
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
                 dataUser = dataSnapshot.getValue(User.class);
+                mStorageRef.child("userImages/" + userId + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mView.onUpdateUserData(dataUser, uri.toString());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+
             }
 
             @Override
@@ -80,6 +111,25 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         });
     }
 
+    private void getLocalData() {
+        userName = mModel.getUserNameStringFromSharePf();
+        userAddress = mModel.getUserAddressStringFromSharePf();
+        userAddress = mModel.getLocalImageStringFromSharePf();
+
+    }
+    private void loadImageFromStorage(String path)
+    {
+        try {
+            File f=new File(path, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            mView.onLocalBitmapReady(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
     void setListener(EditProfileInterface.RequiredViewOps listener) {
         this.listener = listener;
     }
@@ -143,6 +193,30 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         dataUser.setName(userName);
     }
 
+    void saveLocal(Bitmap bitmapImage) {
+
+        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        mModel.saveLocal(userName, userAddress, directory.getAbsolutePath());
+    }
     void saveAuthSetting(final String username, final String linkImages) {
         handler.post(new Runnable() {
             @Override
@@ -172,10 +246,13 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
     void uploadFile(final Uri filePath) {
 
+        if (!isImagesChaged) {
+            isUploadDone = true;
+            return;
+        }
         handler.post(new Runnable() {
             @Override
             public void run() {
-                listener.showDialog();
                 if (filePath != null) {
 
                     StorageReference riversRef = mStorageRef.child("userImages/" + userId + ".jpg");

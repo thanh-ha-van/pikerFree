@@ -6,6 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.MimeTypeMap;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.io.File;
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -15,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.models.User;
 
 public class EditProfileActivity extends AppCompatActivity implements EditProfileInterface.RequiredViewOps {
 
@@ -26,7 +34,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     public CustomEditText etUserAddress;
     private WaitingDialog waitingDialog;
     private Uri filePath;
-
+    private Bitmap bitmap;
     private static final int PICK_IMAGE_REQUEST = 234;
     private EditProfilePresenter profilePresenter;
 
@@ -37,6 +45,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         ButterKnife.bind(this);
         initData();
     }
+
     private void initData() {
         profilePresenter = new EditProfilePresenter(this, this);
         profilePresenter.setListener(this);
@@ -48,18 +57,18 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @OnClick(R.id.btn_change_image)
     public void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
     }
 
     @OnClick(R.id.btn_save)
     public void saveEditing() {
-
-        profilePresenter.uploadFile(filePath);
+        showDialog();
+        profilePresenter.saveLocal(bitmap);
         profilePresenter.saveAuthSetting(etUserName.getText().toString(), etUserAddress.getText().toString());
         profilePresenter.saveDatabaseSetting();
+        profilePresenter.uploadFile(filePath);
     }
 
     @Override
@@ -71,8 +80,9 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 && data.getData() != null) {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
+                profilePresenter.setImagesChanged();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,5 +98,24 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     public void hideDialog() {
         waitingDialog.hideDialog();
 
+    }
+
+    @Override
+    public void onUpdateUserData(User user, String url) {
+        etUserName.setText(user.getName());
+        etUserAddress.setText(user.getAddress());
+
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.temple_images);
+        requestOptions.error(R.drawable.temple_images);
+        Glide.with(this)
+                .setDefaultRequestOptions(requestOptions)
+                .load(url)
+                .into(imageView);
+    }
+
+    @Override
+    public void onLocalBitmapReady(Bitmap bitmap) {
+        imageView.setImageBitmap(bitmap);
     }
 }

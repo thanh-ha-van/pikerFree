@@ -94,4 +94,10 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     public void editProfile() {
         startActivity(new Intent(this.getContext(), EditProfileActivity.class));
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserProfilePic();
+    }
 }

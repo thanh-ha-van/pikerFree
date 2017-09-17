@@ -1,5 +1,11 @@
 package ha.thanh.pikerfree.utils;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.net.Uri;
+import android.webkit.MimeTypeMap;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,5 +68,4 @@ public class Utils {
     public static String formatDigits(int num) {
         return (num < 10) ? "0" + num : Integer.toString(num);
     }
-
 }
