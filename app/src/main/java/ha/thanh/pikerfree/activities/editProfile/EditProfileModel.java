@@ -8,11 +8,11 @@ import android.content.Context;
 
 public class EditProfileModel {
     private EditProfileInterface.RequiredPresenterOps mPresenter;
-    private Context mCon;
+    private Context context;
 
 
     EditProfileModel(Context context, EditProfileInterface.RequiredPresenterOps mPresenter) {
         this.mPresenter = mPresenter;
-        this.mCon =  context;
+        this.context =  context;
     }
 }

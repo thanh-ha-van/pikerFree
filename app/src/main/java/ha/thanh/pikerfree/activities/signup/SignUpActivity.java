@@ -100,7 +100,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                         if (task.isSuccessful()) {
                             getData();
                             updateUserData();
-                            updateDataBase();
                         }
                     }
                 })
@@ -120,16 +119,18 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         dataUser = new User();
         firebaseUser = auth.getCurrentUser();
         dataUser.setId(firebaseUser.getUid());
-        dataUser.setName(firebaseUser.getDisplayName());
+        dataUser.setName(etUserName.getText().toString());
         dataUser.setAddress("No address found");
     }
 
     public void updateDataBase() {
-
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("users");
         DatabaseReference usersRef = ref.child(dataUser.getId());
         usersRef.setValue(dataUser);
+        waitingDialog.hideDialog();
+        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+        finish();
     }
 
     public void updateUserData() {
@@ -143,9 +144,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                waitingDialog.hideDialog();
-                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-                                finish();
+                                updateDataBase();
                             }
                         }
                     });
