@@ -21,7 +21,6 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     private ArrayList<Uri> uris = new ArrayList<>();
     private NewPostPresenter mPresenter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

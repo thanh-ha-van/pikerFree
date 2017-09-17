@@ -1,5 +1,7 @@
 package ha.thanh.pikerfree.activities.editProfile;
 
+import android.net.Uri;
+
 /**
  * Created by HaVan on 9/10/2017.
  */
@@ -7,8 +9,11 @@ package ha.thanh.pikerfree.activities.editProfile;
 public interface EditProfileInterface {
 
     interface RequiredViewOps {
+        void showDialog();
 
+        void hideDialog();
     }
+
     interface RequiredPresenterOps {
 
     }

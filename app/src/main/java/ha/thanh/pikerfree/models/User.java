@@ -3,8 +3,6 @@ package ha.thanh.pikerfree.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import ha.thanh.pikerfree.constants.Constants;
-
 
 /**
  * Created by HaVan on 8/27/2017.
@@ -20,7 +18,7 @@ public class User {
     private String avatarLink = "userImages/default_profile.jgp";
     private String password = "";
     private int[] posts;
-    private int[] conversation;
+    private int[] conversations;
 
     public User() {
     }
@@ -104,10 +102,10 @@ public class User {
     }
 
     public int[] getConversation() {
-        return conversation;
+        return conversations;
     }
 
     public void setConversation(int[] conversation) {
-        this.conversation = conversation;
+        this.conversations = conversation;
     }
 }
