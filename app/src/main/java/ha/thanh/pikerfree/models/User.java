@@ -1,7 +1,5 @@
 package ha.thanh.pikerfree.models;
 
-import android.location.Location;
-import android.net.Uri;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -19,8 +17,10 @@ public class User {
     private double lat = 0;
     private double lng = 0;
     private boolean isAdmin = false;
-    private String avatarLink = Constants.BASE_STORAGE_URL + "userImages/default_profile.jgp";
+    private String avatarLink = "userImages/default_profile.jgp";
     private String password = "";
+    private int[] posts;
+    private int[] conversation;
 
     public User() {
     }
@@ -93,5 +93,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int[] getPosts() {
+        return posts;
+    }
+
+    public void setPosts(int[] posts) {
+        this.posts = posts;
+    }
+
+    public int[] getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(int[] conversation) {
+        this.conversation = conversation;
     }
 }

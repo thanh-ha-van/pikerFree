@@ -1,13 +1,11 @@
 package ha.thanh.pikerfree.activities.signup;
 
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,8 +18,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +25,6 @@ import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.main.MainActivity;
-import ha.thanh.pikerfree.constants.Config;
-import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.User;
@@ -51,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     private FirebaseUser firebaseUser;
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
-    private DatabaseReference mDatabase;
+    User dataUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +92,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         }
         waitingDialog.showDialog();
 
-        //create firebaseUser
         auth.createUserWithEmailAndPassword(email, password)
 
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -123,18 +116,18 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     }
 
     public void updateDataBase() {
+        dataUser = new User();
         firebaseUser = auth.getCurrentUser();
-        User dataUser = new User();
+
         dataUser.setId(firebaseUser.getUid());
         dataUser.setName(firebaseUser.getDisplayName());
-        dataUser.setAddress("No address was set yet.");
+        dataUser.setAddress("No address.");
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("users");
         DatabaseReference usersRef = ref.child(dataUser.getId());
         usersRef.setValue(dataUser);
         waitingDialog.hideDialog();
-
     }
 
     public void updateUserData() {
@@ -142,7 +135,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
             firebaseUser = auth.getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(etUserName.getText().toString())
-                    .setPhotoUri(Uri.parse(""))
+                    .setPhotoUri(Uri.parse(dataUser.getAvatarLink()))
                     .build();
 
             firebaseUser.updateProfile(profileUpdates)
@@ -150,7 +143,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.d("Lololo", "User profile updated.");
                                 startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                 finish();
                             }
