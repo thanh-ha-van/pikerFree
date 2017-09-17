@@ -98,8 +98,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            updateUserData();
                             updateDataBase();
+                            updateUserData();
                         }
                     }
                 })

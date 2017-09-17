@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.DummyData;
-import ha.thanh.pikerfree.objects.Post;
+import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.utils.Utils;
 
 /**
@@ -81,7 +81,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         Post post = dataSet.get(position);
-        Uri uri = post.getLinkImages().get(0);
+        String uri = post.getLinkImages().get(0);
         if (uri == null) uri = DummyData.getIns().getUri();
 
         RequestOptions requestOptions = new RequestOptions();

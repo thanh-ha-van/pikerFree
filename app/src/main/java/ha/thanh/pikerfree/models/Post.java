@@ -17,19 +17,98 @@ public class Post {
     private String description = "No description founded";
     private ArrayList<String> linkImages;
     private int status = Constants.STATUS_OPEN;
-    private int ownerId;
+    private String ownerId;
     private double lat = 0;
-    private double lng  = 0;
-    private Timestamp timePosted;
+    private double lng = 0;
+    private long timePosted;
     private String topic = "";
 
     public Post() {
     }
 
-    public Post(int postId, String title, String description, int ownerId) {
+    public Post(int postId, String title, String description, String ownerId) {
         this.postId = postId;
         this.title = title;
         this.description = description;
     }
 
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<String> getLinkImages() {
+        return linkImages;
+    }
+
+    public void setLinkImages(ArrayList<String> linkImages) {
+        this.linkImages = linkImages;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public long getTimePosted() {
+        return timePosted;
+    }
+
+    public void setTimePosted(long timePosted) {
+        this.timePosted = timePosted;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
 }
