@@ -11,10 +11,11 @@ import ha.thanh.pikerfree.models.User;
 public interface EditProfileInterface {
 
     interface RequiredViewOps {
+
         void showDialog();
         void hideDialog();
         void onUpdateUserData(User user, String url);
-        void onLocalBitmapReady(Bitmap bitmap);
+        void onLocalInforReady(String name, String address, String filepath);
     }
 
     interface RequiredPresenterOps {

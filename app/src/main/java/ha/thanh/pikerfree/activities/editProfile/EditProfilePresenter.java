@@ -85,7 +85,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     }
 
     void getDataFromServer() {
-        getLocalData();
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
@@ -111,25 +111,13 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         });
     }
 
-    private void getLocalData() {
+    public void getLocalData() {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
-        userAddress = mModel.getLocalImageStringFromSharePf();
-
+        mView.onLocalInforReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
     }
-    private void loadImageFromStorage(String path)
-    {
-        try {
-            File f=new File(path, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            mView.onLocalBitmapReady(b);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
 
-    }
+
     void setListener(EditProfileInterface.RequiredViewOps listener) {
         this.listener = listener;
     }
@@ -196,10 +184,10 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     void saveLocal(Bitmap bitmapImage) {
 
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
+
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
+
+        File mypath = new File(directory, "profile.jpg");
 
         FileOutputStream fos = null;
         try {
@@ -215,8 +203,9 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
                 e.printStackTrace();
             }
         }
-        mModel.saveLocal(userName, userAddress, directory.getAbsolutePath());
+        mModel.saveLocal(userName, userAddress, mypath.getAbsolutePath());
     }
+
     void saveAuthSetting(final String username, final String linkImages) {
         handler.post(new Runnable() {
             @Override

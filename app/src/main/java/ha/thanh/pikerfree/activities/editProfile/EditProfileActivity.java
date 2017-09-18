@@ -2,13 +2,12 @@ package ha.thanh.pikerfree.activities.editProfile;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.webkit.MimeTypeMap;
-import android.widget.Toast;
-
+import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -50,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         profilePresenter = new EditProfilePresenter(this, this);
         profilePresenter.setListener(this);
         profilePresenter.addTextChangeListener(etUserName, etUserAddress);
+        profilePresenter.getLocalData();
         profilePresenter.getDataFromServer();
         waitingDialog = new WaitingDialog(this);
     }
@@ -115,7 +115,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     @Override
-    public void onLocalBitmapReady(Bitmap bitmap) {
-        imageView.setImageBitmap(bitmap);
+    public void onLocalInforReady(String name, String address, String filepath) {
+        etUserName.setText(name);
+        etUserAddress.setText(address);
+        File imgFile = new  File(filepath);
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            imageView.setImageBitmap(myBitmap);
+            Log.d("editProfile", "Loaded bitmap from local");
+        }
     }
 }
