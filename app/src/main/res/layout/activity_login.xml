@@ -31,7 +31,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_pass"
@@ -45,7 +45,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_in"
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:text="@string/dont_have_account"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_up"

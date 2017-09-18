@@ -38,14 +38,13 @@ public class CustomYesNoDialog {
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        alertDialog.setCanceledOnTouchOutside(true);
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setContentView(R.layout.view_yes_no_dialog);
         this.interFace = yesNoInterFace;
         ButterKnife.bind(activity);
     }
 
     public void showAlertDialog(String title, String message) {
-
         tvTitle.setText(title);
         tvContent.setText(message);
         alertDialog.show();

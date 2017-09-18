@@ -31,7 +31,7 @@
             android:gravity="center_vertical"
             android:lines="1"
             android:text="Old Laptop Acer"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -43,7 +43,7 @@
             android:gravity="center_vertical"
             android:lines="4"
             android:text="77/08/2017"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_status"

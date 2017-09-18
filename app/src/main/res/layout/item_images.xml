@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    android:layout_margin="@dimen/item_padding_small">
 
     <ImageView
         android:id="@+id/img_item_image"
         android:layout_width="160dp"
-        android:layout_height="150dp"
-        android:layout_margin="@dimen/item_padding_small"
-        app:srcCompat="@color/colorPrimary" />
-</LinearLayout>
+        android:layout_height="100dp"
+        android:background="@drawable/plate_small_corner" />
+
+    <ImageView
+        android:id="@+id/delete_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/circle_shade_red"
+        android:padding="10dp"
+        android:src="@drawable/ic_error"
+        android:tint="@color/red"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/delete_button"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/delete_button"
+        android:visibility="gone" />
+</RelativeLayout>

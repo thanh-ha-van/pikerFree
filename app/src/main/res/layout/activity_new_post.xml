@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/plate"
+                android:background="@drawable/plate_small_corner"
                 android:hint="@string/title_of_item_hint"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
