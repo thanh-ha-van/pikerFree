@@ -2,11 +2,10 @@ package ha.thanh.pikerfree.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.constants.DummyData;
 
 /**
  * Created by HaVan on 8/27/2017.
@@ -14,26 +13,29 @@ import ha.thanh.pikerfree.constants.DummyData;
 @IgnoreExtraProperties
 public class Post {
     private int postId;
-    private String title = "";
-    private String description = "No description founded";
-    private ArrayList<String> linkImages = new ArrayList<>();
+    private String title = "No title found";
+    private String description = "No description found";
+    private List<String> linkImages = new ArrayList<>();
     private int status = Constants.STATUS_OPEN;
     private String ownerId;
     private double lat = 0;
     private double lng = 0;
     private long timePosted;
-    private String topic = "";
+    private String category = "Unknown";
 
     public Post() {
     }
 
-    public Post(int postId, String title, String description, String ownerId) {
+    public Post(int postId, String title, String description, List<String> linkImages, String ownerId, double lat, double lng, long timePosted, String category) {
         this.postId = postId;
         this.title = title;
         this.description = description;
-        linkImages.add(DummyData.linkForImagesTemp);
-        linkImages.add(DummyData.linkForImagesTemp);
-        linkImages.add(DummyData.linkForImagesTemp);
+        this.linkImages = linkImages;
+        this.ownerId = ownerId;
+        this.lat = lat;
+        this.lng = lng;
+        this.timePosted = timePosted;
+        this.category = category;
     }
 
     public int getPostId() {
@@ -60,7 +62,7 @@ public class Post {
         this.description = description;
     }
 
-    public ArrayList<String> getLinkImages() {
+    public List<String> getLinkImages() {
         return linkImages;
     }
 
@@ -108,11 +110,11 @@ public class Post {
         this.timePosted = timePosted;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

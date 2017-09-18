@@ -12,6 +12,9 @@ public class Constants {
     public static final String USER_PROFILE_PIC_PATH = "user_profile_path";
     public static final String BASE_URL = "https://pikerfree.firebaseio.com/";
     public static final String BASE_STORAGE_URL = "gs://pikerfree.appspot.com/";
+    public static final String POST_COUNT = "post_count";
+    public static final String USER_ID = "user_id";
+    public static final String IS_FIRST_RUN = "is_first_run";
     public static final int STATUS_OPEN = 1;
     public static final int STATUS_CLOSE = 3;
     public static final int STATUS_IN_PROCESS = 3;

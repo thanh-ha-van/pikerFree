@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         mainPresenter.saveConfig();
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -118,11 +117,13 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     public void onRequestPermissionSuccess() {
         Globals.getIns().getConfig().setPermissionWriteFile(true);
         Globals.getIns().getConfig().setPermissionCamera(true);
+        Globals.getIns().getConfig().setPermissionLocation(true);
     }
 
     @Override
     public void onRequestPermissionFail() {
         Globals.getIns().getConfig().setPermissionWriteFile(false);
         Globals.getIns().getConfig().setPermissionCamera(false);
+        Globals.getIns().getConfig().setPermissionLocation(false);
     }
 }

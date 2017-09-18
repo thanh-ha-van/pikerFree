@@ -3,6 +3,7 @@ package ha.thanh.pikerfree.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,22 +15,27 @@ import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder> {
-    private String[] filePaths;
+    private List<Uri> filePaths;
     private ItemClickListener mClickListener;
     private int currentPosition;
+    private StorageReference mStorageRef;
 
-    public ImageAdapter(Context context, String[] dataSet) {
+    public ImageAdapter(Context context, List<Uri> dataSet) {
         this.filePaths = dataSet;
+        mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -78,21 +84,38 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        File imgFile = new File(filePaths[position]);
+        File imgFile = new File(filePaths.get(position).toString());
         if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             holder.imgItemImage.setImageBitmap(myBitmap);
         }
-        startUploadImages(filePaths[position]);
+        startUploadImages(filePaths.get(position));
 
     }
-    public void startUploadImages (String filepath) {
 
+    public void startUploadImages (Uri filepath) {
+        if (filepath != null) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            StorageReference riversRef = mStorageRef.child("postImages").child(userId +"/" + postId  ".jpg");
+            riversRef.putFile(filepath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.e("editProfile", "done upload file to server");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Log.e("editProfile", " upload file to server get error");
+                        }
+                    });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return filePaths.length;
+        return filePaths.size();
     }
 
     public interface ItemClickListener {

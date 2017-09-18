@@ -47,6 +47,7 @@
     <!-- download and upload service-->
 
     <string name="progress_downloading">Downloading…</string>
+    <string name="turn_network_on">Please turn on your internet connection</string>
     <string name="progress_uploading">Uploading…</string>
     <string name="progress_auth">Signing In…</string>
 

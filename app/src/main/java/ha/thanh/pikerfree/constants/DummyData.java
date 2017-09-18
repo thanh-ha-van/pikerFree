@@ -1,10 +1,5 @@
 package ha.thanh.pikerfree.constants;
 
-import android.net.Uri;
-
-/**
- * Created by HaVan on 8/27/2017.
- */
 
 public class DummyData {
     private static DummyData ourInstance = null;

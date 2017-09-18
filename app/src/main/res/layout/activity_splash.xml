@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical">
@@ -14,10 +14,20 @@
         android:layout_marginBottom="80dp"
         android:src="@drawable/piker"
         android:tint="@color/colorAccent" />
+
     <com.wang.avi.AVLoadingIndicatorView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:indicatorName="BallClipRotatePulseIndicator"
-        app:indicatorColor="@color/colorAccent"/>
+        app:indicatorColor="@color/colorAccent"
+        app:indicatorName="BallClipRotatePulseIndicator" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_network_error"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:padding="8dp"
+        android:textColor="@color/red"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
