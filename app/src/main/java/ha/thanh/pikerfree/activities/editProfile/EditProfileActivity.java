@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +19,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.User;
 
 public class EditProfileActivity extends AppCompatActivity implements EditProfileInterface.RequiredViewOps {
 
@@ -50,7 +47,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         profilePresenter.setListener(this);
         profilePresenter.addTextChangeListener(etUserName, etUserAddress);
         profilePresenter.getLocalData();
-        profilePresenter.getDataFromServer();
         waitingDialog = new WaitingDialog(this);
     }
 
@@ -98,20 +94,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     public void hideDialog() {
         waitingDialog.hideDialog();
 
-    }
-
-    @Override
-    public void onUpdateUserData(User user, String url) {
-        etUserName.setText(user.getName());
-        etUserAddress.setText(user.getAddress());
-
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.temple_images);
-        requestOptions.error(R.drawable.temple_images);
-        Glide.with(this)
-                .setDefaultRequestOptions(requestOptions)
-                .load(url)
-                .into(imageView);
     }
 
     @Override

@@ -84,37 +84,13 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         this.isImagesChaged = true;
     }
 
-    void getDataFromServer() {
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(com.google.firebase.database.DataSnapshot dataSnapshot) {
-                dataUser = dataSnapshot.getValue(User.class);
-                mStorageRef.child("userImages/" + userId + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        mView.onUpdateUserData(dataUser, uri.toString());
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     public void getLocalData() {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
         mView.onLocalInforReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
+
+        Log.e("editProfile", "got local infor:  Name" + userName  + " Address " + userAddress + " Path " + mModel.getLocalImageStringFromSharePf());
     }
 
 
@@ -168,7 +144,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
                 updateDataUser();
                 databaseReference.setValue(dataUser);
                 isUpdatedDatabase = true;
-                Log.e("editProfile", "done save database");
+                Log.e("editProfile", "done save database to server");
                 checkIfCanHideDialog();
             }
         });
@@ -204,6 +180,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
             }
         }
         mModel.saveLocal(userName, userAddress, mypath.getAbsolutePath());
+        Log.e("editProfile", " Done save local");
     }
 
     void saveAuthSetting(final String username, final String linkImages) {

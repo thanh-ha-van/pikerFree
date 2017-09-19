@@ -16,7 +16,7 @@ public class User {
     private double lng = 0;
     private boolean isAdmin = false;
     private String avatarLink = "userImages/default_profile.jgp";
-    private String password = "";
+    private String email = "";
     private int[] posts;
     private int[] conversations;
 
@@ -85,12 +85,12 @@ public class User {
         this.avatarLink = avatarLink;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int[] getPosts() {

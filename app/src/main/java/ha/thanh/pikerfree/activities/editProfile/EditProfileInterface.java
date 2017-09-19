@@ -14,7 +14,6 @@ public interface EditProfileInterface {
 
         void showDialog();
         void hideDialog();
-        void onUpdateUserData(User user, String url);
         void onLocalInforReady(String name, String address, String filepath);
     }
 

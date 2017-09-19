@@ -33,7 +33,7 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
 
     private void checkNetwork() {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm.getActiveNetworkInfo() != null)
+        if (cm.getActiveNetworkInfo() == null)
             mView.onNetworkFail();
     }
 
@@ -41,26 +41,10 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
         return Globals.getIns().getConfig().isFirstRun();
     }
 
-    public void getServerInfor() {
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("postCount");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                int value = dataSnapshot.getValue(int.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                mView.onNetworkFail();
-            }
-        });
+    void setIsFirstRun() {
+        mModel.setIsFirstRun();
     }
+
 
     @Override
     public void loadConfigDone() {

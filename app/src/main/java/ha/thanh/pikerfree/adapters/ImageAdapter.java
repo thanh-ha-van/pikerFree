@@ -94,23 +94,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     }
 
     public void startUploadImages (Uri filepath) {
-        if (filepath != null) {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            StorageReference riversRef = mStorageRef.child("postImages").child(userId +"/" + postId  ".jpg");
-            riversRef.putFile(filepath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Log.e("editProfile", "done upload file to server");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            Log.e("editProfile", " upload file to server get error");
-                        }
-                    });
-        }
     }
 
     @Override

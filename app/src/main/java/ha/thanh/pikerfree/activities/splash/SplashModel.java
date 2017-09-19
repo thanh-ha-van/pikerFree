@@ -31,4 +31,10 @@ class SplashModel {
         Globals.getIns().getConfig().setUserID(userId);
         mPresenter.loadConfigDone();
     }
+
+    public void setIsFirstRun() {
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putBoolean(Constants.IS_FIRST_RUN, false);
+        editor.apply();
+    }
 }

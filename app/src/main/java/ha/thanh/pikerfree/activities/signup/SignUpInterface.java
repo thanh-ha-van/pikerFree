@@ -7,9 +7,14 @@ package ha.thanh.pikerfree.activities.signup;
 public interface SignUpInterface {
 
     interface RequiredViewOps {
+        void onHideWaiting();
+
+        void onShowInforDialog(String title, String mess);
+
+        void onDoneProcess();
 
     }
-    interface RequiredPresenterOps {
 
+    interface RequiredPresenterOps {
     }
 }

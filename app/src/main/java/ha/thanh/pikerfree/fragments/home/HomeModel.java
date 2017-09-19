@@ -27,13 +27,9 @@ public class HomeModel {
 
     public List<Post> loadAllMyPost() {
         List<Post> dummyPost = new ArrayList<>();
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
-        dummyPost.add(new Post(0, "Old laptop", mCon.getResources().getString(R.string.dummy_string), "235SEGSO"));
+        List<String> dummyString = new ArrayList<>();
+        dummyString.add(DummyData.getIns().getUri());
+        dummyPost.add(new Post(0, "Old laptop", DummyData.getIns().getUri(), dummyString, "owner1", 0, 0, 0, "unknown"));
         return dummyPost;
     }
 }

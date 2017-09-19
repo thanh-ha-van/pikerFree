@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.activities.editProfile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import ha.thanh.pikerfree.constants.Constants;
 
@@ -22,6 +23,7 @@ public class EditProfileModel {
 
     public String getUserNameStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_NAME, "");
+
     }
 
     public String getUserAddressStringFromSharePf() {
@@ -38,5 +40,6 @@ public class EditProfileModel {
         editor.putString(Constants.USER_ADDRESS, userAddress);
         editor.putString(Constants.USER_PROFILE_PIC_PATH, path);
         editor.apply();
+
     }
 }

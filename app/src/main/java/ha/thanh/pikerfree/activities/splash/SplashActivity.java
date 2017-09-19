@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.intro.IntroActivity;
+import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity implements SplashInterface.RequiredViewOps {
@@ -17,7 +18,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     private static final int LOAD_SUCCESS = 1;
     private static final int LOAD_ERROR = 2;
     private Handler handler = new Handler();
-    private boolean isFirstRun = false;
+    private boolean isFirstRun;
     private int statusLoadLanguage;
     private SplashPresenter mPresenter;
     @BindView(R.id.tv_network_error)
@@ -38,7 +39,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
         public void run() {
             if (!isFirstRun) {
                 if (statusLoadLanguage == LOAD_SUCCESS) {
-                    startMainActivity();
+                    startLoginActivity();
                 } else if (statusLoadLanguage == LOAD_ERROR) {
                     tvNetworkError.setText(getResources().getString(R.string.turn_network_on));
                 } else {
@@ -46,6 +47,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
                 }
             } else {
                 startIntroActivity();
+                mPresenter.setIsFirstRun();
             }
         }
     };
@@ -58,8 +60,8 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
         finish();
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();

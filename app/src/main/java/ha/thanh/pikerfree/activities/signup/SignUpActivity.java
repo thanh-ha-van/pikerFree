@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.activities.signup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,11 +42,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     EditText etPassConfirm;
 
     SignUpPresenter presenter;
-    private FirebaseAuth auth;
-    private FirebaseUser firebaseUser;
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
-    User dataUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         presenter = new SignUpPresenter(this, this);
-        auth = FirebaseAuth.getInstance();
         waitingDialog = new WaitingDialog(this);
         alertDialog = new CustomAlertDialog(this);
 
@@ -91,64 +88,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
             return;
         }
         waitingDialog.showDialog();
+        presenter.doSignUp(email, password, username);
 
-        auth.createUserWithEmailAndPassword(email, password)
-
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            getData();
-                            updateUserData();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        {
-                            waitingDialog.hideDialog();
-                            alertDialog.showAlertDialog("Error", e.getMessage());
-                        }
-                    }
-                });
-
-    }
-
-    public void getData() {
-        dataUser = new User();
-        firebaseUser = auth.getCurrentUser();
-        dataUser.setId(firebaseUser.getUid());
-        dataUser.setName(etUserName.getText().toString());
-        dataUser.setAddress("No address found");
-    }
-
-    public void updateDataBase() {
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("users");
-        DatabaseReference usersRef = ref.child(dataUser.getId());
-        usersRef.setValue(dataUser);
-        waitingDialog.hideDialog();
-        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-        finish();
-    }
-
-    public void updateUserData() {
-        if (auth != null) {
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(etUserName.getText().toString())
-                    .setPhotoUri(Uri.parse(dataUser.getAvatarLink()))
-                    .build();
-            firebaseUser.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                updateDataBase();
-                            }
-                        }
-                    });
-        }
     }
 
     @OnClick(R.id.btn_log_in)
@@ -157,4 +98,20 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         finish();
     }
 
+    @Override
+    public void onHideWaiting() {
+        waitingDialog.hideDialog();
+    }
+
+    @Override
+    public void onShowInforDialog(String title, String mess) {
+        alertDialog.showAlertDialog(title, mess);
+    }
+
+    @Override
+    public void onDoneProcess() {
+        waitingDialog.hideDialog();
+        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+        finish();
+    }
 }
