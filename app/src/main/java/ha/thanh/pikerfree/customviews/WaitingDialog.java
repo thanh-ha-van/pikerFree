@@ -29,8 +29,10 @@ public class WaitingDialog {
     public void showDialog() {
         alertDialog.show();
     }
+    public void deleteDialog() {
+    }
 
     public void hideDialog() {
-        alertDialog.hide();
+        alertDialog.dismiss();
     }
 }

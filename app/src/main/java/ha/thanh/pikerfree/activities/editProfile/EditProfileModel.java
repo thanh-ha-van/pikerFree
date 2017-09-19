@@ -2,8 +2,6 @@ package ha.thanh.pikerfree.activities.editProfile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
 import ha.thanh.pikerfree.constants.Constants;
 
 /**

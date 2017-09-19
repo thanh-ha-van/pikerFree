@@ -3,7 +3,6 @@ package ha.thanh.pikerfree.activities.editProfile;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,21 +18,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.User;
 
 
@@ -42,7 +35,6 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
     private EditProfileInterface.RequiredViewOps mView;
     private EditProfileModel mModel;
-    private EditProfileInterface.RequiredViewOps listener;
     private Context context;
 
     private StorageReference mStorageRef;
@@ -89,13 +81,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
         mView.onLocalInforReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
-
         Log.e("editProfile", "got local infor:  Name" + userName  + " Address " + userAddress + " Path " + mModel.getLocalImageStringFromSharePf());
-    }
-
-
-    void setListener(EditProfileInterface.RequiredViewOps listener) {
-        this.listener = listener;
     }
 
     void addTextChangeListener(final EditText etUserName, final EditText etUserAddress) {
@@ -247,6 +233,6 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
     private void checkIfCanHideDialog() {
         if (isUpdatedDatabase && isUpdatedAuth && isUploadDone)
-            listener.hideDialog();
+            mView.hideDialog();
     }
 }

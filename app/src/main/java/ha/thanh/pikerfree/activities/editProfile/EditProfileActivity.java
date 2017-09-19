@@ -44,7 +44,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void initData() {
         profilePresenter = new EditProfilePresenter(this, this);
-        profilePresenter.setListener(this);
         profilePresenter.addTextChangeListener(etUserName, etUserAddress);
         profilePresenter.getLocalData();
         waitingDialog = new WaitingDialog(this);
@@ -93,15 +92,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     @Override
     public void hideDialog() {
         waitingDialog.hideDialog();
-
     }
 
     @Override
     public void onLocalInforReady(String name, String address, String filepath) {
         etUserName.setText(name);
         etUserAddress.setText(address);
-        File imgFile = new  File(filepath);
-        if(imgFile.exists()){
+        File imgFile = new File(filepath);
+        if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             imageView.setImageBitmap(myBitmap);
             Log.d("editProfile", "Loaded bitmap from local");

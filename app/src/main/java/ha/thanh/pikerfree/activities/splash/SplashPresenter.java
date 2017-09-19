@@ -2,17 +2,7 @@ package ha.thanh.pikerfree.activities.splash;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import ha.thanh.pikerfree.constants.Globals;
-
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 
 /**

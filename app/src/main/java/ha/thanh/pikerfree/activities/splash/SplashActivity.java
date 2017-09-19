@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     private static final int LOAD_SUCCESS = 1;
     private static final int LOAD_ERROR = 2;
     private Handler handler = new Handler();
-    private boolean isFirstRun;
+    private boolean isFirstRun = true;
     private int statusLoadLanguage;
     private SplashPresenter mPresenter;
     @BindView(R.id.tv_network_error)
@@ -67,7 +67,6 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
         finish();
     }
 
-
     @Override
     public void onLoadConfigDone() {
         statusLoadLanguage = LOAD_SUCCESS;
@@ -81,6 +80,6 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     @Override
     protected void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, 500);
+        handler.postDelayed(runnable, 1000);
     }
 }

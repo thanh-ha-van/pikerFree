@@ -2,7 +2,6 @@ package ha.thanh.pikerfree.activities.splash;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
@@ -26,7 +25,7 @@ class SplashModel {
 
     private void loadAllConfig() {
         String userId = sPref.getString(Constants.USER_ID, Globals.getIns().getConfig().getUserID());
-        boolean isFirstRun = sPref.getBoolean(Constants.IS_FIRST_RUN, false);
+        boolean isFirstRun = sPref.getBoolean(Constants.IS_FIRST_RUN, true);
         Globals.getIns().getConfig().setFirstRun(isFirstRun);
         Globals.getIns().getConfig().setUserID(userId);
         mPresenter.loadConfigDone();
