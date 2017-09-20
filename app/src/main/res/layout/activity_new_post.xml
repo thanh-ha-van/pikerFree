@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:background="@drawable/plate_small_corner" />
+                android:background="@color/gray" />
 
             <EditText
                 android:id="@+id/editText"

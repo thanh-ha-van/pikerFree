@@ -8,7 +8,9 @@
         android:id="@+id/img_item_image"
         android:layout_width="160dp"
         android:layout_height="100dp"
-        android:background="@drawable/plate_small_corner" />
+        android:adjustViewBounds="true"
+        android:background="@drawable/plate_small_corner"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/delete_button"

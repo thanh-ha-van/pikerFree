@@ -3,22 +3,15 @@ package ha.thanh.pikerfree.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.util.List;
@@ -26,16 +19,18 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.models.ImagePost;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder> {
-    private List<Uri> filePaths;
+public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.MyViewHolder> {
+    private List<ImagePost> imagePosts;
     private ItemClickListener mClickListener;
     private int currentPosition;
     private StorageReference mStorageRef;
 
-    public ImageAdapter(Context context, List<Uri> dataSet) {
-        this.filePaths = dataSet;
+    public ImagePickerAdapter(Context context, List<ImagePost> dataSet, ItemClickListener listener) {
+        this.imagePosts = dataSet;
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        mClickListener = listener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -58,20 +53,20 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
 
             currentPosition = getAdapterPosition();
             if (mClickListener != null && currentPosition == getItemCount() - 1) {
+                // pick more image when click to final item
                 mClickListener.onAddImagesToAdapter();
-            }
-            else {
+            } else {
+                // show delete option when click on an item.
                 deleteButton.setVisibility(View.VISIBLE);
             }
             if (deleteButton.getVisibility() == View.VISIBLE && view.getId() == deleteButton.getId()) {
+
+                // when show option item are show. if user choose to delete. Delete
                 mClickListener.onItemDeleted(currentPosition);
             }
+            // if user click again out of delete button. hide delete button.
             else deleteButton.setVisibility(View.GONE);
         }
-    }
-
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
     }
 
     @Override
@@ -84,25 +79,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        File imgFile = new File(filePaths.get(position).toString());
+        File imgFile = new File(imagePosts.get(position).getPath());
         if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             holder.imgItemImage.setImageBitmap(myBitmap);
         }
-        startUploadImages(filePaths.get(position));
-
-    }
-
-    public void startUploadImages (Uri filepath) {
+        if (imagePosts.get(position).isUploadDone())
+            holder.progressBar.setVisibility(View.GONE);
+        else holder.progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public int getItemCount() {
-        return filePaths.size();
+        return imagePosts.size();
     }
 
     public interface ItemClickListener {
+
         void onAddImagesToAdapter();
+
         void onItemDeleted(int position);
     }
 
