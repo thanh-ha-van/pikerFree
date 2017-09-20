@@ -1,47 +1,49 @@
 package ha.thanh.pikerfree.models;
 
-import android.location.Location;
-import android.net.Uri;
+import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
+
+import ha.thanh.pikerfree.constants.Constants;
 
 /**
  * Created by HaVan on 8/27/2017.
  */
-
+@IgnoreExtraProperties
 public class Post {
     private int postId;
-    private String title = "";
-    private String description = "No description founded";
-    private ArrayList<Uri> linkImages;
-    private int status;
-    private int ownerId;
-    private Location location;
-    private Timestamp timePosted;
-    private String topic = "";
+    private String title = "No title found";
+    private String description = "No description found";
+    private List<String> linkImages = new ArrayList<>();
+    private int status = Constants.STATUS_OPEN;
+    private String ownerId;
+    private double lat = 0;
+    private double lng = 0;
+    private long timePosted;
+    private String category = "Unknown";
 
     public Post() {
-
     }
 
-    public Post(int postId, String title, String description, int ownerId) {
-        this.postId = postId;
-        this.title = title;
-        this.description = description;
-        this.ownerId = ownerId;
-    }
-
-    public Post(int postId, String title, String description, ArrayList<Uri> linkImages, int status, int ownerId, Location location, Timestamp timePosted, String topic) {
+    public Post(int postId, String title, String description, List<String> linkImages, String ownerId, double lat, double lng, long timePosted, String category) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.linkImages = linkImages;
-        this.status = status;
         this.ownerId = ownerId;
-        this.location = location;
+        this.lat = lat;
+        this.lng = lng;
         this.timePosted = timePosted;
-        this.topic = topic;
+        this.category = category;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public String getTitle() {
@@ -60,11 +62,11 @@ public class Post {
         this.description = description;
     }
 
-    public ArrayList<Uri> getLinkImages() {
+    public List<String> getLinkImages() {
         return linkImages;
     }
 
-    public void setLinkImages(ArrayList<Uri> linkImages) {
+    public void setLinkImages(ArrayList<String> linkImages) {
         this.linkImages = linkImages;
     }
 
@@ -76,35 +78,43 @@ public class Post {
         this.status = status;
     }
 
-    public int getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
 
-    public Location getLocation() {
-        return location;
+    public double getLat() {
+        return lat;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
-    public Timestamp getTimePosted() {
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public long getTimePosted() {
         return timePosted;
     }
 
-    public void setTimePosted(Timestamp timePosted) {
+    public void setTimePosted(long timePosted) {
         this.timePosted = timePosted;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

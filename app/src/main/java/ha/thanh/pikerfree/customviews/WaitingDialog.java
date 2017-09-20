@@ -22,15 +22,17 @@ public class WaitingDialog {
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        alertDialog.setCanceledOnTouchOutside(true);
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setContentView(R.layout.view_waiting_dialog);
     }
 
     public void showDialog() {
         alertDialog.show();
     }
+    public void deleteDialog() {
+    }
 
     public void hideDialog() {
-        alertDialog.hide();
+        alertDialog.dismiss();
     }
 }

@@ -1,31 +1,51 @@
 package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import java.util.ArrayList;
+import android.widget.ProgressBar;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder> {
-    private ArrayList<Uri> dataSet;
+    private List<Uri> filePaths;
     private ItemClickListener mClickListener;
     private int currentPosition;
+    private StorageReference mStorageRef;
 
-    public ImageAdapter(Context context, ArrayList<Uri> dataSet) {
-        this.dataSet = dataSet;
+    public ImageAdapter(Context context, List<Uri> dataSet) {
+        this.filePaths = dataSet;
+        mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.img_item_image)
         ImageView imgItemImage;
+        @BindView(R.id.progress_bar)
+        ProgressBar progressBar;
+        @BindView(R.id.delete_button)
+        ImageView deleteButton;
 
         MyViewHolder(View view) {
             super(view);
@@ -37,10 +57,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
         public void onClick(View view) {
 
             currentPosition = getAdapterPosition();
-            if (mClickListener != null) {
-                if (!dataSet.get(currentPosition).equals(Uri.EMPTY))
-                mClickListener.onItemClick(currentPosition);
+            if (mClickListener != null && currentPosition == getItemCount() - 1) {
+                mClickListener.onAddImagesToAdapter();
             }
+            else {
+                deleteButton.setVisibility(View.VISIBLE);
+            }
+            if (deleteButton.getVisibility() == View.VISIBLE && view.getId() == deleteButton.getId()) {
+                mClickListener.onItemDeleted(currentPosition);
+            }
+            else deleteButton.setVisibility(View.GONE);
         }
     }
 
@@ -57,22 +83,27 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Uri uri = dataSet.get(position);
-        if (uri.equals(Uri.EMPTY)) {
-            holder.imgItemImage.setImageResource(R.drawable.ic_image);
-        }
-        holder.imgItemImage.setImageURI(uri);
 
+        File imgFile = new File(filePaths.get(position).toString());
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.imgItemImage.setImageBitmap(myBitmap);
+        }
+        startUploadImages(filePaths.get(position));
+
+    }
+
+    public void startUploadImages (Uri filepath) {
     }
 
     @Override
     public int getItemCount() {
-        return dataSet.size();
+        return filePaths.size();
     }
 
     public interface ItemClickListener {
-
-        void onItemClick(int position);
+        void onAddImagesToAdapter();
+        void onItemDeleted(int position);
     }
 
 }

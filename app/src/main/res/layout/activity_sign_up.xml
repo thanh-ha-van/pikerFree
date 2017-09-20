@@ -26,7 +26,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_user_name"
@@ -39,7 +39,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_pass"
@@ -47,13 +47,13 @@
             android:layout_height="40dp"
             android:layout_margin="8dp"
             android:background="@drawable/plate_shade"
-            android:hint="@string/password"
+            android:hint="@string/email"
             android:inputType="textPassword"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_pass_confirm"
@@ -67,7 +67,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_sign_up"
@@ -84,9 +84,9 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
             android:text="@string/already_have_an_account"
-            android:textSize="18sp" />
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_in"

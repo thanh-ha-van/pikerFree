@@ -15,10 +15,15 @@ import java.util.List;
 import ha.thanh.pikerfree.services.DialogMessage;
 
 public class HandlePermission {
-    private static final String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+    private static final String[] PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,};
     private Activity mActivity;
-    DialogMessage dialogMessage;
-    CallbackRequestPermission callbackRequestPermission;
+    private DialogMessage dialogMessage;
+    private CallbackRequestPermission callbackRequestPermission;
     public static final int REQUEST_ID_PERMISSION = 123;
 
     public HandlePermission(Activity context, CallbackRequestPermission callbackRequestPermision) {

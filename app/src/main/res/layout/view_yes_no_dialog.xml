@@ -19,7 +19,7 @@
         android:padding="5dp"
         android:text="Content"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -31,7 +31,7 @@
         android:text="Title"
         android:textAllCaps="true"
         android:textColor="@color/colorAccent"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

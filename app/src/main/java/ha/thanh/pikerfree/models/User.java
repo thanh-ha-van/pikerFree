@@ -1,32 +1,39 @@
 package ha.thanh.pikerfree.models;
 
-import android.location.Location;
-import android.net.Uri;
+
+import com.google.firebase.database.IgnoreExtraProperties;
 
 
 /**
  * Created by HaVan on 8/27/2017.
  */
-
+@IgnoreExtraProperties
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String address;
-    private Location location;
-    private int[] postIds;
-    private boolean isAdmin;
-    private Uri avatarLink;
-    private boolean isMale;
-    private String password;
+    private double lat = 0;
+    private double lng = 0;
+    private boolean isAdmin = false;
+    private String avatarLink = "userImages/default_profile.jgp";
+    private String email = "";
+    private int[] posts;
+    private int[] conversations;
 
     public User() {
     }
 
-    public int getId() {
+    public User(String id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -46,20 +53,20 @@ public class User {
         this.address = address;
     }
 
-    public Location getLocation() {
-        return location;
+    public double getLat() {
+        return lat;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
-    public int[] getPostIds() {
-        return postIds;
+    public double getLng() {
+        return lng;
     }
 
-    public void setPostIds(int[] postIds) {
-        this.postIds = postIds;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public boolean isAdmin() {
@@ -70,27 +77,35 @@ public class User {
         isAdmin = admin;
     }
 
-    public Uri getAvatarLink() {
+    public String getAvatarLink() {
         return avatarLink;
     }
 
-    public void setAvatarLink(Uri avatarLink) {
+    public void setAvatarLink(String avatarLink) {
         this.avatarLink = avatarLink;
     }
 
-    public boolean isMale() {
-        return isMale;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMale(boolean male) {
-        isMale = male;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public int[] getPosts() {
+        return posts;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPosts(int[] posts) {
+        this.posts = posts;
+    }
+
+    public int[] getConversation() {
+        return conversations;
+    }
+
+    public void setConversation(int[] conversation) {
+        this.conversations = conversation;
     }
 }

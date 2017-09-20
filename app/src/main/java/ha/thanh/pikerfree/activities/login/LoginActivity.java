@@ -7,48 +7,36 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.forgetPassword.ForgetPassActivity;
-import ha.thanh.pikerfree.activities.mainActivity.MainActivity;
+import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.activities.signup.SignUpActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 
 public class LoginActivity extends AppCompatActivity implements LoginInterface.RequiredViewOps {
 
-    private FirebaseAuth auth;
     @BindView(R.id.et_email_login)
     EditText etUserName;
     @BindView(R.id.et_pass)
     EditText etPass;
     CustomAlertDialog alertDialog;
     WaitingDialog waitingDialog;
+    LoginPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        auth = FirebaseAuth.getInstance();
+        presenter = new LoginPresenter(this, this);
         alertDialog = new CustomAlertDialog(this);
         waitingDialog = new WaitingDialog(this);
-        checkLogIn();
-    }
-
-    public void checkLogIn() {
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
+        presenter.checkLogIn();
     }
 
     @OnClick(R.id.btn_log_up)
@@ -77,45 +65,39 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
             alertDialog.showAlertDialog("Oop!", "Please enter your password");
             return;
         }
-        showWaiting();
-        //authenticate user
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            // there was an error
-                            if (password.length() < 6) {
-                                etPass.setError(getString(R.string.minimum_password));
-                                hideWaiting();
-                            }
-                        } else {
-                            hideWaiting();
-                            startMain();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        {
-                            hideWaiting();
-                            alertDialog.showAlertDialog("Oop!", e.getMessage());
-                        }
-                    }
-                });
-    }
-
-    public void showWaiting() {
         waitingDialog.showDialog();
+        presenter.doLogin(email, password);
     }
 
-    public void hideWaiting() {
-        waitingDialog.hideDialog();
-    }
     public void startMain() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onHideWaitingDialog() {
+        waitingDialog.hideDialog();
+    }
+
+    @Override
+    public void onLogInSuccess() {
+        startMain();
+    }
+
+    @Override
+    public void onShowAlert(String title, String message) {
+        alertDialog.showAlertDialog(title, message);
+    }
+
+    @Override
+    public void onPasswordWeek() {
+        etPass.setError("Password must be at least 6 characters");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.removeListener();
     }
 }

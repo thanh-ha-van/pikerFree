@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.activities.splashActivity.SplashActivity;
+import ha.thanh.pikerfree.activities.splash.SplashActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override

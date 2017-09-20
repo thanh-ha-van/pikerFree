@@ -21,7 +21,7 @@
             android:gravity="center"
             android:text="@string/we_need_email"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_email_reset"
@@ -32,7 +32,7 @@
             android:hint="@string/input_email"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_reset"

@@ -1,14 +1,9 @@
 package ha.thanh.pikerfree.constants;
 
-import android.net.Uri;
-
-/**
- * Created by HaVan on 8/27/2017.
- */
 
 public class DummyData {
     private static DummyData ourInstance = null;
-    public  static Uri linkForImagesTemp = Uri.parse("http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c05145861.png");
+    public  static String linkForImagesTemp = "http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c05145861.png";
 
     public static DummyData getIns() {
         if (ourInstance == null) {
@@ -20,7 +15,7 @@ public class DummyData {
     private DummyData() {
     }
 
-    public Uri getUri() {
+    public String getUri() {
         return linkForImagesTemp;
     }
 

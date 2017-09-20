@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.mainActivity;
+package ha.thanh.pikerfree.activities.main;
 
 /**
  * Created by HaVan on 5/22/2017.

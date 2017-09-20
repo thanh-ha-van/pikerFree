@@ -2,14 +2,32 @@ package ha.thanh.pikerfree.constants;
 
 
 public class Config {
-    private static final int DEFAULT_WORD_OF_DATE = 8;
-    public static final String BASE_URL = "https://pikerfree.firebaseio.com/";
 
     private boolean isPermissionWriteFile = false;
     private boolean isPermissionCamera = false;
+    private boolean isPermissionLocation = false;
+
+    private boolean isFirstRun = true;
+    private String userID;
 
     public Config() {
 
+    }
+
+    public boolean isFirstRun() {
+        return isFirstRun;
+    }
+
+    public void setFirstRun(boolean firstRun) {
+        isFirstRun = firstRun;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public boolean isPermissionWriteFile() {
@@ -26,6 +44,14 @@ public class Config {
 
     public void setPermissionCamera(boolean permissionCamera) {
         isPermissionCamera = permissionCamera;
+    }
+
+    public boolean isPermissionLocation() {
+        return isPermissionLocation;
+    }
+
+    public void setPermissionLocation(boolean permissionLocation) {
+        isPermissionLocation = permissionLocation;
     }
 }
 

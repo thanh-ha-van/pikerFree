@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.activities.mainActivity;
+package ha.thanh.pikerfree.activities.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,11 +11,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MainPresenter {
     private Context context;
-    private SharedPreferences sharedPreferences;
 
     public MainPresenter(Context context) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(Constants.CONFIG, MODE_PRIVATE);
     }
 
     protected void saveConfig() {
