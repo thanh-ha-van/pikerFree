@@ -39,7 +39,6 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
     private User dataUser;
     private ValueEventListener eventListener;
     private DatabaseReference pref;
-    private boolean isGotData = false;
 
 
     LoginPresenter(Activity activity, LoginInterface.RequiredViewOps mView) {
@@ -86,8 +85,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
     }
 
     public void getDataFromServer() {
-        if (!isGotData) {
-            isGotData = true;
+
             firebaseUser = auth.getCurrentUser();
             dataUser = new User();
             database = FirebaseDatabase.getInstance();
@@ -108,7 +106,6 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                 }
             };
             pref.addValueEventListener(eventListener);
-        }
     }
 
     public void removeListener() {
