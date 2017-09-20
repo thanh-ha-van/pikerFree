@@ -18,11 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,8 +42,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
-    private ValueEventListener eventListener;
-    private DatabaseReference pref;
+
     private User dataUser;
 
     private String userId;
@@ -80,42 +76,12 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
         this.isImagesChaged = true;
     }
 
-    public void getServerData() {
-
-        firebaseUser = auth.getCurrentUser();
-        dataUser = new User();
-        database = FirebaseDatabase.getInstance();
-        pref = database.getReference().child("users").child(firebaseUser.getUid());
-        eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                dataUser = dataSnapshot.getValue(User.class);
-                Log.d("Login", " get Data from server " + dataUser.toString());
-                mView.onServerDataReady(dataUser);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        pref.addValueEventListener(eventListener);
-
-    }
-
-    public void removeListener() {
-        if(pref != null)
-            pref.removeEventListener(eventListener);
-    }
 
     public void getLocalData() {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
-        String filePath = mModel.getLocalImageStringFromSharePf();
-        if (!filePath.equals("")) {
-            mView.onLocalDataReady(userName, userAddress, filePath);
-            Log.e("editProfile", "got local data:  Name" + userName + " Address " + userAddress + " Path " + filePath);
-        } else mView.onLocalDataFail();
+        mView.onLocalInforReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
+        Log.e("editProfile", "got local infor:  Name" + userName  + " Address " + userAddress + " Path " + mModel.getLocalImageStringFromSharePf());
     }
 
     void addTextChangeListener(final EditText etUserName, final EditText etUserAddress) {

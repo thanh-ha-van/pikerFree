@@ -19,7 +19,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.User;
 
 public class EditProfileActivity extends AppCompatActivity implements EditProfileInterface.RequiredViewOps {
 
@@ -96,30 +95,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     @Override
-    public void onLocalDataReady(String name, String address, String filepath) {
+    public void onLocalInforReady(String name, String address, String filepath) {
         etUserName.setText(name);
         etUserAddress.setText(address);
         File imgFile = new File(filepath);
         if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            if(myBitmap == null) onLocalDataFail();
             imageView.setImageBitmap(myBitmap);
             Log.d("editProfile", "Loaded bitmap from local");
         }
-    }
-
-    @Override
-    public void onLocalDataFail() {
-        profilePresenter.getServerData();
-    }
-
-    @Override
-    public void onServerDataReady(User user) {
-
-    }
-
-    @Override
-    public void onServerDataFail(String error) {
-
     }
 }
