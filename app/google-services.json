@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "485455843827-5gunv6eargnnaf5mehvu7cckojkak4id.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "ha.thanh.pikerfree",
-            "certificate_hash": "72fb4d98ff42bfd60ae1d1209152f90642a9d03d"
-          }
-        },
-        {
           "client_id": "485455843827-1q3ruopvrt42g173dvpqikbs5dam2jni.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "485455843827-1q3ruopvrt42g173dvpqikbs5dam2jni.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
