@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.models.ImagePost;
+import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 
 /**
@@ -47,6 +48,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private int postCount = 0;
     private int imageCount = 0;
     private User dataUser;
+    private Post post;
     private Handler handler;
 
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
@@ -67,7 +69,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         database = FirebaseDatabase.getInstance();
         // for database
         userPref = database.getReference("users").child(firebaseUser.getUid());
-        userPref = database.getReference("posts");
+        postPref = database.getReference("posts");
         getCurrentPostCount();
     }
 
@@ -90,16 +92,20 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     }
 
     public void uploadPostToDatabase(String title, String description) {
-
+        createUser();
         createPost(title, description);
         uploadPostData();
         uploadUserData();
         updateCurrentPostCount();
     }
 
+    private void createUser() {
+        dataUser = new User();
+        dataUser.setId(firebaseUser.getUid());
+    }
 
     private void createPost(String title, String description) {
-
+        post = new Post();
     }
 
     private void uploadPostData() {
@@ -153,7 +159,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
     private int getImagePostIndexFromName(String name) {
         for (int i = 0; i < imagePostList.size(); i++) {
-            if (imagePostList.get(i).getName() == name)
+            if (imagePostList.get(i).getName().equalsIgnoreCase(name))
                 return i;
         }
         return -1;

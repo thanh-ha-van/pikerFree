@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     public void getUserProfilePic() {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.mipmap.ic_launcher);
-        requestOptions.error(R.drawable.temple_images);
+        requestOptions.error(R.drawable.file);
         Glide.with(this.getContext())
                 .setDefaultRequestOptions(requestOptions)
                 .load(firebaseUser.getPhotoUrl())

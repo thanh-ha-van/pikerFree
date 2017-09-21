@@ -85,8 +85,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         if (linkFirstImages == null) linkFirstImages = DummyData.getIns().getUri();
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.mipmap.ic_launcher);
-        requestOptions.error(R.drawable.temple_images);
+        requestOptions.placeholder(R.drawable.file);
+        requestOptions.error(R.drawable.file);
 
         Glide.with(this.mConText)
                 .setDefaultRequestOptions(requestOptions)

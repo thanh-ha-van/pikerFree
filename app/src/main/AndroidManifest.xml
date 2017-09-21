@@ -17,11 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -35,7 +30,6 @@
         <activity
             android:name=".activities.newPost.NewPostActivity"
             android:screenOrientation="portrait">
-
 
         </activity>
         <activity
@@ -57,6 +51,13 @@
             android:name=".activities.forgetPassword.ForgetPassActivity"
             android:screenOrientation="portrait">
 
+        </activity>
+        <activity android:name=".activities.selectCategory.SelectCategoryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
