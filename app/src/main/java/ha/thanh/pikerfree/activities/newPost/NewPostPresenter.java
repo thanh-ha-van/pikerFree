@@ -18,7 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.vlk.multimager.utils.Image;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private DatabaseReference postPref;
     private ValueEventListener eventListener;
     private int postCount = 0;
+    private int imageCount = 0;
     private User dataUser;
     private Handler handler;
 
@@ -68,16 +71,27 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         getCurrentCount();
     }
 
-    public void addItemToList(ImagePost imagePost) {
-        imagePostList.add(0, imagePost);
-    }
-    public List<ImagePost> getItemList() {
-        return  imagePostList;
+    public void startUploadImages() {
+        for (int i = 0; i < imagePostList.size(); i++) {
+            upLoadSingleImage(imagePostList.get(i));
+        }
     }
 
-    public ImagePost getFirstItem() {
-        return imagePostList.get(0);
+    public void addAllImage(ArrayList<Image> imagesList) {
+        for (int i = imageCount; i < imagesList.size(); i++) {
+            imagePostList.add(0,
+                    new ImagePost(imagesList.get(i).imagePath,
+                            "image_no_" + String.valueOf(imageCount + 1) + ".jpg"));
+            imageCount++;
+        }
+        if(imagesList.size() == 5) imagesList.remove(4);
+        imageCount --;
     }
+
+    public List<ImagePost> getItemList() {
+        return imagePostList;
+    }
+
     @Override
     public void onSaveLocalDone() {
 
@@ -94,24 +108,33 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
             @Override
             public void run() {
                 if (imagePost.getPathLocal() != null) {
-                    Uri filePath = Uri.parse(imagePost.getPathLocal());
+                    Uri file = Uri.fromFile(new File(imagePost.getPathLocal()));
                     StorageReference riversRef = mStorageRef.child(postCount + "/" + imagePost.getName());
-                    riversRef.putFile(filePath)
+                    riversRef.putFile(file)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Log.d("thanh", "Upload image done");
+                                    imagePostList.get(getImagePostIndexFromName(imagePost.getName())).setUploadDone(true);
+                                    mView.onUploadSingleImageDone();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception exception) {
-                                    Log.d("thanh", "Upload image fail");
+                                    Log.e("thanh", " it's not over yet bitch");
                                 }
                             });
                 }
             }
         });
+    }
+
+    private int getImagePostIndexFromName(String name) {
+        for (int i = 0; i < imagePostList.size(); i++) {
+            if(imagePostList.get(i).getName() == name)
+                return i;
+        }
+        return -1;
     }
 
     public void getCurrentCount() {

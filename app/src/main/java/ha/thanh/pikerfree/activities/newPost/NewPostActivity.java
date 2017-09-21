@@ -21,6 +21,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.models.ImagePost;
 
 
 public class NewPostActivity extends AppCompatActivity implements NewPostInterface.RequiredViewOps, ImagePickerAdapter.ItemClickListener {
@@ -80,8 +81,8 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     public void onAddImagesToAdapter() {
         Intent intent = new Intent(this, GalleryActivity.class);
         Params params = new Params();
-        params.setCaptureLimit(10);
-        params.setPickerLimit(10);
+        params.setCaptureLimit(4);
+        params.setPickerLimit(4);
         params.setToolbarColor(getResources().getColor(R.color.colorPrimary));
         params.setActionButtonColor(getResources().getColor(R.color.colorPrimary));
         params.setButtonTextColor(getResources().getColor(R.color.white));
@@ -102,6 +103,9 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
         switch (requestCode) {
             case Constants.TYPE_MULTI_PICKER:
                 ArrayList<Image> imagesList = data.getParcelableArrayListExtra(Constants.KEY_BUNDLE_LIST);
+                mPresenter.addAllImage(imagesList);
+                adapter.notifyDataSetChanged();
+                mPresenter.startUploadImages();
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

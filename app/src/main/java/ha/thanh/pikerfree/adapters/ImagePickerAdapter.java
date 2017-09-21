@@ -53,19 +53,15 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
             currentPosition = getAdapterPosition();
             if (mClickListener != null && currentPosition == getItemCount() - 1) {
-                // pick more image when click to final item
                 mClickListener.onAddImagesToAdapter();
-            } else {
-                // show delete option when click on an item.
-                deleteButton.setVisibility(View.VISIBLE);
+            } else if (view.getId() != deleteButton.getId()) {
+                if (deleteButton.getVisibility() == View.GONE)
+                    deleteButton.setVisibility(View.VISIBLE);
+                else deleteButton.setVisibility(View.GONE);
             }
             if (deleteButton.getVisibility() == View.VISIBLE && view.getId() == deleteButton.getId()) {
-
-                // when show option item are show. if user choose to delete. Delete
                 mClickListener.onItemDeleted(currentPosition);
             }
-            // if user click again out of delete button. hide delete button.
-            else deleteButton.setVisibility(View.GONE);
         }
     }
 
