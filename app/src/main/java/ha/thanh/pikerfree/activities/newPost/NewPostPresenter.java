@@ -34,7 +34,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private NewPostInterface.RequiredViewOps mView;
     private NewPostModel mModel;
 
-    private List<ImagePost> imagePostList = new ArrayList<>();
+    private List<ImagePost> imagePostList;
     private Context context;
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
@@ -43,16 +43,20 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private DatabaseReference postPref;
     private ValueEventListener eventListener;
     private int postCount = 0;
-
     private User dataUser;
     private Handler handler;
 
-    NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView, List<ImagePost> list) {
+    NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
+
         this.mView = mView;
         this.context = context;
-        this.imagePostList = list;
+
+        this.imagePostList = new ArrayList<>();
+        imagePostList.add(new ImagePost("", true, "image_no_0"));
+
         mModel = new NewPostModel(context, this);
         handler = new Handler();
+
         /// for storage
         mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages");
         // for setName;
@@ -64,6 +68,16 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         getCurrentCount();
     }
 
+    public void addItemToList(ImagePost imagePost) {
+        imagePostList.add(0, imagePost);
+    }
+    public List<ImagePost> getItemList() {
+        return  imagePostList;
+    }
+
+    public ImagePost getFirstItem() {
+        return imagePostList.get(0);
+    }
     @Override
     public void onSaveLocalDone() {
 
@@ -75,24 +89,24 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     }
 
 
-    public void upLoadSingleImage(final String path, final String imageName) {
+    public void upLoadSingleImage(final ImagePost imagePost) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (path != null) {
-                    Uri filePath = Uri.parse(path);
-                    StorageReference riversRef = mStorageRef.child(postCount +"/" + imageName + ".jpg");
+                if (imagePost.getPathLocal() != null) {
+                    Uri filePath = Uri.parse(imagePost.getPathLocal());
+                    StorageReference riversRef = mStorageRef.child(postCount + "/" + imagePost.getName());
                     riversRef.putFile(filePath)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Log.e("thanh", "done upload file to server");
+                                    Log.d("thanh", "Upload image done");
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception exception) {
-                                    Log.e("thanh", " upload file to server get error");
+                                    Log.d("thanh", "Upload image fail");
                                 }
                             });
                 }

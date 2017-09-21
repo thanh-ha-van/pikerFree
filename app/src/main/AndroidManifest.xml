@@ -58,9 +58,6 @@
             android:screenOrientation="portrait">
 
         </activity>
-        <activity
-            android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
-            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

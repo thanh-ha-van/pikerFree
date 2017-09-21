@@ -5,20 +5,28 @@ package ha.thanh.pikerfree.models;
  */
 
 public class ImagePost {
-    private  String path;
+    private  String pathLocal;
     private boolean isUploadDone;
+    private String name;
 
-    public ImagePost(String path) {
-        this.path = path;
-        isUploadDone = false;
+    public ImagePost(String pathLocal, String name) {
+        this.pathLocal = pathLocal;
+        this.isUploadDone = false;
+        this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    public ImagePost(String pathLocal, boolean isUploadDone, String name) {
+        this.pathLocal = pathLocal;
+        this.isUploadDone = isUploadDone;
+        this.name = name;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public String getPathLocal() {
+        return pathLocal;
+    }
+
+    public void setPathLocal(String pathLocal) {
+        this.pathLocal = pathLocal;
     }
 
     public boolean isUploadDone() {
@@ -27,5 +35,13 @@ public class ImagePost {
 
     public void setUploadDone(boolean uploadDone) {
         isUploadDone = uploadDone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

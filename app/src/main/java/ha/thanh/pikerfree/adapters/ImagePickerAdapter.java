@@ -79,7 +79,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        File imgFile = new File(imagePosts.get(position).getPath());
+        File imgFile = new File(imagePosts.get(position).getPathLocal());
         if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             holder.imgItemImage.setImageBitmap(myBitmap);
