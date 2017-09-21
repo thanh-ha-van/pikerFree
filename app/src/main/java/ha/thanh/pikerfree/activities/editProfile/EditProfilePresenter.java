@@ -50,7 +50,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     private String userAddress;
 
     private boolean isTextChanged = false;
-    private boolean isImagesChaged = false;
+    private boolean isImagesChanged = false;
     private boolean isUploadDone = false;
     private boolean isUpdatedDatabase = false;
     private boolean isUpdatedAuth = false;
@@ -73,14 +73,14 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     }
 
     void setImagesChanged() {
-        this.isImagesChaged = true;
+        this.isImagesChanged = true;
     }
 
 
     public void getLocalData() {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
-        mView.onLocalInforReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
+        mView.onLocalDataReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
         Log.e("editProfile", "got local infor:  Name" + userName  + " Address " + userAddress + " Path " + mModel.getLocalImageStringFromSharePf());
     }
 
@@ -198,7 +198,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
     void uploadFile(final Uri filePath) {
 
-        if (!isImagesChaged) {
+        if (!isImagesChanged) {
             isUploadDone = true;
             return;
         }

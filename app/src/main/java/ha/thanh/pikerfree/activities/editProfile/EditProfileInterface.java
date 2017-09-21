@@ -11,7 +11,7 @@ public interface EditProfileInterface {
         void showDialog();
         void hideDialog();
 
-        void onLocalInforReady(String name, String address, String filepath);
+        void onLocalDataReady(String name, String address, String filepath);
     }
 
     interface RequiredPresenterOps {

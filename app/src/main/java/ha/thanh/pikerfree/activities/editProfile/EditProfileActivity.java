@@ -9,6 +9,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -95,14 +98,20 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     @Override
-    public void onLocalInforReady(String name, String address, String filepath) {
+    public void onLocalDataReady(String name, String address, String filepath) {
         etUserName.setText(name);
         etUserAddress.setText(address);
         File imgFile = new File(filepath);
         if (imgFile.exists()) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            imageView.setImageBitmap(myBitmap);
-            Log.d("editProfile", "Loaded bitmap from local");
+            Glide.with(this)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.file)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(120, 160)
+                            .dontTransform())
+                    .into(imageView);
         }
     }
 }
