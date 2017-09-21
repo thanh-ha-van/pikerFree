@@ -4,7 +4,7 @@ App that help you to get risk of your old stuffs to whom really need that.
 1. Firebase for backend.
 2. Retrofit
 3. RxAndroid
-4. Butterfnife
+4. Butter Knife
 5. Glide
 6. Others
 # Summary
