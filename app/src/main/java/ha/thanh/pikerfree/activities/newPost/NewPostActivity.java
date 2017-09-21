@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 
 import com.vlk.multimager.activities.GalleryActivity;
@@ -21,7 +23,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.ImagePost;
+import ha.thanh.pikerfree.models.Post;
 
 
 public class NewPostActivity extends AppCompatActivity implements NewPostInterface.RequiredViewOps, ImagePickerAdapter.ItemClickListener {
@@ -29,6 +31,10 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
 
     @BindView(R.id.rv_images)
     public RecyclerView recyclerViewImage;
+    @BindView(R.id.et_item_title)
+    public TextView tvTitle;
+    @BindView(R.id.et_description)
+    public TextView tvDescription;
 
     private NewPostPresenter mPresenter;
     private ImagePickerAdapter adapter;
@@ -64,6 +70,19 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     @OnClick(R.id.bnt_post_this)
     public void đoPostToServer() {
 
+        String tile = tvTitle.getText().toString();
+        String description = tvDescription.getText().toString();
+
+        if (TextUtils.isEmpty(tile)) {
+            alertDialog.showAlertDialog("Oop!", "Please enter the title for your item");
+            return;
+        }
+        if (TextUtils.isEmpty(description)) {
+            alertDialog.showAlertDialog("Oop!", "Please enter some description");
+            return;
+        }
+        waitingDialog.showDialog();
+        mPresenter.uploadPostToDatabase(tile, description);
     }
 
     @Override

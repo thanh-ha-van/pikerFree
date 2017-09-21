@@ -68,12 +68,12 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         // for database
         userPref = database.getReference("users").child(firebaseUser.getUid());
         userPref = database.getReference("posts");
-        getCurrentCount();
+        getCurrentPostCount();
     }
 
     public void startUploadImages() {
-        if(imagePostList.size() >= 5) imagePostList.remove(4);
-        imageCount --;
+        if (imagePostList.size() >= 5) imagePostList.remove(4);
+        imageCount--;
         for (int i = 0; i < imagePostList.size(); i++) {
             upLoadSingleImage(imagePostList.get(i));
         }
@@ -86,6 +86,27 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
                             "image_no_" + String.valueOf(imageCount + 1) + ".jpg"));
             imageCount++;
         }
+
+    }
+
+    public void uploadPostToDatabase(String title, String description) {
+
+        createPost(title, description);
+        uploadPostData();
+        uploadUserData();
+        updateCurrentPostCount();
+    }
+
+
+    private void createPost(String title, String description) {
+
+    }
+
+    private void uploadPostData() {
+
+    }
+
+    private void uploadUserData() {
 
     }
 
@@ -132,13 +153,13 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
     private int getImagePostIndexFromName(String name) {
         for (int i = 0; i < imagePostList.size(); i++) {
-            if(imagePostList.get(i).getName() == name)
+            if (imagePostList.get(i).getName() == name)
                 return i;
         }
         return -1;
     }
 
-    public void getCurrentCount() {
+    public void getCurrentPostCount() {
         database = FirebaseDatabase.getInstance();
         userPref = database.getReference().child("postCount");
         eventListener = new ValueEventListener() {
@@ -153,5 +174,10 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
             }
         };
+        userPref.addValueEventListener(eventListener);
+    }
+
+    public void updateCurrentPostCount() {
+
     }
 }

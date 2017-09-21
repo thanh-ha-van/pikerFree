@@ -109,7 +109,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                             .placeholder(R.drawable.file)
                             .centerCrop()
                             .dontAnimate()
-                            .override(120, 160)
+                            .override(160, 160)
                             .dontTransform())
                     .into(imageView);
         }
