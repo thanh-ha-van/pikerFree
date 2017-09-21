@@ -72,6 +72,8 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     }
 
     public void startUploadImages() {
+        if(imagePostList.size() >= 5) imagePostList.remove(4);
+        imageCount --;
         for (int i = 0; i < imagePostList.size(); i++) {
             upLoadSingleImage(imagePostList.get(i));
         }
@@ -84,8 +86,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
                             "image_no_" + String.valueOf(imageCount + 1) + ".jpg"));
             imageCount++;
         }
-        if(imagesList.size() == 5) imagesList.remove(4);
-        imageCount --;
+
     }
 
     public List<ImagePost> getItemList() {

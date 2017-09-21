@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -25,11 +28,11 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     private List<ImagePost> imagePosts;
     private ItemClickListener mClickListener;
     private int currentPosition;
-    private StorageReference mStorageRef;
+    private Context context;
 
     public ImagePickerAdapter(Context context, List<ImagePost> dataSet, ItemClickListener listener) {
+        this.context = context;
         this.imagePosts = dataSet;
-        mStorageRef = FirebaseStorage.getInstance().getReference();
         mClickListener = listener;
     }
 
@@ -37,8 +40,8 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
         @BindView(R.id.img_item_image)
         ImageView imgItemImage;
-        @BindView(R.id.progress_bar)
-        ProgressBar progressBar;
+        @BindView(R.id.text_uploading)
+        TextView tvUploading;
         @BindView(R.id.delete_button)
         ImageView deleteButton;
 
@@ -54,14 +57,15 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
             currentPosition = getAdapterPosition();
             if (mClickListener != null && currentPosition == getItemCount() - 1) {
                 mClickListener.onAddImagesToAdapter();
-            } else if (view.getId() != deleteButton.getId()) {
-                if (deleteButton.getVisibility() == View.GONE)
-                    deleteButton.setVisibility(View.VISIBLE);
-                else deleteButton.setVisibility(View.GONE);
             }
-            if (deleteButton.getVisibility() == View.VISIBLE && view.getId() == deleteButton.getId()) {
-                mClickListener.onItemDeleted(currentPosition);
-            }
+//            else if (view.getId() != deleteButton.getId()) {
+//                if (deleteButton.getVisibility() == View.GONE)
+//                    deleteButton.setVisibility(View.VISIBLE);
+//                else deleteButton.setVisibility(View.GONE);
+//            }
+//            if (deleteButton.getVisibility() == View.VISIBLE && view.getId() == deleteButton.getId()) {
+//                mClickListener.onItemDeleted(currentPosition);
+//            }
         }
     }
 
@@ -77,12 +81,20 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
         File imgFile = new File(imagePosts.get(position).getPathLocal());
         if (imgFile.exists()) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.imgItemImage.setImageBitmap(myBitmap);
+            Glide.with(context)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.file)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(120, 160)
+                            .dontTransform())
+                    .into(holder.imgItemImage);
         }
-        if (imagePosts.get(position).isUploadDone())
-            holder.progressBar.setVisibility(View.GONE);
-        else holder.progressBar.setVisibility(View.VISIBLE);
+        if (imagePosts.get(position).isUploadDone()) {
+            holder.tvUploading.setTrans;
+            holder.tvUploading.setVisibility(View.GONE);
+        } else holder.tvUploading.setVisibility(View.VISIBLE);
     }
 
     @Override
