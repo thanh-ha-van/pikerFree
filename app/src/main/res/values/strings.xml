@@ -17,15 +17,15 @@
 
     <!-- dummy string. must be removed later -->
     <string name="dummy_string">My old laptop still work fine but i just bough new one so i want to give away this old one. Please feel free to message me. Im ready to call at any time.</string>
-    <string name="title_of_item_hint">Title of item...</string>
-    <string name="short_description">A short description ...</string>
+    <string name="title_of_item_hint">Title of item &#8230;</string>
+    <string name="short_description">A short description &#8230;</string>
 
     <!-- for login/out/ sign ... -->
-    <string name="input_username">Username...</string>
-    <string name="input_phone">Phone number...</string>
-    <string name="input_email">Email...</string>
-    <string name="email">Password...</string>
-    <string name="password_confirm">Confirm email...</string>
+    <string name="input_username">Username &#8230;</string>
+    <string name="input_phone">Phone number &#8230;</string>
+    <string name="input_email">Email &#8230;</string>
+    <string name="email">Password &#8230;</string>
+    <string name="password_confirm">Confirm email &#8230;</string>
     <string name="login">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="we_need_email">We just need your registered email to send your email reset instructions.</string>
@@ -42,14 +42,15 @@
     <string name="post">Post this</string>
     <string name="new_post">New post</string>
     <string name="status_close">Closed</string>
+    <string name="search">Search &#8230;</string>
 
 
     <!-- download and upload service-->
 
-    <string name="progress_downloading">Downloading…</string>
+    <string name="progress_downloading">Downloading &amp;</string>
     <string name="turn_network_on">Please turn on your internet connection</string>
-    <string name="progress_uploading">Uploading…</string>
-    <string name="progress_auth">Signing In…</string>
+    <string name="progress_uploading">Uploading &#8230;</string>
+    <string name="progress_auth">Signing In &#8230;</string>
 
     <string name="upload_success">Upload finished</string>
     <string name="upload_failure">Upload failed</string>\

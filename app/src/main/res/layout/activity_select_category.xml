@@ -1,15 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ha.thanh.pikerfree.activities.selectCategory.SelectCategoryActivity">
+    android:background="@color/gray"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView
-        android:id="@+id/list"
+    <ha.thanh.pikerfree.customviews.CustomEditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/plate_small_corner"
+        android:gravity="center_vertical"
+        android:hint="@string/search"
+        android:padding="8dp"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/gray_2" />
+
+    <ListView
+        android:id="@+id/lv_session"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        android:background="@drawable/plate_small_corner"
+        android:dividerHeight="1px">
+
+    </ListView>
+
 </LinearLayout>
