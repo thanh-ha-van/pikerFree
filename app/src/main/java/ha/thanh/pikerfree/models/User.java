@@ -3,6 +3,8 @@ package ha.thanh.pikerfree.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by HaVan on 8/27/2017.
@@ -17,8 +19,8 @@ public class User {
     private boolean isAdmin = false;
     private String avatarLink = "userImages/default_profile.jgp";
     private String email = "";
-    private int[] posts;
-    private int[] conversations;
+    private ArrayList<Integer> posts;
+    private ArrayList<Integer> conversations;
 
     public User() {
     }
@@ -93,19 +95,19 @@ public class User {
         this.email = email;
     }
 
-    public int[] getPosts() {
+    public ArrayList<Integer> getPosts() {
         return posts;
     }
 
-    public void setPosts(int[] posts) {
+    public void setPosts(ArrayList<Integer> posts) {
         this.posts = posts;
     }
 
-    public int[] getConversation() {
+    public ArrayList<Integer> getConversation() {
         return conversations;
     }
 
-    public void setConversation(int[] conversation) {
+    public void setConversation(ArrayList<Integer> conversation) {
         this.conversations = conversation;
     }
 }

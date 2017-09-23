@@ -8,11 +8,8 @@ public class NewPostInterface {
     interface RequiredViewOps {
 
         void onPostDone();
-
         void onUploadSingleImageDone();
-
         void onPostFail(String error);
-
     }
 
     interface RequiredPresenterOps {

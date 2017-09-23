@@ -1,5 +1,6 @@
 package ha.thanh.pikerfree.activities.newPost;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,9 @@ import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 
 
-public class NewPostActivity extends AppCompatActivity implements NewPostInterface.RequiredViewOps, ImagePickerAdapter.ItemClickListener {
+public class NewPostActivity extends AppCompatActivity
+        implements NewPostInterface.RequiredViewOps,
+        ImagePickerAdapter.ItemClickListener, CustomAlertDialog.AlertListener{
 
 
     @BindView(R.id.rv_images)
@@ -60,11 +63,10 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
         alertDialog = new CustomAlertDialog(this);
         mPresenter = new NewPostPresenter(this, this);
         adapter = new ImagePickerAdapter(this, mPresenter.getItemList(), this);
-
     }
 
     private void initView() {
-
+        alertDialog.setListener(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerViewImage.setLayoutManager(gridLayoutManager);
         recyclerViewImage.setAdapter(adapter);
@@ -86,8 +88,12 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
             alertDialog.showAlertDialog("Oop!", "Please enter some description");
             return;
         }
+        if (tvSelect.getText().equals(getResources().getString(R.string.select_a_category))) {
+            alertDialog.showAlertDialog("Oop!", "Please select a category for you post");
+            return;
+        }
         waitingDialog.showDialog();
-        mPresenter.uploadPostToDatabase(tile, description);
+        mPresenter.uploadPostToDatabase(tile, description, tvSelect.getText().toString());
     }
     @OnClick(R.id.tv_select)
     public void startSelectActivity() {
@@ -98,6 +104,7 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     @Override
     public void onPostDone() {
         waitingDialog.hideDialog();
+        alertDialog.showAlertDialog("Done", "Completed, Press OK to back to Main screen");
     }
 
     @Override
@@ -153,5 +160,10 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     protected void onResume() {
         super.onResume();
         recyclerViewImage.requestFocus();
+    }
+
+    @Override
+    public void onOkClicked() {
+        finish();
     }
 }

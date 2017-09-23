@@ -1,11 +1,4 @@
 package ha.thanh.pikerfree.utils;
-
-import android.content.ContentResolver;
-import android.content.Context;
-import android.net.Uri;
-import android.webkit.MimeTypeMap;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +10,7 @@ public class Utils {
     public static long getCurrentTimestamp() {
         return  System.currentTimeMillis();
     }
+
 
     public static int startTimeToday(int timestamp) {
         Calendar cal = Calendar.getInstance();

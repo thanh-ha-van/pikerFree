@@ -27,6 +27,7 @@ import java.util.List;
 import ha.thanh.pikerfree.models.ImagePost;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
+import ha.thanh.pikerfree.utils.Utils;
 
 /**
  * Created by HaVan on 8/23/2017.
@@ -38,38 +39,29 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private NewPostModel mModel;
 
     private List<ImagePost> imagePostList;
-    private Context context;
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
     private FirebaseUser firebaseUser;
-    private DatabaseReference userPref;
-    private DatabaseReference postPref;
+
     private ValueEventListener eventListener;
-    private int postCount = 0;
+    private int postCount = -1;
     private int imageCount = 0;
     private User dataUser;
     private Post post;
     private Handler handler;
+    private boolean isUpdatedPostDatabase = false;
+    private boolean isUpdatedUserDatabase = false;
 
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
 
         this.mView = mView;
-        this.context = context;
-
         this.imagePostList = new ArrayList<>();
         imagePostList.add(new ImagePost("", true, "image_no_0"));
-
         mModel = new NewPostModel(context, this);
         handler = new Handler();
-
-        /// for storage
         mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages");
-        // for setName;
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        // for database
-        userPref = database.getReference("users").child(firebaseUser.getUid());
-        postPref = database.getReference("posts");
         getCurrentPostCount();
     }
 
@@ -83,37 +75,76 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
     public void addAllImage(ArrayList<Image> imagesList) {
         for (int i = imageCount; i < imagesList.size(); i++) {
-            imagePostList.add(0,
+            imagePostList.add(
                     new ImagePost(imagesList.get(i).imagePath,
                             "image_no_" + String.valueOf(imageCount + 1) + ".jpg"));
             imageCount++;
         }
+        imagePostList.remove(0);
+        imagePostList.add(new ImagePost("", true, "image_no_0"));
 
     }
 
-    public void uploadPostToDatabase(String title, String description) {
-        createUser();
-        createPost(title, description);
+    public void uploadPostToDatabase(String title, String description, String category) {
+        isUpdatedPostDatabase = false;
+        isUpdatedUserDatabase = false;
+        getCurrentUser();
+        createPost(title, description, category);
         uploadPostData();
-        uploadUserData();
+        updateUserData();
         updateCurrentPostCount();
     }
 
-    private void createUser() {
+    private void getCurrentUser() {
         dataUser = new User();
+        ArrayList<Integer> postList = new ArrayList<>();
+        if(dataUser.getPosts() !=null) {
+            postList = dataUser.getPosts();
+        }
+        postList.add(postCount);
+        dataUser.setPosts(postList);
         dataUser.setId(firebaseUser.getUid());
     }
 
-    private void createPost(String title, String description) {
+    private void createPost(String title, String description, String category) {
         post = new Post();
+        post.setTitle(title);
+        post.setDescription(description);
+        post.setCategory(category);
+        post.setLat(mModel.getUserLat());
+        post.setLng(mModel.getUserLng());
+        post.setPostId(postCount);
+        post.setOwnerId(dataUser.getId());
+        post.setTimePosted(Utils.getCurrentTimestamp());
+        post.getLinkImages();
     }
 
     private void uploadPostData() {
-
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference postPref;
+                postPref = database.getReference("posts").child(postCount + "");
+                postPref.setValue(post);
+                isUpdatedPostDatabase = true;
+                Log.e("thanh", "done save database post to server");
+                checkIfCanHideDialog();
+            }
+        });
     }
 
-    private void uploadUserData() {
-
+    private void updateUserData() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference userPref;
+                userPref = database.getReference("users").child(firebaseUser.getUid());
+                userPref.setValue(dataUser);
+                isUpdatedUserDatabase = true;
+                Log.e("thanh", "done save database user to server");
+                checkIfCanHideDialog();
+            }
+        });
     }
 
     public List<ImagePost> getItemList() {
@@ -165,14 +196,20 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         return -1;
     }
 
+    private void checkIfCanHideDialog() {
+        if (isUpdatedPostDatabase && isUpdatedUserDatabase)
+            mView.onPostDone();
+    }
+
     public void getCurrentPostCount() {
-        database = FirebaseDatabase.getInstance();
-        userPref = database.getReference().child("postCount");
+        DatabaseReference postCountRef;
+        postCountRef = database.getReference().child("postCount");
         eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postCount = dataSnapshot.getValue(int.class);
+                postCount =dataSnapshot.getValue(int.class);
                 Log.e("thanh", " get count = " + postCount);
+
             }
 
             @Override
@@ -180,10 +217,13 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
             }
         };
-        userPref.addValueEventListener(eventListener);
+        postCountRef.addListenerForSingleValueEvent(eventListener);
     }
 
     public void updateCurrentPostCount() {
-
+        DatabaseReference postCountRef;
+        postCount ++;
+        postCountRef = database.getReference().child("postCount");
+        postCountRef.setValue(postCount);
     }
 }

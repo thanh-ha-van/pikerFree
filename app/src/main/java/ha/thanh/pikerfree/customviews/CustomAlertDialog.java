@@ -16,6 +16,7 @@ import ha.thanh.pikerfree.R;
 
 public class CustomAlertDialog {
     private Dialog alertDialog;
+    private AlertListener listener;
 
     public CustomAlertDialog(Activity activity) {
         alertDialog = new Dialog(activity);
@@ -39,10 +40,18 @@ public class CustomAlertDialog {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                listener.onOkClicked();
             }
         });
 
         alertDialog.show();
 
+    }
+    public void setListener(AlertListener listener){
+        this.listener = listener;
+    }
+
+    public interface AlertListener {
+        void onOkClicked();
     }
 }
