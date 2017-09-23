@@ -15,7 +15,7 @@ public class Post {
     private int postId;
     private String title = "No title found";
     private String description = "No description found";
-    private List<String> linkImages = new ArrayList<>();
+    private List<String> requestingUser;
     private int status = Constants.STATUS_OPEN;
     private String ownerId;
     private double lat = 0;
@@ -26,16 +26,16 @@ public class Post {
     public Post() {
     }
 
-    public Post(int postId, String title, String description, List<String> linkImages, String ownerId, double lat, double lng, long timePosted, String category) {
+    public Post(int postId, String title, String description, String ownerId, double lat, double lng, long timePosted, String category) {
         this.postId = postId;
         this.title = title;
         this.description = description;
-        this.linkImages = linkImages;
         this.ownerId = ownerId;
         this.lat = lat;
         this.lng = lng;
         this.timePosted = timePosted;
         this.category = category;
+        requestingUser = new ArrayList<>();
     }
 
     public int getPostId() {
@@ -60,14 +60,6 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<String> getLinkImages() {
-        return linkImages;
-    }
-
-    public void setLinkImages(ArrayList<String> linkImages) {
-        this.linkImages = linkImages;
     }
 
     public int getStatus() {

@@ -46,6 +46,9 @@
     <string name="select_a_category">Select a category</string>
 
 
+    <!-- for view of post -->
+
+
     <!-- download and upload service-->
 
     <string name="progress_downloading">Downloading &amp;</string>
