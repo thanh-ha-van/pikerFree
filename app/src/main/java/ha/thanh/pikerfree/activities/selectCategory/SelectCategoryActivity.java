@@ -37,6 +37,8 @@ public class SelectCategoryActivity extends AppCompatActivity implements Categor
 
     public void initView() {
         ButterKnife.bind(this);
+        edtSearch.clearFocus();
+        listView.requestFocus();
         listView.requestFocus();
         final CategoryAdapter adapter = new CategoryAdapter(this, categoryList, this);
         listView.setAdapter(adapter);

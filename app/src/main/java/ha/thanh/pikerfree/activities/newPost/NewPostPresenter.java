@@ -74,7 +74,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     }
 
     public void startUploadImages() {
-        if (imagePostList.size() >= 5) imagePostList.remove(4);
+        if (imagePostList.size() >= 7) imagePostList.remove(6);
         imageCount--;
         for (int i = 0; i < imagePostList.size(); i++) {
             upLoadSingleImage(imagePostList.get(i));

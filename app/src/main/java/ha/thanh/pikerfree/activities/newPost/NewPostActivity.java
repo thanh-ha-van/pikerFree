@@ -68,6 +68,8 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerViewImage.setLayoutManager(gridLayoutManager);
         recyclerViewImage.setAdapter(adapter);
+        tvTitle.clearFocus();
+        recyclerViewImage.requestFocus();
     }
 
     @OnClick(R.id.bnt_post_this)
@@ -108,8 +110,8 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     public void onAddImagesToAdapter() {
         Intent intent = new Intent(this, GalleryActivity.class);
         Params params = new Params();
-        params.setCaptureLimit(4);
-        params.setPickerLimit(4);
+        params.setCaptureLimit(6);
+        params.setPickerLimit(6);
         params.setToolbarColor(getResources().getColor(R.color.colorPrimary));
         params.setActionButtonColor(getResources().getColor(R.color.colorPrimary));
         params.setButtonTextColor(getResources().getColor(R.color.white));
@@ -145,5 +147,11 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     @Override
     public void onUploadSingleImageDone() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerViewImage.requestFocus();
     }
 }
