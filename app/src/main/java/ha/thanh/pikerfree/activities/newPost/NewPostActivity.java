@@ -20,10 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.selectCategory.SelectCategoryActivity;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.Post;
 
 
 public class NewPostActivity extends AppCompatActivity implements NewPostInterface.RequiredViewOps, ImagePickerAdapter.ItemClickListener {
@@ -35,12 +35,15 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
     public TextView tvTitle;
     @BindView(R.id.et_description)
     public TextView tvDescription;
+    @BindView(R.id.tv_select)
+    public TextView tvSelect;
 
     private NewPostPresenter mPresenter;
     private ImagePickerAdapter adapter;
 
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
+    public final static int SELECT_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,11 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
         waitingDialog.showDialog();
         mPresenter.uploadPostToDatabase(tile, description);
     }
+    @OnClick(R.id.tv_select)
+    public void startSelectActivity() {
+        Intent intent = new Intent(this, SelectCategoryActivity.class);
+        startActivityForResult(intent, SELECT_CODE);
+    }
 
     @Override
     public void onPostDone() {
@@ -125,6 +133,10 @@ public class NewPostActivity extends AppCompatActivity implements NewPostInterfa
                 mPresenter.addAllImage(imagesList);
                 adapter.notifyDataSetChanged();
                 mPresenter.startUploadImages();
+                break;
+            case SELECT_CODE:
+                String selected = data.getStringExtra("selected");
+                tvSelect.setText(selected);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

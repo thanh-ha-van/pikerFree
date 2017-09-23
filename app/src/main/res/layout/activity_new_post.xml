@@ -50,8 +50,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_images"
                 android:layout_width="match_parent"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@color/gray" />
 
             <EditText
@@ -65,13 +65,18 @@
                 android:inputType="textMultiLine"
                 android:padding="@dimen/item_padding_small" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_category"
-                android:layout_width="match_parent"
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/tv_select"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:background="@color/gray" />
-
+                android:background="@drawable/plate_fill_green"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Select a category"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/bnt_post_this"

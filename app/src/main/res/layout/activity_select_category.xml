@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/transparent"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -21,10 +21,10 @@
     <ListView
         android:id="@+id/lv_session"
         android:layout_width="match_parent"
+        android:scrollIndicators="none"
         android:layout_height="match_parent"
         android:background="@drawable/plate_small_corner"
         android:dividerHeight="1px">
-
     </ListView>
 
 </LinearLayout>

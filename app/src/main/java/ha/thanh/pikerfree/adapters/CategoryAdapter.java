@@ -19,10 +19,15 @@ public class CategoryAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Item> item;
     private ArrayList<Item> originalItem;
+    private ItemClickListener listener;
 
-    public CategoryAdapter(Context context, ArrayList<Item> item) {
+    public CategoryAdapter(Context context, ArrayList<Item> item, ItemClickListener listener ) {
         this.context = context;
         this.item = item;
+        this.listener = listener;
+    }
+    public interface ItemClickListener {
+        void onItemClick(int position);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (item.get(position).isSection()) {
 
@@ -54,6 +59,12 @@ public class CategoryAdapter extends BaseAdapter {
             CustomTextView tvItemTitle = (CustomTextView) convertView.findViewById(R.id.tvItemTitle);
             tvItemTitle.setText(item.get(position).getTitle());
         }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(position);
+            }
+        });
         return convertView;
     }
 

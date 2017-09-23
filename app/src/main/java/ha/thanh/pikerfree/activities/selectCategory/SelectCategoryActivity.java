@@ -1,5 +1,7 @@
 package ha.thanh.pikerfree.activities.selectCategory;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,7 +19,7 @@ import ha.thanh.pikerfree.models.categoryItem.EntryItem;
 import ha.thanh.pikerfree.models.categoryItem.Item;
 import ha.thanh.pikerfree.models.categoryItem.SectionItem;
 
-public class SelectCategoryActivity extends AppCompatActivity {
+public class SelectCategoryActivity extends AppCompatActivity implements CategoryAdapter.ItemClickListener {
 
     @BindView(R.id.lv_session)
     public ListView listView;
@@ -30,14 +32,13 @@ public class SelectCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_category);
         getData();
-
         initView();
     }
 
     public void initView() {
         ButterKnife.bind(this);
         listView.requestFocus();
-        final CategoryAdapter adapter = new CategoryAdapter(this, categoryList);
+        final CategoryAdapter adapter = new CategoryAdapter(this, categoryList, this);
         listView.setAdapter(adapter);
         listView.setTextFilterEnabled(true);
         edtSearch.addTextChangedListener(new TextWatcher() {
@@ -78,6 +79,14 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 categoryList.add(new EntryItem(all[i][k]));
             }
         }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("selected", categoryList.get(position).getTitle());
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 }
 
