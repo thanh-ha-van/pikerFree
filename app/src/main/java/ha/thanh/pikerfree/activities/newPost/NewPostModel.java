@@ -14,22 +14,9 @@ public class NewPostModel {
 
     private NewPostInterface.RequiredPresenterOps mPresenter;
     private GPSTracker gpsTracker;
-    private SharedPreferences sharedPreferences;
     NewPostModel(Context context, NewPostInterface.RequiredPresenterOps mPresenter) {
         this.mPresenter = mPresenter;
-        sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
         this.gpsTracker = new GPSTracker(context);
-    }
-
-
-    public String getUserNameStringFromSharePf() {
-        return sharedPreferences.getString(Constants.USER_NAME, "");
-
-    }
-
-    public String getUserAddressStringFromSharePf() {
-        return sharedPreferences.getString(Constants.USER_ADDRESS, "");
-
     }
 
     public double getUserLat() {

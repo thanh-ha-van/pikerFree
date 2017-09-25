@@ -27,13 +27,13 @@ public class PostActivity extends AppCompatActivity  implements ImageSlideAdapte
     }
     private void initView() {
         ButterKnife.bind(this);
-        List<String> linkImages = mPresenter.getPostImageLinks();
-        adapter = new ImageSlideAdapter(this, linkImages, this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        rvImage.setLayoutManager(layoutManager);
-        rvImage.setAdapter(adapter);
-        SnapHelper helper = new LinearSnapHelper();
-        helper.attachToRecyclerView(rvImage);
+//        List<String> linkImages = mPresenter.getPostImageLinks();
+//        adapter = new ImageSlideAdapter(this, linkImages, this);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        rvImage.setLayoutManager(layoutManager);
+//        rvImage.setAdapter(adapter);
+//        SnapHelper helper = new LinearSnapHelper();
+//        helper.attachToRecyclerView(rvImage);
     }
 
     @Override

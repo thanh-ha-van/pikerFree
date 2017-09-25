@@ -6,7 +6,7 @@ package ha.thanh.pikerfree.fragments.home;
 
 public class HomeInterface {
     interface RequiredViewOps {
-
+        void onLocalDataReady(String name, String address, String filepath);
     }
     interface RequiredPresenterOps {
 

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +32,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.editProfile.EditProfileActivity;
 import ha.thanh.pikerfree.activities.newPost.NewPostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
+import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Post;
 
 public class HomeFragment extends Fragment implements HomeInterface.RequiredViewOps {
@@ -38,6 +40,10 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     public RecyclerView rvPost;
     @BindView(R.id.profile_image)
     public CircleImageView userImage;
+    @BindView(R.id.user_address)
+    CustomTextView tvUserAddress;
+    @BindView(R.id.user_name)
+    CustomTextView tvUserName;
     private List<Post> posts;
     private HomePresenter homePresenter;
     private FirebaseUser firebaseUser;
@@ -67,18 +73,8 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
             rvPost.setLayoutManager(layoutManager);
             rvPost.setAdapter(adapter);
         }
-        getUserProfilePic();
     }
 
-    public void getUserProfilePic() {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.mipmap.ic_launcher);
-        requestOptions.error(R.drawable.file);
-        Glide.with(this.getContext())
-                .setDefaultRequestOptions(requestOptions)
-                .load(firebaseUser.getPhotoUrl())
-                .into(userImage);
-    }
 
     private void initData() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -98,6 +94,23 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     @Override
     public void onResume() {
         super.onResume();
-        getUserProfilePic();
+    }
+
+    @Override
+    public void onLocalDataReady(String name, String address, String filepath) {
+        tvUserName.setText(name);
+        tvUserAddress.setText(address);
+        File imgFile = new File(filepath);
+        if (imgFile.exists()) {
+            Glide.with(this)
+                    .load(imgFile)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.file)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(160, 160)
+                            .dontTransform())
+                    .into(userImage);
+        }
     }
 }

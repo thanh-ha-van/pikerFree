@@ -51,7 +51,8 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private Handler handler;
     private boolean isUpdatedPostDatabase = false;
     private boolean isUpdatedUserDatabase = false;
-
+    private boolean isGetDataUser = false;
+    private ArrayList<Integer> postList;
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
 
         this.mView = mView;
@@ -59,6 +60,8 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         imagePostList.add(new ImagePost("", true, "image_no_0"));
         mModel = new NewPostModel(context, this);
         handler = new Handler();
+        dataUser = new User();
+        postList = new ArrayList<>();
         mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
@@ -96,14 +99,31 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     }
 
     private void getCurrentUser() {
-        dataUser = new User();
-        ArrayList<Integer> postList = new ArrayList<>();
-        if(dataUser.getPosts() !=null) {
-            postList = dataUser.getPosts();
-        }
-        postList.add(postCount);
-        dataUser.setPosts(postList);
-        dataUser.setId(firebaseUser.getUid());
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference userPref;
+                userPref = database.getReference("users").child(firebaseUser.getUid());
+                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        dataUser = dataSnapshot.getValue(User.class);
+                        isGetDataUser = true;
+                        if(dataUser.getPosts() !=null)
+                        postList = dataUser.getPosts();
+                        postList.add(postCount);
+                        dataUser.setPosts(postList);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
     }
 
     private void createPost(String title, String description, String category) {
@@ -116,7 +136,6 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         post.setPostId(postCount);
         post.setOwnerId(dataUser.getId());
         post.setTimePosted(Utils.getCurrentTimestamp());
-        post.getLinkImages();
     }
 
     private void uploadPostData() {
@@ -137,12 +156,16 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                DatabaseReference userPref;
-                userPref = database.getReference("users").child(firebaseUser.getUid());
-                userPref.setValue(dataUser);
-                isUpdatedUserDatabase = true;
-                Log.e("thanh", "done save database user to server");
-                checkIfCanHideDialog();
+                if (isGetDataUser) {
+                    DatabaseReference userPref;
+                    userPref = database.getReference("users").child(firebaseUser.getUid());
+                    userPref.setValue(dataUser);
+                    isUpdatedUserDatabase = true;
+                    Log.e("thanh", "done save database user to server");
+                    checkIfCanHideDialog();
+                } else {
+                    handler.postDelayed(this, 100);
+                }
             }
         });
     }
@@ -207,7 +230,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postCount =dataSnapshot.getValue(int.class);
+                postCount = dataSnapshot.getValue(int.class);
                 Log.e("thanh", " get count = " + postCount);
 
             }
@@ -222,7 +245,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
     public void updateCurrentPostCount() {
         DatabaseReference postCountRef;
-        postCount ++;
+        postCount++;
         postCountRef = database.getReference().child("postCount");
         postCountRef.setValue(postCount);
     }

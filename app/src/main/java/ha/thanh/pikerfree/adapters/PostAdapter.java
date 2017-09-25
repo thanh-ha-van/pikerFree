@@ -76,9 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         Post post = dataSet.get(position);
-        String linkFirstImages = post.getLinkImages().get(0);
-        if (linkFirstImages == null) linkFirstImages = DummyData.getIns().getUri();
-
+        String linkFirstImages = Utils.getLinkImages(post).get(0);
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(R.drawable.file);
         requestOptions.error(R.drawable.file);

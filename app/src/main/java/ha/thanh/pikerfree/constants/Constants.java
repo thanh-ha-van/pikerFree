@@ -16,7 +16,6 @@ public class Constants {
     public static final String USER_ID = "user_id";
     public static final String IS_FIRST_RUN = "is_first_run";
     public static final int STATUS_OPEN = 1;
-    public static final int STATUS_CLOSE = 3;
-    public static final int STATUS_IN_PROCESS = 3;
+    public static final int STATUS_CLOSE = 2;
 
 }

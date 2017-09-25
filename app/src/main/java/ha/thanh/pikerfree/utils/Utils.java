@@ -1,8 +1,13 @@
 package ha.thanh.pikerfree.utils;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
+
+import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.models.Post;
 
 public class Utils {
 
@@ -24,6 +29,13 @@ public class Utils {
         return (int) (cal.getTimeInMillis() / 1000);
     }
 
+    public static List<String> getLinkImages(Post post){
+        List<String> list = new ArrayList<>();
+        for(int i = 0; i < 6; i ++) {
+            list.add(Constants.BASE_STORAGE_URL + "postImages/" + post.getPostId() + "/" + "image_no_" + i);
+        }
+        return list;
+    }
     public static int getTimeNextDay(int timestamp) {
         return startTimeToday(timestamp) + 86400;
     }
