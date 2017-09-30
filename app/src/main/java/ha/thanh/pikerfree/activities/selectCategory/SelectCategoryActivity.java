@@ -83,10 +83,20 @@ public class SelectCategoryActivity extends AppCompatActivity implements Categor
         }
     }
 
+    private String getUserSelection(int position) {
+        String result = categoryList.get(position).getTitle();
+        for (int i = position; i > 0; i--) {
+            if (categoryList.get(i) instanceof SectionItem)
+                return categoryList.get(i).getTitle() + " " + result;
+        }
+
+        return result;
+    }
+
     @Override
     public void onItemClick(int position) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("selected", categoryList.get(position).getTitle());
+        returnIntent.putExtra("selected", getUserSelection(position));
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }

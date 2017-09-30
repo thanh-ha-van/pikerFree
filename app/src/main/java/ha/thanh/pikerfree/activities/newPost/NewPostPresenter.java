@@ -52,7 +52,9 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
     private boolean isUpdatedPostDatabase = false;
     private boolean isUpdatedUserDatabase = false;
     private boolean isGetDataUser = false;
+    private boolean isGetPostCount = false;
     private ArrayList<Integer> postList;
+
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
 
         this.mView = mView;
@@ -111,8 +113,8 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
                         dataUser = dataSnapshot.getValue(User.class);
                         isGetDataUser = true;
-                        if(dataUser.getPosts() !=null)
-                        postList = dataUser.getPosts();
+                        if (dataUser.getPosts() != null)
+                            postList = dataUser.getPosts();
                         postList.add(postCount);
                         dataUser.setPosts(postList);
                     }
@@ -133,7 +135,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         post.setCategory(category);
         post.setLat(mModel.getUserLat());
         post.setLng(mModel.getUserLng());
-        post.setPostId(postCount);
+        post.setPostId(postCount + 1);
         post.setOwnerId(dataUser.getId());
         post.setTimePosted(Utils.getCurrentTimestamp());
     }
@@ -191,12 +193,14 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
             public void run() {
                 if (imagePost.getPathLocal() != null) {
                     Uri file = Uri.fromFile(new File(imagePost.getPathLocal()));
-                    StorageReference riversRef = mStorageRef.child(postCount + "/" + imagePost.getName());
+                    StorageReference riversRef
+                            = mStorageRef.child( String.valueOf(postCount + 1) + "/" + imagePost.getName());
                     riversRef.putFile(file)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    imagePostList.get(getImagePostIndexFromName(imagePost.getName())).setUploadDone(true);
+                                    imagePostList.get(getImagePostIndexFromName(imagePost.getName()))
+                                            .setUploadDone(true);
                                     mView.onUploadSingleImageDone();
                                 }
                             })
@@ -232,7 +236,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postCount = dataSnapshot.getValue(int.class);
                 Log.e("thanh", " get count = " + postCount);
-
+                isGetPostCount = true;
             }
 
             @Override
@@ -240,7 +244,9 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
             }
         };
-        postCountRef.addListenerForSingleValueEvent(eventListener);
+        if (!isGetPostCount)
+            postCountRef.addListenerForSingleValueEvent(eventListener);
+        else postCountRef.removeEventListener(eventListener);
     }
 
     public void updateCurrentPostCount() {
