@@ -85,7 +85,7 @@ public class SelectCategoryActivity extends AppCompatActivity implements Categor
 
     private String getUserSelection(int position) {
         String result = categoryList.get(position).getTitle();
-        for (int i = position; i > 0; i--) {
+        for (int i = position; i >= 0; i--) {
             if (categoryList.get(i) instanceof SectionItem)
                 return categoryList.get(i).getTitle() + " " + result;
         }

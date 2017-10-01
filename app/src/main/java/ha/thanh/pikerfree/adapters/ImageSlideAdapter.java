@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
 import java.util.List;
@@ -63,6 +64,7 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.My
                 .load(mList.get(position))
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.file)
+                        .error(R.drawable.action_button_bg)
                         .centerCrop()
                         .dontAnimate()
                         .override(400, 300)

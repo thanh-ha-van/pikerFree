@@ -6,7 +6,7 @@
     android:background="@color/gray"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".activities.post.PostActivity">
+    tools:context=".activities.viewPost.PostActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,36 +20,116 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:id="@+id/et_item_title"
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:maxLines="1"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
-                android:text="sssssss"
-                android:textColor="@color/white"
+                android:text="Title"
+                android:textColor="@color/green"
                 android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray_2">
+
+            </LinearLayout>
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="description"
+                android:textColor="@color/text_black_3"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray_2">
+
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_images"
                 android:layout_width="match_parent"
-                android:padding="16dp"
-                android:layout_height="wrap_content"
+                android:layout_height="240dp"
                 android:layout_gravity="center"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray_2">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/plate_green_small"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Opening"
+                    android:textColor="@color/green"
+                    android:textSize="14sp" />
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="17/08/2017"
+                    android:textColor="@color/text_black_3"
+                    android:textSize="14sp" />
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="3 kms away"
+                    android:textColor="@color/orange"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray_2"></LinearLayout>
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:id="@+id/et_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/plate_small_corner"
-                android:gravity="top"
-                android:inputType="textMultiLine"
-                android:padding="@dimen/item_padding"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@color/green"
+                android:gravity="center"
+                android:text="Send receive request"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray_2">
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

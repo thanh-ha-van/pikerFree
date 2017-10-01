@@ -17,35 +17,51 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.intro.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.main.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activities.newPost.NewPostActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activities.login.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activities.editProfile.EditProfileActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activities.signup.SignUpActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activities.forgetPassword.ForgetPassActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activities.selectCategory.SelectCategoryActivity"></activity>
-        <activity android:name=".activities.post.PostActivity"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activities.selectCategory.SelectCategoryActivity">
+
+        </activity>
+        <activity android:name=".activities.viewPost.PostActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

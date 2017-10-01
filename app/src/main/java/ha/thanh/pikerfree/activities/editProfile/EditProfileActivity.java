@@ -52,7 +52,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         waitingDialog = new WaitingDialog(this);
     }
 
-
     @OnClick(R.id.btn_change_image)
     public void showFileChooser() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,

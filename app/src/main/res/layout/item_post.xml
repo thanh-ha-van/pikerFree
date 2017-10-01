@@ -41,7 +41,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="4"
-            android:text="77/08/2017"
+            android:text="17/08/2017"
             android:textSize="14sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView

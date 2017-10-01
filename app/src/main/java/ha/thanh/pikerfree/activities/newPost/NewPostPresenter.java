@@ -136,7 +136,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         post.setLat(mModel.getUserLat());
         post.setLng(mModel.getUserLng());
         post.setPostId(postCount + 1);
-        post.setOwnerId(dataUser.getId());
+        post.setOwnerId(firebaseUser.getUid());
         post.setTimePosted(Utils.getCurrentTimestamp());
     }
 
