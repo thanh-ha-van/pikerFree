@@ -14,6 +14,8 @@ public class Constants {
     public static final String BASE_STORAGE_URL = "gs://pikerfree.appspot.com/";
     public static final String POST_COUNT = "post_count";
     public static final String USER_ID = "user_id";
+    public static final String USER_LAT = "user_lat";
+    public static final String USER_LNG = "user_lng";
     public static final String IS_FIRST_RUN = "is_first_run";
     public static final int STATUS_OPEN = 1;
     public static final int STATUS_CLOSE = 2;

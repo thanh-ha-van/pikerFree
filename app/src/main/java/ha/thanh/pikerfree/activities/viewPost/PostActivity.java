@@ -11,6 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
+import ha.thanh.pikerfree.customviews.CustomTextView;
+import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.utils.Utils;
 
 public class PostActivity extends AppCompatActivity  implements PostInterface.RequiredViewOps, ImageSlideAdapter.OnclickView{
 
@@ -18,6 +22,17 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
     private PostPresenter mPresenter;
     @BindView(R.id.rv_images)
     RecyclerView rvImage;
+    @BindView(R.id.tv_title)
+    CustomTextView title;
+    @BindView(R.id.tv_description)
+    CustomTextView description;
+    @BindView(R.id.tv_send_request)
+    CustomTextView sendRequest;
+    @BindView(R.id.tv_day)
+    CustomTextView dayTime;
+    @BindView(R.id.tv_distance)
+    CustomTextView distance;
+    WaitingDialog waitingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +55,8 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
         rvImage.setAdapter(adapter);
         SnapHelper helper = new LinearSnapHelper();
         helper.attachToRecyclerView(rvImage);
+        waitingDialog = new WaitingDialog(this);
+        waitingDialog.showDialog();
     }
 
     @Override
@@ -48,8 +65,12 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
     }
 
     @Override
-    public void getPostDone() {
-
+    public void getPostDone(Post post) {
+        title.setText(post.getTitle());
+        description.setText(post.getDescription());
+        dayTime.setText(Utils.getTimeString(post.getTimePosted()));
+        //distance.setText(Utils.getDistance(post.getLat(), post.getLng()));
+        waitingDialog.hideDialog();
     }
 
     @Override
@@ -64,6 +85,6 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
 
     @Override
     public void getLinkDone() {
-
+        adapter.notifyDataSetChanged();
     }
 }

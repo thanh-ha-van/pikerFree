@@ -54,7 +54,13 @@ public class Utils {
         }
         return "";
     }
-
+    public static double distance_in_meter(final double lat1, final double lon1, final double lat2, final double lon2) {
+        int R = 6371; // km
+        double x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+        double y = (lat2 - lat1);
+        double distance = Math.sqrt(x * x + y * y) * R;
+        return  distance;
+    }
     public static String getFormatTime(int timestamp) {
         int h = (timestamp / 3600);
         int m = (timestamp - h * 3600) / 60;

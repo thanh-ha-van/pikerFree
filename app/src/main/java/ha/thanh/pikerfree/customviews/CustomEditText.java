@@ -39,18 +39,18 @@ public class CustomEditText extends AppCompatEditText {
 
     private void init() {
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/SanFRegular.ttf");
-        this.setTypeface(font);
+        //this.setTypeface(font);
     }
 
     @Override
     public void setTypeface(Typeface tf, int style) {
         tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/SanFRegular.ttf");
-        super.setTypeface(tf, style);
+        //super.setTypeface(tf, style);
     }
 
     @Override
     public void setTypeface(Typeface tf) {
         tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/SanFRegular.ttf");
-        super.setTypeface(tf);
+        //super.setTypeface(tf);
     }
 }

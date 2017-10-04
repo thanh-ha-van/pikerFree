@@ -9,9 +9,27 @@ public class Config {
 
     private boolean isFirstRun = true;
     private String userID;
+    private double userLat;
+    private double userLng;
 
     public Config() {
 
+    }
+
+    public double getUserLat() {
+        return userLat;
+    }
+
+    public void setUserLat(double userLat) {
+        this.userLat = userLat;
+    }
+
+    public double getUserLng() {
+        return userLng;
+    }
+
+    public void setUserLng(double userLng) {
+        this.userLng = userLng;
     }
 
     public boolean isFirstRun() {

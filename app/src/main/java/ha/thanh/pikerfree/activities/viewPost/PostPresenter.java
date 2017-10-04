@@ -62,7 +62,7 @@ public class PostPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
-                        mView.getPostDone();
+                        mView.getPostDone(post);
                     }
 
                     @Override
@@ -74,10 +74,6 @@ public class PostPresenter {
         });
     }
 
-    public Post getPost() {
-        return post;
-    }
-
     public void getImageLinksFromId(String postId) {
         for (int i = 1; i <= 6; i++) {
             mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages").child(postId).child("image_no_" + i + ".jpg");
@@ -85,9 +81,9 @@ public class PostPresenter {
                 @Override
                 public void onSuccess(Uri uri) {
                     imagePostList.add(uri.toString());
+                    mView.getLinkDone();
                 }
             });
-            if (i == 6) mView.getLinkDone();
         }
     }
 }
