@@ -9,10 +9,52 @@
     android:orientation="vertical"
     tools:context=".activities.viewPost.PostActivity">
 
+    <LinearLayout
+        android:id="@+id/view_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_back"
+            android:tint="@color/white" />
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="POST"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/img_next"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_more"
+            android:tint="@color/white" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,17 +62,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:id="@+id/layout_count_dot"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/shade_black"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
-                android:text="Title"
-                android:textColor="@color/green"
+                android:textColor="@color/text_black_3"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -46,23 +106,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:padding="10dp"
-                android:text="description"
                 android:textColor="@color/text_black_3"
                 android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_2">
-
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_images"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,16 +123,22 @@
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:background="@drawable/plate_green_small"
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Opening"
                     android:textColor="@color/green"
                     android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/gray_2">
+
+                </LinearLayout>
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_day"
@@ -96,9 +147,16 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:gravity="center"
-                    android:text="17/08/2017"
-                    android:textColor="@color/text_black_3"
+                    android:textColor="@color/green"
                     android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/gray_2">
+
+                </LinearLayout>
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_distance"
@@ -107,7 +165,6 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:gravity="center"
-                    android:text="3 kms away"
                     android:textColor="@color/orange"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -121,12 +178,13 @@
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
+                android:paddingEnd="10dp"
                 android:paddingStart="10dp"
                 android:text="Owner"
-                android:textColor="@color/green"
+                android:textColor="@color/text_black_3"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -138,8 +196,8 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
                     android:src="@drawable/ic_user"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="2dp">
@@ -159,41 +217,43 @@
                         android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:lines="1"
-                        android:text="Thanh Ha Van"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text_black_3"
                         android:textSize="16sp" />
 
-                    <ha.thanh.pikerfree.customviews.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_gravity="left"
-                        android:background="@drawable/plate_small_corner"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="Send message"
-                        android:textColor="@color/green"
-                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>
-
-            <ha.thanh.pikerfree.customviews.CustomTextView
-                android:id="@+id/tv_send_request"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@color/green"
-                android:gravity="center"
-                android:text="Send receive request"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/gray_2">
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:id="@+id/tv_chat"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Chat"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:id="@+id/tv_send_request"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/green"
+            android:gravity="center"
+            android:text="Send request"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 </LinearLayout>

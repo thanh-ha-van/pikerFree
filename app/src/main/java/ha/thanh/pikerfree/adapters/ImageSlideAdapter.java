@@ -9,9 +9,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.storage.FirebaseStorage;
-
-import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,6 +46,7 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.My
         public void onClick(View view) {
             onclickView.onClick(getAdapterPosition());
         }
+
     }
 
     @Override
