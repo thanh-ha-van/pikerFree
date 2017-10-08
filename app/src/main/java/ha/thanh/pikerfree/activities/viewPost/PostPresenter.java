@@ -18,6 +18,7 @@ import java.util.List;
 
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
+import ha.thanh.pikerfree.utils.Utils;
 
 /**
  * Created by HaVan on 9/23/2017.
@@ -73,6 +74,16 @@ public class PostPresenter {
             }
         });
     }
+
+    public String getDistance() {
+        return Utils.getDistance(mModel.getUserLat(), mModel.getUserLng(), post.getLat(), post.getLng());
+    }
+    public String getStatus() {
+        if (post.getStatus() == 1)
+            return "Opening";
+        return  "Closed";
+    }
+
 
     public void getImageLinksFromId(String postId) {
         for (int i = 1; i <= 6; i++) {

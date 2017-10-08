@@ -1,9 +1,6 @@
 package ha.thanh.pikerfree.activities.newPost;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-
-import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.services.GPSTracker;
 
 /**

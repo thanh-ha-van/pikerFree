@@ -1,4 +1,7 @@
 package ha.thanh.pikerfree.utils;
+
+import android.location.Location;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,36 +16,20 @@ public class Utils {
 
 
     public static long getCurrentTimestamp() {
-        return  System.currentTimeMillis();
+        return System.currentTimeMillis();
     }
 
 
-    public static int startTimeToday(int timestamp) {
-        Calendar cal = Calendar.getInstance();
-        long timeCurrent = timestamp * 1000L;
-        cal.setTimeInMillis(timeCurrent);
-        System.out.print(cal.getTime().toString());
-        cal.set(Calendar.HOUR, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        return (int) (cal.getTimeInMillis() / 1000);
-    }
-
-    public static List<String> getLinkImages(Post post){
+    public static List<String> getLinkImages(Post post) {
         List<String> list = new ArrayList<>();
-        for(int i = 0; i < 6; i ++) {
+        for (int i = 0; i < 6; i++) {
             list.add(Constants.BASE_STORAGE_URL + "postImages/" + post.getPostId() + "/" + "image_no_" + i);
         }
         return list;
     }
-    public static int getTimeNextDay(int timestamp) {
-        return startTimeToday(timestamp) + 86400;
-    }
-
 
     public static String getTimeString(long timestamp) {
-        try{
+        try {
             Calendar calendar = Calendar.getInstance();
             TimeZone tz = calendar.getTimeZone();
             calendar.setTimeInMillis(timestamp);
@@ -50,34 +37,34 @@ public class Utils {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
             Date currentTimeZone = calendar.getTime();
             return sdf.format(currentTimeZone);
-        }catch (Exception e) {
+        } catch (Exception e) {
         }
         return "";
     }
-    public static double distance_in_meter(final double lat1, final double lon1, final double lat2, final double lon2) {
-        int R = 6371; // km
-        double x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
-        double y = (lat2 - lat1);
-        double distance = Math.sqrt(x * x + y * y) * R;
-        return  distance;
-    }
-    public static String getFormatTime(int timestamp) {
-        int h = (timestamp / 3600);
-        int m = (timestamp - h * 3600) / 60;
-        int s = timestamp - h * 3600 - m * 60;
-        if (h < 0) {
-            h = 0;
+
+    public static String getDistance(final double lat1, final double lon1, final double lat2, final double lon2) {
+        Location l1 = new Location("One");
+        l1.setLatitude(lat1);
+        l1.setLongitude(lon1);
+
+        Location l2 = new Location("Two");
+        l2.setLatitude(lat2);
+        l2.setLongitude(lon2);
+
+        float distance = l1.distanceTo(l2);
+        int discaceint = Math.round(distance);
+        String dist = discaceint + " M";
+
+        if (distance > 1000.0f) {
+            double roundOff = Math.round(distance * 10.0) / 10000.0;
+
+            dist = roundOffTo2DecPlaces(roundOff) + " KM";
         }
-        if (m < 0) {
-            m = 0;
-        }
-        if (s < 0) {
-            s = 0;
-        }
-        return formatDigits(h) + ":" + formatDigits(m) + ":" + formatDigits(s);
+        return dist;
     }
 
-    public static String formatDigits(int num) {
-        return (num < 10) ? "0" + num : Integer.toString(num);
+    final static String roundOffTo2DecPlaces(double val) {
+        return String.format("%.2f", val);
     }
+
 }

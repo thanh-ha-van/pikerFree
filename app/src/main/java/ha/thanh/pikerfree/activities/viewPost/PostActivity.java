@@ -38,6 +38,10 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
     CustomTextView dayTime;
     @BindView(R.id.tv_distance)
     CustomTextView distance;
+    @BindView(R.id.tv_owner_name)
+    CustomTextView ownwerName;
+    @BindView(R.id.tv_post_status)
+    CustomTextView postStatus;
     WaitingDialog waitingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +111,9 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
         title.setText(post.getTitle());
         description.setText(post.getDescription());
         dayTime.setText(Utils.getTimeString(post.getTimePosted()));
-        //distance.setText(Utils.getDistance(post.getLat(), post.getLng()));
+        distance.setText(mPresenter.getDistance());
         waitingDialog.hideDialog();
+        postStatus.setText(mPresenter.getStatus());
     }
 
     @Override
