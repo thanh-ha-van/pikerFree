@@ -5,19 +5,19 @@ import android.content.Context;
 
 import ha.thanh.pikerfree.services.GPSTracker;
 
-public class PostModel {
+class PostModel {
     private GPSTracker gpsTracker;
     private Context context;
 
-    public PostModel(Context context) {
+    PostModel(Context context) {
         this.context = context;
         this.gpsTracker = new GPSTracker(context);
     }
 
-    public double getUserLat() {
+    double getUserLat() {
         return  gpsTracker.getLatitude();
     }
-    public double getUserLng() {
+    double getUserLng() {
         return  gpsTracker.getLongitude();
     }
 

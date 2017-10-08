@@ -34,7 +34,7 @@ public class Utils {
             TimeZone tz = calendar.getTimeZone();
             calendar.setTimeInMillis(timestamp);
             calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             Date currentTimeZone = calendar.getTime();
             return sdf.format(currentTimeZone);
         } catch (Exception e) {
@@ -53,12 +53,12 @@ public class Utils {
 
         float distance = l1.distanceTo(l2);
         int discaceint = Math.round(distance);
-        String dist = discaceint + " M";
+        String dist = discaceint + " meters away";
 
         if (distance > 1000.0f) {
             double roundOff = Math.round(distance * 10.0) / 10000.0;
 
-            dist = roundOffTo2DecPlaces(roundOff) + " KM";
+            dist = roundOffTo2DecPlaces(roundOff) + " kilometers away";
         }
         return dist;
     }

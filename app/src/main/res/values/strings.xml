@@ -48,6 +48,11 @@
 
     <!-- for view of post -->
 
+    <string name="chat">Chat</string>
+    <string name="send_request">Send request</string>
+    <string name="meet_owner">Meet the owner</string>
+    <string name="post_view">POST</string>
+
 
     <!-- download and upload service-->
 

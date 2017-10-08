@@ -6,21 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 
-/**
- * Created by HaVan on 9/23/2017.
- */
 
 public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.MyViewHolder> {
 
+    private boolean zoomOut = false;
     private List<String> mList;
     protected Context context;
     private OnclickView onclickView;
@@ -45,6 +45,21 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.My
         @Override
         public void onClick(View view) {
             onclickView.onClick(getAdapterPosition());
+//            if (zoomOut) {
+//
+//                imageView.setLayoutParams(
+//                        new LinearLayout.
+//                                LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                                LinearLayout.LayoutParams.WRAP_CONTENT));
+//                imageView.setAdjustViewBounds(true);
+//                zoomOut = false;
+//            } else {
+//                imageView.setLayoutParams(new LinearLayout.LayoutParams(
+//                        LinearLayout.LayoutParams.MATCH_PARENT,
+//                        LinearLayout.LayoutParams.MATCH_PARENT));
+//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//                zoomOut = true;
+//            }
         }
 
     }

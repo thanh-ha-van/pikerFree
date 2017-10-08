@@ -1,18 +1,20 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
+import android.net.Uri;
+
 import java.util.List;
 
 import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.models.User;
 
-/**
- * Created by HaVan on 9/23/2017.
- */
 
-public class PostInterface {
+
+class PostInterface {
     interface RequiredViewOps {
         void getPostDone(Post post);
         void getLinkDone();
         void getPostFail();
-        void onInternetFail(String error);
+        void getOwnerDone(User user);
+        void getOwnerImageDone(Uri uri);
     }
 }

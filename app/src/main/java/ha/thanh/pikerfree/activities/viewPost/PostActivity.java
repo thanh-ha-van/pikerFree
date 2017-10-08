@@ -1,5 +1,6 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,21 +10,30 @@ import android.support.v7.widget.SnapHelper;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
-public class PostActivity extends AppCompatActivity  implements PostInterface.RequiredViewOps, ImageSlideAdapter.OnclickView{
+public class PostActivity extends AppCompatActivity implements PostInterface.RequiredViewOps, ImageSlideAdapter.OnclickView {
 
     private ImageSlideAdapter adapter;
     private PostPresenter mPresenter;
     private ImageView[] dots;
     private int currentPosition = 0;
+    private CustomAlertDialog alertDialog;
     @BindView(R.id.layout_count_dot)
     public LinearLayout pager_indicator;
     @BindView(R.id.rv_images)
@@ -39,10 +49,13 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
     @BindView(R.id.tv_distance)
     CustomTextView distance;
     @BindView(R.id.tv_owner_name)
-    CustomTextView ownwerName;
+    CustomTextView ownerName;
     @BindView(R.id.tv_post_status)
     CustomTextView postStatus;
+    @BindView(R.id.owner_pic)
+    CircleImageView ownerPic;
     WaitingDialog waitingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +64,15 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
         initView();
     }
 
+    @OnClick(R.id.tv_chat)
+    public void startChat(){
+        // start a conversation between user and owner
+    }
+    @OnClick(R.id.tv_send_request)
+    public void setSendRequest(){
+        // send request to owner
+        // change post data
+    }
     private void initData() {
 
         mPresenter = new PostPresenter(this, this);
@@ -68,6 +90,7 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
         helper.attachToRecyclerView(rvImage);
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
+        alertDialog = new CustomAlertDialog(this);
         //setUiPageViewController();
     }
 
@@ -101,6 +124,7 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
         }
 
     }
+
     @Override
     public void onClick(int position) {
 
@@ -122,8 +146,22 @@ public class PostActivity extends AppCompatActivity  implements PostInterface.Re
     }
 
     @Override
-    public void onInternetFail(String error) {
+    public void getOwnerDone(User user) {
+        ownerName.setText(user.getName());
 
+    }
+
+    @Override
+    public void getOwnerImageDone(Uri uri) {
+        Glide.with(this)
+                .load(uri)
+                .apply(new RequestOptions()
+                        .error(R.drawable.action_button_bg)
+                        .centerCrop()
+                        .dontAnimate()
+                        .override(200, 200)
+                        .dontTransform())
+                .into(ownerPic);
     }
 
     @Override

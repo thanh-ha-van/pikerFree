@@ -20,17 +20,14 @@ import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
-/**
- * Created by HaVan on 9/23/2017.
- */
 
-public class PostPresenter {
+
+class PostPresenter {
     private PostInterface.RequiredViewOps mView;
     private PostModel mModel;
     private List<String> imagePostList;
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
-    private ValueEventListener eventListener;
     private User dataUser;
     private Post post;
     private Handler handler;
@@ -40,7 +37,7 @@ public class PostPresenter {
         initData();
     }
 
-    public List<String> getImagePostList() {
+    List<String> getImagePostList() {
         return imagePostList;
     }
 
@@ -53,7 +50,7 @@ public class PostPresenter {
         handler = new Handler();
     }
 
-    public void getPostData(final String postId) {
+    void getPostData(final String postId) {
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -64,6 +61,40 @@ public class PostPresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
                         mView.getPostDone(post);
+                        getOwnerData(post.getOwnerId());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                        mView.getPostFail();
+                    }
+                });
+            }
+        });
+    }
+
+    String getDistance() {
+        return Utils.getDistance(mModel.getUserLat(), mModel.getUserLng(), post.getLat(), post.getLng());
+    }
+    String getStatus() {
+        if (post.getStatus() == 1)
+            return "Opening";
+        return  "Closed";
+    }
+
+    private void getOwnerData(final String UserId) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference userPref;
+                userPref = database.getReference("users").child(UserId);
+                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        dataUser = dataSnapshot.getValue(User.class);
+                        mView.getOwnerDone(dataUser);
+                        getUserImageLink(dataUser.getAvatarLink());
                     }
 
                     @Override
@@ -75,17 +106,18 @@ public class PostPresenter {
         });
     }
 
-    public String getDistance() {
-        return Utils.getDistance(mModel.getUserLat(), mModel.getUserLng(), post.getLat(), post.getLng());
-    }
-    public String getStatus() {
-        if (post.getStatus() == 1)
-            return "Opening";
-        return  "Closed";
+    private void getUserImageLink(String link) {
+
+        mStorageRef = FirebaseStorage.getInstance().getReference().child(link);
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                mView.getOwnerImageDone(uri);
+            }
+        });
     }
 
-
-    public void getImageLinksFromId(String postId) {
+    void getImageLinksFromId(String postId) {
         for (int i = 1; i <= 6; i++) {
             mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages").child(postId).child("image_no_" + i + ".jpg");
             mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
