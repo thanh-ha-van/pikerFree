@@ -3,7 +3,6 @@ package ha.thanh.pikerfree.activities.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -50,7 +49,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
     }
 
 
-    public void checkLogIn() {
+    void checkLogIn() {
         if (auth.getCurrentUser() != null) {
             mView.onLogInSuccess();
         }
@@ -85,7 +84,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                 });
     }
 
-    public void getDataFromServer() {
+    private void getDataFromServer() {
         if (!isGotData) {
             isGotData = true;
             firebaseUser = auth.getCurrentUser();
@@ -97,7 +96,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     dataUser = dataSnapshot.getValue(User.class);
                     Log.d("Login", " get Data from server " + dataUser.toString());
-                    saveInforToLocal();
+                    saveDataToLocal();
                     mView.onHideWaitingDialog();
                     mView.onLogInSuccess();
                 }
@@ -111,12 +110,12 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
         }
     }
 
-    public void removeListener() {
+    void removeListener() {
         if(pref != null)
         pref.removeEventListener(eventListener);
     }
 
-    public void saveInforToLocal() {
+    private void saveDataToLocal() {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -124,9 +123,9 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
 
         ContextWrapper cw = new ContextWrapper(activity.getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        File mypath = new File(directory, "profile.jpg");
+        File myPath = new File(directory, "profile.jpg");
 
-        pathReference.getFile(mypath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+        pathReference.getFile(myPath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                 Log.d("Login", "Got profile pic from server");
@@ -137,7 +136,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                 Log.d("Login", exception.toString());
             }
         });
-        mModel.saveDataLocal(dataUser, mypath.getAbsolutePath());
+        mModel.saveDataLocal(dataUser, myPath.getAbsolutePath());
     }
 
 }

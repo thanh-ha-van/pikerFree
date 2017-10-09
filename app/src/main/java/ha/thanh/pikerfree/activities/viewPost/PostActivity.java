@@ -13,6 +13,13 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +34,10 @@ import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
-public class PostActivity extends AppCompatActivity implements PostInterface.RequiredViewOps, ImageSlideAdapter.OnclickView {
+public class PostActivity extends AppCompatActivity implements
+        PostInterface.RequiredViewOps,
+        ImageSlideAdapter.OnclickView,
+        OnMapReadyCallback {
 
     private ImageSlideAdapter adapter;
     private PostPresenter mPresenter;
@@ -56,23 +66,32 @@ public class PostActivity extends AppCompatActivity implements PostInterface.Req
     CircleImageView ownerPic;
     WaitingDialog waitingDialog;
 
+    @BindView(R.id.mapView)
+    MapView mMapView;
+    private GoogleMap googleMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         initData();
         initView();
+        mMapView.onCreate(savedInstanceState);
+        mMapView.onResume();
+        mMapView.getMapAsync(this);
     }
 
     @OnClick(R.id.tv_chat)
-    public void startChat(){
+    public void startChat() {
         // start a conversation between user and owner
     }
+
     @OnClick(R.id.tv_send_request)
-    public void setSendRequest(){
+    public void setSendRequest() {
         // send request to owner
         // change post data
     }
+
     private void initData() {
 
         mPresenter = new PostPresenter(this, this);
@@ -92,6 +111,8 @@ public class PostActivity extends AppCompatActivity implements PostInterface.Req
         waitingDialog.showDialog();
         alertDialog = new CustomAlertDialog(this);
         //setUiPageViewController();
+
+
     }
 
     private void setUiPageViewController() {
@@ -124,6 +145,18 @@ public class PostActivity extends AppCompatActivity implements PostInterface.Req
         }
 
     }
+    void updateMap(double lat, double lng) {
+        LatLng sydney = new LatLng(lat, lng);
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Post location"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        this.googleMap = googleMap;
+    }
 
     @Override
     public void onClick(int position) {
@@ -138,6 +171,7 @@ public class PostActivity extends AppCompatActivity implements PostInterface.Req
         distance.setText(mPresenter.getDistance());
         waitingDialog.hideDialog();
         postStatus.setText(mPresenter.getStatus());
+        updateMap(post.getLat(), post.getLng());
     }
 
     @Override
@@ -167,5 +201,28 @@ public class PostActivity extends AppCompatActivity implements PostInterface.Req
     @Override
     public void getLinkDone() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
     }
 }

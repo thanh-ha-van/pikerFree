@@ -21,7 +21,7 @@ public class SignUpModel {
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
     }
 
-    public void saveLocal(String username) {
+    void saveLocal(String username) {
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, username);
         editor.apply();

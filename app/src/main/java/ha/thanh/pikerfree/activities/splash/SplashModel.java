@@ -25,8 +25,8 @@ class SplashModel {
 
     private void loadAllConfig() {
         String userId = sPref.getString(Constants.USER_ID, Globals.getIns().getConfig().getUserID());
-        String userLat = sPref.getString(Constants.USER_LAT, "");
-        String userLng = sPref.getString(Constants.USER_LNG, "");
+        String userLat = sPref.getString(Constants.USER_LAT, "0");
+        String userLng = sPref.getString(Constants.USER_LNG, "0");
         boolean isFirstRun = sPref.getBoolean(Constants.IS_FIRST_RUN, true);
         Globals.getIns().getConfig().setFirstRun(isFirstRun);
         Globals.getIns().getConfig().setUserID(userId);
