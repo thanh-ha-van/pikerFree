@@ -61,6 +61,9 @@ class PostPresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
                         mView.getPostDone(post);
+                        if(post.getOwnerId().equals(mModel.getUserIdFromSharePref()))
+                            mView.onUserIsOwner();
+                        else
                         getOwnerData(post.getOwnerId());
                     }
 

@@ -49,6 +49,9 @@
     <!-- for view of post -->
 
     <string name="chat">Chat</string>
+    <string name="you_own_this">You are the owner of this post</string>
+    <string name="delete_this">Delete</string>
+    <string name="close_this">Close</string>
     <string name="send_request">Send request</string>
     <string name="meet_owner">Meet the owner</string>
     <string name="post_view">POST</string>

@@ -1,5 +1,6 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -17,7 +19,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -27,7 +28,6 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
-import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
@@ -43,7 +43,6 @@ public class PostActivity extends AppCompatActivity implements
     private PostPresenter mPresenter;
     private ImageView[] dots;
     private int currentPosition = 0;
-    private CustomAlertDialog alertDialog;
     @BindView(R.id.layout_count_dot)
     public LinearLayout pager_indicator;
     @BindView(R.id.rv_images)
@@ -52,8 +51,6 @@ public class PostActivity extends AppCompatActivity implements
     CustomTextView title;
     @BindView(R.id.tv_description)
     CustomTextView description;
-    @BindView(R.id.tv_send_request)
-    CustomTextView sendRequest;
     @BindView(R.id.tv_day)
     CustomTextView dayTime;
     @BindView(R.id.tv_distance)
@@ -64,8 +61,17 @@ public class PostActivity extends AppCompatActivity implements
     CustomTextView postStatus;
     @BindView(R.id.owner_pic)
     CircleImageView ownerPic;
+    @BindView(R.id.view_owner)
+    View ownerView;
+    @BindView(R.id.view_bottom_action)
+    View bottomView;
+    @BindView(R.id.tv_meet_owner)
+    CustomTextView meetOwner;
+    @BindView(R.id.tv_chat)
+    CustomTextView chatToOwner;
+    @BindView(R.id.tv_send_request)
+    CustomTextView sendRequest;
     WaitingDialog waitingDialog;
-
     @BindView(R.id.mapView)
     MapView mMapView;
     private GoogleMap googleMap;
@@ -74,6 +80,7 @@ public class PostActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
         initData();
         initView();
         mMapView.onCreate(savedInstanceState);
@@ -109,10 +116,16 @@ public class PostActivity extends AppCompatActivity implements
         helper.attachToRecyclerView(rvImage);
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
-        alertDialog = new CustomAlertDialog(this);
         //setUiPageViewController();
 
+    }
 
+    @Override
+    public void onUserIsOwner() {
+        ownerView.setVisibility(View.GONE);
+        meetOwner.setText(getResources().getString(R.string.you_own_this));
+        sendRequest.setText(getResources().getString(R.string.delete_this));
+        chatToOwner.setText(getResources().getString(R.string.close_this));
     }
 
     private void setUiPageViewController() {
@@ -130,7 +143,6 @@ public class PostActivity extends AppCompatActivity implements
         dots[0].setImageResource(R.drawable.seclected_dot);
     }
 
-
     private void pageSelected(int position) {
         currentPosition = position;
         switchDot();
@@ -145,6 +157,7 @@ public class PostActivity extends AppCompatActivity implements
         }
 
     }
+
     void updateMap(double lat, double lng) {
         LatLng sydney = new LatLng(lat, lng);
         googleMap.addMarker(new MarkerOptions().position(sydney)
@@ -208,6 +221,7 @@ public class PostActivity extends AppCompatActivity implements
         super.onResume();
         mMapView.onResume();
     }
+
     @Override
     public void onPause() {
         super.onPause();

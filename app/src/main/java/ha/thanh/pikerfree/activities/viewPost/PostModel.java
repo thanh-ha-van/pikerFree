@@ -2,18 +2,23 @@ package ha.thanh.pikerfree.activities.viewPost;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.services.GPSTracker;
 
 class PostModel {
     private GPSTracker gpsTracker;
-    private Context context;
-
+    private SharedPreferences sharedPreferences;
     PostModel(Context context) {
-        this.context = context;
         this.gpsTracker = new GPSTracker(context);
+        sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
     }
 
+    String getUserIdFromSharePref() {
+        return sharedPreferences.getString(Constants.USER_ID, "");
+
+    }
     double getUserLat() {
         return  gpsTracker.getLatitude();
     }

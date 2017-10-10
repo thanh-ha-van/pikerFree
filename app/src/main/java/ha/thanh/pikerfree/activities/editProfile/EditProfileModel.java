@@ -20,21 +20,21 @@ public class EditProfileModel {
 
     }
 
-    public String getUserNameStringFromSharePf() {
+    String getUserNameStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_NAME, "");
 
     }
 
-    public String getUserAddressStringFromSharePf() {
+     String getUserAddressStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_ADDRESS, "");
 
     }
 
-    public String getLocalImageStringFromSharePf() {
+     String getLocalImageStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_PROFILE_PIC_PATH, "");
     }
 
-    public void saveLocal(String username, String userAddress, String path) {
+     void saveLocal(String username, String userAddress, String path) {
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, username);
         editor.putString(Constants.USER_ADDRESS, userAddress);

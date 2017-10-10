@@ -16,5 +16,6 @@ class PostInterface {
         void getPostFail();
         void getOwnerDone(User user);
         void getOwnerImageDone(Uri uri);
+        void onUserIsOwner();
     }
 }
