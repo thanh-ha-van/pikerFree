@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,67 +14,33 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 
 
-public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.MyViewHolder> {
+public class ImageSlideAdapter extends PagerAdapter {
 
-    private boolean zoomOut = false;
     private List<String> mList;
-    protected Context context;
-    private OnclickView onclickView;
+    Context mContext;
+    LayoutInflater mLayoutInflater;
 
-    public ImageSlideAdapter(Context context, List<String> list, OnclickView onclickView) {
-        this.mList = list;
-        this.context = context;
-        this.onclickView = onclickView;
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.img_item_image)
-        ImageView imageView;
-
-        MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            imageView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            onclickView.onClick(getAdapterPosition());
-//            if (zoomOut) {
-//
-//                imageView.setLayoutParams(
-//                        new LinearLayout.
-//                                LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                                LinearLayout.LayoutParams.WRAP_CONTENT));
-//                imageView.setAdjustViewBounds(true);
-//                zoomOut = false;
-//            } else {
-//                imageView.setLayoutParams(new LinearLayout.LayoutParams(
-//                        LinearLayout.LayoutParams.MATCH_PARENT,
-//                        LinearLayout.LayoutParams.MATCH_PARENT));
-//                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//                zoomOut = true;
-//            }
-        }
-
+    public ImageSlideAdapter(Context mContext, List<String> mList) {
+        this.mContext = mContext;
+        this.mList = mList;
+        mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_slide, parent, false);
-        return new MyViewHolder(itemView);
+    public int getCount() {
+        return mList.size();
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public Object instantiateItem(ViewGroup container, int position) {
+        View itemView = mLayoutInflater.inflate(R.layout.item_image_slide, container, false);
 
-        Glide.with(this.context)
+        ImageView imageView = (ImageView) itemView.findViewById(R.id.img_item_image);
+
+        Glide.with(this.mContext)
                 .load(mList.get(position))
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.file)
@@ -82,16 +49,20 @@ public class ImageSlideAdapter extends RecyclerView.Adapter<ImageSlideAdapter.My
                         .dontAnimate()
                         .override(400, 300)
                         .dontTransform())
-                .into(holder.imageView);
+                .into(imageView);
+
+        container.addView(itemView);
+
+        return itemView;
     }
 
     @Override
-    public int getItemCount() {
-        return mList.size();
+    public boolean isViewFromObject(View view, Object object) {
+        return view == ((LinearLayout) object);
     }
 
-    public interface OnclickView {
-        void onClick(int position);
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((LinearLayout) object);
     }
-
 }

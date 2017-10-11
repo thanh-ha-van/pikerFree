@@ -21,7 +21,6 @@ import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
 
-
 class PostPresenter {
     private PostInterface.RequiredViewOps mView;
     private PostModel mModel;
@@ -31,6 +30,8 @@ class PostPresenter {
     private User dataUser;
     private Post post;
     private Handler handler;
+    private boolean isUserOwner = false;
+
     PostPresenter(Context context, PostInterface.RequiredViewOps mView) {
         this.mView = mView;
         mModel = new PostModel(context);
@@ -43,7 +44,10 @@ class PostPresenter {
 
     private void initData() {
         imagePostList = new ArrayList<>();
-        mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages");
+        mStorageRef = FirebaseStorage
+                .getInstance()
+                .getReference()
+                .child("postImages");
         database = FirebaseDatabase.getInstance();
         dataUser = new User();
         post = new Post();
@@ -55,16 +59,19 @@ class PostPresenter {
             @Override
             public void run() {
                 DatabaseReference postRef;
-                postRef = database.getReference("posts").child(postId);
+                postRef = database
+                        .getReference("posts")
+                        .child(postId);
                 postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
                         mView.getPostDone(post);
-                        if(post.getOwnerId().equals(mModel.getUserIdFromSharePref()))
+                        if (post.getOwnerId().equals(mModel.getUserIdFromSharePref())) {
                             mView.onUserIsOwner();
-                        else
-                        getOwnerData(post.getOwnerId());
+                            isUserOwner = true;
+                        } else
+                            getOwnerData(post.getOwnerId());
                     }
 
                     @Override
@@ -77,13 +84,64 @@ class PostPresenter {
         });
     }
 
+    void handleRequestOrDelete() {
+
+        if (isUserOwner) {
+            // delete post
+            //// TODO: 10/10/2017  delete post and update the datauser;
+            deletePost();
+            updateUserData();
+        } else {
+
+            // request
+            //// TODO: 10/10/2017 update the post data to adđ user to requesting list
+            updateRequestingUserList();
+        }
+    }
+
+    private void deletePost() {
+
+    }
+
+    private void updateUserData() {
+
+    }
+
+    private void updateRequestingUserList() {
+
+    }
+
+    private void closePost() {
+
+    }
+
+    private void initChat() {
+
+    }
+
+    //// TODO: 10/10/2017 must show requesting user for owner of the post.
+    void handleChatOrClose() {
+        if (isUserOwner) {
+
+            // close post
+            closePost();
+            //// TODO: 10/10/2017  to close post is to clear the requesting user list
+        } else {
+
+            // chat
+            initChat();
+            //// TODO: 10/10/2017  to chat is to start an activity with 2 user ids
+        }
+    }
+
     String getDistance() {
         return Utils.getDistance(mModel.getUserLat(), mModel.getUserLng(), post.getLat(), post.getLng());
     }
+
     String getStatus() {
         if (post.getStatus() == 1)
             return "Opening";
-        return  "Closed";
+        return "Closed";
     }
 
     private void getOwnerData(final String UserId) {
@@ -91,7 +149,9 @@ class PostPresenter {
             @Override
             public void run() {
                 DatabaseReference userPref;
-                userPref = database.getReference("users").child(UserId);
+                userPref = database
+                        .getReference("users")
+                        .child(UserId);
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -111,25 +171,33 @@ class PostPresenter {
 
     private void getUserImageLink(String link) {
 
-        mStorageRef = FirebaseStorage.getInstance().getReference().child(link);
-        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                mView.getOwnerImageDone(uri);
-            }
-        });
+        mStorageRef = FirebaseStorage.getInstance()
+                .getReference().child(link);
+        mStorageRef.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mView.getOwnerImageDone(uri);
+                    }
+                });
     }
 
     void getImageLinksFromId(String postId) {
         for (int i = 1; i <= 6; i++) {
-            mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages").child(postId).child("image_no_" + i + ".jpg");
-            mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    imagePostList.add(uri.toString());
-                    mView.getLinkDone();
-                }
-            });
+            mStorageRef = FirebaseStorage
+                    .getInstance()
+                    .getReference()
+                    .child("postImages")
+                    .child(postId)
+                    .child("image_no_" + i + ".jpg");
+            mStorageRef.getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            imagePostList.add(uri.toString());
+                            mView.getLinkDone();
+                        }
+                    });
         }
     }
 }

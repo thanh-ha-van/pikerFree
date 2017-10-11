@@ -1,13 +1,10 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
-import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,17 +33,15 @@ import ha.thanh.pikerfree.utils.Utils;
 
 public class PostActivity extends AppCompatActivity implements
         PostInterface.RequiredViewOps,
-        ImageSlideAdapter.OnclickView,
         OnMapReadyCallback {
 
-    private ImageSlideAdapter adapter;
-    private PostPresenter mPresenter;
-    private ImageView[] dots;
-    private int currentPosition = 0;
+
     @BindView(R.id.layout_count_dot)
     public LinearLayout pager_indicator;
-    @BindView(R.id.rv_images)
-    RecyclerView rvImage;
+
+    @BindView(R.id.vp_image_slide)
+    ViewPager vpImageSlide;
+
     @BindView(R.id.tv_title)
     CustomTextView title;
     @BindView(R.id.tv_description)
@@ -61,26 +56,38 @@ public class PostActivity extends AppCompatActivity implements
     CustomTextView postStatus;
     @BindView(R.id.owner_pic)
     CircleImageView ownerPic;
-    @BindView(R.id.view_owner)
-    View ownerView;
-    @BindView(R.id.view_bottom_action)
-    View bottomView;
     @BindView(R.id.tv_meet_owner)
     CustomTextView meetOwner;
     @BindView(R.id.tv_chat)
     CustomTextView chatToOwner;
     @BindView(R.id.tv_send_request)
     CustomTextView sendRequest;
-    WaitingDialog waitingDialog;
+
+    @BindView(R.id.view_owner)
+    View ownerView;
+    @BindView(R.id.scroll_view)
+    View scrollView;
+    @BindView(R.id.view_bottom_action)
+    View bottomView;
+
+    @BindView(R.id.rv_requesting_user)
+    RecyclerView rvRequestingUser;
+
+
     @BindView(R.id.mapView)
     MapView mMapView;
+
+    private ImageSlideAdapter adapter;
+    private PostPresenter mPresenter;
+    private ImageView[] dots;
+    private int currentPosition = 0;
+    private WaitingDialog waitingDialog;
     private GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
         initData();
         initView();
         mMapView.onCreate(savedInstanceState);
@@ -90,13 +97,12 @@ public class PostActivity extends AppCompatActivity implements
 
     @OnClick(R.id.tv_chat)
     public void startChat() {
-        // start a conversation between user and owner
+        mPresenter.handleChatOrClose();
     }
 
     @OnClick(R.id.tv_send_request)
     public void setSendRequest() {
-        // send request to owner
-        // change post data
+        mPresenter.handleRequestOrDelete();
     }
 
     private void initData() {
@@ -108,15 +114,27 @@ public class PostActivity extends AppCompatActivity implements
 
     private void initView() {
         ButterKnife.bind(this);
-        adapter = new ImageSlideAdapter(this, mPresenter.getImagePostList(), this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        rvImage.setLayoutManager(layoutManager);
-        rvImage.setAdapter(adapter);
-        SnapHelper helper = new LinearSnapHelper();
-        helper.attachToRecyclerView(rvImage);
+        scrollView.setVisibility(View.INVISIBLE);
+        adapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
+        vpImageSlide = (ViewPager) findViewById(R.id.vp_image_slide);
+        vpImageSlide.setAdapter(adapter);
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
-        //setUiPageViewController();
+        vpImageSlide.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                pageSelected(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -129,8 +147,8 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     private void setUiPageViewController() {
-        dots = new ImageView[adapter.getItemCount()];
-        for (int i = 0; i < adapter.getItemCount(); i++) {
+        dots = new ImageView[adapter.getCount()];
+        for (int i = 0; i < adapter.getCount(); i++) {
             dots[i] = new ImageView(this);
             dots[i].setImageResource(R.drawable.none_seclected_dot);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -149,7 +167,7 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     private void switchDot() {
-        for (int i = 0; i < adapter.getItemCount(); i++) {
+        for (int i = 0; i < adapter.getCount(); i++) {
             if (i == currentPosition)
                 dots[i].setImageResource(R.drawable.seclected_dot);
             else
@@ -172,12 +190,8 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onClick(int position) {
-
-    }
-
-    @Override
     public void getPostDone(Post post) {
+        scrollView.setVisibility(View.VISIBLE);
         title.setText(post.getTitle());
         description.setText(post.getDescription());
         dayTime.setText(Utils.getTimeString(post.getTimePosted()));
@@ -185,6 +199,7 @@ public class PostActivity extends AppCompatActivity implements
         waitingDialog.hideDialog();
         postStatus.setText(mPresenter.getStatus());
         updateMap(post.getLat(), post.getLng());
+        setUiPageViewController();
     }
 
     @Override
@@ -195,6 +210,11 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
+
+    }
+
+    @Override
+    public void onDeleteDone() {
 
     }
 
@@ -214,6 +234,7 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void getLinkDone() {
         adapter.notifyDataSetChanged();
+
     }
 
     @Override

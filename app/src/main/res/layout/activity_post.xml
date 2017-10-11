@@ -51,6 +51,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -66,13 +67,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_images"
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_image_slide"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="240dp"
                     android:layout_gravity="center"
                     android:background="@color/white" />
-
 
                 <LinearLayout
                     android:id="@+id/layout_count_dot"
@@ -80,6 +80,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentBottom="true"
                     android:background="@color/shade_black"
+                    android:gravity="center"
                     android:orientation="horizontal" />
             </RelativeLayout>
 
@@ -136,7 +137,7 @@
                     android:layout_width="1px"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/gray_2"></LinearLayout>
+                    android:background="@color/gray_2" />
 
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -153,9 +154,7 @@
                     android:layout_width="1px"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/gray_2">
-
-                </LinearLayout>
+                    android:background="@color/gray_2" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_distance"
@@ -182,15 +181,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:background="@drawable/rec_shadow_below">
-
-            </LinearLayout>
+                android:background="@drawable/rec_shadow_below" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/tv_meet_owner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:id="@+id/tv_meet_owner"
                 android:gravity="center_vertical"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
@@ -198,10 +195,16 @@
                 android:textColor="@color/text_black_3"
                 android:textSize="14sp" />
 
+            <include
+                layout="@layout/view_requesting_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
             <LinearLayout
+                android:id="@+id/view_owner"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:id="@+id/view_owner"
                 android:padding="8dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -242,21 +245,18 @@
                         layout="@layout/view_rating"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2">
-
-                    </include>
+                        android:layout_weight="2" />
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/gray_2">
-
-    </LinearLayout>
+        android:background="@color/gray_2" />
 
     <LinearLayout
         android:id="@+id/view_bottom_action"
