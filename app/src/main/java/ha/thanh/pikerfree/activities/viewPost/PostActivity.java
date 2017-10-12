@@ -108,8 +108,8 @@ public class PostActivity extends AppCompatActivity implements
     private void initData() {
 
         mPresenter = new PostPresenter(this, this);
-        mPresenter.getPostData("1");
-        mPresenter.getImageLinksFromId("1");
+        mPresenter.getPostData("3");
+        mPresenter.getImageLinksFromId("3");
     }
 
     private void initView() {

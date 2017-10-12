@@ -88,7 +88,7 @@ class PostPresenter {
 
         if (isUserOwner) {
             // delete post
-            //// TODO: 10/10/2017  delete post and update the datauser;
+            //// TODO: 10/10/2017  delete post and update the data user;
             deletePost();
             updateUserData();
         } else {

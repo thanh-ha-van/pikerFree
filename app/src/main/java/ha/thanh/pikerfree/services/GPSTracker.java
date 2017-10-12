@@ -13,25 +13,24 @@ import android.util.Log;
 
 public class GPSTracker implements LocationListener {
     private final Context mContext;
-    boolean isGPSEnabled = false;
-    boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
-    Location location = null;
-    double latitude;
-    double longitude;
+    private boolean isGPSEnabled = false;
+    private boolean isNetworkEnabled = false;
+    private boolean canGetLocation = false;
+    private Location location = null;
+    private double latitude;
+    private double longitude;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
-    protected LocationManager locationManager;
-    private Location m_Location;
+    private LocationManager locationManager;
 
     public GPSTracker(Context context) {
         this.mContext = context;
-        m_Location = getLocation();
+        location = getLocation();
     }
 
-    public Location getLocation() {
+    private Location getLocation() {
         try {
             locationManager = (LocationManager) mContext
                     .getSystemService(Context.LOCATION_SERVICE);
@@ -54,6 +53,7 @@ public class GPSTracker implements LocationListener {
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     } catch (SecurityException e) {
 
+                        Log.d("Error", e.toString());
                     }
                     Log.d("Network", "Network Enabled");
 
@@ -62,7 +62,7 @@ public class GPSTracker implements LocationListener {
                             location = locationManager
                                     .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         } catch (SecurityException e) {
-
+                            Log.d("Error", e.toString());
                         }
                         if (location != null) {
                             latitude = location.getLatitude();
@@ -78,7 +78,7 @@ public class GPSTracker implements LocationListener {
                                     MIN_TIME_BW_UPDATES,
                                     MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         } catch (SecurityException e) {
-
+                            Log.d("Error", e.toString());
                         }
                         Log.d("GPS", "GPS Enabled");
                         if (locationManager != null) {
@@ -86,7 +86,7 @@ public class GPSTracker implements LocationListener {
                                 location = locationManager
                                         .getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             } catch (SecurityException e) {
-
+                                Log.d("Error", e.toString());
                             }
                             if (location != null) {
                                 latitude = location.getLatitude();
