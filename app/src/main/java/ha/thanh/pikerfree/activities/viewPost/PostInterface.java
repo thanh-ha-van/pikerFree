@@ -21,5 +21,13 @@ class PostInterface {
         void onUserIsOwner();
 
         void onDeleteDone();
+
+        void onAlreadyRequested();
+
+        void onRequestSent();
+
+        void showConfirmDialog(String mess);
+
+        void onGetRequestingUserDone();
     }
 }

@@ -198,8 +198,9 @@
             <include
                 layout="@layout/view_requesting_user"
                 android:layout_width="match_parent"
+                android:id="@+id/view_requesting_user_list"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/view_owner"

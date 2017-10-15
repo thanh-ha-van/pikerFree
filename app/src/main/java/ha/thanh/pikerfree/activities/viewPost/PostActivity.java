@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +26,10 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
+import ha.thanh.pikerfree.adapters.UserAdapter;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
+import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
@@ -33,6 +37,8 @@ import ha.thanh.pikerfree.utils.Utils;
 
 public class PostActivity extends AppCompatActivity implements
         PostInterface.RequiredViewOps,
+        CustomYesNoDialog.YesNoInterFace,
+UserAdapter.ItemClickListener,
         OnMapReadyCallback {
 
 
@@ -69,7 +75,8 @@ public class PostActivity extends AppCompatActivity implements
     View scrollView;
     @BindView(R.id.view_bottom_action)
     View bottomView;
-
+    @BindView(R.id.view_requesting_user_list)
+    View requestingUserView;
     @BindView(R.id.rv_requesting_user)
     RecyclerView rvRequestingUser;
 
@@ -77,11 +84,14 @@ public class PostActivity extends AppCompatActivity implements
     @BindView(R.id.mapView)
     MapView mMapView;
 
-    private ImageSlideAdapter adapter;
+    private ImageSlideAdapter imageSlideAdapter;
+    private UserAdapter userAdapter;
     private PostPresenter mPresenter;
     private ImageView[] dots;
     private int currentPosition = 0;
     private WaitingDialog waitingDialog;
+    private CustomYesNoDialog confirmDialog;
+    private CustomAlertDialog alertDialog;
     private GoogleMap googleMap;
 
     @Override
@@ -102,7 +112,17 @@ public class PostActivity extends AppCompatActivity implements
 
     @OnClick(R.id.tv_send_request)
     public void setSendRequest() {
+        mPresenter.showConfirmDialog();
+    }
+
+    @Override
+    public void onYesClicked() {
         mPresenter.handleRequestOrDelete();
+    }
+
+    @Override
+    public void onNoClicked() {
+
     }
 
     private void initData() {
@@ -114,12 +134,18 @@ public class PostActivity extends AppCompatActivity implements
 
     private void initView() {
         ButterKnife.bind(this);
+        confirmDialog = new CustomYesNoDialog(this, this);
+        alertDialog = new CustomAlertDialog(this);
+
         scrollView.setVisibility(View.INVISIBLE);
-        adapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
+
+        imageSlideAdapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
         vpImageSlide = (ViewPager) findViewById(R.id.vp_image_slide);
-        vpImageSlide.setAdapter(adapter);
+        vpImageSlide.setAdapter(imageSlideAdapter);
+
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
+
         vpImageSlide.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -135,6 +161,20 @@ public class PostActivity extends AppCompatActivity implements
 
             }
         });
+        userAdapter = new UserAdapter(this, mPresenter.getRequestingUsers(), this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvRequestingUser.setLayoutManager(layoutManager);
+        rvRequestingUser.setAdapter(userAdapter);
+    }
+
+    @Override
+    public void onGetRequestingUserDone() {
+        requestingUserView.setVisibility(View.VISIBLE);
+        userAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onChooseUser(int position) {
 
     }
 
@@ -143,12 +183,12 @@ public class PostActivity extends AppCompatActivity implements
         ownerView.setVisibility(View.GONE);
         meetOwner.setText(getResources().getString(R.string.you_own_this));
         sendRequest.setText(getResources().getString(R.string.delete_this));
-        chatToOwner.setText(getResources().getString(R.string.close_this));
+        chatToOwner.setText(getResources().getString(R.string.edit_this));
     }
 
     private void setUiPageViewController() {
-        dots = new ImageView[adapter.getCount()];
-        for (int i = 0; i < adapter.getCount(); i++) {
+        dots = new ImageView[imageSlideAdapter.getCount()];
+        for (int i = 0; i < imageSlideAdapter.getCount(); i++) {
             dots[i] = new ImageView(this);
             dots[i].setImageResource(R.drawable.none_seclected_dot);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -167,7 +207,7 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     private void switchDot() {
-        for (int i = 0; i < adapter.getCount(); i++) {
+        for (int i = 0; i < imageSlideAdapter.getCount(); i++) {
             if (i == currentPosition)
                 dots[i].setImageResource(R.drawable.seclected_dot);
             else
@@ -179,7 +219,7 @@ public class PostActivity extends AppCompatActivity implements
     void updateMap(double lat, double lng) {
         LatLng sydney = new LatLng(lat, lng);
         googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Post location"));
+                .title("Post's location"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
     }
 
@@ -233,7 +273,7 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void getLinkDone() {
-        adapter.notifyDataSetChanged();
+        imageSlideAdapter.notifyDataSetChanged();
 
     }
 
@@ -259,5 +299,22 @@ public class PostActivity extends AppCompatActivity implements
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
+    }
+
+    @Override
+    public void onAlreadyRequested() {
+        alertDialog.showAlertDialog("Uh oh!", "You already send the request before");
+    }
+
+    @Override
+    public void onRequestSent() {
+
+        alertDialog.showAlertDialog("Done", "your receiving request has been sent");
+
+    }
+
+    @Override
+    public void showConfirmDialog(String mess) {
+        confirmDialog.showAlertDialog("Confirm Action", mess);
     }
 }

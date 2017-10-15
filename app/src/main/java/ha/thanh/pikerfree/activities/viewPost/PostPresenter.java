@@ -16,24 +16,38 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
 
 class PostPresenter {
+
     private PostInterface.RequiredViewOps mView;
     private PostModel mModel;
     private List<String> imagePostList;
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
     private User dataUser;
+    private List<String> requestingUserIDs;
+    private List<User> requestingUsers;
+
+    List<User> getRequestingUsers() {
+        if (requestingUsers != null)
+            return requestingUsers;
+        else
+            return requestingUsers = new ArrayList<>();
+    }
+
     private Post post;
     private Handler handler;
     private boolean isUserOwner = false;
+    private Context con;
 
     PostPresenter(Context context, PostInterface.RequiredViewOps mView) {
         this.mView = mView;
+        this.con = context;
         mModel = new PostModel(context);
         initData();
     }
@@ -67,10 +81,16 @@ class PostPresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
                         mView.getPostDone(post);
+                        requestingUserIDs = post.getRequestingUser();
                         if (post.getOwnerId().equals(mModel.getUserIdFromSharePref())) {
+
+                            // if user is owner then show requesting list and notify text to UI
                             mView.onUserIsOwner();
                             isUserOwner = true;
+                            getRequestingUserList();
                         } else
+
+                            // else show the owner infor to UI
                             getOwnerData(post.getOwnerId());
                     }
 
@@ -84,17 +104,20 @@ class PostPresenter {
         });
     }
 
-    void handleRequestOrDelete() {
+    void showConfirmDialog() {
 
         if (isUserOwner) {
-            // delete post
-            //// TODO: 10/10/2017  delete post and update the data user;
+            mView.showConfirmDialog(con.getResources().getString(R.string.confirm_delete));
+        } else {
+            mView.showConfirmDialog(con.getResources().getString(R.string.confirm_request));
+        }
+    }
+
+    void handleRequestOrDelete() {
+        if (isUserOwner) {
             deletePost();
             updateUserData();
         } else {
-
-            // request
-            //// TODO: 10/10/2017 update the post data to adđ user to requesting list
             updateRequestingUserList();
         }
     }
@@ -109,9 +132,36 @@ class PostPresenter {
 
     private void updateRequestingUserList() {
 
+        boolean canRequest = true;
+        if (requestingUserIDs == null) {
+            // if it's null then must init then add element into it.
+            requestingUserIDs = new ArrayList<>();
+
+        } else {
+            // if it's not null then must check if user is already in it then decide.
+            for (int i = 0; i < requestingUserIDs.size(); i++) {
+                if (requestingUserIDs.get(i).equals(mModel.getUserIdFromSharePref())) {
+                    mView.onAlreadyRequested();
+                    canRequest = false;
+                }
+            }
+        }
+        if (canRequest) {
+            requestingUserIDs.add(mModel.getUserIdFromSharePref());
+            post.setRequestingUser(requestingUserIDs);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    DatabaseReference postPref;
+                    postPref = database.getReference("posts").child("" + post.getPostId()).child("requestingUser");
+                    postPref.setValue(post.getRequestingUser());
+                    mView.onRequestSent();
+                }
+            });
+        }
     }
 
-    private void closePost() {
+    private void editPost() {
 
     }
 
@@ -124,7 +174,7 @@ class PostPresenter {
         if (isUserOwner) {
 
             // close post
-            closePost();
+            editPost();
             //// TODO: 10/10/2017  to close post is to clear the requesting user list
         } else {
 
@@ -158,6 +208,7 @@ class PostPresenter {
                         dataUser = dataSnapshot.getValue(User.class);
                         mView.getOwnerDone(dataUser);
                         getUserImageLink(dataUser.getAvatarLink());
+
                     }
 
                     @Override
@@ -165,6 +216,39 @@ class PostPresenter {
 
                     }
                 });
+            }
+        });
+    }
+
+    private void getRequestingUserList() {
+
+        requestingUsers = new ArrayList<>();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (requestingUserIDs != null) {
+                    for (int i = 0; i < requestingUserIDs.size(); i++) {
+
+                        DatabaseReference userPref;
+                        userPref = database
+                                .getReference("users")
+                                .child(requestingUserIDs.get(i));
+
+                        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+                                requestingUsers.add(user);
+                                mView.onGetRequestingUserDone();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
             }
         });
     }

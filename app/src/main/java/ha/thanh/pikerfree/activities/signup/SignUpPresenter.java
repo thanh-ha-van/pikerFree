@@ -45,7 +45,7 @@ public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
                         if (task.isSuccessful()) {
                             getCurrentUser(userName, email);
                             updateUserDataToServer(userName);
-                            saveDataLocal(userName);
+                            saveDataLocal(userName, auth.getCurrentUser().getUid());
                         }
                     }
                 })
@@ -60,8 +60,8 @@ public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
                 });
     }
 
-    public void saveDataLocal(String userName) {
-        mModel.saveLocal(userName);
+    public void saveDataLocal(String userName, String userId) {
+        mModel.saveLocal(userName, userId);
     }
 
     public void getCurrentUser(String userName, String email) {

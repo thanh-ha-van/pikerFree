@@ -25,7 +25,7 @@
     <string name="input_phone">Phone number &#8230;</string>
     <string name="input_email">Email &#8230;</string>
     <string name="email">Password &#8230;</string>
-    <string name="password_confirm">Confirm email &#8230;</string>
+    <string name="password_confirm">Confirm password &#8230;</string>
     <string name="login">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="we_need_email">We just need your registered email to send your email reset instructions.</string>
@@ -49,9 +49,12 @@
     <!-- for view of post -->
 
     <string name="chat">Chat</string>
+    <string name="confirm_request">To confirm sending request to receive this item. Tap OK.</string>
+    <string name="confirm_delete">Are you sure you want to delete this post?</string>
     <string name="you_own_this">You are the owner of this post</string>
     <string name="delete_this">Delete</string>
-    <string name="close_this">Close</string>
+    <string name="edit_this">Edit</string>
+    <string name="requesting_user">Requesting users:</string>
     <string name="send_request">Send request</string>
     <string name="meet_owner">Meet the owner</string>
     <string name="post_view">POST</string>

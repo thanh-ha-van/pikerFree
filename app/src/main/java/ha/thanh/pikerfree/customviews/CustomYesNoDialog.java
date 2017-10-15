@@ -21,12 +21,8 @@ public class CustomYesNoDialog {
     private Dialog alertDialog;
     private YesNoInterFace interFace;
 
-    @BindView(R.id.tv_title)
-    public TextView tvTitle;
-    @BindView(R.id.tv_content)
-    public TextView tvContent;
 
-    interface YesNoInterFace {
+    public interface YesNoInterFace {
         void onYesClicked();
 
         void onNoClicked();
@@ -41,24 +37,39 @@ public class CustomYesNoDialog {
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setContentView(R.layout.view_yes_no_dialog);
         this.interFace = yesNoInterFace;
-        ButterKnife.bind(activity);
+
     }
 
     public void showAlertDialog(String title, String message) {
+
+        CustomTextView tvContent = (CustomTextView) alertDialog.findViewById(R.id.tv_content);
+        CustomTextView tvTitle = (CustomTextView) alertDialog.findViewById(R.id.tv_title);
+        CustomTextView tvCancel = (CustomTextView) alertDialog.findViewById(R.id.btn_cancel_dialog);
+        CustomTextView tvOK = (CustomTextView) alertDialog.findViewById(R.id.btn_ok_dialog);
         tvTitle.setText(title);
         tvContent.setText(message);
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                interFace.onNoClicked();
+            }
+        });
+
+
+        tvOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                interFace.onYesClicked();
+            }
+        });
+
+
         alertDialog.show();
 
-    }
 
-    @OnClick(R.id.btn_ok_dialog)
-    public void onOkClicked(){
-        alertDialog.dismiss();
-        interFace.onYesClicked();
-    }
-    @OnClick(R.id.btn_cancel_dialog)
-    public void onCancelClicked(){
-        alertDialog.dismiss();
-        interFace.onNoClicked();
+
     }
 }

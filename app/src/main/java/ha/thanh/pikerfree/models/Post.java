@@ -16,6 +16,8 @@ public class Post {
     private String title = "No title found";
     private String description = "No description found";
     private List<String> requestingUser;
+
+
     private int status = Constants.STATUS_OPEN;
     private String ownerId;
     private double lat = 0;
@@ -25,6 +27,7 @@ public class Post {
 
     public Post() {
     }
+
 
     public Post(int postId, String title, String description, String ownerId, double lat, double lng, long timePosted, String category) {
         this.postId = postId;
@@ -36,6 +39,13 @@ public class Post {
         this.timePosted = timePosted;
         this.category = category;
         requestingUser = new ArrayList<>();
+    }
+    public List<String> getRequestingUser() {
+        return requestingUser;
+    }
+
+    public void setRequestingUser(List<String> requestingUser) {
+        this.requestingUser = requestingUser;
     }
 
     public int getPostId() {

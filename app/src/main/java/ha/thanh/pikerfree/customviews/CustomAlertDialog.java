@@ -40,6 +40,7 @@ public class CustomAlertDialog {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                if (listener != null)
                 listener.onOkClicked();
             }
         });

@@ -105,7 +105,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         return userList.size();
     }
 
-    interface ItemClickListener {
+    public interface ItemClickListener {
 
         void onChooseUser(int position);
 
