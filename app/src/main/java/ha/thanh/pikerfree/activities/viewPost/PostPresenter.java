@@ -266,22 +266,28 @@ class PostPresenter {
                 });
     }
 
-    void getImageLinksFromId(String postId) {
-        for (int i = 1; i <= 6; i++) {
-            mStorageRef = FirebaseStorage
-                    .getInstance()
-                    .getReference()
-                    .child("postImages")
-                    .child(postId)
-                    .child("image_no_" + i + ".jpg");
-            mStorageRef.getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            imagePostList.add(uri.toString());
-                            mView.getLinkDone();
-                        }
-                    });
-        }
+    void getImageLinksFromId(final String postId) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 1; i <= 6; i++) {
+                    mStorageRef = FirebaseStorage
+                            .getInstance()
+                            .getReference()
+                            .child("postImages")
+                            .child(postId)
+                            .child("image_no_" + i + ".jpg");
+                    mStorageRef.getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    imagePostList.add(uri.toString());
+                                    mView.getLinkDone();
+                                }
+                            });
+                }
+            }
+        });
+
     }
 }

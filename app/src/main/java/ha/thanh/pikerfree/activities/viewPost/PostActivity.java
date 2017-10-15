@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +39,7 @@ import ha.thanh.pikerfree.utils.Utils;
 public class PostActivity extends AppCompatActivity implements
         PostInterface.RequiredViewOps,
         CustomYesNoDialog.YesNoInterFace,
-UserAdapter.ItemClickListener,
+        UserAdapter.ItemClickListener,
         OnMapReadyCallback {
 
 
@@ -140,7 +141,6 @@ UserAdapter.ItemClickListener,
         scrollView.setVisibility(View.INVISIBLE);
 
         imageSlideAdapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
-        vpImageSlide = (ViewPager) findViewById(R.id.vp_image_slide);
         vpImageSlide.setAdapter(imageSlideAdapter);
 
         waitingDialog = new WaitingDialog(this);
@@ -198,7 +198,8 @@ UserAdapter.ItemClickListener,
             params.setMargins(6, 0, 6, 0);
             pager_indicator.addView(dots[i], params);
         }
-        dots[0].setImageResource(R.drawable.seclected_dot);
+        if (dots.length > 0)
+            dots[0].setImageResource(R.drawable.seclected_dot);
     }
 
     private void pageSelected(int position) {
@@ -207,11 +208,20 @@ UserAdapter.ItemClickListener,
     }
 
     private void switchDot() {
+
         for (int i = 0; i < imageSlideAdapter.getCount(); i++) {
             if (i == currentPosition)
-                dots[i].setImageResource(R.drawable.seclected_dot);
+                try {
+                    dots[i].setImageResource(R.drawable.seclected_dot);
+                } catch (IndexOutOfBoundsException e) {
+                    Log.e("Post", e.getMessage());
+                }
             else
-                dots[i].setImageResource(R.drawable.none_seclected_dot);
+                try {
+                    dots[i].setImageResource(R.drawable.none_seclected_dot);
+                } catch (IndexOutOfBoundsException e) {
+                    Log.e("Post", e.getMessage());
+                }
         }
 
     }
@@ -274,7 +284,6 @@ UserAdapter.ItemClickListener,
     @Override
     public void getLinkDone() {
         imageSlideAdapter.notifyDataSetChanged();
-
     }
 
     @Override
