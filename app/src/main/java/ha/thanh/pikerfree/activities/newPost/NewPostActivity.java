@@ -127,11 +127,6 @@ public class NewPostActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemDeleted(int position) {
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             return;

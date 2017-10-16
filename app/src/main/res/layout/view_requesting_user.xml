@@ -5,12 +5,12 @@
     android:orientation="vertical">
 
 
-    <TextView
+    <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/requesting_user"
-        android:textColor="@color/orange"
+        android:textColor="@color/green"
         android:textSize="14sp" />
 
     <android.support.v7.widget.RecyclerView

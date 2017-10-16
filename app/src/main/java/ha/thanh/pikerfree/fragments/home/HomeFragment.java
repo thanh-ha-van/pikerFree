@@ -1,9 +1,7 @@
 package ha.thanh.pikerfree.fragments.home;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +11,8 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.firebase.client.Firebase;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.List;
@@ -35,7 +28,9 @@ import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Post;
 
-public class HomeFragment extends Fragment implements HomeInterface.RequiredViewOps {
+public class HomeFragment
+        extends Fragment
+        implements HomeInterface.RequiredViewOps, PostAdapter.ItemClickListener {
     @BindView(R.id.rv_my_post)
     public RecyclerView rvPost;
     @BindView(R.id.profile_image)
@@ -47,6 +42,7 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
     private List<Post> posts;
     private HomePresenter homePresenter;
     private FirebaseUser firebaseUser;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,13 +64,17 @@ public class HomeFragment extends Fragment implements HomeInterface.RequiredView
 
     private void initView() {
         if (posts != null) {
-            PostAdapter adapter = new PostAdapter(this.getContext(), posts);
+            PostAdapter adapter = new PostAdapter(this.getContext(), posts, this);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             rvPost.setLayoutManager(layoutManager);
             rvPost.setAdapter(adapter);
         }
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
 
     private void initData() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

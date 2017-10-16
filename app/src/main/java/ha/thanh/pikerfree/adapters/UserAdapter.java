@@ -22,24 +22,21 @@ import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.User;
 
-/**
- * Created by HaVan on 10/11/2017.
- */
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
     private List<User> userList;
     private ItemClickListener mClickListener;
-    private int currentPosition;
     private Context context;
-    private StorageReference mStorageRef;
+
 
     public UserAdapter(Context context, List<User> list, ItemClickListener listener) {
         this.context = context;
         this.userList = list;
         mClickListener = listener;
+        this.notifyDataSetChanged();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.owner_pic)
         ImageView imgItemImage;
@@ -56,10 +53,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         @Override
         public void onClick(View view) {
-
-            currentPosition = getAdapterPosition();
-
-            mClickListener.onChooseUser(currentPosition);
+            mClickListener.onChooseUser(getAdapterPosition());
 
         }
     }
@@ -80,8 +74,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
 
     private void getUserImageLink(String link, final ImageView imageView) {
-
-        mStorageRef = FirebaseStorage.getInstance()
+        StorageReference mStorageRef = FirebaseStorage.getInstance()
                 .getReference().child(link);
         mStorageRef.getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {

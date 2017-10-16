@@ -2,7 +2,6 @@ package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,8 @@ import ha.thanh.pikerfree.R;
 public class ImageSlideAdapter extends PagerAdapter {
 
     private List<String> mList;
-    Context mContext;
-    LayoutInflater mLayoutInflater;
+    private Context mContext;
+    private LayoutInflater mLayoutInflater;
 
     public ImageSlideAdapter(Context mContext, List<String> mList) {
         this.mContext = mContext;
@@ -58,7 +57,7 @@ public class ImageSlideAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((LinearLayout) object);
+        return view == (object);
     }
 
     @Override

@@ -32,14 +32,6 @@ class PostPresenter {
     private User dataUser;
     private List<String> requestingUserIDs;
     private List<User> requestingUsers;
-
-    List<User> getRequestingUsers() {
-        if (requestingUsers != null)
-            return requestingUsers;
-        else
-            return requestingUsers = new ArrayList<>();
-    }
-
     private Post post;
     private Handler handler;
     private boolean isUserOwner = false;
@@ -54,6 +46,13 @@ class PostPresenter {
 
     List<String> getImagePostList() {
         return imagePostList;
+    }
+
+    List<User> getRequestingUsers() {
+        if (requestingUsers != null)
+            return requestingUsers;
+        else
+            return requestingUsers = new ArrayList<>();
     }
 
     private void initData() {

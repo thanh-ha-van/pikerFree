@@ -70,8 +70,7 @@ public class CategoryAdapter extends BaseAdapter {
 
 
     public Filter getFilter() {
-        Filter filter = new Filter() {
-
+        return new Filter() {
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
@@ -110,7 +109,5 @@ public class CategoryAdapter extends BaseAdapter {
                 return results;
             }
         };
-
-        return filter;
     }
 }

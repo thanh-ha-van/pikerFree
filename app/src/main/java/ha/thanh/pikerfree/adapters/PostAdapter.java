@@ -2,7 +2,6 @@ package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,24 +17,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.constants.DummyData;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.utils.Utils;
-
-/**
- * Created by HaVan on 8/27/2017.
- */
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
     private List<Post> dataSet;
     private ItemClickListener mClickListener;
-    private int currentPosition;
     private Context mConText;
 
 
-    public PostAdapter(Context context, List<Post> dataSet) {
+    public PostAdapter(Context context, List<Post> dataSet, ItemClickListener listener) {
         this.dataSet = dataSet;
         this.mConText = context;
+        this.mClickListener = listener;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -58,9 +52,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         @Override
         public void onClick(View view) {
 
-            currentPosition = getAdapterPosition();
             if (mClickListener != null) {
-                mClickListener.onItemClick(currentPosition);
+                mClickListener.onItemClick(getAdapterPosition());
             }
         }
     }

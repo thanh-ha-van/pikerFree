@@ -21,7 +21,6 @@ import ha.thanh.pikerfree.models.ImagePost;
 public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.MyViewHolder> {
     private List<ImagePost> imagePosts;
     private ItemClickListener mClickListener;
-    private int currentPosition;
     private Context context;
 
     public ImagePickerAdapter(Context context, List<ImagePost> dataSet, ItemClickListener listener) {
@@ -30,7 +29,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
         mClickListener = listener;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.img_item_image)
         ImageView imgItemImage;
@@ -47,19 +46,10 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
         @Override
         public void onClick(View view) {
-
-            currentPosition = getAdapterPosition();
+            int currentPosition = getAdapterPosition();
             if (mClickListener != null && currentPosition == getItemCount() - 1) {
                 mClickListener.onAddImagesToAdapter();
             }
-//            else if (view.getId() != deleteButton.getId()) {
-//                if (deleteButton.getVisibility() == View.GONE)
-//                    deleteButton.setVisibility(View.VISIBLE);
-//                else deleteButton.setVisibility(View.GONE);
-//            }
-//            if (deleteButton.getVisibility() == View.VISIBLE && view.getId() == deleteButton.getId()) {
-//                mClickListener.onItemDeleted(currentPosition);
-//            }
         }
     }
 
@@ -98,10 +88,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     }
 
     public interface ItemClickListener {
-
         void onAddImagesToAdapter();
-
-        void onItemDeleted(int position);
     }
 
 }
