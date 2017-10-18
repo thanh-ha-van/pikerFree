@@ -17,17 +17,15 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.User;
 
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
+
     private List<User> userList;
     private ItemClickListener mClickListener;
     private Context context;
-
 
     public UserAdapter(Context context, List<User> list, ItemClickListener listener) {
         this.context = context;
@@ -38,16 +36,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.owner_pic)
         ImageView imgItemImage;
-        @BindView(R.id.tv_owner_name)
-        TextView tvUploading;
-        @BindView(R.id.button_choose)
+        TextView tvName;
         ImageView chooseUser;
 
         MyViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            imgItemImage =(ImageView) view.findViewById(R.id.owner_pic);
+            tvName =(TextView) view.findViewById(R.id.tv_owner_name);
+            chooseUser =(ImageView) view.findViewById(R.id.button_choose);
             itemView.setOnClickListener(this);
         }
 
@@ -61,14 +58,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_images, parent, false);
+                .inflate(R.layout.item_requesting_user, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-
-        holder.tvUploading.setVisibility(View.VISIBLE);
+        holder.tvName.setText(userList.get(position).getName());
         getUserImageLink(userList.get(position).getAvatarLink(), holder.imgItemImage);
     }
 

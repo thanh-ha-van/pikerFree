@@ -49,13 +49,11 @@ class PostPresenter {
     }
 
     List<User> getRequestingUsers() {
-        if (requestingUsers != null)
-            return requestingUsers;
-        else
-            return requestingUsers = new ArrayList<>();
+        return requestingUsers;
     }
 
     private void initData() {
+        requestingUsers = new ArrayList<>();
         imagePostList = new ArrayList<>();
         mStorageRef = FirebaseStorage
                 .getInstance()
@@ -221,7 +219,6 @@ class PostPresenter {
 
     private void getRequestingUserList() {
 
-        requestingUsers = new ArrayList<>();
         handler.post(new Runnable() {
             @Override
             public void run() {

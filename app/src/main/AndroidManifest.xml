@@ -54,7 +54,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.editPost.EditPostActivity" />
-        <activity android:name=".activities.conversation.ConActivity"></activity>
+        <activity android:name=".activities.conversation.ConActivity">
+
+        </activity>
     </application>
 
 </manifest>
