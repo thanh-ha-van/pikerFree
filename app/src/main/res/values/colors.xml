@@ -7,13 +7,13 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#E0E0E0</color>
     <color name="shade">#A0FFFFFF</color>
-    <color name="shade_black">#60000000</color>
+    <color name="shade_black">#40000000</color>
     <color name="gray_2">#C2C2C2</color>
     <color name="text_black_3">#606060</color>
     <color name="text_black_2">#303030</color>
     <color name="text_black">#202020</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="green">#55A01A</color>
+    <color name="green">#2e9c0a</color>
     <color name="orange">#EC5D10</color><!--#-->
     <color name="colorOrangeShade">#80EC5D10</color><!--#-->
     <color name="colorDeepSaffron">#4299E9</color> <!--#FFA726-->
