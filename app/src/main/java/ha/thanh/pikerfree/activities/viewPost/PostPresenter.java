@@ -120,7 +120,10 @@ class PostPresenter {
     }
 
     private void deletePost() {
-
+        DatabaseReference postPref;
+        postPref = database.getReference("posts").child(""+ post.getPostId());
+        postPref.setValue(null);
+        mView.onDeleteDone();
     }
 
     private void updateUserData() {

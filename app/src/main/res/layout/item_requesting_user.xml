@@ -8,8 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:paddingStart="10dp">
+        android:layout_margin="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/owner_pic"
@@ -32,14 +31,16 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="1"
-            android:text="ggwweg"
-            android:textColor="@color/blue"
+            android:textColor="@color/green"
             android:textSize="18sp" />
 
     </LinearLayout>
 
     <View
+        android:id="@+id/bottom_line"
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:background="@color/gray_2" />
 </LinearLayout>

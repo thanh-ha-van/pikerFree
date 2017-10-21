@@ -16,6 +16,7 @@ public class Post {
     private String title = "No title found";
     private String description = "No description found";
     private List<String> requestingUser;
+    private String grantedUser;
 
 
     private int status = Constants.STATUS_OPEN;

@@ -42,10 +42,6 @@ public class PostActivity extends AppCompatActivity implements
         UserAdapter.ItemClickListener,
         OnMapReadyCallback {
 
-
-    @BindView(R.id.layout_count_dot)
-    public LinearLayout pager_indicator;
-
     @BindView(R.id.vp_image_slide)
     ViewPager vpImageSlide;
 
@@ -88,8 +84,6 @@ public class PostActivity extends AppCompatActivity implements
     private ImageSlideAdapter imageSlideAdapter;
     private UserAdapter userAdapter;
     private PostPresenter mPresenter;
-    private ImageView[] dots;
-    private int currentPosition = 0;
     private WaitingDialog waitingDialog;
     private CustomYesNoDialog confirmDialog;
     private CustomAlertDialog alertDialog;
@@ -145,22 +139,6 @@ public class PostActivity extends AppCompatActivity implements
 
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
-
-        vpImageSlide.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                pageSelected(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
         userAdapter = new UserAdapter(this, mPresenter.getRequestingUsers(), this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvRequestingUser.setLayoutManager(layoutManager);
@@ -186,46 +164,6 @@ public class PostActivity extends AppCompatActivity implements
         chatToOwner.setText(getResources().getString(R.string.edit_this));
     }
 
-    private void setUiPageViewController() {
-        dots = new ImageView[imageSlideAdapter.getCount()];
-        for (int i = 0; i < imageSlideAdapter.getCount(); i++) {
-            dots[i] = new ImageView(this);
-            dots[i].setImageResource(R.drawable.none_seclected_dot);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(6, 0, 6, 0);
-            pager_indicator.addView(dots[i], params);
-        }
-        if (dots.length > 0)
-            dots[0].setImageResource(R.drawable.seclected_dot);
-    }
-
-    private void pageSelected(int position) {
-        currentPosition = position;
-        switchDot();
-    }
-
-    private void switchDot() {
-
-        for (int i = 0; i < imageSlideAdapter.getCount(); i++) {
-            if (i == currentPosition)
-                try {
-                    dots[i].setImageResource(R.drawable.seclected_dot);
-                } catch (IndexOutOfBoundsException e) {
-                    Log.e("Post", e.getMessage());
-                }
-            else
-                try {
-                    dots[i].setImageResource(R.drawable.none_seclected_dot);
-                } catch (IndexOutOfBoundsException e) {
-                    Log.e("Post", e.getMessage());
-                }
-        }
-
-    }
-
     void updateMap(double lat, double lng) {
         LatLng sydney = new LatLng(lat, lng);
         googleMap.addMarker(new MarkerOptions().position(sydney)
@@ -249,7 +187,6 @@ public class PostActivity extends AppCompatActivity implements
         waitingDialog.hideDialog();
         postStatus.setText(mPresenter.getStatus());
         updateMap(post.getLat(), post.getLng());
-        setUiPageViewController();
     }
 
     @Override
@@ -265,7 +202,13 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onDeleteDone() {
-
+        alertDialog.showAlertDialog("Deleted", "Your post has been deleted. Press ok and back to previous screen.");
+        alertDialog.setListener(new CustomAlertDialog.AlertListener() {
+            @Override
+            public void onOkClicked() {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -312,13 +255,13 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onAlreadyRequested() {
-        alertDialog.showAlertDialog("Uh oh!", "You already send the request before");
+        alertDialog.showAlertDialog("Uh oh!", "You already send the request before.");
     }
 
     @Override
     public void onRequestSent() {
 
-        alertDialog.showAlertDialog("Done", "your receiving request has been sent");
+        alertDialog.showAlertDialog("Done", "Your request has been sent to owner. Now just wait for their response.");
 
     }
 

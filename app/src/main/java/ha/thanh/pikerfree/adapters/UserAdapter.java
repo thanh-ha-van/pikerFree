@@ -38,12 +38,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         ImageView imgItemImage;
         TextView tvName;
-        ImageView chooseUser;
 
         MyViewHolder(View view) {
             super(view);
-            imgItemImage =(ImageView) view.findViewById(R.id.owner_pic);
-            tvName =(TextView) view.findViewById(R.id.tv_owner_name);
+            imgItemImage = (ImageView) view.findViewById(R.id.owner_pic);
+            tvName = (TextView) view.findViewById(R.id.tv_owner_name);
             itemView.setOnClickListener(this);
         }
 

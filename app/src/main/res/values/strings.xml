@@ -51,7 +51,7 @@
     <string name="chat">Chat</string>
     <string name="confirm_request">To confirm sending request to receive this item. Tap OK.</string>
     <string name="confirm_delete">Are you sure you want to delete this post?</string>
-    <string name="you_own_this">You are the owner of this post</string>
+    <string name="you_own_this">You are the owner of this post!</string>
     <string name="delete_this">Delete</string>
     <string name="edit_this">Edit</string>
     <string name="requesting_user">Requesting users:</string>
