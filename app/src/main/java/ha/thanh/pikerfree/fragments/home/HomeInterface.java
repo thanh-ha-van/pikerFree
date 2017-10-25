@@ -1,5 +1,7 @@
 package ha.thanh.pikerfree.fragments.home;
 
+import ha.thanh.pikerfree.models.User;
+
 /**
  * Created by HaVan on 8/27/2017.
  */
@@ -7,8 +9,7 @@ package ha.thanh.pikerfree.fragments.home;
 public class HomeInterface {
     interface RequiredViewOps {
         void onLocalDataReady(String name, String address, String filepath);
-    }
-    interface RequiredPresenterOps {
-
+        void onGetUserDataDone(User user);
+        void onGetUserPostsDone();
     }
 }

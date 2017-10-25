@@ -1,5 +1,6 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
@@ -112,6 +114,7 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onYesClicked() {
+        waitingDialog.showDialog();
         mPresenter.handleRequestOrDelete();
     }
 
@@ -122,9 +125,11 @@ public class PostActivity extends AppCompatActivity implements
 
     private void initData() {
 
+        Intent in = getIntent();
+        int postID = in.getIntExtra(Constants.POST_VIEW, 1);
         mPresenter = new PostPresenter(this, this);
-        mPresenter.getPostData("3");
-        mPresenter.getImageLinksFromId("3");
+        mPresenter.getPostData(postID+"");
+        mPresenter.getImageLinksFromId(postID+"");
     }
 
     private void initView() {

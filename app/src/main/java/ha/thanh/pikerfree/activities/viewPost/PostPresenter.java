@@ -3,7 +3,9 @@ package ha.thanh.pikerfree.activities.viewPost;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +38,7 @@ class PostPresenter {
     private Handler handler;
     private boolean isUserOwner = false;
     private Context con;
+    private int postID;
 
     PostPresenter(Context context, PostInterface.RequiredViewOps mView) {
         this.mView = mView;
@@ -66,6 +69,8 @@ class PostPresenter {
     }
 
     void getPostData(final String postId) {
+
+        postID = Integer.parseInt(postId);
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -85,10 +90,8 @@ class PostPresenter {
                             mView.onUserIsOwner();
                             isUserOwner = true;
                             getRequestingUserList();
-                        } else
-
-                            // else show the owner infor to UI
-                            getOwnerData(post.getOwnerId());
+                        }
+                        getOwnerData(post.getOwnerId());
                     }
 
                     @Override
@@ -113,20 +116,33 @@ class PostPresenter {
     void handleRequestOrDelete() {
         if (isUserOwner) {
             deletePost();
-            updateUserData();
         } else {
             updateRequestingUserList();
         }
     }
 
     private void deletePost() {
+        // delete data base.
+
         DatabaseReference postPref;
-        postPref = database.getReference("posts").child(""+ post.getPostId());
+        postPref = database.getReference("posts").child("" + post.getPostId());
         postPref.setValue(null);
-        mView.onDeleteDone();
+
+        updateUserData();
     }
 
     private void updateUserData() {
+        List<Integer> posts = dataUser.getPosts();
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i) == postID) {
+                posts.remove(i);
+            }
+        }
+        DatabaseReference userPost;
+        userPost = database.getReference("users").child("" + dataUser.getId()).child("post");
+        userPost.setValue(posts);
+
+        mView.onDeleteDone();
 
     }
 

@@ -24,35 +24,28 @@ import ha.thanh.pikerfree.utils.Utils;
  */
 
 public class HomeModel {
-    private HomeInterface.RequiredPresenterOps mPresenter;
     private SharedPreferences sharedPreferences;
     private Context mCon;
 
-    HomeModel(Context context, HomeInterface.RequiredPresenterOps mPresenter) {
-        this.mPresenter = mPresenter;
+    HomeModel(Context context) {
         this.mCon = context;
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
     }
 
-    public List<Post> loadAllMyPost() {
-        List<Post> dummyPost = new ArrayList<>();
-        dummyPost.add(new Post(0, "Old laptop", "GGG GGG", "owner1", 0, 0, 0, "unknown"));
-        dummyPost.add(new Post(0, "Old laptop", "GGG GGG", "owner1", 0, 0, 0, "unknown"));
-        dummyPost.add(new Post(0, "Old laptop", "GGG GGG", "owner1", 0, 0, 0, "unknown"));
-        return dummyPost;
-    }
-    public String getUserNameStringFromSharePf() {
+    String getUserNameStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_NAME, "");
-
     }
 
-    public String getUserAddressStringFromSharePf() {
+    String getUserAddressStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_ADDRESS, "");
 
     }
 
-    public String getLocalImageStringFromSharePf() {
+    String getLocalImageStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_PROFILE_PIC_PATH, "");
     }
 
+    String getUserIdFromSharePf(){
+        return sharedPreferences.getString(Constants.USER_ID, "");
+    }
 }

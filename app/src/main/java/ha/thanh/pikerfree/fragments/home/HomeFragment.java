@@ -24,12 +24,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.editProfile.EditProfileActivity;
 import ha.thanh.pikerfree.activities.newPost.NewPostActivity;
+import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.models.User;
 
-public class HomeFragment
-        extends Fragment
+public class HomeFragment extends Fragment
         implements HomeInterface.RequiredViewOps, PostAdapter.ItemClickListener {
     @BindView(R.id.rv_my_post)
     public RecyclerView rvPost;
@@ -39,10 +41,8 @@ public class HomeFragment
     CustomTextView tvUserAddress;
     @BindView(R.id.user_name)
     CustomTextView tvUserName;
-    private List<Post> posts;
     private HomePresenter homePresenter;
-    private FirebaseUser firebaseUser;
-
+    PostAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,22 +63,24 @@ public class HomeFragment
     }
 
     private void initView() {
-        if (posts != null) {
-            PostAdapter adapter = new PostAdapter(this.getContext(), posts, this);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-            rvPost.setLayoutManager(layoutManager);
-            rvPost.setAdapter(adapter);
-        }
+
+        adapter = new PostAdapter(this.getContext(), homePresenter.getPostList(), this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rvPost.setLayoutManager(layoutManager);
+        rvPost.setAdapter(adapter);
+
     }
 
     @Override
     public void onItemClick(int position) {
-
+        Intent in = new Intent(this.getContext(), PostActivity.class);
+        in.putExtra(Constants.POST_VIEW, homePresenter.getPostList().get(position).getPostId());
+        startActivity(in);
     }
 
     private void initData() {
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        posts = homePresenter.loadAllMyPost();
+        homePresenter.getLocalData();
+        homePresenter.loadAllMyPost();
     }
 
     @OnClick(R.id.btn_new_post)
@@ -112,5 +114,15 @@ public class HomeFragment
                             .dontTransform())
                     .into(userImage);
         }
+    }
+
+    @Override
+    public void onGetUserDataDone(User user) {
+        // get user data from server. do nothing. lol
+    }
+
+    @Override
+    public void onGetUserPostsDone() {
+        adapter.notifyDataSetChanged();
     }
 }

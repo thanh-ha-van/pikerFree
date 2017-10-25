@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.List;
 
@@ -66,24 +69,35 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         Post post = dataSet.get(position);
-        String linkFirstImages = Utils.getLinkImages(post).get(0);
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.file);
-        requestOptions.error(R.drawable.file);
-
-        Glide.with(this.mConText)
-                .setDefaultRequestOptions(requestOptions)
-                .load(linkFirstImages)
-                .into(holder.imgPostImage);
 
         holder.tvTitle.setText(post.getTitle());
         holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
         holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
         holder.tvStatus.setBackground(getDrawFromStatus(post.getStatus()));
-
+        FirebaseStorage
+                .getInstance()
+                .getReference()
+                .child("postImages")
+                .child(post.getPostId() + "")
+                .child("image_no_1.jpg").getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(mConText)
+                                .load(uri)
+                                .apply(new RequestOptions()
+                                        .placeholder(R.drawable.file)
+                                        .error(R.drawable.action_button_bg)
+                                        .centerCrop()
+                                        .dontAnimate()
+                                        .override(400, 300)
+                                        .dontTransform())
+                                .into(holder.imgPostImage);
+                    }
+                });
     }
 
     private String getTextFromStatus(int status) {

@@ -55,6 +55,7 @@
     <string name="delete_this">Delete</string>
     <string name="edit_this">Edit</string>
     <string name="requesting_user">Requesting users:</string>
+    <string name="no_requested_user">No requesting users found</string>
     <string name="send_request">Send request</string>
     <string name="meet_owner">Meet the owner</string>
     <string name="post_view">POST</string>

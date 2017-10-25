@@ -19,5 +19,6 @@ public class Constants {
     public static final String IS_FIRST_RUN = "is_first_run";
     public static final int STATUS_OPEN = 1;
     public static final int STATUS_CLOSE = 2;
+    public static final String POST_VIEW = "post_view";
 
 }

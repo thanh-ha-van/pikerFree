@@ -93,8 +93,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/circle_green"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_exclamation"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_noun"
                     android:tint="@color/green" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView

@@ -1,9 +1,11 @@
 package ha.thanh.pikerfree.fragments.home;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +25,7 @@ import ha.thanh.pikerfree.models.User;
  * Created by HaVan on 8/27/2017.
  */
 
-public class HomePresenter implements HomeInterface.RequiredPresenterOps {
+public class HomePresenter {
     private HomeInterface.RequiredViewOps mView;
     private HomeModel mModel;
     private Handler handler;
@@ -31,18 +33,46 @@ public class HomePresenter implements HomeInterface.RequiredPresenterOps {
     private StorageReference mStorageRef;
     private List<Post> postList;
 
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    private User user;
 
     HomePresenter(Context context, HomeInterface.RequiredViewOps mView) {
         this.mView = mView;
-        mModel = new HomeModel(context, this);
+        mModel = new HomeModel(context);
         handler = new Handler();
         postList = new ArrayList<>();
         mStorageRef = FirebaseStorage.getInstance().getReference().child("postImages");
         database = FirebaseDatabase.getInstance();
+
     }
 
-    public List<Post> loadAllMyPost() {
-        return mModel.loadAllMyPost();
+    void loadAllMyPost() {
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference userPref;
+                userPref = database
+                        .getReference("users")
+                        .child(mModel.getUserIdFromSharePf());
+                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        user = dataSnapshot.getValue(User.class);
+                        mView.onGetUserDataDone(user);
+                        getPostData(user.getPosts());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
     }
 
     public void getLocalData() {
@@ -53,18 +83,19 @@ public class HomePresenter implements HomeInterface.RequiredPresenterOps {
         mView.onLocalDataReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
     }
 
-    private void getPostData() {
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                DatabaseReference postPref;
-                postPref = database.getReference("posts");
-                postPref.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void getPostData(final ArrayList<Integer> posts) {
+        if (posts != null) {
+            for (int i = 0; i < posts.size(); i++) {
+                DatabaseReference postRef;
+                postRef = database
+                        .getReference("posts")
+                        .child(posts.get(i).toString());
+                postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        GenericTypeIndicator<List<Post>> genericTypeIndicator =new GenericTypeIndicator<List<Post>>(){};
-                        postList = dataSnapshot.getValue(genericTypeIndicator);
+                        postList.add(dataSnapshot.getValue(Post.class));
+                        mView.onGetUserPostsDone();
                     }
 
                     @Override
@@ -73,6 +104,6 @@ public class HomePresenter implements HomeInterface.RequiredPresenterOps {
                     }
                 });
             }
-        });
+        }
     }
 }
