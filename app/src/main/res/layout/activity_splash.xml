@@ -16,8 +16,8 @@
         android:tint="@color/colorAccent" />
 
     <com.wang.avi.AVLoadingIndicatorView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         app:indicatorColor="@color/colorAccent"
         app:indicatorName="BallClipRotatePulseIndicator" />
 

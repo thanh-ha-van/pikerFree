@@ -63,7 +63,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     public void saveEditing() {
         showDialog();
         profilePresenter.saveLocal(bitmap);
-        profilePresenter.saveAuthSetting(etUserName.getText().toString(), etUserAddress.getText().toString());
         profilePresenter.saveDatabaseSetting();
         profilePresenter.uploadFile(filePath);
     }

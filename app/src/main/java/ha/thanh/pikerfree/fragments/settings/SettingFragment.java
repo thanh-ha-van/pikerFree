@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 
 import ha.thanh.pikerfree.R;
 
-/**
- * Created by HaVan on 8/27/2017.
- */
 
-public class SettingFragment  extends Fragment {
+public class SettingFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

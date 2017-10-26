@@ -25,7 +25,7 @@ import ha.thanh.pikerfree.fragments.intro.IntroFragment4;
 import ha.thanh.pikerfree.fragments.intro.IntroFragment5;
 
 
-public class IntroActivity extends AppCompatActivity implements IntroInterface.RequiredViewOps {
+public class IntroActivity extends AppCompatActivity {
     @BindView(R.id.vp_intro)
     public ViewPager vpIntro;
     private List<Fragment> introFragments;
@@ -40,7 +40,6 @@ public class IntroActivity extends AppCompatActivity implements IntroInterface.R
 
     private ImageView[] dots;
     private int currentPosition = 0;
-    private IntroPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +48,6 @@ public class IntroActivity extends AppCompatActivity implements IntroInterface.R
         ButterKnife.bind(this);
         createData();
         initView();
-        mPresenter = new IntroPresenter(this, this);
     }
 
     @Override

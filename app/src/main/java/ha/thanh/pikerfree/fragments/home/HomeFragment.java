@@ -11,11 +11,8 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +25,6 @@ import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomTextView;
-import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 
 public class HomeFragment extends Fragment
@@ -41,6 +37,8 @@ public class HomeFragment extends Fragment
     CustomTextView tvUserAddress;
     @BindView(R.id.user_name)
     CustomTextView tvUserName;
+    @BindView(R.id.tv_loading_post)
+    CustomTextView tvLoadingPost;
     private HomePresenter homePresenter;
     PostAdapter adapter;
 
@@ -123,6 +121,7 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onGetUserPostsDone() {
+        tvLoadingPost.setText("All your post:");
         adapter.notifyDataSetChanged();
     }
 }

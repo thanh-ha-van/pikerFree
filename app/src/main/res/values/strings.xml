@@ -6,7 +6,6 @@
     <string name="text_quest">News</string>
     <string name="text_message">Message</string>
     <string name="text_setting">Setting</string>
-    <string name="back">Back</string>
     <!-- for intro messages -->
     <string name="intro_1">A wise man once said that "One man's trash is another man treasure"</string>
     <string name="intro_2">Some intro sentence</string>
@@ -16,13 +15,11 @@
     <string name="start">Start</string>
 
     <!-- dummy string. must be removed later -->
-    <string name="dummy_string">My old laptop still work fine but i just bough new one so i want to give away this old one. Please feel free to message me. Im ready to call at any time.</string>
     <string name="title_of_item_hint">Title of item &#8230;</string>
     <string name="short_description">A short description &#8230;</string>
 
     <!-- for login/out/ sign ... -->
     <string name="input_username">Username &#8230;</string>
-    <string name="input_phone">Phone number &#8230;</string>
     <string name="input_email">Email &#8230;</string>
     <string name="email">Password &#8230;</string>
     <string name="password_confirm">Confirm password &#8230;</string>
@@ -32,8 +29,6 @@
     <string name="dont_have_account">Don\'t have an account? just sign up</string>
     <string name="already_have_an_account">Already have an account? just log in</string>
     <string name="forgot_password">Forget password</string>
-    <string name="minimum_password">Password must be at least 6 characters</string>
-    <string name="auth_failed">Sorry! Auth failed.</string>
     <string name="reset_pass">Reset email</string>
 
     <!-- for status of post -->
@@ -64,14 +59,8 @@
 
     <!-- download and upload service-->
 
-    <string name="progress_downloading">Downloading &amp;</string>
     <string name="turn_network_on">Please turn on your internet connection</string>
-    <string name="progress_uploading">Uploading &#8230;</string>
-    <string name="progress_auth">Signing In &#8230;</string>
 
-    <string name="upload_success">Upload finished</string>
-    <string name="upload_failure">Upload failed</string>\
+    \
 
-    <string name="download_success">Download finished</string>
-    <string name="download_failure">Download failure</string>
 </resources>

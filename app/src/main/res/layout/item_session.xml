@@ -13,8 +13,9 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:padding="10dp"
-        android:textSize="16sp"
         android:text="Section"
-        android:textColor="@color/white" />
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </LinearLayout>

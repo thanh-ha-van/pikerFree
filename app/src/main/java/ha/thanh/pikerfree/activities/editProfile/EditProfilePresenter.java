@@ -11,13 +11,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,16 +26,13 @@ import java.io.IOException;
 import ha.thanh.pikerfree.models.User;
 
 
-class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps {
+class EditProfilePresenter {
 
     private EditProfileInterface.RequiredViewOps mView;
     private EditProfileModel mModel;
     private Context context;
 
     private StorageReference mStorageRef;
-    private FirebaseDatabase database;
-    private FirebaseAuth auth;
-    private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
 
     private User dataUser;
@@ -49,24 +41,19 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     private String userName;
     private String userAddress;
 
-    private boolean isTextChanged = false;
     private boolean isImagesChanged = false;
     private boolean isUploadDone = false;
     private boolean isUpdatedDatabase = false;
-    private boolean isUpdatedAuth = false;
 
     private Handler handler;
 
     EditProfilePresenter(Context context, EditProfileInterface.RequiredViewOps mView) {
         this.mView = mView;
         this.context = context;
-        mModel = new EditProfileModel(context, this);
-        auth = FirebaseAuth.getInstance();
+        mModel = new EditProfileModel(context);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("users").child(firebaseUser.getUid());
+        userId = mModel.getUserIdFromSharePf();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
         handler = new Handler();
         dataUser = new User();
         updateDataUser();
@@ -77,11 +64,10 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     }
 
 
-    public void getLocalData() {
+    void getLocalData() {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
         mView.onLocalDataReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
-        Log.e("editProfile", "got local infor:  Name" + userName  + " Address " + userAddress + " Path " + mModel.getLocalImageStringFromSharePf());
     }
 
     void addTextChangeListener(final EditText etUserName, final EditText etUserAddress) {
@@ -100,7 +86,6 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
             @Override
             public void afterTextChanged(Editable editable) {
-                isTextChanged = true;
                 userAddress = etUserAddress.getText().toString();
             }
         });
@@ -117,7 +102,6 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
             @Override
             public void afterTextChanged(Editable editable) {
-                isTextChanged = true;
                 userName = etUserName.getText().toString();
             }
         });
@@ -128,16 +112,17 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
             @Override
             public void run() {
                 updateDataUser();
-                databaseReference.setValue(dataUser);
+                databaseReference.child("avatarLink").setValue(dataUser.getAvatarLink());
+                databaseReference.child("address").setValue(dataUser.getAddress());
+                databaseReference.child("name").setValue(dataUser.getName());
                 isUpdatedDatabase = true;
-                Log.e("editProfile", "done save database to server");
                 checkIfCanHideDialog();
             }
         });
     }
 
     private void updateDataUser() {
-        dataUser.setId(firebaseUser.getUid());
+        dataUser.setId(userId);
         dataUser.setAvatarLink("userImages/" + userId + ".jpg");
         dataUser.setAddress(userAddress);
         dataUser.setName(userName);
@@ -149,57 +134,29 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
 
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
 
-        File mypath = new File(directory, "profile.jpg");
+        File myPath = new File(directory, "profile.jpg");
 
         FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
+            fos = new FileOutputStream(myPath);
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
                 fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
         }
-        mModel.saveLocal(userName, userAddress, mypath.getAbsolutePath());
-        Log.e("editProfile", " Done save local");
-    }
-
-    void saveAuthSetting(final String username, final String linkImages) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (isTextChanged) {
-                    if (auth != null) {
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(username)
-                                .setPhotoUri(Uri.parse(linkImages))
-                                .build();
-                        firebaseUser.updateProfile(profileUpdates)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            isUpdatedAuth = true;
-                                            checkIfCanHideDialog();
-                                            Log.e("editProfile", "done save auth");
-                                        }
-                                    }
-                                });
-                    }
-                }
-            }
-        });
+        mModel.saveLocal(userName, userAddress, myPath.getAbsolutePath());
     }
 
     void uploadFile(final Uri filePath) {
 
         if (!isImagesChanged) {
             isUploadDone = true;
+            checkIfCanHideDialog();
             return;
         }
         handler.post(new Runnable() {
@@ -214,7 +171,6 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     isUploadDone = true;
                                     checkIfCanHideDialog();
-                                    Log.e("editProfile", "done upload file to server");
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -232,7 +188,7 @@ class EditProfilePresenter implements EditProfileInterface.RequiredPresenterOps 
     }
 
     private void checkIfCanHideDialog() {
-        if (isUpdatedDatabase && isUpdatedAuth && isUploadDone)
+        if (isUpdatedDatabase && isUploadDone)
             mView.hideDialog();
     }
 }

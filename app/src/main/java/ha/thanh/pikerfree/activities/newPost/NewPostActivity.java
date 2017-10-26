@@ -1,6 +1,5 @@
 package ha.thanh.pikerfree.activities.newPost;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.TextView;
-
 
 import com.vlk.multimager.activities.GalleryActivity;
 import com.vlk.multimager.utils.Constants;
@@ -29,8 +27,7 @@ import ha.thanh.pikerfree.customviews.WaitingDialog;
 
 public class NewPostActivity extends AppCompatActivity
         implements NewPostInterface.RequiredViewOps,
-        ImagePickerAdapter.ItemClickListener, CustomAlertDialog.AlertListener{
-
+        ImagePickerAdapter.ItemClickListener, CustomAlertDialog.AlertListener {
 
     @BindView(R.id.rv_images)
     public RecyclerView recyclerViewImage;
@@ -95,6 +92,7 @@ public class NewPostActivity extends AppCompatActivity
         waitingDialog.showDialog();
         mPresenter.uploadPostToDatabase(tile, description, tvSelect.getText().toString());
     }
+
     @OnClick(R.id.tv_select)
     public void startSelectActivity() {
         Intent intent = new Intent(this, SelectCategoryActivity.class);

@@ -14,7 +14,4 @@ public interface SignUpInterface {
         void onDoneProcess();
 
     }
-
-    interface RequiredPresenterOps {
-    }
 }

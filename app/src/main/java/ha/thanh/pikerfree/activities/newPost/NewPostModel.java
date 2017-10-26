@@ -9,17 +9,15 @@ import ha.thanh.pikerfree.services.GPSTracker;
 
 public class NewPostModel {
 
-    private NewPostInterface.RequiredPresenterOps mPresenter;
     private GPSTracker gpsTracker;
-    NewPostModel(Context context, NewPostInterface.RequiredPresenterOps mPresenter) {
-        this.mPresenter = mPresenter;
+    NewPostModel(Context context) {
         this.gpsTracker = new GPSTracker(context);
     }
 
-    public double getUserLat() {
+     double getUserLat() {
         return  gpsTracker.getLatitude();
     }
-    public double getUserLng() {
+     double getUserLng() {
         return  gpsTracker.getLongitude();
     }
 

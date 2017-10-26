@@ -5,23 +5,16 @@ import android.content.SharedPreferences;
 
 import ha.thanh.pikerfree.constants.Constants;
 
-/**
- * Created by HaVan on 9/10/2017.
- */
-
-public class SignUpModel {
-    private SignUpInterface.RequiredPresenterOps mPresenter;
-    private Context mCon;
+class SignUpModel {
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
-    SignUpModel(Context context, SignUpInterface.RequiredPresenterOps mPresenter) {
-        this.mPresenter = mPresenter;
-        this.mCon =  context;
+
+    SignUpModel(Context context) {
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
     }
 
     void saveLocal(String username, String userId) {
+        SharedPreferences.Editor editor;
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, username);
         editor.putString(Constants.USER_ID, userId);

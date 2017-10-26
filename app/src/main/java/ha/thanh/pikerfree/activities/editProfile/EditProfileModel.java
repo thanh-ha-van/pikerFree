@@ -10,14 +10,12 @@ import ha.thanh.pikerfree.constants.Constants;
  */
 
 public class EditProfileModel {
-    private EditProfileInterface.RequiredPresenterOps mPresenterOpt;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    EditProfileModel(Context context, EditProfileInterface.RequiredPresenterOps presenterOpt) {
-        this.mPresenterOpt = presenterOpt;
-        sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
+    EditProfileModel(Context context) {
 
+        sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
     }
 
     String getUserNameStringFromSharePf() {
@@ -34,6 +32,9 @@ public class EditProfileModel {
         return sharedPreferences.getString(Constants.USER_PROFILE_PIC_PATH, "");
     }
 
+    String getUserIdFromSharePf() {
+        return sharedPreferences.getString(Constants.USER_ID, "");
+    }
      void saveLocal(String username, String userAddress, String path) {
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, username);

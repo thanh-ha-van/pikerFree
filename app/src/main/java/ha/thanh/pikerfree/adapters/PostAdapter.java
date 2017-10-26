@@ -114,9 +114,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     private Drawable getDrawFromStatus(int status) {
         switch (status) {
             case 1:
-                return mConText.getResources().getDrawable(R.drawable.plate_fill_green);
+                return mConText.getResources().getDrawable(R.drawable.plate_fill_green_small);
             case 2:
-                return mConText.getResources().getDrawable(R.drawable.plate_fill_orange);
+                return mConText.getResources().getDrawable(R.drawable.plate_fill_orrange_small);
             default:
                 return null;
         }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
 import java.io.File;
 import java.util.List;
 
@@ -35,8 +36,6 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
         ImageView imgItemImage;
         @BindView(R.id.text_uploading)
         TextView tvUploading;
-        @BindView(R.id.delete_button)
-        ImageView deleteButton;
 
         MyViewHolder(View view) {
             super(view);

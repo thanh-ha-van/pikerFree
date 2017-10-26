@@ -12,6 +12,7 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@color/colorAccent"
         android:textSize="14sp" />
 

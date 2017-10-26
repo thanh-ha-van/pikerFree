@@ -38,12 +38,12 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_requesting_user"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/orange"
-        android:text="@string/no_requested_user"/>
+        android:padding="10dp"
+        android:text="@string/no_requested_user"
+        android:textColor="@color/orange" />
 </LinearLayout>

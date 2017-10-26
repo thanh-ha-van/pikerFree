@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     @BindView(R.id.viewpager)
     ViewPager viewPager;
     private MenuItem prevMenuItem;
-    private MainPresenter mainPresenter;
     private HandlePermission handlePermission;
 
     @Override
@@ -38,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         handlePermission = new HandlePermission(this, this);
-        mainPresenter = new MainPresenter(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         viewPager.addOnPageChangeListener(onPageChangeListener);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(1);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        mainPresenter.saveConfig();
     }
 
     @Override

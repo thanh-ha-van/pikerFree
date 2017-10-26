@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
-    android:layout_margin="8dp"
+    android:layout_height="111dp"
     android:background="@drawable/plate_small_corner"
-    android:backgroundTint="@color/gray"
+    android:layout_margin="10dp"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/img_post_image"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_margin="5dp"
-        android:background="@color/white"
+        android:layout_width="144dp"
+        android:layout_height="111dp"
         android:scaleType="centerCrop" />
 
     <LinearLayout
@@ -20,43 +17,46 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingRight="16dp"
+        android:paddingEnd="6dp"
+        android:paddingStart="6dp"
         android:weightSum="4">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="6dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="1"
+            android:textAllCaps="true"
             android:textColor="@color/text_black_3"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_day"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="6dp"
             android:layout_weight="1"
-            android:ellipsize="end"
             android:gravity="center_vertical"
-            android:lines="4"
+            android:textAllCaps="true"
             android:textColor="@color/text_black_3"
             android:textSize="14sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_status"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/plate_small_corner"
-            android:backgroundTint="@color/green"
+            android:background="@drawable/plate_fill_green_small"
             android:ellipsize="end"
             android:gravity="center"
             android:lines="4"
+            android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

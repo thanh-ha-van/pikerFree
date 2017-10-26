@@ -29,11 +29,8 @@ import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
-/**
- * Created by HaVan on 8/23/2017.
- */
 
-public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
+class NewPostPresenter {
 
     private NewPostInterface.RequiredViewOps mView;
     private NewPostModel mModel;
@@ -60,7 +57,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         this.mView = mView;
         this.imagePostList = new ArrayList<>();
         imagePostList.add(new ImagePost("", true, "image_no_0"));
-        mModel = new NewPostModel(context, this);
+        mModel = new NewPostModel(context);
         handler = new Handler();
         dataUser = new User();
         postList = new ArrayList<>();
@@ -70,7 +67,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         getCurrentPostCount();
     }
 
-    public void startUploadImages() {
+    void startUploadImages() {
         if (imagePostList.size() >= 7) imagePostList.remove(6);
         imageCount--;
         for (int i = 0; i < imagePostList.size(); i++) {
@@ -78,7 +75,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         }
     }
 
-    public void addAllImage(ArrayList<Image> imagesList) {
+    void addAllImage(ArrayList<Image> imagesList) {
         for (int i = imageCount; i < imagesList.size(); i++) {
             imagePostList.add(
                     new ImagePost(imagesList.get(i).imagePath,
@@ -90,13 +87,12 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
 
     }
 
-    public void uploadPostToDatabase(String title, String description, String category) {
+    void uploadPostToDatabase(String title, String description, String category) {
         isUpdatedPostDatabase = false;
         isUpdatedUserDatabase = false;
         getCurrentUser();
         createPost(title, description, category);
         uploadPostData();
-        updateUserData();
         updateCurrentPostCount();
     }
 
@@ -117,6 +113,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
                             postList = dataUser.getPosts();
                         postList.add(postCount);
                         dataUser.setPosts(postList);
+                        updateUserData();
                     }
 
                     @Override
@@ -163,7 +160,6 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
                     userPref = database.getReference("users").child(firebaseUser.getUid());
                     userPref.setValue(dataUser);
                     isUpdatedUserDatabase = true;
-                    Log.e("thanh", "done save database user to server");
                     checkIfCanHideDialog();
                 } else {
                     handler.postDelayed(this, 100);
@@ -172,29 +168,19 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         });
     }
 
-    public List<ImagePost> getItemList() {
+    List<ImagePost> getItemList() {
         return imagePostList;
     }
 
-    @Override
-    public void onSaveLocalDone() {
 
-    }
-
-    @Override
-    public void onSaveLocalFail(String error) {
-
-    }
-
-
-    public void upLoadSingleImage(final ImagePost imagePost) {
+    private void upLoadSingleImage(final ImagePost imagePost) {
         handler.post(new Runnable() {
             @Override
             public void run() {
                 if (imagePost.getPathLocal() != null) {
                     Uri file = Uri.fromFile(new File(imagePost.getPathLocal()));
                     StorageReference riversRef
-                            = mStorageRef.child( String.valueOf(postCount + 1) + "/" + imagePost.getName());
+                            = mStorageRef.child(String.valueOf(postCount + 1) + "/" + imagePost.getName());
                     riversRef.putFile(file)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -228,7 +214,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
             mView.onPostDone();
     }
 
-    public void getCurrentPostCount() {
+    private void getCurrentPostCount() {
         DatabaseReference postCountRef;
         postCountRef = database.getReference().child("postCount");
         eventListener = new ValueEventListener() {
@@ -249,7 +235,7 @@ public class NewPostPresenter implements NewPostInterface.RequiredPresenterOps {
         else postCountRef.removeEventListener(eventListener);
     }
 
-    public void updateCurrentPostCount() {
+    private void updateCurrentPostCount() {
         DatabaseReference postCountRef;
         postCount++;
         postCountRef = database.getReference().child("postCount");

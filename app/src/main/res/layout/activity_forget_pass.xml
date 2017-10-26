@@ -20,7 +20,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/we_need_email"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText

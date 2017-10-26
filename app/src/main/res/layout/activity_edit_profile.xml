@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:padding="8dp"
+        android:padding="4dp"
         android:text="Your name:"
         android:textAlignment="center"
         android:textColor="@color/text_black_3"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:padding="8dp"
+        android:padding="4dp"
         android:text="Your Address:"
         android:textAlignment="center"
         android:textColor="@color/text_black_3"
@@ -100,12 +100,14 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_save"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/plate_fill_green"
+            android:layout_margin="10dp"
+            android:background="@drawable/plate_fill_green_small"
             android:gravity="center"
             android:text="Save"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>

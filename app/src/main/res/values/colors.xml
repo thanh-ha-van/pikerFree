@@ -2,22 +2,21 @@
 <resources>
     <color name="colorPrimary">#4299E9</color>
     <color name="colorPrimaryDark">#0D1D1C</color>
-    <color name="colorAccent">#208CB2</color>
-    <color name="colorAccentShade">#A0208CB2</color>
+    <color name="colorAccent">#0b2938</color>
+    <color name="colorAccentShade">#A00b2938</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#E0E0E0</color>
     <color name="shade">#A0FFFFFF</color>
-    <color name="shade_black">#40000000</color>
     <color name="gray_2">#C2C2C2</color>
     <color name="text_black_3">#606060</color>
-    <color name="text_black_2">#303030</color>
-    <color name="text_black">#202020</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="green">#31781f</color>
+    <color name="greenShade">#A031781f</color>
+    <color name="green_light">#d031781f</color>
     <color name="orange">#EC5D10</color><!--#-->
     <color name="colorOrangeShade">#80EC5D10</color><!--#-->
-    <color name="colorDeepSaffron">#4299E9</color> <!--#FFA726-->
-    <color name="colorGamboge">#C2C2C2</color> <!--#FFA726-->
+    <!--#FFA726-->
+    <!--#FFA726-->
     <color name="colorRobinEggBlue">#4299E9</color>
     <color name="red">#DC0F06</color>
 </resources>

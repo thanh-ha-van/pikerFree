@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Wait for it ..."
+        android:text="Loading..."
         android:textAlignment="center"
         android:textColor="@color/white" />
 

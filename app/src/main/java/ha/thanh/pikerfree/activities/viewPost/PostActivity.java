@@ -128,8 +128,8 @@ public class PostActivity extends AppCompatActivity implements
         Intent in = getIntent();
         int postID = in.getIntExtra(Constants.POST_VIEW, 1);
         mPresenter = new PostPresenter(this, this);
-        mPresenter.getPostData(postID+"");
-        mPresenter.getImageLinksFromId(postID+"");
+        mPresenter.getPostData(postID + "");
+        mPresenter.getImageLinksFromId(postID + "");
     }
 
     private void initView() {

@@ -1,24 +1,10 @@
 package ha.thanh.pikerfree.activities.signup;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +14,6 @@ import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.User;
 
 public class SignUpActivity extends AppCompatActivity implements SignUpInterface.RequiredViewOps {
 

@@ -56,7 +56,7 @@
             android:id="@+id/btn_ok_dialog"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:background="@drawable/plate_brown_shade"
+            android:background="@drawable/plate_green_shade"
             android:gravity="center"
             android:text="OK"
             android:textColor="@color/white"

@@ -13,26 +13,14 @@
         android:background="@drawable/file"
         android:scaleType="centerCrop" />
 
-    <ImageView
-        android:id="@+id/delete_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/circle_shade_red"
-        android:padding="10dp"
-        android:src="@drawable/ic_error"
-        android:tint="@color/red"
-        android:visibility="gone" />
-
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/text_uploading"
         android:layout_width="80dp"
         android:layout_height="20dp"
-        android:layout_below="@+id/delete_button"
-        android:layout_toEndOf="@+id/delete_button"
-        android:background="@drawable/plate_shade"
+        android:background="@drawable/plate_brown_shade"
         android:gravity="center"
         android:text="Uploading..."
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_item_image"
         app:layout_constraintLeft_toLeftOf="@+id/img_item_image"

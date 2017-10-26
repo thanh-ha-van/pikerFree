@@ -16,11 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import ha.thanh.pikerfree.models.User;
 
-/**
- * Created by HaVan on 9/10/2017.
- */
-
-public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
+class SignUpPresenter {
 
     private SignUpInterface.RequiredViewOps mView;
     private SignUpModel mModel;
@@ -32,7 +28,7 @@ public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
     SignUpPresenter(Activity context, SignUpInterface.RequiredViewOps mView) {
         this.mView = mView;
         this.activity = context;
-        mModel = new SignUpModel(context, this);
+        mModel = new SignUpModel(context);
         auth = FirebaseAuth.getInstance();
     }
 
@@ -60,11 +56,11 @@ public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
                 });
     }
 
-    public void saveDataLocal(String userName, String userId) {
+    private void saveDataLocal(String userName, String userId) {
         mModel.saveLocal(userName, userId);
     }
 
-    public void getCurrentUser(String userName, String email) {
+    private void getCurrentUser(String userName, String email) {
         // get Firebase user and convert to dataUser to push to database
         firebaseUser = auth.getCurrentUser();
         dataUser = new User();
@@ -73,7 +69,7 @@ public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
         dataUser.setId(firebaseUser.getUid());
     }
 
-    public void updateDataBase() {
+    private void updateDataBase() {
         // update to database;
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("users");
@@ -82,7 +78,7 @@ public class SignUpPresenter implements SignUpInterface.RequiredPresenterOps {
         mView.onDoneProcess();
     }
 
-    public void updateUserDataToServer(String userName) {
+    private void updateUserDataToServer(String userName) {
 
         // update Auth data
         if (auth != null) {
