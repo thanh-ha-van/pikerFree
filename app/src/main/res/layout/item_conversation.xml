@@ -32,15 +32,31 @@
             android:orientation="vertical"
             android:weightSum="3">
 
-            <ha.thanh.pikerfree.customviews.CustomTextView
-                android:id="@+id/tv_userName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:text="Thanh Ha Van"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:id="@+id/tv_userName"
+                    android:layout_width="0dp"
+                    android:layout_height="22dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Thanh Ha Van"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="10/27/2017"
+                    android:textColor="@color/text_black_3"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/tv_last_mess"

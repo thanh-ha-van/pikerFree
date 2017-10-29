@@ -17,6 +17,7 @@ import ha.thanh.pikerfree.models.User;
 
 
 class HomePresenter {
+
     private HomeInterface.RequiredViewOps mView;
     private HomeModel mModel;
     private Handler handler;
@@ -39,7 +40,7 @@ class HomePresenter {
     }
 
     void loadAllMyPost() {
-
+        postList.removeAll(getPostList());
         handler.post(new Runnable() {
             @Override
             public void run() {

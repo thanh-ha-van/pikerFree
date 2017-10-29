@@ -39,6 +39,8 @@ public class HomeFragment extends Fragment
     CustomTextView tvUserName;
     @BindView(R.id.tv_loading_post)
     CustomTextView tvLoadingPost;
+    @BindView(R.id.tv_no_data)
+    CustomTextView tvNoData;
     private HomePresenter homePresenter;
     PostAdapter adapter;
 
@@ -78,7 +80,6 @@ public class HomeFragment extends Fragment
 
     private void initData() {
         homePresenter.getLocalData();
-        homePresenter.loadAllMyPost();
     }
 
     @OnClick(R.id.btn_new_post)
@@ -94,6 +95,7 @@ public class HomeFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        homePresenter.loadAllMyPost();
     }
 
     @Override
@@ -121,7 +123,9 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onGetUserPostsDone() {
-        tvLoadingPost.setText("All your post:");
+        rvPost.setVisibility(View.VISIBLE);
+        tvNoData.setVisibility(View.GONE);
+        tvLoadingPost.setText("Your posts");
         adapter.notifyDataSetChanged();
     }
 }

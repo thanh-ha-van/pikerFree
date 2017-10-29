@@ -139,7 +139,7 @@ class PostPresenter {
             }
         }
         DatabaseReference userPost;
-        userPost = database.getReference("users").child("" + dataUser.getId()).child("post");
+        userPost = database.getReference("users").child("" + dataUser.getId()).child("posts");
         userPost.setValue(posts);
 
         mView.onDeleteDone();

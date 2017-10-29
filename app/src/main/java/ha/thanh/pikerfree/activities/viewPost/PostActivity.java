@@ -20,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
@@ -180,6 +181,8 @@ public class PostActivity extends AppCompatActivity implements
     public void onMapReady(GoogleMap googleMap) {
 
         this.googleMap = googleMap;
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(
+                this, R.raw.mapstyle_night));
     }
 
     @Override

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:background="@drawable/circle_green"
             android:padding="5dp"
             android:src="@drawable/ic_like"
-            android:tint="@color/green" />
+            android:tint="@color/gray" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:text="@string/requesting_user"
-            android:textColor="@color/green"
+            android:textColor="@color/gray"
             android:textSize="14sp" />
     </LinearLayout>
 

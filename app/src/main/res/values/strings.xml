@@ -15,7 +15,7 @@
     <string name="start">Start</string>
 
     <!-- dummy string. must be removed later -->
-    <string name="title_of_item_hint">Title of item &#8230;</string>
+    <string name="title_of_item_hint">Title&#8230;</string>
     <string name="short_description">A short description &#8230;</string>
 
     <!-- for login/out/ sign ... -->

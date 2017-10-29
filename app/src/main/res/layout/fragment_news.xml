@@ -2,38 +2,284 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
         android:orientation="vertical">
 
-        <ha.thanh.pikerfree.customviews.CustomTextView
+        <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/tv_loading_post"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:background="@color/white"
+            android:layout_height="54dp"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center"
-            android:text="Loading new posts..."
+            android:hint="Search for post..."
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
             android:textSize="14sp" />
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="Categories"
+            android:textAllCaps="true"
+            android:textColor="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
+            android:layout_height="100dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Accessories"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_menu"
+                    android:tint="@color/gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Baby and toys"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_baby_trolley"
+                    android:tint="@color/gray" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_my_post"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray" />
+            android:layout_height="100dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Cloths"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_coat"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Electronics"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_electronic"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Groceries"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_shopping_basket"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Home and living"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_home"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Pets"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_rabbit"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:gravity="center"
+                    android:text="Others"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_more"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>

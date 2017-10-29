@@ -2,10 +2,9 @@
 
 <resources>
     <string-array name="Section">
-
         <item>Accessories</item>
-        <item>Baby stuffs</item>
-        <item>Cloths</item>
+        <item>Baby and toys</item>
+        <item>Fashion</item>
         <item>Electronics</item>
         <item>Groceries</item>
         <item>Home - Living</item>
@@ -56,7 +55,6 @@
     </string-array>
 
     <string-array name="HomeLiving">
-
         <item>Air Conditioners</item>
         <item>Bedding Sets</item>
         <item>Home Decor</item>
@@ -80,7 +78,7 @@
     </string-array>
     <string-array name="Others">
         <item>Books</item>
-        <item>non-material</item>
+        <item>Non-material</item>
         <item>Gears</item>
         <item>Bikes</item>
         <item>Motor</item>

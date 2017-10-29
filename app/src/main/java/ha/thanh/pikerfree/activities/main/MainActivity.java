@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         ButterKnife.bind(this);
         handlePermission = new HandlePermission(this, this);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         viewPager.addOnPageChangeListener(onPageChangeListener);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(1);

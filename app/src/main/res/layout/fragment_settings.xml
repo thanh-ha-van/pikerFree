@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:overScrollMode="never">
 
     <LinearLayout
@@ -9,45 +10,181 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="30dp"
+            android:src="@drawable/piker"
+            android:tint="@color/gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="2dp">
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Manage account"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/about_team"
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:padding="5dp"
-                android:background="@drawable/bg_circle_check"
-                android:src="@drawable/ic_like">
-
-            </ImageView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:weightSum="3">
-
-                <ha.thanh.pikerfree.customviews.CustomTextView
-                    android:id="@+id/tv_userName"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:text="Thanh Ha Van"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/gray" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Privacy and term"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/gray" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Notification"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <Switch
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:shadowColor="@color/gray" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="About"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/gray" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Help"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/gray" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Log out"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_right_arrow"
+                android:tint="@color/gray" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorAccent" />
+
 
     </LinearLayout>
 
