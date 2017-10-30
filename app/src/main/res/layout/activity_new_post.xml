@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorAccent"
         android:gravity="center">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/new_post"
-            android:textColor="@color/gray"
+            android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -42,36 +42,37 @@
                 android:id="@+id/et_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/plate_small_corner"
                 android:hint="@string/title_of_item_hint"
-                android:maxLines="1"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
+                android:singleLine="true"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
                 android:textColor="@color/gray"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
                 android:textSize="18sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_images"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
                 android:background="@drawable/plate_small_corner" />
 
             <ha.thanh.pikerfree.customviews.CustomEditText
                 android:id="@+id/et_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/plate_small_corner"
                 android:gravity="top"
                 android:hint="@string/short_description"
                 android:inputType="textMultiLine"
                 android:padding="@dimen/item_padding_small"
                 android:textColor="@color/gray"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/white"
                 android:textSize="16sp" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
@@ -80,14 +81,13 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:background="@drawable/plate_small_corner"
+                android:background="@drawable/plate"
                 android:gravity="center"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:text="Select a category"
                 android:textAllCaps="true"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
@@ -96,12 +96,11 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:background="@drawable/plate_small_corner"
+                android:background="@drawable/plate"
                 android:gravity="center"
                 android:text="@string/post"
                 android:textAllCaps="true"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>

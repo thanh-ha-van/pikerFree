@@ -102,13 +102,13 @@
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/plate_small_corner"
+            android:layout_margin="20dp"
+            android:background="@drawable/plate"
             android:gravity="center"
             android:text="Save"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

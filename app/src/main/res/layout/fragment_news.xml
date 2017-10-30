@@ -15,11 +15,11 @@
             android:id="@+id/tv_loading_post"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorAccent"
             android:gravity="center"
             android:hint="Search for post..."
-            android:textColorHint="@color/gray"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="14sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="Categories"
             android:textAllCaps="true"
-            android:textColor="@color/gray" />
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                     android:gravity="center"
                     android:text="Accessories"
                     android:textAllCaps="true"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="13sp" />
 
                 <ImageView
@@ -62,8 +62,8 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
-                    android:src="@drawable/ic_menu"
-                    android:tint="@color/gray" />
+                    android:src="@drawable/ic_cube"
+                    android:tint="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,7 +79,7 @@
                     android:gravity="center"
                     android:text="Baby and toys"
                     android:textAllCaps="true"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="13sp" />
 
                 <ImageView
@@ -89,7 +89,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_baby_trolley"
-                    android:tint="@color/gray" />
+                    android:tint="@color/white" />
             </LinearLayout>
 
         </LinearLayout>

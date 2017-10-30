@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorAccent"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_gravity="center"
-                android:background="@color/white" />
+                android:background="@color/colorAccent" />
 
             <include
                 layout="@layout/view_post_infor"
@@ -82,7 +82,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:background="@color/gray_2" />
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="2dp"
                     android:src="@drawable/ic_noun"
-                    android:tint="@color/gray" />
+                    android:tint="@color/white" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_meet_owner"
@@ -107,7 +107,7 @@
                     android:paddingEnd="10dp"
                     android:paddingStart="10dp"
                     android:text="@string/meet_owner"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -179,13 +179,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/gray_2" />
+        android:background="@color/gray" />
 
     <LinearLayout
         android:id="@+id/view_bottom_action"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="5dp"
+        android:layout_height="46dp"
         android:background="@color/colorAccent"
         android:orientation="horizontal">
 
@@ -195,7 +194,6 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/chat"
             android:textAllCaps="true"
@@ -208,7 +206,6 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/send_request"
             android:textAllCaps="true"

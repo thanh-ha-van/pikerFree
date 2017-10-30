@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorAccent">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
@@ -51,45 +51,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorAccent" />
+        android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_new_post"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
             android:layout_weight="1"
-            android:background="@drawable/plate_small_corner"
             android:gravity="center"
             android:text="New post"
             android:textAllCaps="true"
-            android:textColor="@color/gray"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_edit_profile"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
             android:layout_weight="1"
-            android:background="@drawable/plate_small_corner"
             android:gravity="center"
             android:text="Edit profile"
             android:textAllCaps="true"
-            android:textColor="@color/gray"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorAccent" />
+        android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -102,14 +98,9 @@
             android:layout_height="24dp"
             android:background="@color/colorAccent"
             android:gravity="center"
-            android:textColor="@color/white"
             android:text="Syncing data..."
+            android:textColor="@color/white"
             android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/colorAccent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,8 +122,8 @@
                 android:layout_height="300dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/gray"
-                android:text="You have no post yet" />
+                android:text="You have no post yet"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

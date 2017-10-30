@@ -16,13 +16,13 @@
 
     <!-- dummy string. must be removed later -->
     <string name="title_of_item_hint">Title&#8230;</string>
-    <string name="short_description">A short description &#8230;</string>
+    <string name="short_description">Description&#8230;</string>
 
     <!-- for login/out/ sign ... -->
-    <string name="input_username">Username &#8230;</string>
-    <string name="input_email">Email &#8230;</string>
-    <string name="email">Password &#8230;</string>
-    <string name="password_confirm">Confirm password &#8230;</string>
+    <string name="input_username">Username&#8230;</string>
+    <string name="input_email">Email&#8230;</string>
+    <string name="email">Password&#8230;</string>
+    <string name="password_confirm">Confirm password&#8230;</string>
     <string name="login">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="we_need_email">We just need your registered email to send your email reset instructions.</string>
@@ -50,7 +50,7 @@
     <string name="delete_this">Delete</string>
     <string name="edit_this">Edit</string>
     <string name="requesting_user">Requesting users:</string>
-    <string name="no_requested_user">No requesting users found</string>
+    <string name="no_requested_user">No requesting users</string>
     <string name="send_request">Send request</string>
     <string name="meet_owner">Meet the owner</string>
     <string name="post_view">POST</string>

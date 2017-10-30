@@ -17,7 +17,7 @@
             android:background="@drawable/circle_green"
             android:padding="5dp"
             android:src="@drawable/ic_like"
-            android:tint="@color/gray" />
+            android:tint="@color/white" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"
@@ -25,16 +25,9 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:text="@string/requesting_user"
-            android:textColor="@color/gray"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:background="@color/gray_2" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_requesting_user"
@@ -44,7 +37,9 @@
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="10dp"
         android:text="@string/no_requested_user"
         android:textColor="@color/orange" />
+
 </LinearLayout>

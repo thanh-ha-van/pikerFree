@@ -20,8 +20,12 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/we_need_email"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_email_reset"
@@ -32,18 +36,25 @@
             android:hint="@string/input_email"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_reset"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/plate_brown_shade"
+            android:layout_margin="8dp"
+            android:background="@drawable/plate"
             android:gravity="center"
             android:text="@string/reset_pass"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

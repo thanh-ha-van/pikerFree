@@ -11,23 +11,21 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="0dp"
         android:src="@drawable/piker"
-        android:tint="@color/colorAccent" />
+        android:tint="@color/gray" />
 
-    <com.wang.avi.AVLoadingIndicatorView
+    <View
         android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:indicatorColor="@color/colorAccent"
-        app:indicatorName="BallClipRotatePulseIndicator" />
+        android:layout_height="70dp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/tv_network_error"
         android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:textSize="14sp"
+        android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textColor="@color/red"
-        android:layout_height="wrap_content" />
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="14sp" />
 
 </LinearLayout>
