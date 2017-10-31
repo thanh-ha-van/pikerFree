@@ -23,7 +23,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activities.splash.SplashActivity" >
+        <activity android:name=".activities.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,10 +38,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.newPost.NewPostActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activities.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -55,13 +52,10 @@
             android:name=".activities.forgetPassword.ForgetPassActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.selectCategory.SelectCategoryActivity" />
-        <activity android:name=".activities.viewPost.PostActivity">
-
-        </activity>
+        <activity android:name=".activities.viewPost.PostActivity"></activity>
         <activity android:name=".activities.editPost.EditPostActivity" />
-        <activity android:name=".activities.conversation.ConActivity">
-
-        </activity>
+        <activity android:name=".activities.conversation.ConActivity"></activity>
+        <activity android:name=".activities.viewCategory.ViewCategoryActivity"></activity>
     </application>
 
 </manifest>

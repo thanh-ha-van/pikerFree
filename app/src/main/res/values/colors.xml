@@ -18,6 +18,6 @@
     <color name="colorOrangeShade">#80EC5D10</color><!--#-->
     <!--#FFA726-->
     <!--#FFA726-->
-    <color name="colorRobinEggBlue">#4299E9</color>
+    <color name="GrayScale">#74898B</color>
     <color name="red">#DC0F06</color>
 </resources>

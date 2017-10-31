@@ -23,7 +23,7 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="@string/intro_5"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/gray"
             android:textSize="18sp"
             app:font="Trebuchet.ttf" />
     </LinearLayout>
@@ -33,7 +33,7 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="@drawable/plate_brown_shade"
+        android:background="@drawable/plate_shade"
         android:gravity="center"
         android:text="@string/start"
         android:textAllCaps="false"
