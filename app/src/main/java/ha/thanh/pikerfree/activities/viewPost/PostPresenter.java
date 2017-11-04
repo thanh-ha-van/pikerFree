@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -66,6 +67,28 @@ class PostPresenter {
         dataUser = new User();
         post = new Post();
         handler = new Handler();
+    }
+    String getTextFromIntCategory(int intput) {
+        switch (intput) {
+            case Constants.CATE_ACCESSORY:
+                return "ACCESSORIES";
+            case Constants.CATE_BABY:
+                return "BABY AND TOYS";
+            case Constants.CATE_ELECTRONIC:
+                return "ELECTRONIC";
+            case Constants.CATE_FASHION:
+                return "FASHION";
+            case Constants.CATE_GROCERY:
+                return "GROCERIES";
+            case Constants.CATE_HOME:
+                return "HOME AND STUFFS";
+            case Constants.CATE_OTHER:
+                return "OTHERS";
+            case Constants.CATE_PET:
+                return "PETS";
+            default:
+                return "OTHERS";
+        }
     }
 
     void getPostData(final String postId) {

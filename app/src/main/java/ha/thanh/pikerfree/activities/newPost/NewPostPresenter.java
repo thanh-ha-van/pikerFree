@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.ImagePost;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
@@ -51,6 +52,7 @@ class NewPostPresenter {
     private boolean isGetDataUser = false;
     private boolean isGetPostCount = false;
     private ArrayList<Integer> postList;
+    private int selectedCategory = 8;
 
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
 
@@ -75,6 +77,30 @@ class NewPostPresenter {
         }
     }
 
+     String getTextFromIntCategory(int intput) {
+        selectedCategory = intput;
+        switch (intput) {
+            case Constants.CATE_ACCESSORY:
+                return "ACCESSORIES";
+            case Constants.CATE_BABY:
+                return "BABY AND TOYS";
+            case Constants.CATE_ELECTRONIC:
+                return "ELECTRONIC";
+            case Constants.CATE_FASHION:
+                return "FASHION";
+            case Constants.CATE_GROCERY:
+                return "GROCERIES";
+            case Constants.CATE_HOME:
+                return "HOME AND STUFFS";
+            case Constants.CATE_OTHER:
+                return "OTHERS";
+            case Constants.CATE_PET:
+                return "PETS";
+            default:
+                return "OTHERS";
+        }
+    }
+
     void addAllImage(ArrayList<Image> imagesList) {
         for (int i = imageCount; i < imagesList.size(); i++) {
             imagePostList.add(
@@ -87,11 +113,11 @@ class NewPostPresenter {
 
     }
 
-    void uploadPostToDatabase(String title, String description, String category) {
+    void uploadPostToDatabase(String title, String description) {
         isUpdatedPostDatabase = false;
         isUpdatedUserDatabase = false;
         getCurrentUser();
-        createPost(title, description, category);
+        createPost(title, description, selectedCategory);
         uploadPostData();
         updateCurrentPostCount();
     }
@@ -125,7 +151,7 @@ class NewPostPresenter {
         });
     }
 
-    private void createPost(String title, String description, String category) {
+    private void createPost(String title, String description, int category) {
         post = new Post();
         post.setTitle(title);
         post.setDescription(description);

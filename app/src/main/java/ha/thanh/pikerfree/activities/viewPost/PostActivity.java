@@ -68,6 +68,8 @@ public class PostActivity extends AppCompatActivity implements
     CustomTextView chatToOwner;
     @BindView(R.id.tv_send_request)
     CustomTextView sendRequest;
+    @BindView(R.id.tv_post_category)
+    CustomTextView tvCategory;
 
     @BindView(R.id.view_owner)
     View ownerView;
@@ -194,6 +196,7 @@ public class PostActivity extends AppCompatActivity implements
         distance.setText(mPresenter.getDistance());
         waitingDialog.hideDialog();
         postStatus.setText(mPresenter.getStatus());
+        tvCategory.setText(mPresenter.getTextFromIntCategory(post.getCategory()));
         updateMap(post.getLat(), post.getLng());
     }
 

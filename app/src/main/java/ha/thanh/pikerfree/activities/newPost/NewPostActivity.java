@@ -90,7 +90,7 @@ public class NewPostActivity extends AppCompatActivity
             return;
         }
         waitingDialog.showDialog();
-        mPresenter.uploadPostToDatabase(tile, description, tvSelect.getText().toString());
+        mPresenter.uploadPostToDatabase(tile, description );
     }
 
     @OnClick(R.id.tv_select)
@@ -137,8 +137,8 @@ public class NewPostActivity extends AppCompatActivity
                 mPresenter.startUploadImages();
                 break;
             case SELECT_CODE:
-                String selected = data.getStringExtra("selected");
-                tvSelect.setText(selected);
+                int selected = data.getIntExtra("selected", 8);
+                tvSelect.setText(mPresenter.getTextFromIntCategory(selected));
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

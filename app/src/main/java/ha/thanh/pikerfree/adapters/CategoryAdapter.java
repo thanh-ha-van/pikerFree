@@ -2,112 +2,68 @@ package ha.thanh.pikerfree.adapters;
 
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Filter;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.customviews.CustomTextView;
-import ha.thanh.pikerfree.models.categoryItem.Item;
 
-public class CategoryAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<Item> item;
-    private ArrayList<Item> originalItem;
-    private ItemClickListener listener;
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+    private String[] dataSet;
+    private ItemClickListener mClickListener;
 
-    public CategoryAdapter(Context context, ArrayList<Item> item, ItemClickListener listener ) {
-        this.context = context;
-        this.item = item;
-        this.listener = listener;
+
+    public CategoryAdapter(Context context, ItemClickListener listener) {
+        this.dataSet = context.getResources().getStringArray(R.array.Section);
+        this.mClickListener = listener;
     }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+
+        @BindView(R.id.tvSectionTitle)
+        TextView tvTitle;
+
+
+        MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            if (mClickListener != null) {
+                mClickListener.onItemClick(getAdapterPosition());
+            }
+        }
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_session, parent, false);
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
+        holder.tvTitle.setText(dataSet[position]);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataSet.length;
+    }
+
     public interface ItemClickListener {
         void onItemClick(int position);
-    }
-
-    @Override
-    public int getCount() {
-        return item.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return item.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (item.get(position).isSection()) {
-
-            convertView = inflater.inflate(R.layout.item_session, parent, false);
-            CustomTextView tvSectionTitle = (CustomTextView) convertView.findViewById(R.id.tvSectionTitle);
-            tvSectionTitle.setText(item.get(position).getTitle());
-        } else {
-            // if item
-            convertView = inflater.inflate(R.layout.item_entry, parent, false);
-            CustomTextView tvItemTitle = (CustomTextView) convertView.findViewById(R.id.tvItemTitle);
-            tvItemTitle.setText(item.get(position).getTitle());
-        }
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClick(position);
-            }
-        });
-        return convertView;
-    }
-
-
-    public Filter getFilter() {
-        return new Filter() {
-            @SuppressWarnings("unchecked")
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-                item = (ArrayList<Item>) results.values;
-                notifyDataSetChanged();
-            }
-
-            @SuppressWarnings("null")
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-
-                FilterResults results = new FilterResults();
-                ArrayList<Item> filteredArrayList = new ArrayList<>();
-
-
-                if (originalItem == null || originalItem.size() == 0) {
-                    originalItem = new ArrayList<>(item);
-                }
-
-                if (constraint == null && constraint.length() == 0) {
-                    results.count = originalItem.size();
-                    results.values = originalItem;
-                } else {
-                    constraint = constraint.toString().toLowerCase(Locale.ENGLISH);
-                    for (int i = 0; i < originalItem.size(); i++) {
-                        String title = originalItem.get(i).getTitle().toLowerCase(Locale.ENGLISH);
-                        if (title.startsWith(constraint.toString())) {
-                            filteredArrayList.add(originalItem.get(i));
-                        }
-                    }
-                    results.count = filteredArrayList.size();
-                    results.values = filteredArrayList;
-                }
-
-                return results;
-            }
-        };
     }
 }

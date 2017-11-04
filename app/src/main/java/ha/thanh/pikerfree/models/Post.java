@@ -24,13 +24,13 @@ public class Post {
     private double lat = 0;
     private double lng = 0;
     private long timePosted;
-    private String category = "Unknown";
+    private int category = 8;
 
     public Post() {
     }
 
 
-    public Post(int postId, String title, String description, String ownerId, double lat, double lng, long timePosted, String category) {
+    public Post(int postId, String title, String description, String ownerId, double lat, double lng, long timePosted, int category) {
         this.postId = postId;
         this.title = title;
         this.description = description;
@@ -113,11 +113,11 @@ public class Post {
         this.timePosted = timePosted;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 }

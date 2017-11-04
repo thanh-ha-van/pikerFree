@@ -4,18 +4,30 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.services.GPSTracker;
 
-/**
- * Created by HaVan on 10/31/2017.
- */
 
-public class ViewCategoryModel {
-    private Context context;
+class ViewCategoryModel {
+
+    private GPSTracker gpsTracker;
     private SharedPreferences sharedPreferences;
+    private ViewCategoryInterface.PresenterOpt presenterOpt;
 
-    public ViewCategoryModel(Context context) {
-        this.context = context;
+    ViewCategoryModel(Context context, ViewCategoryInterface.PresenterOpt presenterOpt) {
+        this.gpsTracker = new GPSTracker(context);
+        this. presenterOpt = presenterOpt;
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
     }
 
+    String getUserIdFromSharePref() {
+        return sharedPreferences.getString(Constants.USER_ID, "");
+
+    }
+
+    double getUserLat() {
+        return  gpsTracker.getLatitude();
+    }
+    double getUserLng() {
+        return  gpsTracker.getLongitude();
+    }
 }

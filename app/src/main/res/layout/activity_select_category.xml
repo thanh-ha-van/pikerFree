@@ -1,30 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical"
-    android:layout_margin="16dp">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:layout_margin="24dp"
+    android:background="@color/transparent"
+    android:orientation="vertical">
 
-    <ha.thanh.pikerfree.customviews.CustomEditText
-        android:id="@+id/edtSearch"
+    <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/plate_small_corner"
-        android:gravity="center_vertical"
-        android:hint="@string/search"
-        android:padding="8dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="SELECT A CATEGORY"
+        android:textColor="@color/white" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lv_session"
         android:layout_width="match_parent"
-        android:scrollIndicators="none"
         android:layout_height="match_parent"
-        android:background="@drawable/plate_small_corner"
-        android:dividerHeight="1px">
-    </ListView>
-
+        android:background="@color/colorPrimaryDark"
+        android:dividerHeight="1px"/>
 </LinearLayout>

@@ -12,7 +12,6 @@ public class Constants {
     public static final String USER_PROFILE_PIC_PATH = "user_profile_path";
     public static final String BASE_URL = "https://pikerfree.firebaseio.com/";
     public static final String BASE_STORAGE_URL = "gs://pikerfree.appspot.com/";
-    public static final String POST_COUNT = "post_count";
     public static final String USER_ID = "user_id";
     public static final String USER_LAT = "user_lat";
     public static final String USER_LNG = "user_lng";
@@ -20,5 +19,24 @@ public class Constants {
     public static final int STATUS_OPEN = 1;
     public static final int STATUS_CLOSE = 2;
     public static final String POST_VIEW = "post_view";
+
+    public static final String CATEGORY = "category_num";
+
+    public static final int CATE_ACCESSORY = 1;
+
+    public static final int CATE_BABY = 2;
+
+    public static final int CATE_ELECTRONIC = 3;
+
+    public static final int CATE_FASHION = 4;
+
+    public static final int CATE_GROCERY = 5;
+
+    public static final int CATE_HOME = 6;
+
+    public static final int CATE_PET = 7;
+
+    public static final int CATE_OTHER = 8;
+
 
 }

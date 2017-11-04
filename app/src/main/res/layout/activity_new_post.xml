@@ -37,20 +37,33 @@
             android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
-
-            <ha.thanh.pikerfree.customviews.CustomEditText
-                android:id="@+id/et_item_title"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/plate_shade"
-                android:hint="@string/title_of_item_hint"
-                android:paddingEnd="20dp"
-                android:paddingStart="20dp"
-                android:singleLine="true"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/white"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_title"
+                    android:tint="@color/white" />
+
+                <ha.thanh.pikerfree.customviews.CustomEditText
+                    android:id="@+id/et_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/title_of_item_hint"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -68,19 +81,34 @@
                 android:layout_height="1px"
                 android:background="@color/gray" />
 
-            <ha.thanh.pikerfree.customviews.CustomEditText
-                android:id="@+id/et_description"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/plate_shade"
-                android:gravity="top"
-                android:hint="@string/short_description"
-                android:inputType="textMultiLine"
-                android:padding="@dimen/item_padding_small"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/white"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_more"
+                    android:tint="@color/white" />
+
+                <ha.thanh.pikerfree.customviews.CustomEditText
+                    android:id="@+id/et_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/short_description"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/item_padding_small"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -95,7 +123,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="10dp"
                     android:background="@drawable/circle_green"
                     android:padding="10dp"
                     android:src="@drawable/ic_forward"
@@ -103,17 +131,15 @@
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_select"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="Select a category"
-                    android:textAllCaps="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/select_a_category"
+                    android:padding="@dimen/item_padding_small"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
