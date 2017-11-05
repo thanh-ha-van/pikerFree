@@ -11,6 +11,6 @@
         android:layout_height="240dp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:background="@drawable/file"
+        android:background="@drawable/loading"
         android:scaleType="centerCrop" />
 </LinearLayout>

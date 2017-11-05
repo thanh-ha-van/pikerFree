@@ -27,12 +27,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     private List<Post> dataSet;
     private ItemClickListener mClickListener;
     private Context mConText;
+    private double lat;
+    private double lng;
 
-
-    public PostAdapter(Context context, List<Post> dataSet, ItemClickListener listener) {
+    public PostAdapter(Context context, List<Post> dataSet, ItemClickListener listener, double lat, double lng) {
         this.dataSet = dataSet;
         this.mConText = context;
         this.mClickListener = listener;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -45,6 +48,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         TextView tvDay;
         @BindView(R.id.tv_status)
         TextView tvStatus;
+        @BindView(R.id.tv_distance)
+        TextView tvDistance;
 
         MyViewHolder(View view) {
             super(view);
@@ -72,11 +77,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         Post post = dataSet.get(position);
-
+        holder.tvDistance.setText(Utils.getDistance(lat, lng, post.getLat(), post.getLng()));
         holder.tvTitle.setText(post.getTitle());
         holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
         holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
-        holder.tvStatus.setBackground(getDrawFromStatus(post.getStatus()));
         FirebaseStorage
                 .getInstance()
                 .getReference()
@@ -89,11 +93,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                         Glide.with(mConText)
                                 .load(uri)
                                 .apply(new RequestOptions()
-                                        .placeholder(R.drawable.file)
-                                        .error(R.drawable.action_button_bg)
+                                        .placeholder(R.drawable.loading)
                                         .centerCrop()
                                         .dontAnimate()
-                                        .override(400, 300)
+                                        .override(380, 240)
                                         .dontTransform())
                                 .into(holder.imgPostImage);
                     }

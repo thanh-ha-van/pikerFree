@@ -2,20 +2,14 @@ package ha.thanh.pikerfree.fragments.news;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.adapters.TypeAdapter;
 
 public class NewsFragment extends Fragment
-        implements NewsInterface.RequiredViewOps, TypeAdapter.ItemClickListener {
+        implements NewsInterface.RequiredViewOps {
 
     NewsPresenter newsPresenter;
 
@@ -46,10 +40,6 @@ public class NewsFragment extends Fragment
 
     }
 
-    @Override
-    public void onItemClick(int position) {
-
-    }
 
     @Override
     public void onGetPostsDone() {

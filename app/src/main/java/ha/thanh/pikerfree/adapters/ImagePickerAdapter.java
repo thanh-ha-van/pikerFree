@@ -67,7 +67,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
             Glide.with(context)
                     .load(imgFile)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.file)
+                            .placeholder(R.drawable.add)
                             .centerCrop()
                             .dontAnimate()
                             .override(120, 160)

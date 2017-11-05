@@ -39,6 +39,15 @@ class HomePresenter {
 
     }
 
+    double getUserLat() {
+        return mModel.getUserLat();
+    }
+
+    double getUserLng() {
+        return mModel.getUserLng();
+    }
+
+
     void loadAllMyPost() {
         postList.removeAll(getPostList());
         handler.post(new Runnable() {

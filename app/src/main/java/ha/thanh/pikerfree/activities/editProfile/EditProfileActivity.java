@@ -104,7 +104,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
             Glide.with(this)
                     .load(imgFile)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.file)
+                            .placeholder(R.drawable.loading)
                             .centerCrop()
                             .dontAnimate()
                             .override(160, 160)

@@ -52,13 +52,12 @@ public class Utils {
         l2.setLongitude(lon2);
 
         float distance = l1.distanceTo(l2);
-        int distanceInt = Math.round(distance);
-        String dist = distanceInt + " meters away";
+        int distanceInt = (Math.round(distance)/100)*100;
+        String dist = distanceInt + " m away";
 
-        if (distance > 1000.0f) {
-            double roundOff = Math.round(distance * 10.0) / 10000.0;
-
-            dist = roundOffTo2DecPlaces(roundOff) + " kms away";
+        if (distanceInt > 1000) {
+            double roundOff = Math.round(distance ) / 1000;
+            dist = roundOffTo2DecPlaces(roundOff) + " km away";
         }
         return dist;
     }

@@ -64,8 +64,12 @@ public class HomeFragment extends Fragment
 
     private void initView() {
 
-        adapter = new PostAdapter(this.getContext(), homePresenter.getPostList(), this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        adapter = new PostAdapter(this.getContext(),
+                homePresenter.getPostList(),
+                this, homePresenter.getUserLat(),
+                homePresenter.getUserLng());
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
 
@@ -107,7 +111,7 @@ public class HomeFragment extends Fragment
             Glide.with(this)
                     .load(imgFile)
                     .apply(new RequestOptions()
-                            .placeholder(R.drawable.file)
+                            .placeholder(R.drawable.loading)
                             .centerCrop()
                             .dontAnimate()
                             .override(160, 160)
