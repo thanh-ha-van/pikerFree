@@ -70,16 +70,16 @@ class NewPostPresenter {
     }
 
     void startUploadImages() {
-        if (imagePostList.size() >= 7) imagePostList.remove(6);
+        imagePostList.remove(imagePostList.size()- 1);
         imageCount--;
         for (int i = 0; i < imagePostList.size(); i++) {
             upLoadSingleImage(imagePostList.get(i));
         }
     }
 
-     String getTextFromIntCategory(int intput) {
-        selectedCategory = intput;
-        switch (intput) {
+     String getTextFromIntCategory(int intPut) {
+        selectedCategory = intPut;
+        switch (intPut) {
             case Constants.CATE_ACCESSORY:
                 return "ACCESSORIES";
             case Constants.CATE_BABY:

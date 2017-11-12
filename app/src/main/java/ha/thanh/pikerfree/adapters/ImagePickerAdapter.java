@@ -45,8 +45,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
         @Override
         public void onClick(View view) {
-            int currentPosition = getAdapterPosition();
-            if (mClickListener != null && currentPosition == getItemCount() - 1) {
+            if (mClickListener != null) {
                 mClickListener.onAddImagesToAdapter();
             }
         }
