@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import com.vlk.multimager.activities.GalleryActivity;
@@ -23,11 +24,12 @@ import ha.thanh.pikerfree.activities.selectCategory.SelectCategoryActivity;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.utils.Utils;
 
 
 public class NewPostActivity extends AppCompatActivity
         implements NewPostInterface.RequiredViewOps,
-        ImagePickerAdapter.ItemClickListener, CustomAlertDialog.AlertListener {
+         CustomAlertDialog.AlertListener {
 
     @BindView(R.id.rv_images)
     public RecyclerView recyclerViewImage;
@@ -55,11 +57,10 @@ public class NewPostActivity extends AppCompatActivity
     }
 
     private void initData() {
-
         waitingDialog = new WaitingDialog(this);
         alertDialog = new CustomAlertDialog(this);
         mPresenter = new NewPostPresenter(this, this);
-        adapter = new ImagePickerAdapter(this, mPresenter.getItemList(), this);
+        adapter = new ImagePickerAdapter(this, mPresenter.getItemList(), null);
     }
 
     private void initView() {
@@ -69,6 +70,19 @@ public class NewPostActivity extends AppCompatActivity
         recyclerViewImage.setAdapter(adapter);
         tvTitle.clearFocus();
         recyclerViewImage.requestFocus();
+    }
+
+    @OnClick(R.id.edit_images)
+    public void goEditImage() {
+        Intent intent = new Intent(this, GalleryActivity.class);
+        Params params = new Params();
+        params.setCaptureLimit(6);
+        params.setPickerLimit(6);
+        params.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+        params.setActionButtonColor(getResources().getColor(R.color.colorPrimary));
+        params.setButtonTextColor(getResources().getColor(R.color.white));
+        intent.putExtra(Constants.KEY_PARAMS, params);
+        startActivityForResult(intent, Constants.TYPE_MULTI_PICKER);
     }
 
     @OnClick(R.id.bnt_post_this)
@@ -90,7 +104,7 @@ public class NewPostActivity extends AppCompatActivity
             return;
         }
         waitingDialog.showDialog();
-        mPresenter.uploadPostToDatabase(tile, description );
+        mPresenter.uploadPostToDatabase(tile, description);
     }
 
     @OnClick(R.id.tv_select)
@@ -111,18 +125,6 @@ public class NewPostActivity extends AppCompatActivity
         alertDialog.showAlertDialog("Error", error);
     }
 
-    @Override
-    public void onAddImagesToAdapter() {
-        Intent intent = new Intent(this, GalleryActivity.class);
-        Params params = new Params();
-        params.setCaptureLimit(6);
-        params.setPickerLimit(6);
-        params.setToolbarColor(getResources().getColor(R.color.colorPrimary));
-        params.setActionButtonColor(getResources().getColor(R.color.colorPrimary));
-        params.setButtonTextColor(getResources().getColor(R.color.white));
-        intent.putExtra(Constants.KEY_PARAMS, params);
-        startActivityForResult(intent, Constants.TYPE_MULTI_PICKER);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -131,6 +133,7 @@ public class NewPostActivity extends AppCompatActivity
         }
         switch (requestCode) {
             case Constants.TYPE_MULTI_PICKER:
+                recyclerViewImage.setVisibility(View.VISIBLE);
                 ArrayList<Image> imagesList = data.getParcelableArrayListExtra(Constants.KEY_BUNDLE_LIST);
                 mPresenter.addAllImage(imagesList);
                 adapter.notifyDataSetChanged();
@@ -138,7 +141,7 @@ public class NewPostActivity extends AppCompatActivity
                 break;
             case SELECT_CODE:
                 int selected = data.getIntExtra("selected", 8);
-                tvSelect.setText(mPresenter.getTextFromIntCategory(selected));
+                tvSelect.setText(Utils.getTextFromIntCategory(selected));
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

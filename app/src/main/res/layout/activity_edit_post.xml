@@ -1,8 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ha.thanh.pikerfree.activities.editPost.EditPostActivity">
+    android:background="@color/gray"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".activities.newPost.NewPostActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
+        android:gravity="center">
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/edit_this"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_title"
+                    android:tint="@color/white" />
+
+                <ha.thanh.pikerfree.customviews.CustomEditText
+                    android:id="@+id/et_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/title_of_item_hint"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_image_slide"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_gravity="center"
+                android:background="@color/colorAccent" />
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/edit_images"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/plate_shade"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_edit_profile"
+                android:gravity="center"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:text="Change Images"
+                android:textColor="@color/white"
+                android:tint="@color/white" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_more"
+                    android:tint="@color/white" />
+
+                <ha.thanh.pikerfree.customviews.CustomEditText
+                    android:id="@+id/et_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/short_description"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/item_padding_small"
+                    android:textColor="@color/gray"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_forward"
+                    android:tint="@color/white" />
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:id="@+id/tv_post_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:hint="@string/select_a_category"
+                    android:padding="@dimen/item_padding_small"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_flash"
+                    android:tint="@color/white" />
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:id="@+id/tv_post_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:text="Opening"
+                    android:padding="@dimen/item_padding_small"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray" />
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/bnt_post_this"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:background="@drawable/plate"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

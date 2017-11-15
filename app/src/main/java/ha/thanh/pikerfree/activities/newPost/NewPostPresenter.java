@@ -77,30 +77,6 @@ class NewPostPresenter {
         }
     }
 
-     String getTextFromIntCategory(int intPut) {
-        selectedCategory = intPut;
-        switch (intPut) {
-            case Constants.CATE_ACCESSORY:
-                return "ACCESSORIES";
-            case Constants.CATE_BABY:
-                return "BABY AND TOYS";
-            case Constants.CATE_ELECTRONIC:
-                return "ELECTRONIC";
-            case Constants.CATE_FASHION:
-                return "FASHION";
-            case Constants.CATE_GROCERY:
-                return "GROCERIES";
-            case Constants.CATE_HOME:
-                return "HOME AND STUFFS";
-            case Constants.CATE_OTHER:
-                return "OTHERS";
-            case Constants.CATE_PET:
-                return "PETS";
-            default:
-                return "OTHERS";
-        }
-    }
-
     void addAllImage(ArrayList<Image> imagesList) {
         for (int i = imageCount; i < imagesList.size(); i++) {
             imagePostList.add(

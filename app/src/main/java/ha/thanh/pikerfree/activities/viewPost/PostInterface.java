@@ -8,9 +8,12 @@ import ha.thanh.pikerfree.models.User;
 
 class PostInterface {
     interface RequiredViewOps {
+
         void getPostDone(Post post);
 
         void getLinkDone();
+
+        void OnGoToEdit(int id);
 
         void getPostFail();
 

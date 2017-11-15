@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.editPost.EditPostActivity;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
 import ha.thanh.pikerfree.constants.Constants;
@@ -209,6 +210,14 @@ public class PostActivity extends AppCompatActivity implements
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
 
+    }
+
+    @Override
+    public void OnGoToEdit(int id) {
+        Intent intent = new Intent(this, EditPostActivity.class);
+        intent.putExtra(Constants.POST_VIEW, id);
+        startActivity(intent);
+        finish();
     }
 
     @Override

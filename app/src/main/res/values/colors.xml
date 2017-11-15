@@ -15,9 +15,7 @@
     <color name="greenShade">#A031781f</color>
     <color name="green_light">#319916</color>
     <color name="orange">#EC5D10</color><!--#-->
-    <color name="colorOrangeShade">#80EC5D10</color><!--#-->
-    <!--#FFA726-->
-    <!--#FFA726-->
+    <color name="colorOrangeShade">#90EC5D10</color><!--#-->
     <color name="GrayScale">#74898B</color>
     <color name="red">#DC0F06</color>
 </resources>
