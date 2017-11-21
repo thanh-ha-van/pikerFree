@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:layout_height="70dp"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="2dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
@@ -40,20 +42,20 @@
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_userName"
                     android:layout_width="0dp"
-                    android:layout_height="22dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:lines="1"
                     android:text="Thanh Ha Van"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="22dp"
                     android:text="10/27/2017"
-                    android:textColor="@color/text_black_3"
+                    android:textColor="@color/white"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -62,12 +64,11 @@
                 android:id="@+id/tv_last_mess"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:ellipsize="end"
+                android:singleLine="true"
                 android:gravity="center_vertical"
-                android:lines="1"
-                android:text="Hey, how are you to day? I'd like to talk about shit. "
-                android:textColor="@color/text_black_3"
-                android:textSize="12sp" />
+                android:text="Hey, how are you to day? I'd like to talk about love"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

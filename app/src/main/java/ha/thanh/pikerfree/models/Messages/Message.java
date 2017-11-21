@@ -1,8 +1,5 @@
-package ha.thanh.pikerfree.models;
+package ha.thanh.pikerfree.models.Messages;
 
-/**
- * Created by HaVan on 8/27/2017.
- */
 
 public class Message {
     private int id;
@@ -10,7 +7,7 @@ public class Message {
     private String text;
     private long time;
 
-    public Message(int id, String author, String text, long time) {
+    Message(int id, String author, String text, long time) {
         this.id = id;
         this.author = author;
         this.text = text;

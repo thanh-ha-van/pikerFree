@@ -1,44 +1,44 @@
 package ha.thanh.pikerfree.activities.conversation;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Handler;
-import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.User;
 
-/**
- * Created by HaVan on 10/16/2017.
- */
 
-public class ConPresenter {
+class ConPresenter {
 
-    ConInterface.RequiredViewOps mView;
-    Context con;
-    ConModel mModel;
+    private ConInterface.RequiredViewOps mView;
+    private ConModel mModel;
 
-    String id1;
-    String id2;
+    private String id1;
+    private String id2;
+    private StorageReference mStorageRef;
 
-    String userId;
+    private String userId;
     private boolean isUser1 = false;
-    Conversation conversation;
+    private Conversation conversation;
 
     private Handler handler;
     private FirebaseDatabase database;
-    private User OpUser;
+    private User OPUser;
 
-    public ConPresenter(Context context, ConInterface.RequiredViewOps mView, String id1, String id2) {
+    ConPresenter(Context context, ConInterface.RequiredViewOps mView, String id1, String id2) {
         this.mView = mView;
-        this.con = context;
+        this.id1 = id1;
+        this.id2 = id2;
         mModel = new ConModel(context);
         initData();
     }
@@ -46,10 +46,15 @@ public class ConPresenter {
     private void initData() {
         handler = new android.os.Handler();
         database = FirebaseDatabase.getInstance();
-        OpUser = new User();
+        OPUser = new User();
         userId = mModel.getUserIdFromSharePref();
-        if (userId.equals(id1))
+        if (userId.equals(id1)) {
             isUser1 = true;
+            getOPData(id2);
+        } else {
+            isUser1 = false;
+            getOPData(id1);
+        }
         checkIfAlreadyHave();
     }
 
@@ -60,6 +65,8 @@ public class ConPresenter {
         // database and conversations database at the same time.
         // If Init a new conversations, the database at user1, user2 and conversations will be change.
         // after that. updating the conversation will be easy, delete a conversation will be logic.
+        // The content of conversation is inside the conversations preference.
+
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -88,6 +95,7 @@ public class ConPresenter {
     }
 
     private void startNewConversation() {
+
         // To start  a new conversation is to change data at user1, user2 and conversations database itself.
         // For user1 and user2 will add the conversation id into mess preference.
         // For conversations preference is add the new conversation id. easy. logic. fuck it im genius.
@@ -115,6 +123,9 @@ public class ConPresenter {
                         .child(Constants.MESS_STRING)
                         .child(id1 + id2);
                 user2Pref.setValue(conversation);
+
+                // at this time the conversation is available so just be an old one.
+                loadOldConversation(id1 + id2);
             }
         });
     }
@@ -131,9 +142,8 @@ public class ConPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         conversation = dataSnapshot.getValue(Conversation.class);
-
-                        // todo shit
-
+                        // the last mess id is 0+
+                        showData();
                     }
 
                     @Override
@@ -143,4 +153,52 @@ public class ConPresenter {
             }
         });
     }
+
+    private  void showData() {
+        if (conversation.getLastMessId() == 0){
+            // nothing in the content of conversation.
+        }
+        else {
+            //
+        }
+    }
+
+    private void getOPData(final String UserId) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference userPref;
+                userPref = database
+                        .getReference("users")
+                        .child(UserId);
+                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        OPUser = dataSnapshot.getValue(User.class);
+                        mView.getOPDone(OPUser);
+                        getUserImageLink(OPUser.getAvatarLink());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+    }
+
+    private void getUserImageLink(String link) {
+
+        mStorageRef = FirebaseStorage.getInstance()
+                .getReference().child(link);
+        mStorageRef.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mView.getOwnerImageDone(uri);
+                    }
+                });
+    }
+
 }
