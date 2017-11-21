@@ -5,12 +5,9 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
 
-
-/**
- * Created by HaVan on 8/27/2017.
- */
 @IgnoreExtraProperties
 public class User {
+
     private String id;
     private String name;
     private String address;
@@ -21,6 +18,7 @@ public class User {
     private String email = "";
     private ArrayList<Integer> posts;
     private ArrayList<Integer> conversations;
+    private ArrayList<String> mess;
 
     public User() {
     }
@@ -29,6 +27,22 @@ public class User {
         this.id = id;
         this.name = name;
         this.address = address;
+    }
+
+    public ArrayList<Integer> getConversations() {
+        return conversations;
+    }
+
+    public void setConversations(ArrayList<Integer> conversations) {
+        this.conversations = conversations;
+    }
+
+    public ArrayList<String> getMess() {
+        return mess;
+    }
+
+    public void setMess(ArrayList<String> mess) {
+        this.mess = mess;
     }
 
     public String getId() {

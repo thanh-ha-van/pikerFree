@@ -5,14 +5,24 @@ package ha.thanh.pikerfree.models;
  */
 
 public class Message {
+    private int id;
     private String author;
     private String text;
     private long time;
 
-    public Message(String author, String text, long time) {
+    public Message(int id, String author, String text, long time) {
+        this.id = id;
         this.author = author;
         this.text = text;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {

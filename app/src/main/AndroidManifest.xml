@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-feature android:name="android.hardware.Camera" />
+    <uses-feature android:name="android.hardware." />
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -38,7 +40,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.newPost.NewPostActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -52,10 +54,13 @@
             android:name=".activities.forgetPassword.ForgetPassActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.selectCategory.SelectCategoryActivity" />
-        <activity android:name=".activities.viewPost.PostActivity"></activity>
+        <activity android:name=".activities.viewPost.PostActivity" />
         <activity android:name=".activities.editPost.EditPostActivity" />
-        <activity android:name=".activities.conversation.ConActivity"></activity>
-        <activity android:name=".activities.viewCategory.ViewCategoryActivity"></activity>
+        <activity android:name=".activities.conversation.ConActivity" />
+        <activity android:name=".activities.viewCategory.ViewCategoryActivity" />
+        <activity android:name=".activities.augmentedReality.ARActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -5,38 +5,48 @@ package ha.thanh.pikerfree.models;
  */
 
 public class Conversation {
-    private int idUser1;
-    private int idUser2;
-    private int conversationId;
 
-    public Conversation(int idUser1, int idUser2, int coversationId) {
+    private String idUser1;
+    private String idUser2;
+    private String conversationId;
+    private int lastMessId;
+
+    public Conversation(String idUser1, String idUser2, String conversationId, int lastMessId) {
         this.idUser1 = idUser1;
         this.idUser2 = idUser2;
-        this.conversationId = coversationId;
-    }
-
-    public int getConversationId() {
-        return conversationId;
-    }
-
-    public void setConversationId(int conversationId) {
         this.conversationId = conversationId;
+        this.lastMessId = lastMessId;
     }
 
-    public int getIdUser1() {
+    public String getIdUser1() {
         return idUser1;
     }
 
-    public void setIdUser1(int idUser1) {
+    public void setIdUser1(String idUser1) {
         this.idUser1 = idUser1;
     }
 
-    public int getIdUser2() {
+    public String getIdUser2() {
         return idUser2;
     }
 
-    public void setIdUser2(int idUser2) {
+    public void setIdUser2(String idUser2) {
         this.idUser2 = idUser2;
     }
 
+    public String getConversationId() {
+        return conversationId;
+    }
+
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
+    }
+
+    public int getLastMessId() {
+        return lastMessId;
+    }
+
+    public void setLastMessId(int lastMessId) {
+        this.lastMessId = lastMessId;
+    }
 }

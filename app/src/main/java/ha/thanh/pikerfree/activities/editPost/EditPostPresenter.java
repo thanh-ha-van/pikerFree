@@ -51,6 +51,7 @@ public class EditPostPresenter {
     private Handler handler;
     private Context con;
     private int postID;
+    public int selectedCategory = 8;
 
     EditPostPresenter(Context context, EditPostInterface.RequiredViewOps mView) {
         this.mView = mView;
@@ -99,6 +100,32 @@ public class EditPostPresenter {
         for (int i = 0; i < imageLocalList.size()-1; i++) {
             upLoadSingleImage(imageLocalList.get(i));
         }
+    }
+
+    void uploadPostToDatabase(String title, String description) {
+
+        createPost(title, description, selectedCategory);
+        uploadPostData();
+    }
+
+    private void createPost(String title, String description, int category) {
+
+        post.setTitle(title);
+        post.setDescription(description);
+        post.setCategory(category);
+        post.setTimePosted(Utils.getCurrentTimestamp());
+    }
+
+    private void uploadPostData() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference postPref;
+                postPref = database.getReference("posts").child(postID + "");
+                postPref.setValue(post);
+                mView.onPostDone();
+            }
+        });
     }
     private void upLoadSingleImage(final ImagePost imagePost) {
         handler.post(new Runnable() {

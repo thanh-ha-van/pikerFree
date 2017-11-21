@@ -52,7 +52,7 @@ class NewPostPresenter {
     private boolean isGetDataUser = false;
     private boolean isGetPostCount = false;
     private ArrayList<Integer> postList;
-    private int selectedCategory = 8;
+    int selectedCategory = 8;
 
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
 
@@ -70,7 +70,7 @@ class NewPostPresenter {
     }
 
     void startUploadImages() {
-        imagePostList.remove(imagePostList.size()- 1);
+        imagePostList.remove(imagePostList.size() - 1);
         imageCount--;
         for (int i = 0; i < imagePostList.size(); i++) {
             upLoadSingleImage(imagePostList.get(i));

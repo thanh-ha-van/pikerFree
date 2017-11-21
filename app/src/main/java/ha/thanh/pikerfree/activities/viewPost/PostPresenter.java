@@ -3,7 +3,9 @@ package ha.thanh.pikerfree.activities.viewPost;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,6 +67,7 @@ class PostPresenter {
         post = new Post();
         handler = new Handler();
     }
+
     String getTextFromIntCategory(int intput) {
         switch (intput) {
             case Constants.CATE_ACCESSORY:
@@ -204,20 +207,17 @@ class PostPresenter {
 
     private void initChat() {
 
+        String id1 = dataUser.getId();
+        String id2 = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mView.OnStartConversation(id1, id2);
     }
 
-    //// TODO: 10/10/2017 must show requesting user for owner of the post.
     void handleChatOrClose() {
         if (isUserOwner) {
 
-            // close post
             editPost();
-            //// TODO: 10/10/2017  to close post is to clear the requesting user list
         } else {
-
-            // chat
             initChat();
-            //// TODO: 10/10/2017  to chat is to start an activity with 2 user ids
         }
     }
 

@@ -32,5 +32,7 @@ class PostInterface {
         void showConfirmDialog(String mess);
 
         void onGetRequestingUserDone();
+
+        void OnStartConversation(String id1, String id2);
     }
 }

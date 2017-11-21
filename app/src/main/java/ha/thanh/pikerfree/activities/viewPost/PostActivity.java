@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.editPost.EditPostActivity;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
@@ -288,5 +289,14 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void showConfirmDialog(String mess) {
         confirmDialog.showAlertDialog("Confirm Action", mess);
+    }
+
+    @Override
+    public void OnStartConversation(String id1, String id2) {
+        Intent intent = new Intent(this, ConActivity.class);
+        intent.putExtra(Constants.U_ID_1, id1);
+        intent.putExtra(Constants.U_ID_2, id2);
+        startActivity(intent);
+        finish();
     }
 }

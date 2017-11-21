@@ -20,7 +20,14 @@ public class Constants {
     public static final int STATUS_CLOSE = 2;
     public static final String POST_VIEW = "post_view";
 
+    public static final String U_ID_1 = "user_1";
+    public static final String U_ID_2 = "user_2";
+
     public static final String CATEGORY = "category_num";
+    public static final String CONVERSATION = "conversations";
+    public static final String USERS_STRING = "users";
+    public static final String MESS_STRING = "mess";
+    public static final String POST = "post";
 
     public static final int CATE_ACCESSORY = 1;
 

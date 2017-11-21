@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.vlk.multimager.activities.GalleryActivity;
@@ -18,13 +19,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.selectCategory.SelectCategoryActivity;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.ImagePost;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.utils.Utils;
 
@@ -54,6 +56,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
     private ImagePickerAdapter imagePickerAdapter;
     private EditPostPresenter mPresenter;
     private WaitingDialog waitingDialog;
+    private CustomAlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         mPresenter.getPostData(postID + "");
         mPresenter.getImageLinksFromId(postID + "");
         imagePickerAdapter = new ImagePickerAdapter(this, mPresenter.getItemList(), null);
+        alertDialog = new CustomAlertDialog(this);
     }
 
     private void initView() {
@@ -88,6 +92,25 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         recyclerViewImage.setAdapter(imagePickerAdapter);
     }
 
+
+    @OnClick(R.id.btn_save_edit_post)
+
+    public void saveEdit() {
+        String tile = title.getText().toString();
+        String des = description.getText().toString();
+
+        if (TextUtils.isEmpty(tile)) {
+            alertDialog.showAlertDialog("Oop!", "Please enter the title for your item");
+            return;
+        }
+        if (TextUtils.isEmpty(des)) {
+            alertDialog.showAlertDialog("Oop!", "Please enter some description");
+            return;
+        }
+
+        waitingDialog.showDialog();
+        mPresenter.uploadPostToDatabase(tile, des);
+    }
 
     @OnClick(R.id.edit_images)
     public void goEditImage() {
@@ -108,13 +131,20 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         if (resultCode != RESULT_OK) {
             return;
         }
-        vpImageSlide.setVisibility(View.GONE);
-        recyclerViewImage.setVisibility(View.VISIBLE);
-        ArrayList<Image> imagesList = data.getParcelableArrayListExtra(com.vlk.multimager.utils.Constants.KEY_BUNDLE_LIST);
-        mPresenter.addAllImage(imagesList);
-        imagePickerAdapter.notifyDataSetChanged();
-        mPresenter.startUploadImages();
-
+        switch (requestCode) {
+            case com.vlk.multimager.utils.Constants.TYPE_MULTI_PICKER:
+                recyclerViewImage.setVisibility(View.VISIBLE);
+                ArrayList<Image> imagesList = data.getParcelableArrayListExtra(com.vlk.multimager.utils.Constants.KEY_BUNDLE_LIST);
+                mPresenter.addAllImage(imagesList);
+                imagePickerAdapter.notifyDataSetChanged();
+                mPresenter.startUploadImages();
+                break;
+            case SELECT_CODE:
+                int selected = data.getIntExtra("selected", 8);
+                tvCategory.setText(Utils.getTextFromIntCategory(selected));
+                mPresenter.selectedCategory = selected;
+                break;
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -139,6 +169,15 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         postStatus.setText(mPresenter.getStatus());
         tvCategory.setText(Utils.getTextFromIntCategory(post.getCategory()));
     }
+
+    public final static int SELECT_CODE = 101;
+
+    @OnClick(R.id.tv_select)
+    public void startSelectActivity() {
+        Intent intent = new Intent(this, SelectCategoryActivity.class);
+        startActivityForResult(intent, SELECT_CODE);
+    }
+
 
     @Override
     public void getLinkDone() {

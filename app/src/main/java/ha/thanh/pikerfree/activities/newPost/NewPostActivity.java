@@ -90,7 +90,7 @@ public class NewPostActivity extends AppCompatActivity
 
         String tile = tvTitle.getText().toString();
         String description = tvDescription.getText().toString();
-
+        alertDialog.setListener(null);
         if (TextUtils.isEmpty(tile)) {
             alertDialog.showAlertDialog("Oop!", "Please enter the title for your item");
             return;
@@ -103,6 +103,7 @@ public class NewPostActivity extends AppCompatActivity
             alertDialog.showAlertDialog("Oop!", "Please select a category for you post");
             return;
         }
+
         waitingDialog.showDialog();
         mPresenter.uploadPostToDatabase(tile, description);
     }
@@ -125,7 +126,6 @@ public class NewPostActivity extends AppCompatActivity
         alertDialog.showAlertDialog("Error", error);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
@@ -142,6 +142,7 @@ public class NewPostActivity extends AppCompatActivity
             case SELECT_CODE:
                 int selected = data.getIntExtra("selected", 8);
                 tvSelect.setText(Utils.getTextFromIntCategory(selected));
+                mPresenter.selectedCategory = selected;
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
