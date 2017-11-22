@@ -17,7 +17,6 @@ public class User {
     private String avatarLink = "userImages/default_profile.jgp";
     private String email = "";
     private ArrayList<Integer> posts;
-    private ArrayList<Integer> conversations;
     private ArrayList<String> mess;
 
     public User() {
@@ -29,13 +28,6 @@ public class User {
         this.address = address;
     }
 
-    public ArrayList<Integer> getConversations() {
-        return conversations;
-    }
-
-    public void setConversations(ArrayList<Integer> conversations) {
-        this.conversations = conversations;
-    }
 
     public ArrayList<String> getMess() {
         return mess;
@@ -115,13 +107,5 @@ public class User {
 
     public void setPosts(ArrayList<Integer> posts) {
         this.posts = posts;
-    }
-
-    public ArrayList<Integer> getConversation() {
-        return conversations;
-    }
-
-    public void setConversation(ArrayList<Integer> conversation) {
-        this.conversations = conversation;
     }
 }
