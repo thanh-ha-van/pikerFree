@@ -15,6 +15,7 @@ public class ConInterface {
         void OnNewMess(Message message);
         void getOPDone(User user);
         void getOwnerImageDone(Uri uri);
+        void onGetMessDone(Message message);
     }
 
 }

@@ -2,8 +2,11 @@ package ha.thanh.pikerfree.activities.conversation;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -11,8 +14,10 @@ import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.adapters.MessageAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
@@ -31,6 +36,12 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     public ImageView sendButton;
     @BindView(R.id.et_mess_to_send)
     public CustomEditText tvMessToSend;
+    @BindView(R.id.rv_messes)
+    public RecyclerView rvMess;
+    @BindView(R.id.swipeRefreshLayout)
+    public SwipeRefreshLayout swipeRefreshLayout;
+
+    private MessageAdapter messageAdapter;
 
 
     @Override
@@ -51,21 +62,41 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     private void initView() {
 
         ButterKnife.bind(this);
+        messageAdapter = new MessageAdapter(this, presenter.getMessageList());
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvMess.setLayoutManager(layoutManager);
+        rvMess.setAdapter(messageAdapter);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.onPull();
+            }
+        });
+    }
+
+    @OnClick(R.id.btn_send)
+    public void sendNewMess(){
+        String textTosend = tvMessToSend.getText().toString();
+        if(textTosend.equals("") ||textTosend.equals("\n"))
+             return;
+        presenter.onUserAddNewMess(tvMessToSend.getText().toString());
+        tvMessToSend.setText("");
     }
 
     @Override
     public void OnGoToProfile(String id) {
-
+        // to go op user profile
     }
 
     @Override
     public void OnNewMess(Message message) {
-
+        messageAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void getOPDone(User user) {
-
+        OPName.setText(user.getName());
     }
 
     @Override
@@ -79,5 +110,10 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
                         .override(200, 200)
                         .dontTransform())
                 .into(OPImage);
+    }
+
+    @Override
+    public void onGetMessDone(Message message) {
+        messageAdapter.notifyDataSetChanged();
     }
 }

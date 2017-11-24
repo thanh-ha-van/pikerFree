@@ -1,6 +1,14 @@
 package ha.thanh.pikerfree.utils;
 
 import android.location.Location;
+import android.util.Log;
+
+import com.firebase.client.Firebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,7 +18,9 @@ import java.util.List;
 import java.util.TimeZone;
 
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.models.User;
 
 public class Utils {
 
@@ -50,6 +60,11 @@ public class Utils {
         return list;
     }
 
+    public Message getMessageFromId(String conversationId, int messId){
+
+        return  null;
+    }
+
     public static String getTimeString(long timestamp) {
         try {
             Calendar calendar = Calendar.getInstance();
@@ -60,6 +75,7 @@ public class Utils {
             Date currentTimeZone = calendar.getTime();
             return sdf.format(currentTimeZone);
         } catch (Exception e) {
+            Log.e("Utils", e.getMessage());
         }
         return "";
     }
@@ -84,7 +100,7 @@ public class Utils {
         return dist;
     }
 
-    final static String roundOffTo2DecPlaces(double val) {
+    private static String roundOffTo2DecPlaces(double val) {
         return String.format("%.2f", val);
     }
 
