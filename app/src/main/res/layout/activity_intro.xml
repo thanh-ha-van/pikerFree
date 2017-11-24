@@ -10,7 +10,7 @@
         android:id="@+id/view_title"
         android:layout_width="match_parent"
         android:background="@color/shade"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:padding="10dp"
             android:src="@drawable/ic_back"
             android:tint="@color/white" />
@@ -39,7 +39,7 @@
         <ImageView
             android:id="@+id/img_next"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:padding="10dp"
             android:src="@drawable/ic_next"
             android:tint="@color/white" />

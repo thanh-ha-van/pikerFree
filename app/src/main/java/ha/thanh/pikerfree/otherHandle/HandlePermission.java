@@ -76,7 +76,7 @@ public class HandlePermission {
         }
     }
 
-    public void showDialogSetting() {
+    private void showDialogSetting() {
         dialogMessage.setMessage("You have to enable permission for using this feature.");
         dialogMessage.setOnClickButton(new DialogMessage.OnClickButton() {
             @Override

@@ -76,15 +76,13 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         mPresenter.getImageLinksFromId(postID + "");
         imagePickerAdapter = new ImagePickerAdapter(this, mPresenter.getItemList(), null);
         alertDialog = new CustomAlertDialog(this);
+        imageSlideAdapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
     }
 
     private void initView() {
         ButterKnife.bind(this);
         scrollView.setVisibility(View.INVISIBLE);
-
-        imageSlideAdapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
         vpImageSlide.setAdapter(imageSlideAdapter);
-
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
@@ -172,7 +170,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
 
     public final static int SELECT_CODE = 101;
 
-    @OnClick(R.id.tv_select)
+    @OnClick(R.id.tv_post_category)
     public void startSelectActivity() {
         Intent intent = new Intent(this, SelectCategoryActivity.class);
         startActivityForResult(intent, SELECT_CODE);

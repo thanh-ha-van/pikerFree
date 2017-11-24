@@ -11,17 +11,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/colorAccent"
         android:gravity="center">
 
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_back"
+            android:tint="@color/white"/>
+
         <ha.thanh.pikerfree.customviews.CustomTextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="@string/new_post"
+            android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <ScrollView
@@ -73,15 +84,15 @@
                 android:id="@+id/rv_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/edit_images"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:background="@drawable/plate_shade"
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/ic_edit_profile"

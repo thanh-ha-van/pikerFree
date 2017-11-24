@@ -11,17 +11,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/colorAccent"
         android:gravity="center">
 
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_back"
+            android:tint="@color/white"
+            android:padding="10dp"/>
         <ha.thanh.pikerfree.customviews.CustomTextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/edit_this"
+            android:text="@string/edit_post"
+            android:textAllCaps="true"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <ScrollView

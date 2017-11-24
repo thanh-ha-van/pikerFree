@@ -193,7 +193,6 @@ class ConPresenter {
                 messPref.setValue(lastMessId);
             }
         });
-
     }
 
     private void showData() {

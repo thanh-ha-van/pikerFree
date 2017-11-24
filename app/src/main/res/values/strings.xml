@@ -8,10 +8,10 @@
     <string name="text_setting">Setting</string>
     <!-- for intro messages -->
     <string name="intro_1">A wise man once said that "One man's trash is another man treasure"</string>
-    <string name="intro_2">Some intro sentence</string>
-    <string name="intro_3">Some intro sentence </string>
-    <string name="intro_4">Some intro sentence </string>
-    <string name="intro_5">Some intro sentence </string>
+    <string name="intro_2">With this application, you will have a sosial network to give and to be received.</string>
+    <string name="intro_3">Just tap and add some description and give your unused item to someone whom really in need.</string>
+    <string name="intro_4">Just tap and seek for want you need that available from good people around you.</string>
+    <string name="intro_5">PikerFree, free and always</string>
     <string name="start">Start</string>
 
     <!-- dummy string. must be removed later -->
@@ -37,6 +37,7 @@
     <string name="status_open">Opening</string>
     <string name="post">Post this</string>
     <string name="new_post">New post</string>
+    <string name="edit_post">Edit post</string>
     <string name="status_close">Closed</string>
     <string name="search">Search &#8230;</string>
     <string name="select_a_category">Select a category</string>
@@ -49,7 +50,7 @@
     <string name="confirm_delete">Are you sure you want to delete this post?</string>
     <string name="you_own_this">You are the owner of this post!</string>
     <string name="delete_this">Delete</string>
-    <string name="edit_this">Edit</string>
+    <string name="edit_this">Edit post</string>
     <string name="requesting_user">Requesting users:</string>
     <string name="no_requested_user">No requesting users</string>
     <string name="send_request">Send request</string>

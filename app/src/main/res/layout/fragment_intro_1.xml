@@ -59,8 +59,8 @@
                 android:id="@+id/tv_word_challenge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="lol"
+                android:layout_marginEnd="5dp"
+                android:text="To give"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -89,8 +89,8 @@
                 android:id="@+id/tv_message_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="some word"
+                android:layout_marginEnd="5dp"
+                android:text="be received"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="some word"
+                android:text="is to"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
