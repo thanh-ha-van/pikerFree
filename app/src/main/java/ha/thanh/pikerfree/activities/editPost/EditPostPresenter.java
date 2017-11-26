@@ -103,7 +103,6 @@ public class EditPostPresenter {
     }
 
     void uploadPostToDatabase(String title, String description) {
-
         createPost(title, description, selectedCategory);
         uploadPostData();
     }

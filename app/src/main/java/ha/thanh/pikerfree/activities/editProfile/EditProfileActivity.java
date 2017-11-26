@@ -67,6 +67,12 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         profilePresenter.uploadFile(filePath);
     }
 
+    @OnClick(R.id.ic_back)
+
+    public void getBack() {
+        onBackPressed();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

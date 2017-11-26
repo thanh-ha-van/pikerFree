@@ -183,6 +183,7 @@ class ConPresenter {
                 messPref.setValue(message);
             }
         });
+        
         handler.post(new Runnable() {
             @Override
             public void run() {

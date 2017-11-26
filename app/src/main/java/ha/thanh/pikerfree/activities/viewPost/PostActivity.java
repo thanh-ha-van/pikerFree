@@ -107,6 +107,11 @@ public class PostActivity extends AppCompatActivity implements
         mMapView.getMapAsync(this);
     }
 
+    @OnClick(R.id.ic_back)
+    public void getBack() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.tv_chat)
     public void startChat() {
         mPresenter.handleChatOrClose();

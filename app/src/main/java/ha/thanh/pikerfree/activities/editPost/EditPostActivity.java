@@ -90,9 +90,13 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         recyclerViewImage.setAdapter(imagePickerAdapter);
     }
 
+    @OnClick(R.id.ic_back)
+
+    public void getBack() {
+        onBackPressed();
+    }
 
     @OnClick(R.id.btn_save_edit_post)
-
     public void saveEdit() {
         String tile = title.getText().toString();
         String des = description.getText().toString();
@@ -149,12 +153,19 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
 
     @Override
     public void onPostDone() {
-
+        waitingDialog.hideDialog();
+        alertDialog.showAlertDialog("Done", "Click ok to back to previous screen");
+        alertDialog.setListener(new CustomAlertDialog.AlertListener() {
+            @Override
+            public void onOkClicked() {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
     public void onUploadSingleImageDone() {
-
+        imagePickerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -184,6 +195,6 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
 
     @Override
     public void getPostFail() {
-
+        alertDialog.showAlertDialog("Error", "Can not complete action");
     }
 }

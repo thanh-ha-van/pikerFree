@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-        homePresenter = new HomePresenter(this.getContext(), this);
         initData();
         initView();
         return view;
@@ -83,6 +82,7 @@ public class HomeFragment extends Fragment
     }
 
     private void initData() {
+        homePresenter = new HomePresenter(this.getContext(), this);
         homePresenter.getLocalData();
     }
 

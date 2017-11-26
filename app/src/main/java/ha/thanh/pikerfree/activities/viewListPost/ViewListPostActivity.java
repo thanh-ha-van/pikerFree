@@ -1,0 +1,61 @@
+package ha.thanh.pikerfree.activities.viewListPost;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import butterknife.BindView;
+import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.viewPost.PostActivity;
+import ha.thanh.pikerfree.adapters.PostAdapter;
+import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomTextView;
+import ha.thanh.pikerfree.utils.Utils;
+
+public class ViewListPostActivity extends AppCompatActivity implements ViewListPostInterface.RequiredViewOps, PostAdapter.ItemClickListener{
+
+
+    @BindView(R.id.rv_my_post)
+    public RecyclerView rvPost;
+    @BindView(R.id.tv_title)
+    public CustomTextView tvTitle;
+    private ViewListPostPresenter presenter;
+    PostAdapter adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_list_post);
+        initData();
+        initView();
+    }
+
+    private void initData() {
+        Intent intent = getIntent();
+        presenter.currentCategory = intent.getIntExtra(Constants.CATEGORY, 8);
+        presenter = new ViewListPostPresenter(this, this);
+        presenter.getPostData();
+    }
+
+    private void initView() {
+        tvTitle.setText(Utils.getTextFromIntCategory(presenter.currentCategory));
+        adapter = new PostAdapter(this, presenter.getPostList(), this, presenter.getUserLat(), presenter.getUserLng());
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvPost.setLayoutManager(layoutManager);
+        rvPost.setAdapter(adapter);
+    }
+    @Override
+    public void onItemClick(int position) {
+        Intent in = new Intent(this, PostActivity.class);
+        in.putExtra(Constants.POST_VIEW, presenter.getPostList().get(position).getPostId());
+        startActivity(in);
+    }
+
+    @Override
+    public void onGetPostDone() {
+
+    }
+}

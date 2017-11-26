@@ -72,6 +72,12 @@ public class NewPostActivity extends AppCompatActivity
         recyclerViewImage.requestFocus();
     }
 
+    @OnClick(R.id.ic_back)
+
+    public void getBack() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.edit_images)
     public void goEditImage() {
         Intent intent = new Intent(this, GalleryActivity.class);

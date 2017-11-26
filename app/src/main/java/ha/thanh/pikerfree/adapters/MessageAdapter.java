@@ -13,7 +13,6 @@ import java.util.List;
 
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.Messages.Message;
-import ha.thanh.pikerfree.models.Messages.MineMess;
 import ha.thanh.pikerfree.utils.Utils;
 
 
@@ -35,33 +34,30 @@ public class MessageAdapter extends RecyclerView.Adapter {
         return mMessageList.size();
     }
 
-    // Determines the appropriate ViewType according to the sender of the message.
     @Override
     public int getItemViewType(int position) {
-        MineMess message = (MineMess) mMessageList.get(position);
 
+        Message message = mMessageList.get(position);
         if (message.getAuthor().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-// If the current user is the sender of the message
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
-// If some other user sent the message
             return VIEW_TYPE_MESSAGE_RECEIVED;
         }
     }
 
-    // Inflates the appropriate layout according to the ViewType.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View view;
 
         if (viewType == VIEW_TYPE_MESSAGE_SENT) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_message_mine, parent, false);
-            return new SentMessageHolder(view);
+            return new MessageHolder(view);
         } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_message_their, parent, false);
-            return new ReceivedMessageHolder(view);
+            return new MessageHolder(view);
         }
 
         return null;
@@ -69,43 +65,24 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MineMess message = (MineMess) mMessageList.get(position);
 
-        switch (holder.getItemViewType()) {
-            case VIEW_TYPE_MESSAGE_SENT:
-                ((SentMessageHolder) holder).bind(message);
-                break;
-            case VIEW_TYPE_MESSAGE_RECEIVED:
-                ((ReceivedMessageHolder) holder).bind(message);
-        }
+        Message message = mMessageList.get(position);
+
+        ((MessageHolder) holder).bind(message);
+
     }
 
-    private class SentMessageHolder extends RecyclerView.ViewHolder {
+    private class MessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText;
 
-        SentMessageHolder(View itemView) {
+        MessageHolder(View itemView) {
             super(itemView);
 
             messageText = (TextView) itemView.findViewById(R.id.tv_mess_content);
             timeText = (TextView) itemView.findViewById(R.id.tv_mess_time);
         }
 
-        void bind(MineMess message) {
-            messageText.setText(message.getText());
-            timeText.setText(Utils.getTimeString(message.getTime()));
-        }
-    }
-
-    private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText;
-
-        ReceivedMessageHolder(View itemView) {
-            super(itemView);
-            messageText = (TextView) itemView.findViewById(R.id.tv_mess_content);
-            timeText = (TextView) itemView.findViewById(R.id.tv_mess_time);
-        }
-
-        void bind(MineMess message) {
+        void bind(Message message) {
             messageText.setText(message.getText());
             timeText.setText(Utils.getTimeString(message.getTime()));
         }
