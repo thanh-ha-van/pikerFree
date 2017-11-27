@@ -19,7 +19,7 @@
             android:id="@+id/ic_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="10dp"
+            android:padding="14dp"
             android:src="@drawable/ic_back"
             android:tint="@color/white"/>
 

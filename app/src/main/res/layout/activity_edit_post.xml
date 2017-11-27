@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_back"
             android:tint="@color/white"
-            android:padding="10dp"/>
+            android:padding="14dp"/>
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"

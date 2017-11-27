@@ -7,14 +7,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomTextView;
+import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.utils.Utils;
 
-public class ViewListPostActivity extends AppCompatActivity implements ViewListPostInterface.RequiredViewOps, PostAdapter.ItemClickListener{
+public class ViewListPostActivity extends AppCompatActivity implements ViewListPostInterface.RequiredViewOps, PostAdapter.ItemClickListener {
 
 
     @BindView(R.id.rv_my_post)
@@ -23,6 +25,7 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     public CustomTextView tvTitle;
     private ViewListPostPresenter presenter;
     PostAdapter adapter;
+    WaitingDialog waitingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +36,17 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     }
 
     private void initData() {
+
+        waitingDialog = new WaitingDialog(this);
+        waitingDialog.showDialog();
+        presenter = new ViewListPostPresenter(this, this);
         Intent intent = getIntent();
         presenter.currentCategory = intent.getIntExtra(Constants.CATEGORY, 8);
-        presenter = new ViewListPostPresenter(this, this);
-        presenter.getPostData();
+
     }
 
     private void initView() {
+        ButterKnife.bind(this);
         tvTitle.setText(Utils.getTextFromIntCategory(presenter.currentCategory));
         adapter = new PostAdapter(this, presenter.getPostList(), this, presenter.getUserLat(), presenter.getUserLng());
         LinearLayoutManager layoutManager =
@@ -47,6 +54,7 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
     }
+
     @Override
     public void onItemClick(int position) {
         Intent in = new Intent(this, PostActivity.class);
@@ -57,5 +65,7 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     @Override
     public void onGetPostDone() {
 
+        waitingDialog.hideDialog();
+        adapter.notifyDataSetChanged();
     }
 }

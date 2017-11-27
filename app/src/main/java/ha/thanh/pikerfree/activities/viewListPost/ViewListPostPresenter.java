@@ -45,6 +45,7 @@ class ViewListPostPresenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postCount = dataSnapshot.getValue(int.class);
+                getAllPostData();
             }
 
             @Override
@@ -55,6 +56,12 @@ class ViewListPostPresenter {
         postCountRef.addListenerForSingleValueEvent(eventListener);
     }
 
+    void getAllPostData() {
+        for (int i = postCount; i >= 0; i--) {
+            getPostData(i + "");
+        }
+    }
+
     double getUserLat() {
         return mModel.getUserLat();
     }
@@ -63,29 +70,47 @@ class ViewListPostPresenter {
         return mModel.getUserLng();
     }
 
-    void getPostData() {
-
+    void getPostData(final String id) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < postCount; i++) {
-                    DatabaseReference postRef;
-                    postRef = database
-                            .getReference("posts")
-                            .child(i + "");
-                    postRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            postList.add(dataSnapshot.getValue(Post.class));
-                            mView.onGetPostDone();
+                DatabaseReference postRef;
+                postRef = database
+                        .getReference("posts");
+                postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(id)) {
+                            getData(id);
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
-                }
+                    }
+                });
+            }
+        });
+    }
+
+    private void getData(final String id) {
+
+        DatabaseReference postRef;
+        postRef = database
+                .getReference("posts")
+                .child(id);
+        postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                postList.add(dataSnapshot.getValue(Post.class));
+                mView.onGetPostDone();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
