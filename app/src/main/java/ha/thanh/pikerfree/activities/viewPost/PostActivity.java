@@ -72,6 +72,8 @@ public class PostActivity extends AppCompatActivity implements
     CustomTextView sendRequest;
     @BindView(R.id.tv_post_category)
     CustomTextView tvCategory;
+    @BindView(R.id.tv_no_requesting_user)
+    CustomTextView noRequestingUser;
 
     @BindView(R.id.view_owner)
     View ownerView;
@@ -119,7 +121,12 @@ public class PostActivity extends AppCompatActivity implements
 
     @OnClick(R.id.tv_send_request)
     public void setSendRequest() {
-        mPresenter.showConfirmDialog();
+
+        if (mPresenter.isUserOwner) {
+            showConfirmDialog(getResources().getString(R.string.confirm_delete));
+        } else {
+            showConfirmDialog(getResources().getString(R.string.confirm_request));
+        }
     }
 
     @Override
@@ -146,9 +153,7 @@ public class PostActivity extends AppCompatActivity implements
         ButterKnife.bind(this);
         confirmDialog = new CustomYesNoDialog(this, this);
         alertDialog = new CustomAlertDialog(this);
-
         scrollView.setVisibility(View.INVISIBLE);
-
         imageSlideAdapter = new ImageSlideAdapter(this, mPresenter.getImagePostList());
         vpImageSlide.setAdapter(imageSlideAdapter);
 
@@ -162,6 +167,7 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onGetRequestingUserDone() {
+        noRequestingUser.setVisibility(View.GONE);
         requestingUserView.setVisibility(View.VISIBLE);
         userAdapter.notifyDataSetChanged();
     }
@@ -239,15 +245,22 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void getOwnerImageDone(Uri uri) {
-        Glide.with(this)
-                .load(uri)
-                .apply(new RequestOptions()
-                        .error(R.drawable.action_button_bg)
-                        .centerCrop()
-                        .dontAnimate()
-                        .override(200, 200)
-                        .dontTransform())
-                .into(ownerPic);
+        try {
+            Glide.with(this)
+                    .load(uri)
+                    .apply(new RequestOptions()
+                            .error(R.drawable.action_button_bg)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(200, 200)
+                            .dontTransform())
+                    .into(ownerPic);
+        }
+        catch (IllegalArgumentException e)
+        {
+            e.getMessage();
+        }
+
     }
 
     @Override
@@ -282,18 +295,21 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onAlreadyRequested() {
         alertDialog.showAlertDialog("Uh oh!", "You already send the request before.");
+        alertDialog.setListener(null);
     }
 
     @Override
     public void onRequestSent() {
 
         alertDialog.showAlertDialog("Done", "Your request has been sent to owner. Now just wait for their response.");
-
+        alertDialog.setListener(null);
+        waitingDialog.hideDialog();
+        userAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showConfirmDialog(String mess) {
-        confirmDialog.showAlertDialog("Confirm Action", mess);
+        confirmDialog.showAlertDialog("Confirm", mess);
     }
 
     @Override

@@ -28,7 +28,7 @@
         <LinearLayout
             android:id="@+id/view_manage"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -58,7 +58,7 @@
         <LinearLayout
             android:id="@+id/view_privacy"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -88,7 +88,7 @@
         <LinearLayout
             android:id="@+id/view_notification"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -118,7 +118,7 @@
         <LinearLayout
             android:id="@+id/view_about"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -148,7 +148,7 @@
         <LinearLayout
             android:id="@+id/view_help"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -179,7 +179,7 @@
         <LinearLayout
             android:id="@+id/view_log_out"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">

@@ -36,7 +36,7 @@ class PostPresenter {
     private List<User> requestingUsers;
     private Post post;
     private Handler handler;
-    private boolean isUserOwner = false;
+    public boolean isUserOwner = false;
     private Context con;
     private int postID;
 
@@ -112,8 +112,8 @@ class PostPresenter {
                             // if user is owner then show requesting list and notify text to UI
                             mView.onUserIsOwner();
                             isUserOwner = true;
-                            getRequestingUserList();
                         }
+                        getRequestingUserList();
                         getOwnerData(post.getOwnerId());
                     }
 
@@ -125,15 +125,6 @@ class PostPresenter {
                 });
             }
         });
-    }
-
-    void showConfirmDialog() {
-
-        if (isUserOwner) {
-            mView.showConfirmDialog(con.getResources().getString(R.string.confirm_delete));
-        } else {
-            mView.showConfirmDialog(con.getResources().getString(R.string.confirm_request));
-        }
     }
 
     void handleRequestOrDelete() {
@@ -164,7 +155,6 @@ class PostPresenter {
         DatabaseReference userPost;
         userPost = database.getReference("users").child("" + dataUser.getId()).child("posts");
         userPost.setValue(posts);
-
         mView.onDeleteDone();
 
     }

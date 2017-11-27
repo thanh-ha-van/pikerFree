@@ -49,7 +49,7 @@ class HomePresenter {
 
 
     void loadAllMyPost() {
-        postList.removeAll(getPostList());
+        postList.clear();
         handler.post(new Runnable() {
             @Override
             public void run() {

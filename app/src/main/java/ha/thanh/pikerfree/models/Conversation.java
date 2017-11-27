@@ -11,6 +11,9 @@ public class Conversation {
     private String conversationId;
     private int lastMessId;
 
+    public Conversation() {
+    }
+
     public Conversation(String idUser1, String idUser2, String conversationId, int lastMessId) {
         this.idUser1 = idUser1;
         this.idUser2 = idUser2;

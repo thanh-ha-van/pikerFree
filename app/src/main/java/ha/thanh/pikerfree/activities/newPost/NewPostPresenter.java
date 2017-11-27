@@ -158,9 +158,9 @@ class NewPostPresenter {
             @Override
             public void run() {
                 if (isGetDataUser) {
-                    DatabaseReference userPref;
-                    userPref = database.getReference("users").child(firebaseUser.getUid());
-                    userPref.setValue(dataUser);
+                    DatabaseReference userPostPref;
+                    userPostPref = database.getReference("users").child(firebaseUser.getUid()).child("post");
+                    userPostPref.setValue(dataUser.getPosts());
                     isUpdatedUserDatabase = true;
                     checkIfCanHideDialog();
                 } else {

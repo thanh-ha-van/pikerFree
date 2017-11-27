@@ -78,6 +78,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
+                android:layout_marginStart="60dp"
                 android:background="@color/gray" />
 
             <android.support.v7.widget.RecyclerView
@@ -91,6 +92,8 @@
                 android:id="@+id/edit_images"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/plate_shade"
@@ -107,6 +110,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
+                android:layout_marginStart="60dp"
                 android:background="@color/gray" />
 
             <LinearLayout
@@ -141,6 +145,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
+                android:layout_marginStart="60dp"
                 android:background="@color/gray" />
 
             <LinearLayout
@@ -175,6 +180,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
+                android:layout_marginStart="60dp"
                 android:background="@color/gray" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
@@ -183,6 +189,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
+                android:textStyle="bold"
                 android:background="@drawable/plate"
                 android:gravity="center"
                 android:text="@string/post"

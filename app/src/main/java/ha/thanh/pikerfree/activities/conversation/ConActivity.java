@@ -65,6 +65,8 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         messageAdapter = new MessageAdapter(this, presenter.getMessageList());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         rvMess.setLayoutManager(layoutManager);
         rvMess.setAdapter(messageAdapter);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

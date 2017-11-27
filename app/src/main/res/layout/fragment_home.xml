@@ -32,6 +32,7 @@
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textStyle="bold"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
@@ -50,20 +51,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/gray"
         android:orientation="horizontal">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_new_post"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
             android:layout_weight="1"
+            android:background="@drawable/plate_green_shade"
             android:gravity="center"
             android:text="New post"
             android:textAllCaps="true"
@@ -74,7 +73,10 @@
             android:id="@+id/btn_edit_profile"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
             android:layout_weight="1"
+            android:background="@drawable/plate_green_shade"
             android:gravity="center"
             android:text="Edit profile"
             android:textAllCaps="true"
@@ -84,28 +86,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_loading_post"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:background="@color/colorAccent"
+            android:layout_height="26dp"
+            android:background="@color/gray"
             android:gravity="center"
             android:text="Syncing data..."
             android:textColor="@color/white"
             android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"

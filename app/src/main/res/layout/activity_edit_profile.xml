@@ -134,6 +134,7 @@
             android:background="@drawable/plate"
             android:gravity="center"
             android:text="Save"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"

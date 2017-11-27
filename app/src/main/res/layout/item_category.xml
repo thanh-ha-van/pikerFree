@@ -2,8 +2,6 @@
     android:id="@+id/activity_main_inference"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
 <View
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>

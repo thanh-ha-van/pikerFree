@@ -7,6 +7,9 @@ public class Message {
     private String text;
     private long time;
 
+    public Message() {
+    }
+
     public Message(int id, String author, String text, long time) {
         this.id = id;
         this.author = author;

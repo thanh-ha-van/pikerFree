@@ -52,6 +52,7 @@
             android:background="@drawable/plate"
             android:gravity="center"
             android:text="@string/reset_pass"
+            android:textStyle="bold"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="16sp" />

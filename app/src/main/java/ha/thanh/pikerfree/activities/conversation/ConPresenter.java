@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,6 +44,10 @@ class ConPresenter {
     private int lastMessId;
     private List<Message> messageList = new ArrayList<>();
 
+
+    private ArrayList<String> conversationList1;
+    private ArrayList<String> conversationList2;
+
     List<Message> getMessageList() {
         return messageList;
     }
@@ -56,10 +61,14 @@ class ConPresenter {
     }
 
     private void initData() {
+
+        conversationList1 = new ArrayList<>();
+        conversationList2 = new ArrayList<>();
         handler = new android.os.Handler();
         database = FirebaseDatabase.getInstance();
         OPUser = new User();
         userId = mModel.getUserIdFromSharePref();
+        getCurrentConversation();
         if (userId.equals(id1)) {
             getOPData(id2);
         } else {
@@ -68,21 +77,58 @@ class ConPresenter {
         checkIfAlreadyHave();
     }
 
-    private void checkIfAlreadyHave() {
+    private void getCurrentConversation() {
 
-        // The conversation id is the id of user1 and user 2 stand together.
-        // The conversation id will be stored in users
-        // database and conversations database at the same time.
-        // If Init a new conversations, the database at user1, user2 and conversations will be change.
-        // after that. updating the conversation will be easy, delete a conversation will be logic.
-        // The content of conversation is inside the conversations preference.
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference userPref;
+                userPref = database.getReference("users").child(id1).child(Constants.MESS_STRING);
+                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
+                        };
+
+                        conversationList1 = dataSnapshot.getValue(t);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                DatabaseReference user2Pref;
+                user2Pref = database.getReference("users").child(id2).child(Constants.MESS_STRING);
+                user2Pref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
+                        };
+
+                        conversationList2 = dataSnapshot.getValue(t);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void checkIfAlreadyHave() {
 
         handler.post(new Runnable() {
             @Override
             public void run() {
                 DatabaseReference userPref;
                 userPref = database
-                        .getReference("users").child(userId).child("mess");
+                        .getReference(Constants.CONVERSATION);
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -106,57 +152,75 @@ class ConPresenter {
 
     private void startNewConversation() {
 
-        // To start  a new conversation is to change data at user1, user2 and conversations database itself.
-        // For user1 and user2 will add the conversation id into mess preference.
-        // For conversations preference is add the new conversation id. easy. logic. fuck it im genius.
-
         conversation = new Conversation(id1, id2, id1 + id2, 0);
+        if (conversationList1 == null)
+            conversationList1 = new ArrayList<>();
+        if (conversationList2 == null)
+            conversationList2 = new ArrayList<>();
+
+        conversationList1.add(id1 + id2);
+        conversationList2.add(id1 + id2);
+
         handler.post(new Runnable() {
             @Override
             public void run() {
 
-                // add to conversations
+                DatabaseReference user1PostPref;
+                user1PostPref = database.getReference("users").child(id1).child(Constants.MESS_STRING);
+                user1PostPref.setValue(conversationList1);
+
+                DatabaseReference user2PostPref;
+                user2PostPref = database.getReference("users").child(id2).child(Constants.MESS_STRING);
+                user2PostPref.setValue(conversationList2);
+
                 DatabaseReference conPref;
                 conPref = database.getReference(Constants.CONVERSATION).child(id1 + id2);
                 conPref.setValue(conversation);
-                // add to user1
-                DatabaseReference user1Pref;
-                user1Pref = database.getReference(Constants.USERS_STRING)
-                        .child(id1)
-                        .child(Constants.MESS_STRING)
-                        .child(id1 + id2);
-                user1Pref.setValue(conversation);
-                // add to user2
-                DatabaseReference user2Pref;
-                user2Pref = database.getReference(Constants.USERS_STRING)
-                        .child(id2)
-                        .child(Constants.MESS_STRING)
-                        .child(id1 + id2);
-                user2Pref.setValue(conversation);
-
-                // at this time the conversation is available so just be an old one.
                 loadOldConversation(id1 + id2);
             }
         });
     }
 
     private void loadOldConversation(final String id) {
+
+        final ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                conversation = dataSnapshot.getValue(Conversation.class);
+                getMessData(id);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        DatabaseReference conPref;
+        conPref = database
+                .getReference(Constants.CONVERSATION)
+                .child(id);
+        conPref.addValueEventListener(eventListener);
+
+    }
+
+    private void getMessData(final String id) {
         handler.post(new Runnable() {
             @Override
             public void run() {
                 DatabaseReference conPref;
                 conPref = database
                         .getReference(Constants.CONVERSATION)
-                        .child(id);
+                        .child(id).child("lastMessId");
                 conPref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        conversation = dataSnapshot.getValue(Conversation.class);
                         showData();
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+
                     }
                 });
             }
@@ -183,7 +247,7 @@ class ConPresenter {
                 messPref.setValue(message);
             }
         });
-        
+
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -197,6 +261,7 @@ class ConPresenter {
     }
 
     private void showData() {
+
         if (conversation.getLastMessId() != 0) {
             lastMessId = conversation.getLastMessId();
             currentPull = lastMessId;
@@ -229,7 +294,7 @@ class ConPresenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Message mess = dataSnapshot.getValue(Message.class);
-                messageList.add(messageList.size() - 1, mess);
+                messageList.add(mess);
                 mView.onGetMessDone(mess);
             }
 

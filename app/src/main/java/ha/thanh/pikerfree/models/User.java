@@ -13,7 +13,6 @@ public class User {
     private String address;
     private double lat = 0;
     private double lng = 0;
-    private boolean isAdmin = false;
     private String avatarLink = "userImages/default_profile.jgp";
     private String email = "";
     private ArrayList<Integer> posts;
@@ -75,14 +74,6 @@ public class User {
 
     public void setLng(double lng) {
         this.lng = lng;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 
     public String getAvatarLink() {
