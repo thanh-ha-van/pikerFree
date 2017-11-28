@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#4299E9</color>
-    <color name="blueShade">#A04299E9</color>
+    <color name="blueShade">#AA4299E9</color>
     <color name="colorPrimaryDark">#2e323c</color>
     <color name="colorAccent">#4C515C</color>
     <color name="colorAccentShade">#A04C515C</color>
@@ -13,7 +13,7 @@
     <color name="text_black_3">#4C515C</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="green">#31781f</color>
-    <color name="greenShade">#A031781f</color>
+    <color name="greenShade">#AA31781f</color>
     <color name="green_light">#319916</color>
     <color name="orange">#EC5D10</color><!--#-->
     <color name="colorOrangeShade">#90EC5D10</color><!--#-->

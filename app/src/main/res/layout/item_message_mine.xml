@@ -17,6 +17,7 @@
             android:id="@+id/tv_mess_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:layout_marginEnd="10dp"
             android:gravity="end"
             android:textColor="@color/GrayScale" />

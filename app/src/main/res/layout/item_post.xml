@@ -62,7 +62,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="10dp"
+                    android:padding="11dp"
                     android:src="@drawable/seclected_dot" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -80,7 +80,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="10dp"
+                    android:padding="11dp"
                     android:src="@drawable/seclected_dot" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
