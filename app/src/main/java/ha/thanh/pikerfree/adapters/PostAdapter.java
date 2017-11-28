@@ -1,7 +1,6 @@
 package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -96,7 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                                         .placeholder(R.drawable.loading)
                                         .centerCrop()
                                         .dontAnimate()
-                                        .override(380, 240)
+                                        .override(390, 260)
                                         .dontTransform())
                                 .into(holder.imgPostImage);
                     }

@@ -1,5 +1,12 @@
 package ha.thanh.pikerfree.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -41,7 +48,6 @@ public class Utils {
                 return "OTHERS";
         }
     }
-
 
     public static String getTimeString(long timestamp) {
         try {

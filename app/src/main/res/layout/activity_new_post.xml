@@ -72,7 +72,7 @@
                     android:hint="@string/title_of_item_hint"
                     android:singleLine="true"
                     android:textColor="@color/text_black_3"
-                    android:textColorHint="@color/text_black_3"
+                    android:textColorHint="@color/GrayScale"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -137,7 +137,7 @@
                     android:inputType="textMultiLine"
                     android:padding="@dimen/item_padding_small"
                     android:textColor="@color/text_black_3"
-                    android:textColorHint="@color/text_black_3"
+                    android:textColorHint="@color/GrayScale"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -171,7 +171,7 @@
                     android:hint="@string/select_a_category"
                     android:padding="@dimen/item_padding_small"
                     android:textColor="@color/text_black_3"
-                    android:textColorHint="@color/text_black_3"
+                    android:textColorHint="@color/GrayScale"
                     android:textSize="16sp" />
 
             </LinearLayout>

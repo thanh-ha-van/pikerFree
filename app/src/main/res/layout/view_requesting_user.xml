@@ -37,6 +37,7 @@
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/tv_no_requesting_user"
         android:layout_width="match_parent"
+        android:textSize="14sp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"

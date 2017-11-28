@@ -25,7 +25,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
@@ -38,7 +38,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
@@ -52,7 +52,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
@@ -66,7 +66,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
