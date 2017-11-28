@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/whiteShade"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activities.viewPost.PostActivity">
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -56,7 +56,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/whiteShade"
             android:orientation="vertical">
 
             <android.support.v4.view.ViewPager
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_gravity="center"
-                android:background="@color/colorAccent" />
+                android:background="@color/gray" />
 
             <include
                 layout="@layout/view_post_infor"
@@ -83,7 +83,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="2dp"
                     android:src="@drawable/ic_noun"
-                    android:tint="@color/white" />
+                    android:tint="@color/green" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_meet_owner"
@@ -94,7 +94,7 @@
                     android:paddingEnd="10dp"
                     android:paddingStart="10dp"
                     android:text="@string/meet_owner"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -135,7 +135,7 @@
                         android:lines="1"
                         android:paddingEnd="4dp"
                         android:paddingStart="4dp"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
                     <include
@@ -163,15 +163,10 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/gray" />
-
-    <LinearLayout
         android:id="@+id/view_bottom_action"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@color/gray"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -183,7 +178,7 @@
             android:gravity="center"
             android:text="@string/chat"
             android:textAllCaps="true"
-            android:textColor="@color/text_black_3"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -196,7 +191,7 @@
             android:gravity="center"
             android:text="@string/send_request"
             android:textAllCaps="true"
-            android:textColor="@color/text_black_3"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

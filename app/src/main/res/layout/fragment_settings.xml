@@ -2,21 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/whiteShade"
     android:overScrollMode="never">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:padding="30dp"
             android:src="@drawable/piker"
-            android:tint="@color/white" />
+            android:tint="@color/colorPrimary" />
 
         <View
             android:layout_width="match_parent"
@@ -38,14 +36,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Manage account"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_right_arrow"
-                android:tint="@color/gray" />
+                android:tint="@color/text_black_3" />
         </LinearLayout>
 
         <View
@@ -68,14 +66,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Privacy and term"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_right_arrow"
-                android:tint="@color/white" />
+                android:tint="@color/text_black_3" />
         </LinearLayout>
 
         <View
@@ -98,14 +96,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Notification"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_right_arrow"
-                android:tint="@color/white" />
+                android:tint="@color/text_black_3" />
         </LinearLayout>
 
         <View
@@ -128,14 +126,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="About"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_right_arrow"
-                android:tint="@color/white" />
+                android:tint="@color/text_black_3" />
         </LinearLayout>
 
         <View
@@ -158,14 +156,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Help"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_right_arrow"
-                android:tint="@color/white" />
+                android:tint="@color/text_black_3" />
         </LinearLayout>
 
         <View
@@ -189,14 +187,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Log out"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_right_arrow"
-                android:tint="@color/white" />
+                android:tint="@color/text_black_3" />
         </LinearLayout>
 
         <View

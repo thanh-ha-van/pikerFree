@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activities.newPost.NewPostActivity">
@@ -12,24 +12,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/ic_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:padding="14dp"
             android:src="@drawable/ic_back"
-            android:tint="@color/white"
-            android:padding="14dp"/>
+            android:tint="@color/white" />
+
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="@string/edit_post"
             android:textAllCaps="true"
-            android:layout_marginEnd="50dp"
-            android:layout_weight="1"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>
@@ -39,13 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/colorPrimaryDark"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/whiteShade"
             android:orientation="vertical">
 
             <LinearLayout
@@ -60,7 +60,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="5dp"
                     android:src="@drawable/ic_title"
-                    android:tint="@color/white" />
+                    android:tint="@color/green" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_item_title"
@@ -70,8 +70,8 @@
                     android:background="@color/transparent"
                     android:hint="@string/title_of_item_hint"
                     android:singleLine="true"
-                    android:textColor="@color/gray"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/text_black_3"
+                    android:textColorHint="@color/text_black_3"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -85,31 +85,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_gravity="center"
-                android:background="@color/colorAccent" />
+                android:background="@color/gray" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/edit_images"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:background="@drawable/plate_shade"
+                android:layout_margin="10dp"
+                android:background="@drawable/plate_shade_blue"
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/ic_edit_profile"
                 android:gravity="center"
                 android:paddingEnd="30dp"
                 android:paddingStart="30dp"
                 android:text="Change Images"
-                android:textStyle="bold"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:tint="@color/white" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -127,7 +128,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="5dp"
                     android:src="@drawable/ic_more"
-                    android:tint="@color/white" />
+                    android:tint="@color/green" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_description"
@@ -139,8 +140,8 @@
                     android:hint="@string/short_description"
                     android:inputType="textMultiLine"
                     android:padding="@dimen/item_padding_small"
-                    android:textColor="@color/gray"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/text_black_3"
+                    android:textColorHint="@color/text_black_3"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -161,7 +162,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="10dp"
                     android:src="@drawable/ic_forward"
-                    android:tint="@color/white" />
+                    android:tint="@color/green" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_post_category"
@@ -172,8 +173,8 @@
                     android:gravity="top"
                     android:hint="@string/select_a_category"
                     android:padding="@dimen/item_padding_small"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/text_black_3"
+                    android:textColorHint="@color/text_black_3"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -195,7 +196,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="10dp"
                     android:src="@drawable/ic_flash"
-                    android:tint="@color/white" />
+                    android:tint="@color/green" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_post_status"
@@ -204,9 +205,9 @@
                     android:layout_margin="10dp"
                     android:background="@color/transparent"
                     android:gravity="top"
-                    android:text="Opening"
                     android:padding="@dimen/item_padding_small"
-                    android:textColor="@color/white"
+                    android:text="Opening"
+                    android:textColor="@color/text_black_3"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -222,13 +223,14 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
-                android:background="@drawable/plate"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/plate_green_shade"
                 android:gravity="center"
                 android:text="@string/save"
-                android:textStyle="bold"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -31,8 +31,10 @@ class ConPresenter {
 
     private String id1;
     private String id2;
+    private String conversationID;
 
     private String userId;
+    private boolean isUploadedMess = false;
     private Conversation conversation;
 
     private Handler handler;
@@ -133,9 +135,11 @@ class ConPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(id1 + id2)) {
-                            loadOldConversation(id1 + id2);
+                            createDataForConversation(id1 + id2);
+                            getConversationData(id1 + id2);
                         } else if (dataSnapshot.hasChild(id2 + id1)) {
-                            loadOldConversation(id2 + id1);
+                            createDataForConversation(id2 + id1);
+                            getConversationData(id2 + id1);
                         } else {
                             startNewConversation();
                         }
@@ -146,6 +150,24 @@ class ConPresenter {
 
                     }
                 });
+            }
+        });
+    }
+
+    private void createDataForConversation(final String id) {
+        conversationID = id;
+        final DatabaseReference userPref;
+        userPref = database
+                .getReference(Constants.CONVERSATION).child(id).child("lastMessId");
+        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lastMessId = dataSnapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
@@ -176,35 +198,13 @@ class ConPresenter {
                 DatabaseReference conPref;
                 conPref = database.getReference(Constants.CONVERSATION).child(id1 + id2);
                 conPref.setValue(conversation);
-                loadOldConversation(id1 + id2);
+                getConversationData(id1 + id2);
             }
         });
     }
 
-    private void loadOldConversation(final String id) {
 
-        final ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                conversation = dataSnapshot.getValue(Conversation.class);
-                getMessData(id);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-
-        DatabaseReference conPref;
-        conPref = database
-                .getReference(Constants.CONVERSATION)
-                .child(id);
-        conPref.addValueEventListener(eventListener);
-
-    }
-
-    private void getMessData(final String id) {
+    private void getConversationData(final String id) {
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -236,12 +236,13 @@ class ConPresenter {
     }
 
     private void uploadMess(final Message message) {
+        isUploadedMess = true;
         handler.post(new Runnable() {
             @Override
             public void run() {
                 DatabaseReference messPref;
                 messPref = database.getReference(Constants.CONVERSATION)
-                        .child(conversation.getConversationId())
+                        .child(conversationID)
                         .child(Constants.MESS_STRING)
                         .child(lastMessId + "");
                 messPref.setValue(message);
@@ -253,7 +254,7 @@ class ConPresenter {
             public void run() {
                 DatabaseReference messPref;
                 messPref = database.getReference(Constants.CONVERSATION)
-                        .child(conversation.getConversationId())
+                        .child(conversationID)
                         .child("lastMessId");
                 messPref.setValue(lastMessId);
             }
@@ -262,40 +263,46 @@ class ConPresenter {
 
     private void showData() {
 
-        if (conversation.getLastMessId() != 0) {
-            lastMessId = conversation.getLastMessId();
-            currentPull = lastMessId;
-            nextPull = currentPull - 10;
-            // show the last 10 messages to UI. If user pull show the next 10 mess;
-            while (currentPull > 0) {
-                getMessData(currentPull);
-                currentPull--;
-                if (currentPull == nextPull) {
-                    nextPull = currentPull - 10;
-                    return;
-                }
+        if (isUploadedMess) {
+            getMessData(lastMessId, true);
+            return;
+        }
+        currentPull = lastMessId;
+        nextPull = currentPull - 10;
+        // show the last 10 messages to UI. If user pull show the next 10 mess;
+        while (currentPull > 0) {
+            getMessData(currentPull, false);
+            currentPull--;
+            if (currentPull == nextPull) {
+                nextPull = currentPull - 10;
+                return;
             }
         }
+
     }
 
     void onPull() {
 
     }
 
-    private void getMessData(final int id) {
+    private void getMessData(final int id, final boolean isUpload) {
 
-        DatabaseReference userPref;
-        userPref = database
+        final DatabaseReference messPref;
+        messPref = database
                 .getReference(Constants.CONVERSATION)
-                .child(conversation.getConversationId())
+                .child(conversationID)
                 .child(Constants.MESS_STRING)
                 .child(id + "");
-        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+        messPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Message mess = dataSnapshot.getValue(Message.class);
-                messageList.add(mess);
+                if (isUpload)
+                    messageList.add(messageList.size(), mess);
+                else
+                    messageList.add(mess);
                 mView.onGetMessDone(mess);
+                messPref.removeEventListener(this);
             }
 
             @Override

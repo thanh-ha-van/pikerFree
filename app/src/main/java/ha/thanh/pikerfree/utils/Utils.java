@@ -1,27 +1,17 @@
 package ha.thanh.pikerfree.utils;
 
 import android.location.Location;
+import android.text.format.DateFormat;
 import android.util.Log;
 
-import com.firebase.client.Firebase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.models.Messages.Message;
-import ha.thanh.pikerfree.models.Post;
-import ha.thanh.pikerfree.models.User;
-
 public class Utils {
 
 
@@ -52,18 +42,6 @@ public class Utils {
         }
     }
 
-    public static List<String> getLinkImages(Post post) {
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            list.add(Constants.BASE_STORAGE_URL + "postImages/" + post.getPostId() + "/" + "image_no_" + i);
-        }
-        return list;
-    }
-
-    public Message getMessageFromId(String conversationId, int messId){
-
-        return  null;
-    }
 
     public static String getTimeString(long timestamp) {
         try {
@@ -71,7 +49,7 @@ public class Utils {
             TimeZone tz = calendar.getTimeZone();
             calendar.setTimeInMillis(timestamp);
             calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
             Date currentTimeZone = calendar.getTime();
             return sdf.format(currentTimeZone);
         } catch (Exception e) {
@@ -80,7 +58,28 @@ public class Utils {
         return "";
     }
 
+    public static String getTimeInHour(long smsTimeInMilis) {
+        Calendar smsTime = Calendar.getInstance();
+        smsTime.setTimeInMillis(smsTimeInMilis);
+
+        Calendar now = Calendar.getInstance();
+
+        final String timeFormatString = "h:mm";
+        final String dateTimeFormatString = "dd-MM-yyyy, h:mm";
+        if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE) ) {
+            return "Today " + DateFormat.format(timeFormatString, smsTime);
+        } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1  ){
+            return "Yesterday " + DateFormat.format(timeFormatString, smsTime);
+        } else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
+            return DateFormat.format(dateTimeFormatString, smsTime).toString();
+        } else {
+            return DateFormat.format("dd-MM-yyyy, h:mm", smsTime).toString();
+        }
+    }
+
     public static String getDistance(final double lat1, final double lon1, final double lat2, final double lon2) {
+
+        if (lat1 == 0 || lat2 == 0) return "Unknown";
         Location l1 = new Location("One");
         l1.setLatitude(lat1);
         l1.setLongitude(lon1);
@@ -101,7 +100,7 @@ public class Utils {
     }
 
     private static String roundOffTo2DecPlaces(double val) {
-        return String.format("%.2f", val);
+        return String.format(Locale.getDefault(),"%.2f", val);
     }
 
 }

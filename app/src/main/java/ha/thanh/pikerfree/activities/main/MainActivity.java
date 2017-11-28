@@ -18,7 +18,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ViewPagerAdapter;
 import ha.thanh.pikerfree.constants.Globals;
 import ha.thanh.pikerfree.fragments.home.HomeFragment;
-import ha.thanh.pikerfree.fragments.messages.MessagesFragment;
+import ha.thanh.pikerfree.fragments.messages.MessageFragment;
 import ha.thanh.pikerfree.fragments.news.NewsFragment;
 import ha.thanh.pikerfree.fragments.settings.SettingFragment;
 import ha.thanh.pikerfree.otherHandle.HandlePermission;
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new NewsFragment());
-        fragments.add(new MessagesFragment());
+        fragments.add(new MessageFragment());
         fragments.add(new SettingFragment());
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);

@@ -84,7 +84,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         void bind(Message message) {
             messageText.setText(message.getText());
-            timeText.setText(Utils.getTimeString(message.getTime()));
+            timeText.setText(Utils.getTimeInHour(message.getTime()));
         }
     }
 }

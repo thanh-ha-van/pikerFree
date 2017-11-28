@@ -19,18 +19,18 @@
             android:id="@+id/tv_loading_post"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:background="@color/gray"
-            android:gravity="center"
+            android:background="@color/colorPrimary"
             android:hint="Search for post..."
-            android:textColor="@color/text_black_3"
-            android:textColorHint="@color/text_black_3"
+            android:paddingStart="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent"
+            android:background="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -49,7 +49,7 @@
                     android:gravity="center"
                     android:text="Near by"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -59,7 +59,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_placeholder"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,7 +76,7 @@
                     android:gravity="center"
                     android:text="Recent"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -86,7 +86,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_time"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
         </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -104,7 +104,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -114,7 +113,7 @@
                     android:gravity="center"
                     android:text="Accessories"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -124,7 +123,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_umbrella"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -132,6 +131,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -141,7 +141,7 @@
                     android:gravity="center"
                     android:text="Baby and toys"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -151,7 +151,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_baby_trolley"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
         </LinearLayout>
@@ -160,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -169,6 +169,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -178,7 +179,7 @@
                     android:gravity="center"
                     android:text="Cloths"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -188,7 +189,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_coat"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -196,7 +197,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -206,7 +206,7 @@
                     android:gravity="center"
                     android:text="Electronics"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -216,7 +216,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_electronic"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
         </LinearLayout>
@@ -225,7 +225,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -234,7 +234,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -244,7 +243,7 @@
                     android:gravity="center"
                     android:text="Groceries"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -254,7 +253,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_shopping_basket"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -262,6 +261,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -271,7 +271,7 @@
                     android:gravity="center"
                     android:text="Home and living"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -281,7 +281,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_home"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
         </LinearLayout>
@@ -290,7 +290,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/gray"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -299,6 +299,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -308,7 +309,7 @@
                     android:gravity="center"
                     android:text="Pets"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -318,7 +319,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_rabbit"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -326,7 +327,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:orientation="vertical">
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
@@ -336,7 +336,7 @@
                     android:gravity="center"
                     android:text="Others"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp" />
 
                 <ImageView
@@ -346,7 +346,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="4dp"
                     android:src="@drawable/ic_more"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

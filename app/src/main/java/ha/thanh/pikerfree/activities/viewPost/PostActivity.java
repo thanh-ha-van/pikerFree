@@ -196,8 +196,6 @@ public class PostActivity extends AppCompatActivity implements
     public void onMapReady(GoogleMap googleMap) {
 
         this.googleMap = googleMap;
-        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(
-                this, R.raw.mapstyle_night));
     }
 
     @Override

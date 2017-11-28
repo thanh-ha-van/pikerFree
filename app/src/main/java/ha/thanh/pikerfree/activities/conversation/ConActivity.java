@@ -40,7 +40,6 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     public RecyclerView rvMess;
     @BindView(R.id.swipeRefreshLayout)
     public SwipeRefreshLayout swipeRefreshLayout;
-
     private MessageAdapter messageAdapter;
 
 
@@ -109,7 +108,7 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
                         .error(R.drawable.action_button_bg)
                         .centerCrop()
                         .dontAnimate()
-                        .override(200, 200)
+                        .override(100, 100)
                         .dontTransform())
                 .into(OPImage);
     }

@@ -2,11 +2,11 @@ package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,36 +24,40 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
-import ha.thanh.pikerfree.models.User;
+import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.utils.Utils;
 
-/**
- * Created by HaVan on 8/31/2017.
- */
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.MyViewHolder> {
 
     private List<Conversation> dataSet;
     private ItemClickListener mClickListener;
     private Context mConText;
-    private double lat;
-    private double lng;
+    private android.os.Handler handler;
     private String currentUserId;
+    private FirebaseDatabase database;
 
-    public ConversationAdapter(Context context, List<Conversation> dataSet, ItemClickListener listener, double lat, double lng) {
+
+    public ConversationAdapter(Context context, List<Conversation> dataSet, ItemClickListener listener) {
 
         this.dataSet = dataSet;
         this.mConText = context;
         this.mClickListener = listener;
+        database = FirebaseDatabase.getInstance();
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        handler = new Handler();
     }
 
+    // todo get OP Image, name from op id
+    // todo get LastMess data from last mess id
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.owner_pic)
-        ImageView OpImage;
+        @BindView(R.id.op_pic)
+        CircleImageView OpImage;
         @BindView(R.id.tv_last_mess)
         TextView tvLastMess;
         @BindView(R.id.tv_time)
@@ -85,11 +89,85 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
+        final String user2Id = getOpString(position);
+        // get op images
+        FirebaseStorage
+                .getInstance()
+                .getReference()
+                .child("userImages")
+                .child(user2Id + ".jpg").getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(mConText)
+                                .load(uri)
+                                .apply(new RequestOptions()
+                                        .placeholder(R.drawable.loading)
+                                        .centerCrop()
+                                        .dontAnimate()
+                                        .override(100, 100)
+                                        .dontTransform())
+                                .into(holder.OpImage);
+                    }
+                });
+
+        // Get OP name
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                final DatabaseReference userPref;
+                userPref = database
+                        .getReference("users")
+                        .child(user2Id).child("name");
+                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        holder.tvOpName.setText(dataSnapshot.getValue(String.class));
+                        userPref.removeEventListener(this);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+        // Get last mess data
+
+        final DatabaseReference messPref;
+        messPref = database
+                .getReference(Constants.CONVERSATION)
+                .child(dataSet.get(position).getConversationId())
+                .child(Constants.MESS_STRING)
+                .child(dataSet.get(position).getLastMessId() + "");
+        messPref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Message mess = dataSnapshot.getValue(Message.class);
+                holder.tvLastMess.setText(mess.getText());
+                holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
+                messPref.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return dataSet.size();
+    }
+
+    private String getOpString(int position) {
+        if (dataSet.get(position).getIdUser1().equals(currentUserId))
+            return dataSet.get(position).getIdUser2();
+        return dataSet.get(position).getIdUser1();
     }
 
     public interface ItemClickListener {
