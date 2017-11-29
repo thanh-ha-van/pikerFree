@@ -26,8 +26,18 @@ public class CustomTextView extends android.support.v7.widget.AppCompatTextView 
     }
 
     private void init(AttributeSet attrs) {
-        if (attrs != null) {
-            setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf"), getTypeface().getStyle());
-        }
+        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
+        this.setTypeface(font);
+    }
+    @Override
+    public void setTypeface(Typeface tf, int style) {
+        tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
+        super.setTypeface(tf, style);
+    }
+
+    @Override
+    public void setTypeface(Typeface tf) {
+        tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
+        super.setTypeface(tf);
     }
 }

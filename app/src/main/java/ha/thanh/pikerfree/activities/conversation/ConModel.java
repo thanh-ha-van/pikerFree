@@ -22,11 +22,4 @@ public class ConModel {
         return sharedPreferences.getString(Constants.USER_ID, "");
 
     }
-    double getUserLat() {
-        return  gpsTracker.getLatitude();
-    }
-    double getUserLng() {
-        return  gpsTracker.getLongitude();
-    }
-
 }

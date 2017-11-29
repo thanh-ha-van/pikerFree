@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
@@ -60,6 +61,11 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
         Intent in = new Intent(this, PostActivity.class);
         in.putExtra(Constants.POST_VIEW, presenter.getPostList().get(position).getPostId());
         startActivity(in);
+    }
+
+    @OnClick(R.id.ic_back)
+    public void getBack() {
+        onBackPressed();
     }
 
     @Override

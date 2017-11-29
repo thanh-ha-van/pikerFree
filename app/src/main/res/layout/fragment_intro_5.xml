@@ -24,8 +24,7 @@
             android:gravity="center"
             android:text="@string/intro_5"
             android:textColor="@color/gray"
-            android:textSize="18sp"
-            app:font="Trebuchet.ttf" />
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <ha.thanh.pikerfree.customviews.CustomTextView

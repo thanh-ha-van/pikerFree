@@ -35,6 +35,7 @@ class ConPresenter {
 
     private String userId;
     private boolean isUploadedMess = false;
+    private boolean isFirstTime = true;
     private Conversation conversation;
 
     private Handler handler;
@@ -156,13 +157,14 @@ class ConPresenter {
 
     private void createDataForConversation(final String id) {
         conversationID = id;
-        final DatabaseReference userPref;
-        userPref = database
+        final DatabaseReference lassMessIdPref;
+        lassMessIdPref = database
                 .getReference(Constants.CONVERSATION).child(id).child("lastMessId");
-        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+        lassMessIdPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 lastMessId = dataSnapshot.getValue(Integer.class);
+                lassMessIdPref.removeEventListener(this);
             }
 
             @Override
@@ -215,7 +217,9 @@ class ConPresenter {
                 conPref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        lastMessId = dataSnapshot.getValue(Integer.class);
                         showData();
+                        isFirstTime = false;
                     }
 
                     @Override
@@ -263,18 +267,24 @@ class ConPresenter {
 
     private void showData() {
 
-        if (isUploadedMess) {
+        if (isUploadedMess ) {
+            getMessData(lastMessId, true);
+            return;
+        }
+        if(!isFirstTime){
+            // update single value of last mess id
             getMessData(lastMessId, true);
             return;
         }
         currentPull = lastMessId;
-        nextPull = currentPull - 10;
-        // show the last 10 messages to UI. If user pull show the next 10 mess;
+        nextPull = currentPull - 8;
+        // show the last 8 messages to UI. If user pull show the next 10 mess;
         while (currentPull > 0) {
             getMessData(currentPull, false);
             currentPull--;
             if (currentPull == nextPull) {
-                nextPull = currentPull - 10;
+                nextPull = currentPull - 8;
+                mView.onPullDone();
                 return;
             }
         }
@@ -283,9 +293,24 @@ class ConPresenter {
 
     void onPull() {
 
+        if (currentPull == 0) mView.onEndOfConversation();
+        nextPull = currentPull - 10;
+        // show the last 10 messages to UI. If user pull show the next 10 mess;
+        while (currentPull > 0) {
+            getMessData(currentPull, false);
+            currentPull--;
+            if (currentPull == nextPull) {
+                nextPull = currentPull - 10;
+                mView.onPullDone();
+                return;
+            }
+            if (currentPull == 0) {
+                mView.onEndOfConversation();
+            }
+        }
     }
 
-    private void getMessData(final int id, final boolean isUpload) {
+    private void getMessData(final int id, final boolean isUploadedMess) {
 
         final DatabaseReference messPref;
         messPref = database
@@ -297,8 +322,8 @@ class ConPresenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Message mess = dataSnapshot.getValue(Message.class);
-                if (isUpload)
-                    messageList.add(messageList.size(), mess);
+                if (isUploadedMess)
+                    messageList.add(0, mess);
                 else
                     messageList.add(mess);
                 mView.onGetMessDone(mess);

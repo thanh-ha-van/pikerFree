@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -77,10 +78,10 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     }
 
     @OnClick(R.id.btn_send)
-    public void sendNewMess(){
-        String textTosend = tvMessToSend.getText().toString();
-        if(textTosend.equals("") ||textTosend.equals("\n"))
-             return;
+    public void sendNewMess() {
+        String textToSend = tvMessToSend.getText().toString();
+        if (textToSend.equals("") || textToSend.equals("\n"))
+            return;
         presenter.onUserAddNewMess(tvMessToSend.getText().toString());
         tvMessToSend.setText("");
     }
@@ -91,8 +92,26 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     }
 
     @Override
+    public void onPullDone() {
+
+        swipeRefreshLayout.setRefreshing(false);
+
+    }
+
+    @Override
     public void OnNewMess(Message message) {
         messageAdapter.notifyDataSetChanged();
+        rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onEndOfConversation() {
+        rvMess.smoothScrollToPosition(messageAdapter.getItemCount()-1);
+        swipeRefreshLayout.setRefreshing(false);
+        Toast.makeText(this, "No more messages", Toast.LENGTH_SHORT).show();
     }
 
     @Override
