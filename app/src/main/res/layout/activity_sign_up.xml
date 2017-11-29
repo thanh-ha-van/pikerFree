@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_shade"
+            android:background="@drawable/plate_white_shade"
             android:hint="@string/input_email"
             android:inputType="textEmailAddress"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
@@ -33,11 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_shade"
+            android:background="@drawable/plate_white_shade"
             android:hint="@string/input_username"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
@@ -46,12 +46,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_shade"
+            android:background="@drawable/plate_white_shade"
             android:hint="@string/email"
             android:inputType="textPassword"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
@@ -60,12 +60,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_shade"
+            android:background="@drawable/plate_white_shade"
             android:hint="@string/password_confirm"
             android:inputType="textPassword"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
@@ -87,7 +87,7 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:text="@string/already_have_an_account"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView

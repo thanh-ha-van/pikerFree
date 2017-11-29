@@ -19,18 +19,18 @@
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/piker"
-            android:tint="@color/white" />
+            android:tint="@color/colorPrimaryDark" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_email_login"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_shade"
+            android:background="@drawable/plate_white_shade"
             android:hint="@string/input_email"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
@@ -39,12 +39,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_shade"
+            android:background="@drawable/plate_white_shade"
             android:hint="@string/email"
             android:inputType="textPassword"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textColorHint="@color/GrayScale"
             android:textSize="16sp" />
 
@@ -66,7 +66,7 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:text="@string/dont_have_account"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView

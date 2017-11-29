@@ -36,13 +36,11 @@ class PostPresenter {
     private List<User> requestingUsers;
     private Post post;
     private Handler handler;
-    public boolean isUserOwner = false;
-    private Context con;
+    boolean isUserOwner = false;
     private int postID;
 
     PostPresenter(Context context, PostInterface.RequiredViewOps mView) {
         this.mView = mView;
-        this.con = context;
         mModel = new PostModel(context);
         initData();
     }
@@ -200,6 +198,12 @@ class PostPresenter {
         String id1 = dataUser.getId();
         String id2 = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mView.OnStartConversation(id1, id2);
+    }
+
+    void chooseUser(String userId) {
+        // todo change post to closed
+        // todo show granted user.
+        // todo clear requesting users.
     }
 
     void handleChatOrClose() {

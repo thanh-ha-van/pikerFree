@@ -90,10 +90,30 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         recyclerViewImage.setAdapter(imagePickerAdapter);
     }
 
-    @OnClick(R.id.ic_back)
 
+    @OnClick(R.id.ic_back)
     public void getBack() {
         onBackPressed();
+    }
+
+    @OnClick(R.id.tv_post_status)
+    public void changeStatus(){
+        if(postStatus.getText().toString().equalsIgnoreCase("opening")){
+            postStatus.setText("Closed");
+            postStatus.setTextColor(getResources().getColor(R.color.GrayScale));
+            mPresenter.changeStatus(Constants.STATUS_CLOSE);
+        }
+        else {
+            postStatus.setText("Opening");
+            postStatus.setTextColor(getResources().getColor(R.color.green));
+            mPresenter.changeStatus(Constants.STATUS_OPEN);
+        }
+    }
+
+    @OnClick(R.id.ic_warning)
+    public void showWarning(){
+        alertDialog.showAlertDialog("notice", "When you change the status to closed, other users can not send receiving request to you post any more.");
+        alertDialog.setListener(null);
     }
 
     @OnClick(R.id.btn_save_edit_post)

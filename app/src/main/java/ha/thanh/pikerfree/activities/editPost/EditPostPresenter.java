@@ -88,6 +88,7 @@ public class EditPostPresenter {
         imageLocalList.add(new ImagePost("", true, "image_no_0"));
 
     }
+
     private int getImagePostIndexFromName(String name) {
         for (int i = 0; i < imagePostList.size(); i++) {
             if (imageLocalList.get(i).getName().equalsIgnoreCase(name))
@@ -97,7 +98,7 @@ public class EditPostPresenter {
     }
 
     void startUploadImages() {
-        for (int i = 0; i < imageLocalList.size()-1; i++) {
+        for (int i = 0; i < imageLocalList.size() - 1; i++) {
             upLoadSingleImage(imageLocalList.get(i));
         }
     }
@@ -126,6 +127,7 @@ public class EditPostPresenter {
             }
         });
     }
+
     private void upLoadSingleImage(final ImagePost imagePost) {
         handler.post(new Runnable() {
             @Override
@@ -189,6 +191,10 @@ public class EditPostPresenter {
         if (post.getStatus() == 1)
             return "Opening";
         return "Closed";
+    }
+
+    public void changeStatus(int status) {
+        post.setStatus(status);
     }
 
     void getImageLinksFromId(final String postId) {

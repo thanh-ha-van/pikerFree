@@ -23,7 +23,7 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="@string/intro_5"
-            android:textColor="@color/gray"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"/>
     </LinearLayout>
 

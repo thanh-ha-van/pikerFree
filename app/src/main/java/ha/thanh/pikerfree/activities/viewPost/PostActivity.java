@@ -7,10 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 
 import com.bumptech.glide.Glide;
@@ -20,8 +17,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,13 +27,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.editPost.EditPostActivity;
+import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
+import ha.thanh.pikerfree.customviews.UserInforDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -45,7 +45,7 @@ public class PostActivity extends AppCompatActivity implements
         PostInterface.RequiredViewOps,
         CustomYesNoDialog.YesNoInterFace,
         UserAdapter.ItemClickListener,
-        OnMapReadyCallback {
+        OnMapReadyCallback, UserInforDialog.optionInterface {
 
     @BindView(R.id.vp_image_slide)
     ViewPager vpImageSlide;
@@ -160,7 +160,8 @@ public class PostActivity extends AppCompatActivity implements
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
         userAdapter = new UserAdapter(this, mPresenter.getRequestingUsers(), this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
         rvRequestingUser.setLayoutManager(layoutManager);
         rvRequestingUser.setAdapter(userAdapter);
     }
@@ -174,7 +175,9 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onChooseUser(int position) {
-
+        UserInforDialog userInforDialog = new UserInforDialog(this, this);
+        userInforDialog.showAlertDialog(mPresenter.getRequestingUsers().get(position).getName(),
+                mPresenter.getRequestingUsers().get(position).getId());
     }
 
     @Override
@@ -186,7 +189,7 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     void updateMap(double lat, double lng) {
-        if(lat == 0){
+        if (lat == 0) {
             mMapView.setVisibility(View.GONE);
             return;
         }
@@ -223,7 +226,6 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
-
     }
 
     @Override
@@ -236,7 +238,8 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onDeleteDone() {
-        alertDialog.showAlertDialog("Deleted", "Your post has been deleted. Press ok and back to previous screen.");
+        alertDialog.showAlertDialog("Deleted",
+                "Your post has been deleted. Press ok and back to previous screen.");
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {
@@ -257,9 +260,7 @@ public class PostActivity extends AppCompatActivity implements
                             .override(200, 200)
                             .dontTransform())
                     .into(ownerPic);
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             e.getMessage();
         }
 
@@ -321,5 +322,25 @@ public class PostActivity extends AppCompatActivity implements
         intent.putExtra(Constants.U_ID_2, id2);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onViewProfile(String id) {
+        Intent intent = new Intent(this, ViewProfileActivity.class);
+        intent.putExtra(Constants.USER_ID, id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onSendMess(String id) {
+        Intent intent = new Intent(this, ConActivity.class);
+        intent.putExtra(Constants.U_ID_1, id);
+        intent.putExtra(Constants.U_ID_2, FirebaseAuth.getInstance().getCurrentUser().getUid());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onChoose(String id) {
+        mPresenter.chooseUser(id);
     }
 }

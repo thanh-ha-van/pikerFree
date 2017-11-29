@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.MessageAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomEditText;
@@ -76,6 +77,13 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         });
     }
 
+    @OnClick(R.id.tv_op_name)
+    public void goToProfile(){
+        Intent intent = new Intent(this, ViewProfileActivity.class);
+        intent.putExtra(Constants.USER_ID, presenter.getOpId());
+        startActivity(intent);
+    }
+
     @OnClick(R.id.btn_send)
     public void sendNewMess() {
         String textToSend = tvMessToSend.getText().toString();
@@ -87,7 +95,6 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
 
     @Override
     public void onPullDone() {
-
         swipeRefreshLayout.setRefreshing(false);
     }
 

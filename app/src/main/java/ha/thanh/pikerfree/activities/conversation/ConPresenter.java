@@ -42,6 +42,10 @@ class ConPresenter {
     private FirebaseDatabase database;
     private User OPUser;
 
+    public String getOpId() {
+        return OPUser.getId();
+    }
+
     private int currentPull = 10;
     private int nextPull = 0;
     private int lastMessId;
