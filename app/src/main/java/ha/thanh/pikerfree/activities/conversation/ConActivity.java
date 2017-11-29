@@ -43,7 +43,6 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     public SwipeRefreshLayout swipeRefreshLayout;
     private MessageAdapter messageAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,29 +86,14 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     }
 
     @Override
-    public void OnGoToProfile(String id) {
-        // to go op user profile
-    }
-
-    @Override
     public void onPullDone() {
 
         swipeRefreshLayout.setRefreshing(false);
-
-    }
-
-    @Override
-    public void OnNewMess(Message message) {
-        messageAdapter.notifyDataSetChanged();
-        rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
     }
 
     @Override
     public void onEndOfConversation() {
-        rvMess.smoothScrollToPosition(messageAdapter.getItemCount()-1);
+        rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
         swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(this, "No more messages", Toast.LENGTH_SHORT).show();
     }
@@ -134,6 +118,11 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
 
     @Override
     public void onGetMessDone(Message message) {
+
         messageAdapter.notifyDataSetChanged();
+        rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 }

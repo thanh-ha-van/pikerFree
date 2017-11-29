@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4299E9</color>
-    <color name="blueShade">#AA4299E9</color>
+    <color name="colorPrimary">#068dde</color>
+    <color name="blueShade">#AA068dde</color>
     <color name="colorPrimaryDark">#2e323c</color>
     <color name="colorAccent">#4C515C</color>
     <color name="colorAccentShade">#A04C515C</color>
@@ -17,6 +17,6 @@
     <color name="green_light">#319916</color>
     <color name="orange">#EC5D10</color><!--#-->
     <color name="colorOrangeShade">#90EC5D10</color><!--#-->
-    <color name="GrayScale">#74898B</color>
+    <color name="GrayScale">#757a72</color>
     <color name="red">#DC0F06</color>
 </resources>

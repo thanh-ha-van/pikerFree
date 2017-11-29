@@ -5,18 +5,14 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 
 /**
  * Created by HaVan on 8/31/2017.
  */
 
-public class CustomYesNoDialog {
+public class UserInforDialog {
 
     private Dialog alertDialog;
     private YesNoInterFace interFace;
@@ -24,50 +20,54 @@ public class CustomYesNoDialog {
 
     public interface YesNoInterFace {
 
-        void onYesClicked();
+        void onOption1Clicked();
 
-        void onNoClicked();
+        void onOption2Clicked();
+
+        void onOption3Clicked();
     }
 
-    public CustomYesNoDialog(Activity activity, YesNoInterFace yesNoInterFace) {
+    public UserInforDialog(Activity activity, YesNoInterFace yesNoInterFace) {
         alertDialog = new Dialog(activity);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setContentView(R.layout.view_yes_no_dialog);
+        alertDialog.setContentView(R.layout.view_multiple_dialog);
         this.interFace = yesNoInterFace;
     }
 
     public void showAlertDialog(String title, String message) {
 
-        CustomTextView tvContent = (CustomTextView) alertDialog.findViewById(R.id.tv_content);
         CustomTextView tvTitle = (CustomTextView) alertDialog.findViewById(R.id.tv_title);
-        CustomTextView tvCancel = (CustomTextView) alertDialog.findViewById(R.id.btn_cancel_dialog);
-        CustomTextView tvOK = (CustomTextView) alertDialog.findViewById(R.id.btn_ok_dialog);
+        CustomTextView btnViewProfile = (CustomTextView) alertDialog.findViewById(R.id.btn_view_profile);
+        CustomTextView btnSendMess = (CustomTextView) alertDialog.findViewById(R.id.btn_send_mes);
+        CustomTextView btnChoose = (CustomTextView) alertDialog.findViewById(R.id.btn_choose);
         tvTitle.setText(title);
-        tvContent.setText(message);
-
-        tvCancel.setOnClickListener(new View.OnClickListener() {
+        btnViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                interFace.onNoClicked();
+                interFace.onOption1Clicked();
             }
         });
 
 
-        tvOK.setOnClickListener(new View.OnClickListener() {
+        btnSendMess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                interFace.onYesClicked();
+                interFace.onOption2Clicked();
             }
         });
 
-
+        btnChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                interFace.onOption3Clicked();
+            }
+        });
         alertDialog.show();
-
-
     }
 }

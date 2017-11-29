@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/whiteShade">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -26,18 +25,18 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingRight="16dp"
+            android:paddingEnd="16dp"
             android:weightSum="3">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textStyle="bold"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:textColor="@color/text_black_3"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/user_address"
@@ -48,39 +47,6 @@
                 android:textColor="@color/text_black_3"
                 android:textSize="14sp" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteShade"
-        android:orientation="horizontal">
-
-        <ha.thanh.pikerfree.customviews.CustomTextView
-            android:id="@+id/btn_new_post"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/plate_green_shade"
-            android:gravity="center"
-            android:text="New post"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <ha.thanh.pikerfree.customviews.CustomTextView
-            android:id="@+id/btn_edit_profile"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/plate_green_shade"
-            android:gravity="center"
-            android:text="Edit profile"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -97,6 +63,7 @@
             android:text="Syncing data..."
             android:textColor="@color/GrayScale"
             android:textSize="14sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -107,10 +74,10 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_my_post"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:visibility="gone" />
 
@@ -120,7 +87,7 @@
                 android:layout_height="300dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="You have no post yet"
+                android:text="This user have no post yet"
                 android:textColor="@color/GrayScale" />
         </LinearLayout>
     </LinearLayout>

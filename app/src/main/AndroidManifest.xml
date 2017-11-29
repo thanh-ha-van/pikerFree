@@ -83,7 +83,8 @@
         <activity android:name=".activities.viewCategory.ViewCategoryActivity" />
         <activity android:name=".activities.augmentedReality.ARActivity" />
         <activity android:name=".activities.viewListPost.ViewListPostActivity" />
-        <activity android:name=".information.InformationActivity"></activity>
+        <activity android:name=".information.InformationActivity" />
+        <activity android:name=".activities.viewProfile.ViewProfileActivity"></activity>
     </application>
 
 </manifest>

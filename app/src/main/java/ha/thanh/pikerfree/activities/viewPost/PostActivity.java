@@ -186,6 +186,10 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     void updateMap(double lat, double lng) {
+        if(lat == 0){
+            mMapView.setVisibility(View.GONE);
+            return;
+        }
         LatLng sydney = new LatLng(lat, lng);
         googleMap.addMarker(new MarkerOptions().position(sydney)
                 .title("Post's location"));
