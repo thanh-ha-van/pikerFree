@@ -33,7 +33,7 @@ class MessagePresenter {
         else return  conversationList = new ArrayList<>();
     }
 
-    MessagePresenter(Context context, MessageInterface.RequiredViewOps mView) {
+    MessagePresenter( MessageInterface.RequiredViewOps mView) {
         this.mView = mView;
         handler = new Handler();
         conversationList = new ArrayList<>();

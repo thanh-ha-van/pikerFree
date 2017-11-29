@@ -135,28 +135,31 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             }
         });
         // Get last mess data
+        if (dataSet.get(position).getLastMessId() == 0) {
+            holder.tvLastMess.setText("No message on this conversation");
+            holder.tvTime.setText("Unknown time");
+        } else {
+            final DatabaseReference messPref;
+            messPref = database
+                    .getReference(Constants.CONVERSATION)
+                    .child(dataSet.get(position).getConversationId())
+                    .child(Constants.MESS_STRING)
+                    .child(dataSet.get(position).getLastMessId() + "");
+            messPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Message mess = dataSnapshot.getValue(Message.class);
+                    holder.tvLastMess.setText(mess.getText());
+                    holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
+                    messPref.removeEventListener(this);
+                }
 
-        final DatabaseReference messPref;
-        messPref = database
-                .getReference(Constants.CONVERSATION)
-                .child(dataSet.get(position).getConversationId())
-                .child(Constants.MESS_STRING)
-                .child(dataSet.get(position).getLastMessId() + "");
-        messPref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Message mess = dataSnapshot.getValue(Message.class);
-                holder.tvLastMess.setText(mess.getText());
-                holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
-                messPref.removeEventListener(this);
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+                }
+            });
+        }
     }
 
     @Override

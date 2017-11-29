@@ -281,6 +281,10 @@ class ConPresenter {
             return;
         }
         currentPull = lastMessId;
+        if(lastMessId == 0){
+            mView.onPullDone();
+            return;
+        }
         nextPull = currentPull - 8;
         // show the last 8 messages to UI. If user pull show the next 10 mess;
         while (currentPull > 0) {

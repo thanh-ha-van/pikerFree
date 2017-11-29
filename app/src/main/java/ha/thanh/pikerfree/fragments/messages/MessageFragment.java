@@ -62,7 +62,7 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
 
 
     private void initData() {
-        presenter = new MessagePresenter(this.getContext(), this);
+        presenter = new MessagePresenter(this);
     }
 
     private void initView() {

@@ -12,11 +12,12 @@
     <color name="gray_2">#C2C2C2</color>
     <color name="text_black_3">#4C515C</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="green">#31781f</color>
-    <color name="greenShade">#AA31781f</color>
-    <color name="green_light">#319916</color>
+    <color name="green">#328D0E</color>
+    <color name="greenShade">#AA328D0E</color>
+    <color name="green_light">#35a207</color>
     <color name="orange">#EC5D10</color><!--#-->
     <color name="colorOrangeShade">#90EC5D10</color><!--#-->
     <color name="GrayScale">#757a72</color>
     <color name="red">#DC0F06</color>
+    <color name="grayGround">#d8e1e7</color>
 </resources>

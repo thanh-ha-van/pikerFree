@@ -4,5 +4,5 @@
     android:dither="true">
     <size android:height="10dp" android:width="10dp"/>
 <solid
-    android:color="@color/text_black_3"/>
+    android:color="@color/gray_2"/>
 </shape>

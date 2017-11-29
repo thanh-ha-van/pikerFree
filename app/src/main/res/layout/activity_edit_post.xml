@@ -233,7 +233,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/plate_green_shade"
+                android:background="@drawable/plate"
                 android:gravity="center"
                 android:text="@string/save"
                 android:textAllCaps="true"

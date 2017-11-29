@@ -45,9 +45,6 @@ public class IntroFragment1 extends IntroFragment {
     public void setupUI() {
 
         tvMessageIntro.setText(R.string.intro_1);
-        tvMessage1.setText("lol");
-        tvMessage2.setText("lol");
-        tvMessage3.setText("lol");
 
     }
 

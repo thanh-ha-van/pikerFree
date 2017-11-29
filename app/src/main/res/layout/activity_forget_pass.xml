@@ -20,7 +20,7 @@
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="@string/we_need_email"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
 
         <View
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_white_shade"
+            android:background="@drawable/plate_brown_shade"
             android:hint="@string/input_email"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
