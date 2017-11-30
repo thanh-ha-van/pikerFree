@@ -42,11 +42,11 @@
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_userName"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -87,6 +87,6 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="80dp"
         android:background="@color/gray" />
 </LinearLayout>

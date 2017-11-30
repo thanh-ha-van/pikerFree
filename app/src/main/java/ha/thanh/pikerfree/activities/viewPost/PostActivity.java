@@ -186,6 +186,7 @@ public class PostActivity extends AppCompatActivity implements
         meetOwner.setText(getResources().getString(R.string.you_own_this));
         sendRequest.setText(getResources().getString(R.string.delete_this));
         chatToOwner.setText(getResources().getString(R.string.edit_this));
+        requestingUserView.setVisibility(View.GONE);
     }
 
     void updateMap(double lat, double lng) {
@@ -223,6 +224,10 @@ public class PostActivity extends AppCompatActivity implements
 
     }
 
+    @OnClick(R.id.view_owner)
+    public  void goToProfile(){
+        onViewProfile(mPresenter.getOwnerId());
+    }
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());

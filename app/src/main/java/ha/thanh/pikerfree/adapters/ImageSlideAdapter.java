@@ -42,10 +42,10 @@ public class ImageSlideAdapter extends PagerAdapter {
         Glide.with(this.mContext)
                 .load(mList.get(position))
                 .apply(new RequestOptions()
-                        .placeholder(R.drawable.loading)
+                        .placeholder(R.drawable.background)
                         .centerCrop()
                         .dontAnimate()
-                        .override(400, 300)
+                        .override(400, 270)
                         .dontTransform())
                 .into(imageView);
 

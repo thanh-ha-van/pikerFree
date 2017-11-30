@@ -47,7 +47,7 @@ public class Constants {
 
     public static final int CATE_NEAR_BY = 9;
 
-    public static final int CATE_RECENT = 8;
+    public static final int CATE_RECENT = 10;
 
 
 }

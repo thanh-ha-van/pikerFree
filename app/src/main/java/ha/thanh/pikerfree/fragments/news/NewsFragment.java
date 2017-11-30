@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;
 
@@ -30,56 +32,53 @@ public class NewsFragment extends Fragment
         ButterKnife.bind(this, view);
         newsPresenter = new NewsPresenter(this.getContext(), this);
         initData();
-        initView(view);
         return view;
     }
 
     private void initData() {
 
     }
-
-    private void initView(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.accessories:
-                        goToList(Constants.CATE_ACCESSORY);
-                        break;
-                    case R.id.near_by:
-                        goToList(Constants.CATE_NEAR_BY);
-                        break;
-                    case R.id.recent:
-                        goToList(Constants.CATE_RECENT);
-                        break;
-                    case R.id.baby_and_toy:
-                        goToList(Constants.CATE_BABY);
-                        break;
-                    case R.id.cloths:
-                        goToList(Constants.CATE_FASHION);
-                        break;
-                    case R.id.groceries:
-                        goToList(Constants.CATE_GROCERY);
-                        break;
-                    case R.id.electronics:
-                        goToList(Constants.CATE_ELECTRONIC);
-                        break;
-                    case R.id.home_living:
-                        goToList(Constants.CATE_HOME);
-                        break;
-                    case R.id.others:
-                        goToList(Constants.CATE_OTHER);
-                        break;
-                    case R.id.pet:
-                        goToList(Constants.CATE_PET);
-                        break;
-                    default:
-                        goToList(Constants.CATE_ACCESSORY);
-                        break;
-                }
-            }
-        });
+    @OnClick(R.id.accessories)
+    public  void goToAC(){
+        goToList(Constants.CATE_ACCESSORY);
     }
+    @OnClick(R.id.near_by)
+    public  void goToAC1(){
+        goToList(Constants.CATE_NEAR_BY);
+    }
+    @OnClick(R.id.recent)
+    public  void goToAC2(){
+        goToList(Constants.CATE_RECENT);
+    }
+    @OnClick(R.id.baby_and_toy)
+    public  void goToAC3(){
+        goToList(Constants.CATE_BABY);
+    }
+    @OnClick(R.id.groceries)
+    public  void goToAC4(){
+        goToList(Constants.CATE_GROCERY);
+    }
+    @OnClick(R.id.electronics)
+    public  void goToAC5(){
+        goToList(Constants.CATE_ELECTRONIC);
+    }
+    @OnClick(R.id.cloths)
+    public  void goToAC6(){
+        goToList(Constants.CATE_FASHION);
+    }
+    @OnClick(R.id.home_living)
+    public  void goToAC7(){
+        goToList(Constants.CATE_HOME);
+    }
+    @OnClick(R.id.others)
+    public  void goToAC8(){
+        goToList(Constants.CATE_OTHER);
+    }
+    @OnClick(R.id.pet)
+    public  void goToAC9(){
+        goToList(Constants.CATE_PET);
+    }
+
 
     private void goToList(int category) {
         Intent intent = new Intent(this.getContext(), ViewListPostActivity.class);

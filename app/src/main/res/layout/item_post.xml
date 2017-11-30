@@ -9,14 +9,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="250dp"
         android:background="@color/colorPrimaryDark">
 
         <ImageView
             android:id="@+id/img_post_image"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:background="@drawable/loading"
+            android:background="@drawable/background"
             android:scaleType="centerCrop" />
 
         <LinearLayout

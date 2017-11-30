@@ -68,7 +68,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         Message message = mMessageList.get(position);
 
-        ((MessageHolder) holder).bind(message);
+        ((MessageHolder) holder).bind(message, position);
 
     }
 
@@ -82,9 +82,16 @@ public class MessageAdapter extends RecyclerView.Adapter {
             timeText = (TextView) itemView.findViewById(R.id.tv_mess_time);
         }
 
-        void bind(Message message) {
+        void bind(Message message, int position) {
             messageText.setText(message.getText());
             timeText.setText(Utils.getTimeInHour(message.getTime()));
+            try {
+                if (mMessageList.get(position + 1).getAuthor().equalsIgnoreCase(mMessageList.get(position).getAuthor()))
+                    timeText.setVisibility(View.GONE);
+                else  timeText.setVisibility(View.VISIBLE);
+            } catch (IndexOutOfBoundsException e) {
+                e.getMessage();
+            }
         }
     }
 }

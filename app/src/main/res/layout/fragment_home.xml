@@ -53,6 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:background="@color/whiteShade"
         android:orientation="horizontal">
 
@@ -60,26 +61,26 @@
             android:id="@+id/btn_new_post"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/plate_green_bold"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/bg_rectangle_green_bold"
             android:gravity="center"
             android:text="New post"
             android:textAllCaps="true"
-            android:textColor="@color/green"
+            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_edit_profile"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/plate_green_bold"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_rectangle_greeen_bold_right"
             android:gravity="center"
             android:text="Edit profile"
             android:textAllCaps="true"
-            android:textColor="@color/green"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -100,7 +101,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
             android:background="@drawable/plate_small_corner"
             android:gravity="center"
             android:orientation="vertical">
@@ -108,7 +112,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_my_post"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -117,7 +121,7 @@
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/tv_no_data"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="500dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="You have no post yet"

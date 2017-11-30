@@ -92,10 +92,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                         Glide.with(mConText)
                                 .load(uri)
                                 .apply(new RequestOptions()
-                                        .placeholder(R.drawable.loading)
+                                        .placeholder(R.drawable.background)
                                         .centerCrop()
                                         .dontAnimate()
-                                        .override(390, 260)
+                                        .override(390, 250)
                                         .dontTransform())
                                 .into(holder.imgPostImage);
                     }

@@ -110,8 +110,8 @@ class PostPresenter {
                             // if user is owner then show requesting list and notify text to UI
                             mView.onUserIsOwner();
                             isUserOwner = true;
+                            getRequestingUserList();
                         }
-                        getRequestingUserList();
                         getOwnerData(post.getOwnerId());
                     }
 
@@ -123,6 +123,10 @@ class PostPresenter {
                 });
             }
         });
+    }
+
+    String getOwnerId(){
+        return post.getOwnerId();
     }
 
     void handleRequestOrDelete() {
