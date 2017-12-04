@@ -93,11 +93,11 @@ public class Utils {
 
         float distance = l1.distanceTo(l2);
         int distanceInt = (Math.round(distance)/100)*100;
-        String dist = distanceInt + " m away";
+        String dist = distanceInt + " m";
 
         if (distanceInt > 1000) {
             double roundOff = Math.round(distance ) / 1000;
-            dist = roundOffTo2DecPlaces(roundOff) + " km away";
+            dist = roundOffTo2DecPlaces(roundOff) + " km";
         }
         return dist;
     }

@@ -19,5 +19,5 @@
         android:layout_height="80dp"
         android:paddingTop="10dp"
         app:indicatorColor="@color/white"
-        app:indicatorName="BallClipRotatePulseIndicator" />
+        app:indicatorName="PacmanIndicator" />
 </LinearLayout>

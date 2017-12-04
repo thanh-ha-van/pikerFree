@@ -76,7 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         Post post = dataSet.get(position);
-        holder.tvDistance.setText(Utils.getDistance(lat, lng, post.getLat(), post.getLng()));
+        holder.tvDistance.setText(Utils.getDistance(lat, lng, post.getLocation().latitude, post.getLocation().longitude));
         holder.tvTitle.setText(post.getTitle());
         holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
         holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
@@ -95,7 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                                         .placeholder(R.drawable.background)
                                         .centerCrop()
                                         .dontAnimate()
-                                        .override(390, 250)
+                                        .override(400, 250)
                                         .dontTransform())
                                 .into(holder.imgPostImage);
                     }

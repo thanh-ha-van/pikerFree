@@ -4,6 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.ShareMediaContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.ShareVideo;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -125,7 +132,7 @@ class PostPresenter {
         });
     }
 
-    String getOwnerId(){
+    String getOwnerId() {
         return post.getOwnerId();
     }
 
@@ -205,9 +212,19 @@ class PostPresenter {
     }
 
     void chooseUser(String userId) {
+
         // todo change post to closed
         // todo show granted user.
         // todo clear requesting users.
+
+        post.setStatus(Constants.STATUS_CLOSE);
+        post.setRequestingUser(null);
+        post.setGrantedUser(userId);
+
+    }
+
+    void doSharePost() {
+
     }
 
     void handleChatOrClose() {
@@ -220,7 +237,7 @@ class PostPresenter {
     }
 
     String getDistance() {
-        return Utils.getDistance(mModel.getUserLat(), mModel.getUserLng(), post.getLat(), post.getLng());
+        return Utils.getDistance(mModel.getUserLat(), mModel.getUserLng(), post.getLocation().latitude, post.getLocation().longitude);
     }
 
     String getStatus() {

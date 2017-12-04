@@ -43,8 +43,9 @@ class MessagePresenter {
     }
 
     void loadAllConversation() {
-
+        if(conversationList != null)
         conversationList.clear();
+        if(conversationIdList != null)
         conversationIdList.clear();
         handler.post(new Runnable() {
             @Override
@@ -74,9 +75,7 @@ class MessagePresenter {
     }
 
     private void getConversations() {
-
-
-
+        if(conversationIdList != null)
         for (int i = 0; i < conversationIdList.size(); i++) {
             DatabaseReference conversationPref = database
                     .getReference(Constants.CONVERSATION).child(conversationIdList.get(i));

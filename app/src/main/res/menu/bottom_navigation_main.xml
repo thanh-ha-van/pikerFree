@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_summary"
         android:enabled="true"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_user"
         android:title="@string/text_summary"
         app:showAsAction="ifRoom|withText" />
     <item

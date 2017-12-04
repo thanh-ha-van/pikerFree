@@ -102,6 +102,7 @@
                 android:text="Add Images"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:tint="@color/white" />
 

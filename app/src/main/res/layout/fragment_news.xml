@@ -64,10 +64,9 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_placeholder"
                 android:tint="@color/colorPrimaryDark" />
@@ -91,10 +90,9 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_time"
                 android:tint="@color/colorPrimaryDark" />
@@ -128,12 +126,11 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/ic_umbrella"
+                android:src="@drawable/ic_hanger"
                 android:tint="@color/colorPrimaryDark" />
         </LinearLayout>
 
@@ -156,12 +153,11 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/ic_baby_trolley"
+                android:src="@drawable/ic_stroller"
                 android:tint="@color/colorPrimaryDark" />
         </LinearLayout>
 
@@ -194,10 +190,9 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_coat"
                 android:tint="@color/colorPrimaryDark" />
@@ -221,12 +216,11 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/ic_electronic"
+                android:src="@drawable/ic_idea"
                 android:tint="@color/colorPrimaryDark" />
         </LinearLayout>
 
@@ -258,10 +252,9 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_shopping_basket"
                 android:tint="@color/colorPrimaryDark" />
@@ -289,9 +282,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/ic_home"
+                android:src="@drawable/ic_house"
                 android:tint="@color/colorPrimaryDark" />
         </LinearLayout>
 
@@ -324,10 +316,9 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_rabbit"
                 android:tint="@color/colorPrimaryDark" />
@@ -351,10 +342,9 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_more"
                 android:tint="@color/colorPrimaryDark" />

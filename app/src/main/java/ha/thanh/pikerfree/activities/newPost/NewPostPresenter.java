@@ -24,8 +24,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.ImagePost;
+import ha.thanh.pikerfree.models.Messages.MyGeoLocation;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -132,8 +132,7 @@ class NewPostPresenter {
         post.setTitle(title);
         post.setDescription(description);
         post.setCategory(category);
-        post.setLat(mModel.getUserLat());
-        post.setLng(mModel.getUserLng());
+        post.setLocation(new MyGeoLocation(mModel.getUserLat(), mModel.getUserLng()));
         post.setPostId(postCount + 1);
         post.setOwnerId(firebaseUser.getUid());
         post.setTimePosted(Utils.getCurrentTimestamp());
@@ -159,7 +158,7 @@ class NewPostPresenter {
             public void run() {
                 if (isGetDataUser) {
                     DatabaseReference userPostPref;
-                    userPostPref = database.getReference("users").child(firebaseUser.getUid()).child("post");
+                    userPostPref = database.getReference("users").child(firebaseUser.getUid()).child("posts");
                     userPostPref.setValue(dataUser.getPosts());
                     isUpdatedUserDatabase = true;
                     checkIfCanHideDialog();

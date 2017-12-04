@@ -1,17 +1,32 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.ShareMediaContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -36,7 +51,6 @@ import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.customviews.UserInforDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
-import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -97,6 +111,7 @@ public class PostActivity extends AppCompatActivity implements
     private CustomYesNoDialog confirmDialog;
     private CustomAlertDialog alertDialog;
     private GoogleMap googleMap;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +122,37 @@ public class PostActivity extends AppCompatActivity implements
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         mMapView.getMapAsync(this);
+    }
+
+    @OnClick(R.id.tv_share)
+    public void doSharePost() {
+        ShareDialog shareDialog;
+        FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+            }
+
+            @Override
+            public void onSuccess(Sharer.Result result) {
+
+            }
+        };
+        Bitmap image = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .setCaption("Give me my code or I will ... you know, do that thing you don't like!")
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+        shareDialog = new ShareDialog(this);
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        shareDialog.show(content,ShareDialog.Mode.AUTOMATIC);
+        shareDialog.registerCallback(callbackManager, shareCallback);
     }
 
     @OnClick(R.id.ic_back)
@@ -216,7 +262,7 @@ public class PostActivity extends AppCompatActivity implements
         waitingDialog.hideDialog();
         postStatus.setText(mPresenter.getStatus());
         tvCategory.setText(mPresenter.getTextFromIntCategory(post.getCategory()));
-        updateMap(post.getLat(), post.getLng());
+        updateMap(post.getLocation().latitude, post.getLocation().longitude);
     }
 
     @Override
@@ -225,9 +271,10 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     @OnClick(R.id.view_owner)
-    public  void goToProfile(){
+    public void goToProfile() {
         onViewProfile(mPresenter.getOwnerId());
     }
+
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
@@ -304,6 +351,7 @@ public class PostActivity extends AppCompatActivity implements
     public void onAlreadyRequested() {
         alertDialog.showAlertDialog("Uh oh!", "You already send the request before.");
         alertDialog.setListener(null);
+        waitingDialog.hideDialog();
     }
 
     @Override

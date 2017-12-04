@@ -20,6 +20,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <provider android:authorities="com.facebook.app.FacebookContentProvider{152277168741117}"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
         <service android:name=".services.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -83,8 +88,12 @@
         <activity android:name=".activities.viewCategory.ViewCategoryActivity" />
         <activity android:name=".activities.augmentedReality.ARActivity" />
         <activity android:name=".activities.viewListPost.ViewListPostActivity" />
-        <activity android:name=".information.InformationActivity" />
-        <activity android:name=".activities.viewProfile.ViewProfileActivity"></activity>
+        <activity android:name=".activities.information.AboutActivity" />
+        <activity android:name=".activities.viewProfile.ViewProfileActivity" />
+        <activity android:name=".activities.information.TermActivity" />
+        <activity android:name=".activities.information.HelpActivity" />
+        <activity android:name=".activities.information.NotificationActivity" />
+        <activity android:name=".activities.information.ManageActivity"></activity>
     </application>
 
 </manifest>

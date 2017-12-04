@@ -42,13 +42,12 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
         waitingDialog.showDialog();
         presenter = new ViewListPostPresenter(this, this);
         Intent intent = getIntent();
-        presenter.currentCategory = intent.getIntExtra(Constants.CATEGORY, 8);
-
+        presenter.setCurrentCategory(intent.getIntExtra(Constants.CATEGORY, 8));
     }
 
     private void initView() {
         ButterKnife.bind(this);
-        tvTitle.setText(Utils.getTextFromIntCategory(presenter.currentCategory));
+        tvTitle.setText(Utils.getTextFromIntCategory(presenter.getCurrentCategory()));
         adapter = new PostAdapter(this, presenter.getPostList(), this, presenter.getUserLat(), presenter.getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

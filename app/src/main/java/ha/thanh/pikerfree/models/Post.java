@@ -1,15 +1,14 @@
 package ha.thanh.pikerfree.models;
 
+import com.firebase.geofire.GeoLocation;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.models.Messages.MyGeoLocation;
 
-/**
- * Created by HaVan on 8/27/2017.
- */
 @IgnoreExtraProperties
 public class Post {
     private int postId;
@@ -17,30 +16,42 @@ public class Post {
     private String description = "No description found";
     private List<String> requestingUser;
     private String grantedUser;
-
-
     private int status = Constants.STATUS_OPEN;
     private String ownerId;
-    private double lat = 0;
-    private double lng = 0;
+    private MyGeoLocation location;
     private long timePosted;
     private int category = 8;
 
     public Post() {
     }
 
-
-    public Post(int postId, String title, String description, String ownerId, double lat, double lng, long timePosted, int category) {
+    public Post(int postId, String title, String description, String ownerId, MyGeoLocation location, long timePosted, int category) {
         this.postId = postId;
         this.title = title;
         this.description = description;
         this.ownerId = ownerId;
-        this.lat = lat;
-        this.lng = lng;
+        this.location = location;
         this.timePosted = timePosted;
         this.category = category;
         requestingUser = new ArrayList<>();
     }
+
+    public String getGrantedUser() {
+        return grantedUser;
+    }
+
+    public void setGrantedUser(String grantedUser) {
+        this.grantedUser = grantedUser;
+    }
+
+    public MyGeoLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(MyGeoLocation location) {
+        this.location = location;
+    }
+
     public List<String> getRequestingUser() {
         return requestingUser;
     }
@@ -87,22 +98,6 @@ public class Post {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
     }
 
     public long getTimePosted() {

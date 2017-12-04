@@ -8,29 +8,47 @@ public class Config {
     private boolean isPermissionLocation = false;
 
     private boolean isFirstRun = true;
-    private String userID;
-    private double userLat;
-    private double userLng;
+    private int lastDay = 7;
+    private int distanceSearch = 7;
+    private boolean notificationMess = true;
+    private boolean notificationPost = true;
 
-    public Config() {
+    public int getLastDay() {
+        return lastDay;
+    }
+
+    public void setLastDay(int lastDay) {
+        this.lastDay = lastDay;
+    }
+
+    public int getDistanceSearch() {
+        return distanceSearch;
+    }
+
+    public void setDistanceSearch(int distanceSearch) {
+        this.distanceSearch = distanceSearch;
+    }
+
+    public boolean isNotificationMess() {
+        return notificationMess;
+    }
+
+    public void setNotificationMess(boolean notificationMess) {
+        this.notificationMess = notificationMess;
+    }
+
+    public boolean isNotificationPost() {
+        return notificationPost;
+    }
+
+    public void setNotificationPost(boolean notificationPost) {
+        this.notificationPost = notificationPost;
+    }
+
+    Config() {
 
     }
 
-    public double getUserLat() {
-        return userLat;
-    }
-
-    public void setUserLat(double userLat) {
-        this.userLat = userLat;
-    }
-
-    public double getUserLng() {
-        return userLng;
-    }
-
-    public void setUserLng(double userLng) {
-        this.userLng = userLng;
-    }
 
     public boolean isFirstRun() {
         return isFirstRun;
@@ -40,13 +58,6 @@ public class Config {
         isFirstRun = firstRun;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 
     public boolean isPermissionWriteFile() {
         return isPermissionWriteFile;
