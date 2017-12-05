@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Handler;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +32,11 @@ public class ViewProfilePresenter {
     private List<Post> postList;
     private String currentUserId;
     private GPSTracker gpsTracker;
+    private User user;
 
     List<Post> getPostList() {
         return postList;
     }
-
-    private User user;
 
     ViewProfilePresenter(Context context, ViewProfileInterface.RequiredViewOps mView, String currentUserId) {
         this.mView = mView;
@@ -47,11 +47,46 @@ public class ViewProfilePresenter {
         gpsTracker = new GPSTracker(context);
     }
 
-    public double getUserLat(){
+    void updateRating(int rate) {
+        List<String> list;
+        list = user.getRatedUsers();
+        if (user.getRatedUsers() != null) {
+            for (int i = 0; i < list.size(); i++) {
+                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equalsIgnoreCase(list.get(i))) {
+                    mView.onRatingFail("You already review this user before");
+                    return;
+                }
+            }
+            list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            user.setRatedUsers(list);
+            double newrate = (rate + list.size() * user.getRating()) / (list.size() + 1);
+            user.setRating(newrate);
+            updateUser(newrate);
+        } else {
+            list = new ArrayList<>();
+            list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            double newrate = (rate + 5) / 2;
+            user.setRating(newrate);
+            user.setRatedUsers(list);
+            updateUser(rate);
+        }
+    }
+
+    private void updateUser(double newrate) {
+        DatabaseReference userRatingPref;
+        userRatingPref = database.getReference("users").child(user.getId()).child("rating");
+        userRatingPref.setValue(user.getRating());
+        DatabaseReference ratedUserPref;
+        ratedUserPref = database.getReference("users").child(user.getId()).child("ratedUsers");
+        ratedUserPref.setValue(user.getRatedUsers());
+        mView.onRatingDone(newrate);
+    }
+
+    public double getUserLat() {
         return gpsTracker.getLatitude();
     }
 
-    public double getUserLng(){
+    public double getUserLng() {
         return gpsTracker.getLongitude();
     }
 
@@ -96,6 +131,7 @@ public class ViewProfilePresenter {
                     }
                 });
     }
+
     private void getPostData(final ArrayList<Integer> posts) {
         if (posts != null) {
             for (int i = 0; i < posts.size(); i++) {

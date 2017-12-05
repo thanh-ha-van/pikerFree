@@ -4,6 +4,7 @@ package ha.thanh.pikerfree.models;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @IgnoreExtraProperties
 public class User {
@@ -12,14 +13,30 @@ public class User {
     private String name;
     private String address;
     private String phoneNumber;
-    private double lat = 0;
-    private double lng = 0;
     private String avatarLink = "userImages/default_profile.jgp";
     private String email = "";
     private ArrayList<Integer> posts;
     private ArrayList<String> mess;
+    private double rating = 5;
+    private List<String> ratedUsers;
 
     public User() {
+    }
+
+    public List<String> getRatedUsers() {
+        return ratedUsers;
+    }
+
+    public void setRatedUsers(List<String> ratedUsers) {
+        this.ratedUsers = ratedUsers;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     public String getPhoneNumber() {
@@ -67,22 +84,6 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public void setLng(double lng) {
-        this.lng = lng;
     }
 
     public String getAvatarLink() {

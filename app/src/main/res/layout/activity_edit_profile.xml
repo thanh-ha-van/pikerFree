@@ -71,7 +71,7 @@
         android:padding="4dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:text="Your name:"
+        android:text="Your name"
         android:textColor="@color/gray_2"
         android:textSize="14sp" />
 
@@ -95,7 +95,7 @@
         android:padding="4dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:text="Your phone number:"
+        android:text="Your phone number"
         android:textColor="@color/gray_2"
         android:textSize="14sp" />
 
@@ -125,7 +125,7 @@
         android:padding="4dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:text="Your Address:"
+        android:text="Your Address"
         android:textColor="@color/gray_2"
         android:textSize="14sp" />
 

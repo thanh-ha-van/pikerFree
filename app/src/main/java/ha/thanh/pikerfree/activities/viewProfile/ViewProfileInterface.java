@@ -13,7 +13,8 @@ public class ViewProfileInterface {
 
         void getOwnerImageDone(Uri uri);
         void onGetUserDataDone(User user);
-
         void onGetUserPostsDone();
+        void onRatingFail(String err);
+        void onRatingDone(double newrate);
     }
 }

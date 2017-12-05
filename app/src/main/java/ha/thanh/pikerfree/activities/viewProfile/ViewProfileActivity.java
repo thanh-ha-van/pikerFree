@@ -13,13 +13,15 @@ import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
-import ha.thanh.pikerfree.models.Conversation;
+import ha.thanh.pikerfree.customviews.RatingDialog;
 import ha.thanh.pikerfree.models.User;
 
 public class ViewProfileActivity extends AppCompatActivity implements ViewProfileInterface.RequiredViewOps, PostAdapter.ItemClickListener {
@@ -39,6 +41,8 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     CustomTextView tvNoData;
     @BindView(R.id.user_phone)
     CustomTextView tvPhone;
+    @BindView(R.id.tv_rating_num)
+    CustomTextView tvRateNum;
     private ViewProfilePresenter presenter;
     PostAdapter adapter;
 
@@ -64,6 +68,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
 
     }
 
+
     private void initData() {
         Intent intent = getIntent();
         String userId = intent.getStringExtra(Constants.USER_ID);
@@ -81,6 +86,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         tvUserAddress.setText(user.getAddress());
         tvUserName.setText(user.getName());
         tvPhone.setText(user.getPhoneNumber());
+        tvRateNum.setText(String.valueOf(user.getRating()));
     }
 
     @Override
@@ -109,5 +115,29 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         Intent in = new Intent(this, PostActivity.class);
         in.putExtra(Constants.POST_VIEW, presenter.getPostList().get(position).getPostId());
         startActivity(in);
+    }
+
+    @OnClick(R.id.rating)
+    public void showRating() {
+        RatingDialog ratingDialog = new RatingDialog(this, new RatingDialog.optionInterface() {
+            @Override
+            public void onReview(int rating) {
+                presenter.updateRating(rating);
+            }
+        });
+        ratingDialog.showRatingDialog();
+    }
+
+    @Override
+    public void onRatingFail(String err) {
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
+        alertDialog.showAlertDialog("Error", err);
+    }
+
+    @Override
+    public void onRatingDone(double newrate) {
+        tvRateNum.setText(String.valueOf(newrate));
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
+        alertDialog.showAlertDialog("Done", "Successful");
     }
 }
