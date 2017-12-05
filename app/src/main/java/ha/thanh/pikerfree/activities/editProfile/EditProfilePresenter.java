@@ -40,6 +40,7 @@ class EditProfilePresenter {
     private String userId;
     private String userName;
     private String userAddress;
+    private String userPhone;
 
     private boolean isImagesChanged = false;
     private boolean isUploadDone = false;
@@ -67,10 +68,11 @@ class EditProfilePresenter {
     void getLocalData() {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
-        mView.onLocalDataReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
+        userPhone = mModel.getUserPhoneFromSharePf();
+        mView.onLocalDataReady(userName, userAddress,userPhone, mModel.getLocalImageStringFromSharePf());
     }
 
-    void addTextChangeListener(final EditText etUserName, final EditText etUserAddress) {
+    void addTextChangeListener(final EditText etUserName, final EditText etUserAddress, final  EditText etUserPhone) {
         userAddress = etUserAddress.getText().toString();
         userName = etUserName.getText().toString();
         etUserAddress.addTextChangedListener(new TextWatcher() {
@@ -105,6 +107,22 @@ class EditProfilePresenter {
                 userName = etUserName.getText().toString();
             }
         });
+        etUserPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                userPhone = etUserPhone.getText().toString();
+            }
+        });
     }
 
     void saveDatabaseSetting() {
@@ -115,6 +133,7 @@ class EditProfilePresenter {
                 databaseReference.child("avatarLink").setValue(dataUser.getAvatarLink());
                 databaseReference.child("address").setValue(dataUser.getAddress());
                 databaseReference.child("name").setValue(dataUser.getName());
+                databaseReference.child("phoneNumber").setValue(dataUser.getPhoneNumber());
                 isUpdatedDatabase = true;
                 checkIfCanHideDialog();
             }
@@ -125,6 +144,7 @@ class EditProfilePresenter {
         dataUser.setId(userId);
         dataUser.setAvatarLink("userImages/" + userId + ".jpg");
         dataUser.setAddress(userAddress);
+        dataUser.setPhoneNumber(userPhone);
         dataUser.setName(userName);
     }
 
@@ -149,7 +169,7 @@ class EditProfilePresenter {
                 ioException.printStackTrace();
             }
         }
-        mModel.saveLocal(userName, userAddress, myPath.getAbsolutePath());
+        mModel.saveLocal(userName, userAddress, myPath.getAbsolutePath(), userPhone);
     }
 
     void uploadFile(final Uri filePath) {

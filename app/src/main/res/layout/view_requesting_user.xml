@@ -22,6 +22,7 @@
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_requesting_user"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:text="@string/requesting_user"

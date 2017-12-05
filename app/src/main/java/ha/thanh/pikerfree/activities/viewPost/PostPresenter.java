@@ -1,16 +1,13 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
+import android.util.Log;
 
-import com.facebook.share.model.ShareContent;
-import com.facebook.share.model.ShareHashtag;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.ShareMediaContent;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.ShareVideo;
-import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,10 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
@@ -117,7 +114,9 @@ class PostPresenter {
                             // if user is owner then show requesting list and notify text to UI
                             mView.onUserIsOwner();
                             isUserOwner = true;
-                            getRequestingUserList();
+                            if (post.getStatus() == Constants.STATUS_OPEN)
+                                getRequestingUserList();
+                            else getGrantedUserData();
                         }
                         getOwnerData(post.getOwnerId());
                     }
@@ -132,6 +131,34 @@ class PostPresenter {
         });
     }
 
+    private void getGrantedUserData() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (post.getGrantedUser() != null) {
+                    DatabaseReference userPref;
+                    userPref = database
+                            .getReference("users")
+                            .child(post.getGrantedUser());
+                    userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            User user = dataSnapshot.getValue(User.class);
+                            requestingUsers.add(user);
+                            mView.onGetRequestingUserDone(2);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+            }
+        });
+    }
+
     String getOwnerId() {
         return post.getOwnerId();
     }
@@ -140,7 +167,9 @@ class PostPresenter {
         if (isUserOwner) {
             deletePost();
         } else {
+            if(post.getStatus() == Constants.STATUS_OPEN)
             updateRequestingUserList();
+            else mView.onShowError("This post is closed by owner so you can not send request anymore");
         }
     }
 
@@ -200,8 +229,9 @@ class PostPresenter {
     }
 
     private void editPost() {
-
-        mView.OnGoToEdit(post.getPostId());
+        if (post.getStatus() == Constants.STATUS_OPEN)
+            mView.OnGoToEdit(post.getPostId());
+        else mView.onShowError("This post is already closed so you can not edit this anymore.");
     }
 
     private void initChat() {
@@ -213,18 +243,18 @@ class PostPresenter {
 
     void chooseUser(String userId) {
 
-        // todo change post to closed
-        // todo show granted user.
-        // todo clear requesting users.
-
         post.setStatus(Constants.STATUS_CLOSE);
         post.setRequestingUser(null);
         post.setGrantedUser(userId);
 
+        savePost(userId);
     }
 
-    void doSharePost() {
-
+    private void savePost(String userid) {
+        DatabaseReference postPref;
+        postPref = database.getReference("posts").child(post.getPostId() + "");
+        postPref.setValue(post);
+        mView.onGrantedDone(userid);
     }
 
     void handleChatOrClose() {
@@ -290,7 +320,7 @@ class PostPresenter {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User user = dataSnapshot.getValue(User.class);
                                 requestingUsers.add(user);
-                                mView.onGetRequestingUserDone();
+                                mView.onGetRequestingUserDone(1);
                             }
 
                             @Override
@@ -340,5 +370,33 @@ class PostPresenter {
             }
         });
 
+    }
+
+    public class DownloadImgTask extends AsyncTask<String, Void, List<Bitmap>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected List<Bitmap> doInBackground(String... urls) {
+            List<Bitmap> bms = new ArrayList<>();
+            for (int i = 0; i < imagePostList.size(); i++) {
+                Bitmap bm = null;
+                try {
+                    InputStream in = new java.net.URL(imagePostList.get(i)).openStream();
+                    bm = BitmapFactory.decodeStream(in);
+                    bms.add(bm);
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            return bms;
+        }
+
+        protected void onPostExecute(List<Bitmap> result) {
+            mView.onPostFb(result);
+        }
     }
 }

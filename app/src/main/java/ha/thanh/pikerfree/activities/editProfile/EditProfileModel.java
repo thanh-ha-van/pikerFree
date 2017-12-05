@@ -22,6 +22,10 @@ public class EditProfileModel {
         return sharedPreferences.getString(Constants.USER_NAME, "");
 
     }
+    String getUserPhoneFromSharePf() {
+        return sharedPreferences.getString(Constants.USER_PHONE, "");
+
+    }
 
      String getUserAddressStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_ADDRESS, "");
@@ -35,11 +39,12 @@ public class EditProfileModel {
     String getUserIdFromSharePf() {
         return sharedPreferences.getString(Constants.USER_ID, "");
     }
-     void saveLocal(String username, String userAddress, String path) {
+     void saveLocal(String username, String userAddress, String path, String userPhone) {
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, username);
         editor.putString(Constants.USER_ADDRESS, userAddress);
         editor.putString(Constants.USER_PROFILE_PIC_PATH, path);
+        editor.putString(Constants.USER_PHONE, userPhone);
         editor.apply();
 
     }

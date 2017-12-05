@@ -37,13 +37,15 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     CustomTextView tvLoadingPost;
     @BindView(R.id.tv_no_data)
     CustomTextView tvNoData;
+    @BindView(R.id.user_phone)
+    CustomTextView tvPhone;
     private ViewProfilePresenter presenter;
     PostAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_profile);
+        setContentView(R.layout.activity_view_profile_conslapp);
         ButterKnife.bind(this);
         initData();
         initView();
@@ -78,6 +80,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     public void onGetUserDataDone(User user) {
         tvUserAddress.setText(user.getAddress());
         tvUserName.setText(user.getName());
+        tvPhone.setText(user.getPhoneNumber());
     }
 
     @Override

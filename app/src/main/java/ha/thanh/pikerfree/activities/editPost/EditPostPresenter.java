@@ -193,7 +193,7 @@ public class EditPostPresenter {
         return "Closed";
     }
 
-    public void changeStatus(int status) {
+    void changeStatus(int status) {
         post.setStatus(status);
     }
 

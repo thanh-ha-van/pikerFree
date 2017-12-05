@@ -10,6 +10,6 @@ public interface EditProfileInterface {
 
         void showDialog();
         void hideDialog();
-        void onLocalDataReady(String name, String address, String filepath);
+        void onLocalDataReady(String name, String address,String userPhone, String filepath);
     }
 }

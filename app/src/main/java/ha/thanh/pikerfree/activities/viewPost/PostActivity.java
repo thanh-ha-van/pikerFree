@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Shader;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +36,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -54,6 +59,8 @@ import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
+
+import static com.facebook.share.widget.ShareDialog.canShow;
 
 public class PostActivity extends AppCompatActivity implements
         PostInterface.RequiredViewOps,
@@ -88,7 +95,8 @@ public class PostActivity extends AppCompatActivity implements
     CustomTextView tvCategory;
     @BindView(R.id.tv_no_requesting_user)
     CustomTextView noRequestingUser;
-
+    @BindView(R.id.tv_requesting_user)
+    CustomTextView tvRequestingUsers;
     @BindView(R.id.view_owner)
     View ownerView;
     @BindView(R.id.scroll_view)
@@ -100,7 +108,6 @@ public class PostActivity extends AppCompatActivity implements
     @BindView(R.id.rv_requesting_user)
     RecyclerView rvRequestingUser;
 
-
     @BindView(R.id.mapView)
     MapView mMapView;
 
@@ -111,7 +118,6 @@ public class PostActivity extends AppCompatActivity implements
     private CustomYesNoDialog confirmDialog;
     private CustomAlertDialog alertDialog;
     private GoogleMap googleMap;
-    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,33 +132,9 @@ public class PostActivity extends AppCompatActivity implements
 
     @OnClick(R.id.tv_share)
     public void doSharePost() {
-        ShareDialog shareDialog;
-        FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
-            @Override
-            public void onCancel() {
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-            }
-
-            @Override
-            public void onSuccess(Sharer.Result result) {
-
-            }
-        };
-        Bitmap image = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(image)
-                .setCaption("Give me my code or I will ... you know, do that thing you don't like!")
-                .build();
-        SharePhotoContent content = new SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build();
-        shareDialog = new ShareDialog(this);
-        CallbackManager callbackManager = CallbackManager.Factory.create();
-        shareDialog.show(content,ShareDialog.Mode.AUTOMATIC);
-        shareDialog.registerCallback(callbackManager, shareCallback);
+        waitingDialog.showDialog();
+        PostPresenter.DownloadImgTask imgTask = mPresenter.new DownloadImgTask();
+        imgTask.execute("");
     }
 
     @OnClick(R.id.ic_back)
@@ -213,10 +195,16 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onGetRequestingUserDone() {
+    public void onGetRequestingUserDone(int type) {
         noRequestingUser.setVisibility(View.GONE);
         requestingUserView.setVisibility(View.VISIBLE);
         userAdapter.notifyDataSetChanged();
+        if(type == 1){
+            tvRequestingUsers.setText("Requesting user list:");
+        }
+        else {
+            tvRequestingUsers.setText("Granted user");
+        }
     }
 
     @Override
@@ -282,10 +270,16 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void OnGoToEdit(int id) {
+
         Intent intent = new Intent(this, EditPostActivity.class);
         intent.putExtra(Constants.POST_VIEW, id);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onShowError(String error) {
+        alertDialog.showAlertDialog("Error", error);
     }
 
     @Override
@@ -394,6 +388,40 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onChoose(String id) {
+        waitingDialog.showDialog();
         mPresenter.chooseUser(id);
+    }
+
+    @Override
+    public void onGrantedDone(final String userId) {
+        waitingDialog.hideDialog();
+        alertDialog.showAlertDialog("Done", "You just decide to give item in this post to user. We now will provide you information of this user. Click OK to go to their profile.");
+        alertDialog.setListener(new CustomAlertDialog.AlertListener() {
+            @Override
+            public void onOkClicked() {
+                onViewProfile(userId);
+            }
+        });
+    }
+
+    @Override
+    public void onPostFb(List<Bitmap> bms) {
+
+        List<SharePhoto> photos = new ArrayList<>();
+        for (Bitmap bitmap : bms
+                ) {
+            photos.add(new SharePhoto.Builder().setBitmap(bitmap).build());
+        }
+        SharePhotoContent content = new SharePhotoContent
+                .Builder()
+                .addPhotos(photos)
+                .build();
+        ShareDialog dialog = new ShareDialog(this);
+        if (canShow(SharePhotoContent.class)) {
+            waitingDialog.hideDialog();
+            dialog.show(content);
+        } else {
+            Log.d("Activity", "you cannot share photos :(");
+        }
     }
 }

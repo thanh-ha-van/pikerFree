@@ -1,6 +1,9 @@
 package ha.thanh.pikerfree.activities.viewPost;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
+
+import java.util.List;
 
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
@@ -31,8 +34,14 @@ class PostInterface {
 
         void showConfirmDialog(String mess);
 
-        void onGetRequestingUserDone();
+        void onGetRequestingUserDone(int type);
 
         void OnStartConversation(String id1, String id2);
+
+        void onPostFb(List<Bitmap> bms);
+
+        void onGrantedDone(String userId);
+
+        void onShowError(String error);
     }
 }

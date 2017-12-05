@@ -11,6 +11,7 @@ public class User {
     private String id;
     private String name;
     private String address;
+    private String phoneNumber;
     private double lat = 0;
     private double lng = 0;
     private String avatarLink = "userImages/default_profile.jgp";
@@ -19,6 +20,14 @@ public class User {
     private ArrayList<String> mess;
 
     public User() {
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public User(String id, String name, String address) {

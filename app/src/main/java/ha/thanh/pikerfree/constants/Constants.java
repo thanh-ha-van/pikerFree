@@ -8,6 +8,7 @@ public class Constants {
 
     public static final String SETTING_CONFIG = "pikerfree_setting";
     public static final String USER_NAME = "user_name";
+    public static final String USER_PHONE = "user_phone";
     public static final String USER_ADDRESS = "user_address";
     public static final String USER_PROFILE_PIC_PATH = "user_profile_path";
     public static final String BASE_URL = "https://pikerfree.firebaseio.com/";

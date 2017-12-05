@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -31,6 +32,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     public CustomEditText etUserName;
     @BindView(R.id.et_user_address)
     public CustomEditText etUserAddress;
+    @BindView(R.id.et_user_phone)
+    public CustomEditText etUserPhone;
     private WaitingDialog waitingDialog;
     private Uri filePath;
     private Bitmap bitmap;
@@ -47,7 +50,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     private void initData() {
         profilePresenter = new EditProfilePresenter(this, this);
-        profilePresenter.addTextChangeListener(etUserName, etUserAddress);
+        profilePresenter.addTextChangeListener(etUserName, etUserAddress, etUserPhone);
         profilePresenter.getLocalData();
         waitingDialog = new WaitingDialog(this);
     }
@@ -99,12 +102,14 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     @Override
     public void hideDialog() {
         waitingDialog.hideDialog();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onLocalDataReady(String name, String address, String filepath) {
+    public void onLocalDataReady(String name, String address,String userPhone, String filepath) {
         etUserName.setText(name);
         etUserAddress.setText(address);
+        etUserPhone.setText(userPhone);
         File imgFile = new File(filepath);
         if (imgFile.exists()) {
             Glide.with(this)

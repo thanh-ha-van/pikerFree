@@ -83,6 +83,10 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         intent.putExtra(Constants.USER_ID, presenter.getOpId());
         startActivity(intent);
     }
+    @OnClick(R.id.ic_back)
+    public void getBack() {
+        onBackPressed();
+    }
 
     @OnClick(R.id.btn_send)
     public void sendNewMess() {

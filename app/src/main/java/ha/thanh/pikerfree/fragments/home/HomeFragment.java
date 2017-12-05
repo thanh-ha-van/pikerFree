@@ -33,8 +33,6 @@ public class HomeFragment extends Fragment
     public RecyclerView rvPost;
     @BindView(R.id.profile_image)
     public CircleImageView userImage;
-    @BindView(R.id.user_address)
-    CustomTextView tvUserAddress;
     @BindView(R.id.user_name)
     CustomTextView tvUserName;
     @BindView(R.id.tv_loading_post)
@@ -105,7 +103,6 @@ public class HomeFragment extends Fragment
     @Override
     public void onLocalDataReady(String name, String address, String filepath) {
         tvUserName.setText(name);
-        tvUserAddress.setText(address);
         File imgFile = new File(filepath);
         if (imgFile.exists()) {
             Glide.with(this)
