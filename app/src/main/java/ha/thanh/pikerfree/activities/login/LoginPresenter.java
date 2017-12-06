@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -97,6 +98,8 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                     dataUser = dataSnapshot.getValue(User.class);
                     Log.d("Login", " get Data from server " + dataUser.toString());
                     saveDataToLocal();
+                    String instanceId = FirebaseInstanceId.getInstance().getToken();
+                    database.getReference().child("users").child(dataUser.getId()).child("instanceId").setValue(instanceId);
                     mView.onHideWaitingDialog();
                     mView.onLogInSuccess();
                 }

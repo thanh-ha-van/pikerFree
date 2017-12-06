@@ -2,6 +2,9 @@ package ha.thanh.pikerfree.services;
 
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -11,21 +14,19 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 public class InstanceIDService extends FirebaseInstanceIdService {
 
-    private static final String TAG = "MyFirebaseIIDService";
-
     @Override
     public void onTokenRefresh() {
-        // Get updated InstanceID token.
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
-
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        sendRegistrationToServer(refreshedToken);
+        super.onTokenRefresh();
+        String instanceId = FirebaseInstanceId.getInstance().getToken();
+        Log.d("@@@@", "onTokenRefresh: " + instanceId);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            FirebaseDatabase.getInstance().getReference()
+                    .child("users")
+                    .child(firebaseUser.getUid())
+                    .child("instanceId")
+                    .setValue(instanceId);
+        }
     }
 
-    private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
-    }
 }

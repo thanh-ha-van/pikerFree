@@ -19,6 +19,7 @@ import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
+import ha.thanh.pikerfree.models.MessageNotification;
 import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -241,6 +242,17 @@ class ConPresenter {
         nextPull = lastMessId - 10;
         Message mess = new Message(lastMessId, mModel.getUserIdFromSharePref(), text, Utils.getCurrentTimestamp());
         uploadMess(mess);
+        uploadNotification(text);
+    }
+
+    private void uploadNotification(String text) {
+        MessageNotification message =
+                new MessageNotification(Utils.getCurrentTimestamp(), text, mModel.getUserIdFromSharePref(), OPUser.getId());
+        database.getReference()
+                .child("notifications")
+                .child("messages")
+                .push()
+                .setValue(message);
     }
 
     private void uploadMess(final Message message) {

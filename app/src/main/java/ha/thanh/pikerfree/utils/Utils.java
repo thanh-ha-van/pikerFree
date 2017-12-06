@@ -5,10 +5,15 @@ import android.text.format.DateFormat;
 import android.util.Log;
 
 
+import com.firebase.client.Firebase;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import ha.thanh.pikerfree.constants.Constants;
@@ -47,6 +52,16 @@ public class Utils {
         }
     }
 
+    public static void sendNotificationToUser(String user, final String message) {
+        Firebase ref = new Firebase(FirebaseDatabase.getInstance().toString());
+        final Firebase notifications = ref.child("notificationRequests");
+
+        Map notification = new HashMap<>();
+        notification.put("username", user);
+        notification.put("message", message);
+
+        notifications.push().setValue(notification);
+    }
     public static String getTimeString(long timestamp) {
         try {
             Calendar calendar = Calendar.getInstance();

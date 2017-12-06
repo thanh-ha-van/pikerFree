@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ import ha.thanh.pikerfree.fragments.messages.MessageFragment;
 import ha.thanh.pikerfree.fragments.news.NewsFragment;
 import ha.thanh.pikerfree.fragments.settings.SettingFragment;
 import ha.thanh.pikerfree.otherHandle.HandlePermission;
+import ha.thanh.pikerfree.utils.Utils;
+
 
 public class MainActivity extends AppCompatActivity implements HandlePermission.CallbackRequestPermission {
 

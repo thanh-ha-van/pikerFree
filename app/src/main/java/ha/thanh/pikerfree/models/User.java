@@ -17,10 +17,19 @@ public class User {
     private String email = "";
     private ArrayList<Integer> posts;
     private ArrayList<String> mess;
+    private String instanceId;
     private double rating = 5;
     private List<String> ratedUsers;
 
     public User() {
+    }
+
+    public String getInstanceId() {
+        return instanceId;
+    }
+
+    public void setInstanceId(String instanceId) {
+        this.instanceId = instanceId;
     }
 
     public List<String> getRatedUsers() {
