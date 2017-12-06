@@ -111,8 +111,8 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
     }
 
     void removeListener() {
-        if(pref != null)
-        pref.removeEventListener(eventListener);
+        if (pref != null)
+            pref.removeEventListener(eventListener);
     }
 
     private void saveDataToLocal() {

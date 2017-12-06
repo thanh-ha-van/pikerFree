@@ -1,7 +1,7 @@
 package ha.thanh.pikerfree.fragments.messages;
 
 
- class MessageInterface {
+class MessageInterface {
     interface RequiredViewOps {
 
         void onGetConversationDone();

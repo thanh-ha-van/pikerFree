@@ -37,44 +37,54 @@ public class NewsFragment extends Fragment
     private void initData() {
 
     }
+
     @OnClick(R.id.accessories)
-    public  void goToAC(){
+    public void goToAC() {
         goToList(Constants.CATE_ACCESSORY);
     }
+
     @OnClick(R.id.near_by)
-    public  void goToAC1(){
+    public void goToAC1() {
         goToList(Constants.CATE_NEAR_BY);
     }
+
     @OnClick(R.id.recent)
-    public  void goToAC2(){
+    public void goToAC2() {
         goToList(Constants.CATE_RECENT);
     }
+
     @OnClick(R.id.baby_and_toy)
-    public  void goToAC3(){
+    public void goToAC3() {
         goToList(Constants.CATE_BABY);
     }
+
     @OnClick(R.id.groceries)
-    public  void goToAC4(){
+    public void goToAC4() {
         goToList(Constants.CATE_GROCERY);
     }
+
     @OnClick(R.id.electronics)
-    public  void goToAC5(){
+    public void goToAC5() {
         goToList(Constants.CATE_ELECTRONIC);
     }
+
     @OnClick(R.id.cloths)
-    public  void goToAC6(){
+    public void goToAC6() {
         goToList(Constants.CATE_FASHION);
     }
+
     @OnClick(R.id.home_living)
-    public  void goToAC7(){
+    public void goToAC7() {
         goToList(Constants.CATE_HOME);
     }
+
     @OnClick(R.id.others)
-    public  void goToAC8(){
+    public void goToAC8() {
         goToList(Constants.CATE_OTHER);
     }
+
     @OnClick(R.id.pet)
-    public  void goToAC9(){
+    public void goToAC9() {
         goToList(Constants.CATE_PET);
     }
 

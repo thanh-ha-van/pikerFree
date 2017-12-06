@@ -21,6 +21,7 @@
             android:padding="14dp"
             android:src="@drawable/ic_back"
             android:tint="@color/white" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_op"
             android:layout_width="40dp"

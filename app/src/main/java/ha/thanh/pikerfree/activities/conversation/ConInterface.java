@@ -12,9 +12,13 @@ import ha.thanh.pikerfree.models.User;
 public class ConInterface {
     interface RequiredViewOps {
         void getOPDone(User user);
+
         void getOwnerImageDone(Uri uri);
+
         void onGetMessDone(Message message);
+
         void onEndOfConversation();
+
         void onPullDone();
     }
 

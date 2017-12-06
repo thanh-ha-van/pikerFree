@@ -271,17 +271,17 @@ class ConPresenter {
 
     private void showData() {
 
-        if (isUploadedMess ) {
+        if (isUploadedMess) {
             getMessData(lastMessId, true);
             return;
         }
-        if(!isFirstTime){
+        if (!isFirstTime) {
             // update single value of last mess id
             getMessData(lastMessId, true);
             return;
         }
         currentPull = lastMessId;
-        if(lastMessId == 0){
+        if (lastMessId == 0) {
             mView.onPullDone();
             return;
         }

@@ -199,10 +199,9 @@ public class PostActivity extends AppCompatActivity implements
         noRequestingUser.setVisibility(View.GONE);
         requestingUserView.setVisibility(View.VISIBLE);
         userAdapter.notifyDataSetChanged();
-        if(type == 1){
+        if (type == 1) {
             tvRequestingUsers.setText("Requesting user list:");
-        }
-        else {
+        } else {
             tvRequestingUsers.setText("Granted user");
         }
     }

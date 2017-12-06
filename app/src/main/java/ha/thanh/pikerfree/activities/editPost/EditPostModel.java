@@ -13,6 +13,7 @@ import ha.thanh.pikerfree.services.GPSTracker;
 public class EditPostModel {
     private GPSTracker gpsTracker;
     private SharedPreferences sharedPreferences;
+
     EditPostModel(Context context) {
         this.gpsTracker = new GPSTracker(context);
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
@@ -22,11 +23,13 @@ public class EditPostModel {
         return sharedPreferences.getString(Constants.USER_ID, "");
 
     }
+
     double getUserLat() {
-        return  gpsTracker.getLatitude();
+        return gpsTracker.getLatitude();
     }
+
     double getUserLng() {
-        return  gpsTracker.getLongitude();
+        return gpsTracker.getLongitude();
     }
 
 }

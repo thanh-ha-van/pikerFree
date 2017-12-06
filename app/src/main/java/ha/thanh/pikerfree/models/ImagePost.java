@@ -5,7 +5,7 @@ package ha.thanh.pikerfree.models;
  */
 
 public class ImagePost {
-    private  String pathLocal;
+    private String pathLocal;
     private boolean isUploadDone;
     private String name;
 

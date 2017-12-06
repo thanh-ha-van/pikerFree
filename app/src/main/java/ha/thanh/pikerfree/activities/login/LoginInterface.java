@@ -8,10 +8,14 @@ public interface LoginInterface {
 
     interface RequiredViewOps {
         void onHideWaitingDialog();
+
         void onLogInSuccess();
+
         void onPasswordWeek();
+
         void onShowAlert(String title, String message);
     }
+
     interface RequiredPresenterOps {
 
     }

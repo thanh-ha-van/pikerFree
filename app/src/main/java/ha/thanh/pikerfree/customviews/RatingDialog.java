@@ -15,7 +15,7 @@ public class RatingDialog {
 
 
     public interface optionInterface {
-        void onReview(int rating);
+        void onReview(double rating);
     }
 
     public RatingDialog(Activity activity, optionInterface interFace) {

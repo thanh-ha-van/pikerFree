@@ -41,7 +41,6 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.MyViewHolder> 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-
         MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

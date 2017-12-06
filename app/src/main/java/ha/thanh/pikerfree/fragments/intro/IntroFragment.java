@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 
 
-
 public abstract class IntroFragment extends Fragment {
 
     public void startAnimation() {

@@ -29,11 +29,11 @@ class MessagePresenter {
 
     List<Conversation> getConversationList() {
         if (conversationList != null)
-        return conversationList;
-        else return  conversationList = new ArrayList<>();
+            return conversationList;
+        else return conversationList = new ArrayList<>();
     }
 
-    MessagePresenter( MessageInterface.RequiredViewOps mView) {
+    MessagePresenter(MessageInterface.RequiredViewOps mView) {
         this.mView = mView;
         handler = new Handler();
         conversationList = new ArrayList<>();
@@ -43,10 +43,10 @@ class MessagePresenter {
     }
 
     void loadAllConversation() {
-        if(conversationList != null)
-        conversationList.clear();
-        if(conversationIdList != null)
-        conversationIdList.clear();
+        if (conversationList != null)
+            conversationList.clear();
+        if (conversationIdList != null)
+            conversationIdList.clear();
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -75,24 +75,24 @@ class MessagePresenter {
     }
 
     private void getConversations() {
-        if(conversationIdList != null)
-        for (int i = 0; i < conversationIdList.size(); i++) {
-            DatabaseReference conversationPref = database
-                    .getReference(Constants.CONVERSATION).child(conversationIdList.get(i));
-            conversationPref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Conversation conversation = dataSnapshot.getValue(Conversation.class);
-                    conversationList.add(conversation);
-                    mView.onGetConversationDone();
-                }
+        if (conversationIdList != null)
+            for (int i = 0; i < conversationIdList.size(); i++) {
+                DatabaseReference conversationPref = database
+                        .getReference(Constants.CONVERSATION).child(conversationIdList.get(i));
+                conversationPref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Conversation conversation = dataSnapshot.getValue(Conversation.class);
+                        conversationList.add(conversation);
+                        mView.onGetConversationDone();
+                    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
 
-        }
+            }
     }
 }

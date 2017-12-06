@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.activities.splash;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+
 import ha.thanh.pikerfree.constants.Globals;
 
 

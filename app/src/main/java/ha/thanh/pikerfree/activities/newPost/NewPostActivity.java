@@ -29,7 +29,7 @@ import ha.thanh.pikerfree.utils.Utils;
 
 public class NewPostActivity extends AppCompatActivity
         implements NewPostInterface.RequiredViewOps,
-         CustomAlertDialog.AlertListener {
+        CustomAlertDialog.AlertListener {
 
     @BindView(R.id.rv_images)
     public RecyclerView recyclerViewImage;

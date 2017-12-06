@@ -13,6 +13,7 @@ import ha.thanh.pikerfree.services.GPSTracker;
 public class ConModel {
     private GPSTracker gpsTracker;
     private SharedPreferences sharedPreferences;
+
     ConModel(Context context) {
         this.gpsTracker = new GPSTracker(context);
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);

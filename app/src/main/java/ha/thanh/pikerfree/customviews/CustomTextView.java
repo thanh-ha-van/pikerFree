@@ -29,6 +29,7 @@ public class CustomTextView extends android.support.v7.widget.AppCompatTextView 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
         this.setTypeface(font);
     }
+
     @Override
     public void setTypeface(Typeface tf, int style) {
         tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");

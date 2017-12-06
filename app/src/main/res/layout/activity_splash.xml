@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="0dp"
         android:src="@drawable/piker"
-        android:tint="@color/colorPrimary" />
+        android:tint="@color/white" />
 
     <View
         android:layout_width="70dp"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textAlignment="center"
-        android:textColor="@color/orange"
-        android:textSize="14sp" />
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </LinearLayout>

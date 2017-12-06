@@ -69,10 +69,10 @@ class EditProfilePresenter {
         userName = mModel.getUserNameStringFromSharePf();
         userAddress = mModel.getUserAddressStringFromSharePf();
         userPhone = mModel.getUserPhoneFromSharePf();
-        mView.onLocalDataReady(userName, userAddress,userPhone, mModel.getLocalImageStringFromSharePf());
+        mView.onLocalDataReady(userName, userAddress, userPhone, mModel.getLocalImageStringFromSharePf());
     }
 
-    void addTextChangeListener(final EditText etUserName, final EditText etUserAddress, final  EditText etUserPhone) {
+    void addTextChangeListener(final EditText etUserName, final EditText etUserAddress, final EditText etUserPhone) {
         userAddress = etUserAddress.getText().toString();
         userName = etUserName.getText().toString();
         etUserAddress.addTextChangedListener(new TextWatcher() {

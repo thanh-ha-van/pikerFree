@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.activities.newPost;
 
 import android.content.Context;
+
 import ha.thanh.pikerfree.services.GPSTracker;
 
 /**
@@ -10,15 +11,17 @@ import ha.thanh.pikerfree.services.GPSTracker;
 public class NewPostModel {
 
     private GPSTracker gpsTracker;
+
     NewPostModel(Context context) {
         this.gpsTracker = new GPSTracker(context);
     }
 
-     double getUserLat() {
-        return  gpsTracker.getLatitude();
+    double getUserLat() {
+        return gpsTracker.getLatitude();
     }
-     double getUserLng() {
-        return  gpsTracker.getLongitude();
+
+    double getUserLng() {
+        return gpsTracker.getLongitude();
     }
 
 }

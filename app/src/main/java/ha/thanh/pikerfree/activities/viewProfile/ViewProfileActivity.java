@@ -121,12 +121,13 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     public void showRating() {
         RatingDialog ratingDialog = new RatingDialog(this, new RatingDialog.optionInterface() {
             @Override
-            public void onReview(int rating) {
+            public void onReview(double rating) {
                 presenter.updateRating(rating);
             }
         });
         ratingDialog.showRatingDialog();
     }
+
 
     @Override
     public void onRatingFail(String err) {

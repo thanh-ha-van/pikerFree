@@ -22,24 +22,26 @@ public class EditProfileModel {
         return sharedPreferences.getString(Constants.USER_NAME, "");
 
     }
+
     String getUserPhoneFromSharePf() {
         return sharedPreferences.getString(Constants.USER_PHONE, "");
 
     }
 
-     String getUserAddressStringFromSharePf() {
+    String getUserAddressStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_ADDRESS, "");
 
     }
 
-     String getLocalImageStringFromSharePf() {
+    String getLocalImageStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_PROFILE_PIC_PATH, "");
     }
 
     String getUserIdFromSharePf() {
         return sharedPreferences.getString(Constants.USER_ID, "");
     }
-     void saveLocal(String username, String userAddress, String path, String userPhone) {
+
+    void saveLocal(String username, String userAddress, String path, String userPhone) {
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, username);
         editor.putString(Constants.USER_ADDRESS, userAddress);

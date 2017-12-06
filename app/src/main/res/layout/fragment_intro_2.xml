@@ -103,5 +103,5 @@
         android:gravity="center"
         android:text="@string/intro_2"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 </LinearLayout>

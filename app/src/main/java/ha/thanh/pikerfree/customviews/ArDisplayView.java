@@ -15,7 +15,7 @@ import java.util.List;
  * Created by HaVan on 11/16/2017.
  */
 
-public class ArDisplayView extends SurfaceView implements SurfaceHolder.Callback  {
+public class ArDisplayView extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final String DEBUG_TAG = "ArDisplayView Log";
     Camera mCamera;
@@ -41,10 +41,18 @@ public class ArDisplayView extends SurfaceView implements SurfaceHolder.Callback
         int rotation = mActivity.getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
         switch (rotation) {
-            case Surface.ROTATION_0: degrees = 0; break;
-            case Surface.ROTATION_90: degrees = 90; break;
-            case Surface.ROTATION_180: degrees = 180; break;
-            case Surface.ROTATION_270: degrees = 270; break;
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
         }
         mCamera.setDisplayOrientation((info.orientation - degrees + 360) % 360);
 
@@ -56,14 +64,11 @@ public class ArDisplayView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
-    {
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         Camera.Parameters params = mCamera.getParameters();
         List<Camera.Size> prevSizes = params.getSupportedPreviewSizes();
-        for (Camera.Size s : prevSizes)
-        {
-            if((s.height <= height) && (s.width <= width))
-            {
+        for (Camera.Size s : prevSizes) {
+            if ((s.height <= height) && (s.width <= width)) {
                 params.setPreviewSize(s.width, s.height);
                 break;
             }

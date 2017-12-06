@@ -107,8 +107,7 @@ public class OverlayView extends View implements SensorEventListener, LocationLi
 
                 // now translate the dx
                 canvas.translate(0.0f - dx, 0.0f);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(DEBUG_TAG, "Failed to open Camera");
                 e.printStackTrace();
             }
@@ -119,7 +118,6 @@ public class OverlayView extends View implements SensorEventListener, LocationLi
                     canvas.getHeight() / 2,
                     canvas.getWidth() + canvas.getHeight(),
                     canvas.getHeight() / 2, contentPaint);
-
 
 
             // draw our point -- we've rotated and translated this to the right spot already

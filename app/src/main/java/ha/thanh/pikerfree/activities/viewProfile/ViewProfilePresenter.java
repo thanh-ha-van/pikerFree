@@ -21,10 +21,6 @@ import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.services.GPSTracker;
 
-/**
- * Created by HaVan on 11/29/2017.
- */
-
 public class ViewProfilePresenter {
     private ViewProfileInterface.RequiredViewOps mView;
     private Handler handler;
@@ -47,7 +43,7 @@ public class ViewProfilePresenter {
         gpsTracker = new GPSTracker(context);
     }
 
-    void updateRating(int rate) {
+    void updateRating(double rate) {
         List<String> list;
         list = user.getRatedUsers();
         if (user.getRatedUsers() != null) {
@@ -59,27 +55,27 @@ public class ViewProfilePresenter {
             }
             list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
             user.setRatedUsers(list);
-            double newrate = (rate + list.size() * user.getRating()) / (list.size() + 1);
-            user.setRating(newrate);
-            updateUser(newrate);
+            double newRate = (rate + list.size() * user.getRating()) / (list.size() + 1);
+            user.setRating(newRate);
+            updateUser(newRate);
         } else {
             list = new ArrayList<>();
             list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            double newrate = (rate + 5) / 2;
-            user.setRating(newrate);
+            double newRate = (rate + 5) / 2;
+            user.setRating(newRate);
             user.setRatedUsers(list);
-            updateUser(rate);
+            updateUser(newRate);
         }
     }
 
-    private void updateUser(double newrate) {
+    private void updateUser(double newRate) {
         DatabaseReference userRatingPref;
         userRatingPref = database.getReference("users").child(user.getId()).child("rating");
         userRatingPref.setValue(user.getRating());
         DatabaseReference ratedUserPref;
         ratedUserPref = database.getReference("users").child(user.getId()).child("ratedUsers");
         ratedUserPref.setValue(user.getRatedUsers());
-        mView.onRatingDone(newrate);
+        mView.onRatingDone(newRate);
     }
 
     public double getUserLat() {

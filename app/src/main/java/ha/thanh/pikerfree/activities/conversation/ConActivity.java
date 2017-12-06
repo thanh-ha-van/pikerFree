@@ -78,11 +78,12 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     }
 
     @OnClick(R.id.tv_op_name)
-    public void goToProfile(){
+    public void goToProfile() {
         Intent intent = new Intent(this, ViewProfileActivity.class);
         intent.putExtra(Constants.USER_ID, presenter.getOpId());
         startActivity(intent);
     }
+
     @OnClick(R.id.ic_back)
     public void getBack() {
         onBackPressed();

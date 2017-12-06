@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.Camera" />
     <uses-feature android:name="android.hardware." />
 
@@ -20,10 +20,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <provider android:authorities="com.facebook.app.FacebookContentProvider152277168741117"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider152277168741117"
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:exported="true" />
 
         <service android:name=".services.MessagingService">
             <intent-filter>
@@ -35,14 +38,12 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_app_launch" />
-        <!--
-             Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more.
-        -->
+            android:resource="@mipmap/ic_launcher" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
@@ -92,7 +93,7 @@
         <activity android:name=".activities.information.TermActivity" />
         <activity android:name=".activities.information.HelpActivity" />
         <activity android:name=".activities.information.NotificationActivity" />
-        <activity android:name=".activities.information.ManageActivity"/>
+        <activity android:name=".activities.information.ManageActivity" />
     </application>
 
 </manifest>

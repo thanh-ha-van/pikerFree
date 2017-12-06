@@ -22,6 +22,7 @@ public class LoginModel {
         sharedPreferences = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
 
     }
+
     public void saveDataLocal(User user, String path) {
         editor = sharedPreferences.edit();
         editor.putString(Constants.USER_NAME, user.getName());

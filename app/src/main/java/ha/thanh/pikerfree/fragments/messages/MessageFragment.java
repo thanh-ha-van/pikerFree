@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +16,6 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.adapters.ConversationAdapter;
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Conversation;
 
@@ -28,9 +26,6 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
     public CustomTextView tvNotData;
     @BindView(R.id.rv_conversation)
     public RecyclerView rvConversation;
-    @BindView(R.id.tv_search_mess)
-    public CustomEditText etSearch;
-
 
     private MessagePresenter presenter;
     private ConversationAdapter adapter;

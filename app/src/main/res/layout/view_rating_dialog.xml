@@ -28,7 +28,11 @@
         android:layout_height="35dp"
         android:layout_margin="3dp"
         android:background="@drawable/plate_green_bold"
+        android:drawableEnd="@drawable/ic_star"
+        android:drawableStart="@drawable/ic_star"
         android:gravity="center"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         android:text="5 star"
         android:textColor="@color/green"
         android:textSize="18sp" />
@@ -39,9 +43,13 @@
         android:layout_height="35dp"
         android:layout_margin="3dp"
         android:background="@drawable/plate_green_bold_2"
+        android:drawableEnd="@drawable/ic_star"
+        android:drawableStart="@drawable/ic_star"
         android:gravity="center"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         android:text="4 star"
-        android:textColor="@color/green"
+        android:textColor="#b0ff00"
         android:textSize="18sp" />
 
 
@@ -51,9 +59,13 @@
         android:layout_height="35dp"
         android:layout_margin="3dp"
         android:background="@drawable/plate_green_bold_3"
+        android:drawableEnd="@drawable/ic_star"
+        android:drawableStart="@drawable/ic_star"
         android:gravity="center"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         android:text="3 star"
-        android:textColor="@color/green"
+        android:textColor="#fdff00"
         android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -62,9 +74,13 @@
         android:layout_height="35dp"
         android:layout_margin="3dp"
         android:background="@drawable/plate_green_bold_4"
+        android:drawableEnd="@drawable/ic_star"
+        android:drawableStart="@drawable/ic_star"
         android:gravity="center"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         android:text="2 star"
-        android:textColor="@color/green"
+        android:textColor="@color/orange"
         android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -73,9 +89,13 @@
         android:layout_height="35dp"
         android:layout_margin="3dp"
         android:background="@drawable/plate_green_bold_5"
+        android:drawableEnd="@drawable/ic_star"
+        android:drawableStart="@drawable/ic_star"
         android:gravity="center"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         android:text="1 star"
-        android:textColor="@color/green"
+        android:textColor="@color/red"
         android:textSize="18sp" />
 
 

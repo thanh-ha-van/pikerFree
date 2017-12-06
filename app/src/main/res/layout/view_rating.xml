@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_margin="5dp">
-s
+    s
+
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"

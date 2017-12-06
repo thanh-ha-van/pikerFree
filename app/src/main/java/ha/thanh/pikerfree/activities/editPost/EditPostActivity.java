@@ -97,13 +97,12 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
     }
 
     @OnClick(R.id.tv_post_status)
-    public void changeStatus(){
-        if(postStatus.getText().toString().equalsIgnoreCase("opening")){
+    public void changeStatus() {
+        if (postStatus.getText().toString().equalsIgnoreCase("opening")) {
             postStatus.setText("Closed");
             postStatus.setTextColor(getResources().getColor(R.color.GrayScale));
             mPresenter.changeStatus(Constants.STATUS_CLOSE);
-        }
-        else {
+        } else {
             postStatus.setText("Opening");
             postStatus.setTextColor(getResources().getColor(R.color.green));
             mPresenter.changeStatus(Constants.STATUS_OPEN);
@@ -111,7 +110,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
     }
 
     @OnClick(R.id.ic_warning)
-    public void showWarning(){
+    public void showWarning() {
         alertDialog.showAlertDialog("notice", "When you change the status to closed, other users can not send receiving request to you post any more.");
         alertDialog.setListener(null);
     }

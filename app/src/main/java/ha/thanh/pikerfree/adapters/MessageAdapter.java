@@ -88,7 +88,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             try {
                 if (mMessageList.get(position + 1).getAuthor().equalsIgnoreCase(mMessageList.get(position).getAuthor()))
                     timeText.setVisibility(View.GONE);
-                else  timeText.setVisibility(View.VISIBLE);
+                else timeText.setVisibility(View.VISIBLE);
             } catch (IndexOutOfBoundsException e) {
                 e.getMessage();
             }

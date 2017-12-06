@@ -106,7 +106,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     @Override
-    public void onLocalDataReady(String name, String address,String userPhone, String filepath) {
+    public void onLocalDataReady(String name, String address, String userPhone, String filepath) {
         etUserName.setText(name);
         etUserAddress.setText(address);
         etUserPhone.setText(userPhone);

@@ -167,9 +167,10 @@ class PostPresenter {
         if (isUserOwner) {
             deletePost();
         } else {
-            if(post.getStatus() == Constants.STATUS_OPEN)
-            updateRequestingUserList();
-            else mView.onShowError("This post is closed by owner so you can not send request anymore");
+            if (post.getStatus() == Constants.STATUS_OPEN)
+                updateRequestingUserList();
+            else
+                mView.onShowError("This post is closed by owner so you can not send request anymore");
         }
     }
 

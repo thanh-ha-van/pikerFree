@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import ha.thanh.pikerfree.constants.Constants;
+
 public class Utils {
 
 
@@ -69,9 +70,9 @@ public class Utils {
 
         final String timeFormatString = "h:mm";
         final String dateTimeFormatString = "dd-MM-yyyy, h:mm";
-        if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE) ) {
+        if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE)) {
             return "Today " + DateFormat.format(timeFormatString, smsTime);
-        } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1  ){
+        } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1) {
             return "Yesterday " + DateFormat.format(timeFormatString, smsTime);
         } else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
             return DateFormat.format(dateTimeFormatString, smsTime).toString();
@@ -92,18 +93,18 @@ public class Utils {
         l2.setLongitude(lon2);
 
         float distance = l1.distanceTo(l2);
-        int distanceInt = (Math.round(distance)/100)*100;
+        int distanceInt = (Math.round(distance) / 100) * 100;
         String dist = distanceInt + " m";
 
         if (distanceInt > 1000) {
-            double roundOff = Math.round(distance ) / 1000;
+            double roundOff = Math.round(distance) / 1000;
             dist = roundOffTo2DecPlaces(roundOff) + " km";
         }
         return dist;
     }
 
     private static String roundOffTo2DecPlaces(double val) {
-        return String.format(Locale.getDefault(),"%.2f", val);
+        return String.format(Locale.getDefault(), "%.2f", val);
     }
 
 }

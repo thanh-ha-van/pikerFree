@@ -12,9 +12,13 @@ public class ViewProfileInterface {
     interface RequiredViewOps {
 
         void getOwnerImageDone(Uri uri);
+
         void onGetUserDataDone(User user);
+
         void onGetUserPostsDone();
+
         void onRatingFail(String err);
+
         void onRatingDone(double newrate);
     }
 }

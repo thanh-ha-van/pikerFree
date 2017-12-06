@@ -68,12 +68,13 @@
                     android:autoLink="map"
                     android:textColor="@color/text_black_3"
                     android:textSize="14sp" />
+
                 <include
                     android:id="@+id/rating"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    layout="@layout/view_rating"/>
+                    layout="@layout/view_rating" />
             </LinearLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>

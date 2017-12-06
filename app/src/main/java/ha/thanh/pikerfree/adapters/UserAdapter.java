@@ -64,7 +64,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tvName.setText(userList.get(position).getName());
-        if(userList.get(position).getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+        if (userList.get(position).getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
             holder.tvName.setText(userList.get(position).getName() + " (You)");
         getUserImageLink(userList.get(position).getAvatarLink(), holder.imgItemImage);
     }

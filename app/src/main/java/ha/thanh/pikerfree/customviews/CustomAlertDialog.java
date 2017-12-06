@@ -41,14 +41,15 @@ public class CustomAlertDialog {
             public void onClick(View v) {
                 alertDialog.dismiss();
                 if (listener != null)
-                listener.onOkClicked();
+                    listener.onOkClicked();
             }
         });
 
         alertDialog.show();
 
     }
-    public void setListener(AlertListener listener){
+
+    public void setListener(AlertListener listener) {
         this.listener = listener;
     }
 
