@@ -21,8 +21,17 @@ public class User {
     private boolean isOnline;
     private double rating = 5;
     private List<String> ratedUsers;
+    private List<String> followingUsers;
 
     public User() {
+    }
+
+    public List<String> getFollowingUsers() {
+        return followingUsers;
+    }
+
+    public void setFollowingUsers(List<String> followingUsers) {
+        this.followingUsers = followingUsers;
     }
 
     public boolean isOnline() {

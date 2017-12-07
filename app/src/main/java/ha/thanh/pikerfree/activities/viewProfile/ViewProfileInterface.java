@@ -20,5 +20,7 @@ public class ViewProfileInterface {
         void onRatingFail(String err);
 
         void onRatingDone(double newrate);
+
+        void onFollowSuccess(String inform);
     }
 }

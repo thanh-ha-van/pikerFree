@@ -115,6 +115,22 @@ public class ViewProfilePresenter {
         });
     }
 
+    void followUser() {
+
+        List<String> followingUsers = new ArrayList<>();
+        if(user.getFollowingUsers() != null)
+            followingUsers = user.getFollowingUsers();
+        followingUsers.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference databaseReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(user.getId())
+                .child("followingUsers");
+        databaseReference.setValue(followingUsers);
+        mView.onFollowSuccess("You now following this user, you will get notification when this user have new post.");
+    }
+
     private void getUserImageLink(String link) {
 
         StorageReference mStorageRef;

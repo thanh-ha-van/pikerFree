@@ -78,6 +78,18 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         presenter = new ViewProfilePresenter(this, this, userId);
     }
 
+    @OnClick(R.id.btn_follow)
+    public void followUser() {
+        presenter.followUser();
+    }
+
+    @Override
+    public void onFollowSuccess(String inform) {
+
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
+        alertDialog.showAlertDialog("Success", inform);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -90,8 +102,8 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         tvUserName.setText(user.getName());
         tvPhone.setText(user.getPhoneNumber());
         tvRateNum.setText(String.valueOf(user.getRating()));
-        if(user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
-        else  opStatus.setImageResource(R.drawable.bg_circle_gray);
+        if (user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
+        else opStatus.setImageResource(R.drawable.bg_circle_gray);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package ha.thanh.pikerfree.models;
 
-import com.firebase.geofire.GeoLocation;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
