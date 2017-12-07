@@ -99,6 +99,7 @@ public class ViewProfilePresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         user = dataSnapshot.getValue(User.class);
+                        user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                         mView.onGetUserDataDone(user);
                         getUserImageLink(user.getAvatarLink());
                         getPostData(user.getPosts());

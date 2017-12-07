@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -27,6 +28,8 @@ import ha.thanh.pikerfree.models.User;
 public class ViewProfileActivity extends AppCompatActivity implements ViewProfileInterface.RequiredViewOps, PostAdapter.ItemClickListener {
 
 
+    @BindView(R.id.op_status)
+    ImageView opStatus;
     @BindView(R.id.rv_my_post)
     public RecyclerView rvPost;
     @BindView(R.id.profile_image)
@@ -87,6 +90,8 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         tvUserName.setText(user.getName());
         tvPhone.setText(user.getPhoneNumber());
         tvRateNum.setText(String.valueOf(user.getRating()));
+        if(user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
+        else  opStatus.setImageResource(R.drawable.bg_circle_gray);
     }
 
     @Override

@@ -18,10 +18,19 @@ public class User {
     private ArrayList<Integer> posts;
     private ArrayList<String> mess;
     private String instanceId;
+    private boolean isOnline;
     private double rating = 5;
     private List<String> ratedUsers;
 
     public User() {
+    }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 
     public String getInstanceId() {
@@ -61,7 +70,6 @@ public class User {
         this.name = name;
         this.address = address;
     }
-
 
     public ArrayList<String> getMess() {
         return mess;

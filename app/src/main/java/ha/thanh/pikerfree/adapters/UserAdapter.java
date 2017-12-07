@@ -39,11 +39,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         ImageView imgItemImage;
         TextView tvName;
+        ImageView opStatus;
 
         MyViewHolder(View view) {
             super(view);
             imgItemImage = (ImageView) view.findViewById(R.id.owner_pic);
             tvName = (TextView) view.findViewById(R.id.tv_owner_name);
+            opStatus = (ImageView) view.findViewById(R.id.op_status);
             itemView.setOnClickListener(this);
         }
 
@@ -66,9 +68,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         holder.tvName.setText(userList.get(position).getName());
         if (userList.get(position).getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
             holder.tvName.setText(userList.get(position).getName() + " (You)");
+        if(userList.get(position).isOnline())
+            holder.opStatus.setImageResource(R.drawable.bg_circle_check);
+        else  holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
         getUserImageLink(userList.get(position).getAvatarLink(), holder.imgItemImage);
     }
-
 
     private void getUserImageLink(String link, final ImageView imageView) {
         StorageReference mStorageRef = FirebaseStorage.getInstance()

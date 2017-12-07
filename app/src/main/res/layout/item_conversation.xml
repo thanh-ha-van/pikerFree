@@ -14,17 +14,30 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/op_pic"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_user"
-            app:civ_border_color="@color/colorPrimary"
-            app:civ_border_width="2dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/op_pic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_user"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp" />
+
+            <ImageView
+                android:id="@+id/op_status"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignBottom="@+id/op_pic"
+                android:layout_alignEnd="@+id/op_pic"
+                android:background="@drawable/bg_circle_white"
+                android:padding="2dp"
+                android:src="@drawable/bg_circle_check" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,8 +79,8 @@
                     android:paddingEnd="6dp"
                     android:paddingStart="6dp"
                     android:textColor="@color/white"
-                    android:visibility="gone"
-                    android:tint="@color/white" />
+                    android:tint="@color/white"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -84,9 +97,9 @@
 
     <View
         android:id="@+id/bottom_line"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginStart="80dp"
+        android:layout_marginTop="10dp"
         android:background="@color/gray" />
 </LinearLayout>

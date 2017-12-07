@@ -33,7 +33,6 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
         isFirstRun = mPresenter.isFirstRun();
     }
 
-
     Runnable runnable = new Runnable() {
         @Override
         public void run() {

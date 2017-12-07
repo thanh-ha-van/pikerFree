@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -48,6 +51,18 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         setupViewPager(viewPager);
         viewPager.setCurrentItem(1);
         viewPager.setOffscreenPageLimit(3);
+        changeOnlineStatus();
+    }
+
+    private void changeOnlineStatus() {
+
+        FirebaseDatabase.getInstance()
+                .getReference()
+                .child("users")
+                .child(FirebaseAuth.getInstance()
+                        .getCurrentUser()
+                        .getUid())
+                .child("isOnline").setValue(true);
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
@@ -107,6 +122,13 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
 
     @Override
     public void onBackPressed() {
+        FirebaseDatabase.getInstance()
+                .getReference()
+                .child("users")
+                .child(FirebaseAuth.getInstance()
+                        .getCurrentUser()
+                        .getUid())
+                .child("isOnline").setValue(false);
         super.onBackPressed();
     }
 

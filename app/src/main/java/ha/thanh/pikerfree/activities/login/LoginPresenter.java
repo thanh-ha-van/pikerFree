@@ -54,6 +54,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
         if (auth.getCurrentUser() != null) {
             mView.onLogInSuccess();
         }
+
     }
 
     void doLogin(String email, final String password) {

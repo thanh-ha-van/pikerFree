@@ -3,10 +3,12 @@ package ha.thanh.pikerfree.adapters;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +31,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.Messages.Message;
+import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
 
@@ -56,6 +59,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     // todo get LastMess data from last mess id
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @BindView(R.id.op_status)
+        ImageView opStatus;
         @BindView(R.id.op_pic)
         CircleImageView OpImage;
         @BindView(R.id.tv_last_mess)
@@ -119,12 +124,16 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 final DatabaseReference userPref;
                 userPref = database
                         .getReference("users")
-                        .child(user2Id).child("name");
+                        .child(user2Id);
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        holder.tvOpName.setText(dataSnapshot.getValue(String.class));
-                        userPref.removeEventListener(this);
+                        User user = dataSnapshot.getValue(User.class);
+                        holder.tvOpName.setText(user.getName());
+                        user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
+                        if (user.isOnline())
+                            holder.opStatus.setImageResource(R.drawable.bg_circle_check);
+                        else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
                     }
 
                     @Override
@@ -137,7 +146,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         // Get last mess data
         if (dataSet.get(position).getLastMessId() == 0) {
             holder.tvLastMess.setText("No message on this conversation");
-            holder.tvTime.setText("Unknown time");
+            holder.tvTime.setText("N/A");
         } else {
             final DatabaseReference messPref;
             messPref = database
@@ -151,7 +160,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                     Message mess = dataSnapshot.getValue(Message.class);
                     holder.tvLastMess.setText(mess.getText());
                     holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
-                    messPref.removeEventListener(this);
                 }
 
                 @Override
@@ -160,6 +168,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 }
             });
         }
+
     }
 
     @Override

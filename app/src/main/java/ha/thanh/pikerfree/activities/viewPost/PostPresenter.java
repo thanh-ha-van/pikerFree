@@ -144,6 +144,7 @@ class PostPresenter {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             User user = dataSnapshot.getValue(User.class);
+                            user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                             requestingUsers.add(user);
                             mView.onGetRequestingUserDone(2);
                         }
@@ -289,6 +290,7 @@ class PostPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         dataUser = dataSnapshot.getValue(User.class);
+                        dataUser.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                         mView.getOwnerDone(dataUser);
                         getUserImageLink(dataUser.getAvatarLink());
 

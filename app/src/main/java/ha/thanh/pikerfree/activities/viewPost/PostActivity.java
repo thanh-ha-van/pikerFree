@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 
 import com.bumptech.glide.Glide;
@@ -71,6 +72,8 @@ public class PostActivity extends AppCompatActivity implements
     @BindView(R.id.vp_image_slide)
     ViewPager vpImageSlide;
 
+    @BindView(R.id.op_status)
+    ImageView opStatus;
     @BindView(R.id.tv_title)
     CustomTextView title;
     @BindView(R.id.tv_description)
@@ -265,6 +268,8 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
+        if(user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
+        else  opStatus.setImageResource(R.drawable.bg_circle_gray);
     }
 
     @Override

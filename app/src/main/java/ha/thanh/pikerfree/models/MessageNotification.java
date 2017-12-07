@@ -4,14 +4,13 @@ package ha.thanh.pikerfree.models;
  * Created by HaVan on 12/6/2017.
  */
 
-public class MessageNotification {private long timestamp;
+public class MessageNotification {
 
     private String body;
     private String from;
     private String to;
 
-    public MessageNotification(long timestamp, String body, String from, String to) {
-        this.timestamp = timestamp;
+    public MessageNotification(String body, String from, String to) {
         this.body = body;
         this.from = from;
         this.to = to;
@@ -19,11 +18,6 @@ public class MessageNotification {private long timestamp;
 
     public MessageNotification() {
     }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
 
     public String getTo() {
         return to;

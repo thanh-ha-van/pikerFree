@@ -38,6 +38,8 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     public ImageView sendButton;
     @BindView(R.id.et_mess_to_send)
     public CustomEditText tvMessToSend;
+    @BindView(R.id.op_status)
+    public ImageView opStatus;
     @BindView(R.id.rv_messes)
     public RecyclerView rvMess;
     @BindView(R.id.swipeRefreshLayout)
@@ -105,7 +107,12 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
 
     @Override
     public void onEndOfConversation() {
-        rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+        try {
+            rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+        } catch (IllegalArgumentException e) {
+
+            e.getMessage();
+        }
         swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(this, "No more messages", Toast.LENGTH_SHORT).show();
     }
@@ -113,6 +120,10 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     @Override
     public void getOPDone(User user) {
         OPName.setText(user.getName());
+        if (user.isOnline())
+            opStatus.setImageResource(R.drawable.bg_circle_check);
+        else opStatus.setImageResource(R.drawable.bg_circle_gray);
+
     }
 
     @Override

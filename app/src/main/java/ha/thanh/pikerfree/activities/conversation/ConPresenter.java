@@ -246,8 +246,9 @@ class ConPresenter {
     }
 
     private void uploadNotification(String text) {
+        if(OPUser.isOnline()) return;
         MessageNotification message =
-                new MessageNotification(Utils.getCurrentTimestamp(), text, mModel.getUserIdFromSharePref(), OPUser.getId());
+                new MessageNotification(text, mModel.getUserIdFromSharePref(), OPUser.getId());
         database.getReference()
                 .child("notifications")
                 .child("messages")
@@ -369,6 +370,7 @@ class ConPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         OPUser = dataSnapshot.getValue(User.class);
+                        OPUser.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                         mView.getOPDone(OPUser);
                         getUserImageLink(OPUser.getAvatarLink());
                     }
