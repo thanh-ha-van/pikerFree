@@ -39,8 +39,7 @@
                 android:layout_alignBottom="@+id/img_op"
                 android:layout_alignEnd="@+id/img_op"
                 android:background="@drawable/bg_circle_white"
-                android:padding="2dp"
-                android:src="@drawable/bg_circle_gray"/>
+                android:padding="2dp"/>
         </RelativeLayout>
 
 

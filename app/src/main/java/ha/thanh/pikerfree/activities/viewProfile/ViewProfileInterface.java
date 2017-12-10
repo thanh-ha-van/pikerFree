@@ -22,5 +22,9 @@ public class ViewProfileInterface {
         void onRatingDone(double newrate);
 
         void onFollowSuccess(String inform);
+
+        void onUnFollowSuccess(String inform);
+
+        void onAlreadyFollow();
     }
 }

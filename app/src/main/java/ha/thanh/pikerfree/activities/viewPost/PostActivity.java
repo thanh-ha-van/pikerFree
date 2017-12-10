@@ -49,6 +49,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.editPost.EditPostActivity;
 import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
+import ha.thanh.pikerfree.adapters.CommentAdapter;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
 import ha.thanh.pikerfree.constants.Constants;
@@ -67,7 +68,9 @@ public class PostActivity extends AppCompatActivity implements
         PostInterface.RequiredViewOps,
         CustomYesNoDialog.YesNoInterFace,
         UserAdapter.ItemClickListener,
-        OnMapReadyCallback, UserInforDialog.optionInterface {
+        OnMapReadyCallback,
+        CommentAdapter.CommentClickListener,
+        UserInforDialog.optionInterface {
 
     @BindView(R.id.vp_image_slide)
     ViewPager vpImageSlide;
@@ -110,12 +113,17 @@ public class PostActivity extends AppCompatActivity implements
     View requestingUserView;
     @BindView(R.id.rv_requesting_user)
     RecyclerView rvRequestingUser;
+    @BindView(R.id.rv_comments)
+    RecyclerView rvComments;
+    @BindView(R.id.tv_no_comment)
+    CustomTextView tvNoComment;
 
     @BindView(R.id.mapView)
     MapView mMapView;
 
     private ImageSlideAdapter imageSlideAdapter;
     private UserAdapter userAdapter;
+    private CommentAdapter commentAdapter;
     private PostPresenter mPresenter;
     private WaitingDialog waitingDialog;
     private CustomYesNoDialog confirmDialog;
@@ -190,11 +198,21 @@ public class PostActivity extends AppCompatActivity implements
 
         waitingDialog = new WaitingDialog(this);
         waitingDialog.showDialog();
+
         userAdapter = new UserAdapter(this, mPresenter.getRequestingUsers(), this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         rvRequestingUser.setLayoutManager(layoutManager);
         rvRequestingUser.setAdapter(userAdapter);
+
+        commentAdapter = new CommentAdapter(this, mPresenter.getComments(), this, mPresenter.getOwnerId());
+        rvRequestingUser.setLayoutManager(layoutManager);
+        rvRequestingUser.setAdapter(userAdapter);
+    }
+
+    @Override
+    public void onCommentClicked(int position) {
+
     }
 
     @Override
@@ -214,6 +232,12 @@ public class PostActivity extends AppCompatActivity implements
         UserInforDialog userInforDialog = new UserInforDialog(this, this);
         userInforDialog.showAlertDialog(mPresenter.getRequestingUsers().get(position).getName(),
                 mPresenter.getRequestingUsers().get(position).getId());
+    }
+
+    @Override
+    public void onGetCommentDone() {
+        tvNoComment.setVisibility(View.GONE);
+        commentAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -268,8 +292,8 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
-        if(user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
-        else  opStatus.setImageResource(R.drawable.bg_circle_gray);
+        if (user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
+        else opStatus.setImageResource(R.drawable.bg_circle_gray);
     }
 
     @Override

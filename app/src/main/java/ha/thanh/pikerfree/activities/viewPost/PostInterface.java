@@ -43,5 +43,7 @@ class PostInterface {
         void onGrantedDone(String userId);
 
         void onShowError(String error);
+
+        void onGetCommentDone();
     }
 }

@@ -100,6 +100,7 @@ public class ViewProfilePresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         user = dataSnapshot.getValue(User.class);
                         user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
+                        checkFollowStatus();
                         mView.onGetUserDataDone(user);
                         getUserImageLink(user.getAvatarLink());
                         getPostData(user.getPosts());
@@ -115,12 +116,21 @@ public class ViewProfilePresenter {
         });
     }
 
-    void followUser() {
-
+    private void checkFollowStatus(){
         List<String> followingUsers = new ArrayList<>();
-        if(user.getFollowingUsers() != null)
+        if (user.getFollowingUsers() != null)
+            followingUsers = user.getFollowingUsers();
+
+        if(followingUsers.contains(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+            mView.onAlreadyFollow();
+    }
+
+    void followUser() {
+        List<String> followingUsers = new ArrayList<>();
+        if (user.getFollowingUsers() != null)
             followingUsers = user.getFollowingUsers();
         followingUsers.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        user.setFollowingUsers(followingUsers);
         DatabaseReference databaseReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
@@ -129,6 +139,21 @@ public class ViewProfilePresenter {
                 .child("followingUsers");
         databaseReference.setValue(followingUsers);
         mView.onFollowSuccess("You now following this user, you will get notification when this user have new post.");
+    }
+
+    void unfollowUser() {
+
+        List<String> followingUsers = new ArrayList<>();
+        followingUsers = user.getFollowingUsers();
+        followingUsers.remove(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference databaseReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(user.getId())
+                .child("followingUsers");
+        databaseReference.setValue(followingUsers);
+        mView.onUnFollowSuccess("You now remove following to this user");
     }
 
     private void getUserImageLink(String link) {

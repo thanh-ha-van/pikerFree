@@ -44,6 +44,8 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     CustomTextView tvNoData;
     @BindView(R.id.user_phone)
     CustomTextView tvPhone;
+    @BindView(R.id.btn_follow)
+    CustomTextView followBtn;
     @BindView(R.id.tv_rating_num)
     CustomTextView tvRateNum;
     private ViewProfilePresenter presenter;
@@ -80,7 +82,16 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
 
     @OnClick(R.id.btn_follow)
     public void followUser() {
+        if(followBtn.getText().toString().equalsIgnoreCase("follow"))
         presenter.followUser();
+        else presenter.unfollowUser();
+    }
+
+    @Override
+    public void onUnFollowSuccess(String inform) {
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
+        alertDialog.showAlertDialog("Success", inform);
+        followBtn.setText("FOLLOW");
     }
 
     @Override
@@ -88,6 +99,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
 
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
         alertDialog.showAlertDialog("Success", inform);
+        followBtn.setText("UNFOLLOW");
     }
 
     @Override
@@ -114,9 +126,14 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
                         .error(R.drawable.action_button_bg)
                         .centerCrop()
                         .dontAnimate()
-                        .override(100, 100)
+                        .override(150, 150)
                         .dontTransform())
                 .into(userImage);
+    }
+
+    @Override
+    public void onAlreadyFollow() {
+        followBtn.setText("UNFOLLOW");
     }
 
     @Override

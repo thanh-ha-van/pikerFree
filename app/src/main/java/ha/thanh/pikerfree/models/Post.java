@@ -20,6 +20,7 @@ public class Post {
     private MyGeoLocation location;
     private long timePosted;
     private int category = 8;
+    private List<Comment> comments;
 
     public Post() {
     }
@@ -33,6 +34,14 @@ public class Post {
         this.timePosted = timePosted;
         this.category = category;
         requestingUser = new ArrayList<>();
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public String getGrantedUser() {

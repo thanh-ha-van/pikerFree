@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.models.Comment;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -38,6 +39,7 @@ class PostPresenter {
     private User dataUser;
     private List<String> requestingUserIDs;
     private List<User> requestingUsers;
+    private List<Comment> comments;
     private Post post;
     private Handler handler;
     boolean isUserOwner = false;
@@ -107,6 +109,9 @@ class PostPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
+                        comments = post.getComments();
+                        if(comments == null)
+                            comments = new ArrayList<>();
                         mView.getPostDone(post);
                         requestingUserIDs = post.getRequestingUser();
                         if (post.getOwnerId().equals(mModel.getUserIdFromSharePref())) {
@@ -129,6 +134,10 @@ class PostPresenter {
                 });
             }
         });
+    }
+
+    List<Comment> getComments(){
+        return comments;
     }
 
     private void getGrantedUserData() {

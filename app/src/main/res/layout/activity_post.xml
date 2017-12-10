@@ -123,13 +123,14 @@
 
                     <ImageView
                         android:id="@+id/op_status"
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:layout_alignBottom="@+id/owner_pic"
                         android:layout_alignEnd="@+id/owner_pic"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginEnd="2dp"
                         android:background="@drawable/bg_circle_white"
-                        android:padding="2dp"
-                        android:src="@drawable/bg_circle_check" />
+                        android:padding="2dp" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -164,6 +165,12 @@
             <include
                 android:id="@+id/view_requesting_user_list"
                 layout="@layout/view_requesting_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+            <include
+                android:id="@+id/view_comment_section"
+                layout="@layout/view_comment_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible" />
