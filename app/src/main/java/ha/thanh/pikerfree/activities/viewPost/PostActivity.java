@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Shader;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
@@ -117,9 +118,14 @@ public class PostActivity extends AppCompatActivity implements
     RecyclerView rvComments;
     @BindView(R.id.tv_no_comment)
     CustomTextView tvNoComment;
+    @BindView(R.id.user_comment_pic)
+    CircleImageView userPic;
+    @BindView(R.id.tv_add_comment)
+    CustomTextView tvAddComment;
 
     @BindView(R.id.mapView)
     MapView mMapView;
+
 
     private ImageSlideAdapter imageSlideAdapter;
     private UserAdapter userAdapter;
@@ -179,6 +185,12 @@ public class PostActivity extends AppCompatActivity implements
 
     }
 
+    @OnClick(R.id.btn_add_comment)
+    public void addComment() {
+        if (!tvAddComment.getText().toString().equalsIgnoreCase(""))
+            mPresenter.addComment(tvAddComment.getText().toString());
+    }
+
     private void initData() {
 
         Intent in = getIntent();
@@ -206,8 +218,18 @@ public class PostActivity extends AppCompatActivity implements
         rvRequestingUser.setAdapter(userAdapter);
 
         commentAdapter = new CommentAdapter(this, mPresenter.getComments(), this, mPresenter.getOwnerId());
-        rvRequestingUser.setLayoutManager(layoutManager);
-        rvRequestingUser.setAdapter(userAdapter);
+        rvComments.setLayoutManager(layoutManager);
+        rvComments.setAdapter(userAdapter);
+
+        Glide.with(this)
+                .load(mPresenter.getLocalImage())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.loading)
+                        .centerCrop()
+                        .dontAnimate()
+                        .override(160, 160)
+                        .dontTransform())
+                .into(userPic);
     }
 
     @Override
@@ -275,7 +297,7 @@ public class PostActivity extends AppCompatActivity implements
         distance.setText(mPresenter.getDistance());
         waitingDialog.hideDialog();
         postStatus.setText(mPresenter.getStatus());
-        tvCategory.setText(mPresenter.getTextFromIntCategory(post.getCategory()));
+        tvCategory.setText(Utils.getTextFromIntCategory(post.getCategory()));
         updateMap(post.getLocation().latitude, post.getLocation().longitude);
     }
 

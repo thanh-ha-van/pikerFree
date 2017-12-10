@@ -72,27 +72,33 @@ class PostPresenter {
         handler = new Handler();
     }
 
-    String getTextFromIntCategory(int intput) {
-        switch (intput) {
-            case Constants.CATE_ACCESSORY:
-                return "ACCESSORIES";
-            case Constants.CATE_BABY:
-                return "BABY AND TOYS";
-            case Constants.CATE_ELECTRONIC:
-                return "ELECTRONIC";
-            case Constants.CATE_FASHION:
-                return "FASHION";
-            case Constants.CATE_GROCERY:
-                return "GROCERIES";
-            case Constants.CATE_HOME:
-                return "HOME AND STUFFS";
-            case Constants.CATE_OTHER:
-                return "OTHERS";
-            case Constants.CATE_PET:
-                return "PETS";
-            default:
-                return "OTHERS";
-        }
+    String getLocalImage() {
+        return mModel.getLocalImageStringFromSharePf();
+    }
+
+    void addComment(String commentContent) {
+
+        Comment comment = new Comment();
+        comment.setComment(commentContent);
+        comment.setIdUser(mModel.getUserIdFromSharePref());
+        if (comment.getIdUser() == null)
+            comment.setIdUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        comment.setTime(Utils.getCurrentTimestamp());
+        comments.add(comment);
+        UploadComment();
+    }
+
+    private void UploadComment() {
+        post.setComments(comments);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference postPref;
+                postPref = database.getReference("posts").child("" + post.getPostId()).child("comments");
+                postPref.setValue(post.getComments());
+                mView.onGetCommentDone();
+            }
+        });
     }
 
     void getPostData(final String postId) {
@@ -110,7 +116,7 @@ class PostPresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
                         comments = post.getComments();
-                        if(comments == null)
+                        if (comments == null)
                             comments = new ArrayList<>();
                         mView.getPostDone(post);
                         requestingUserIDs = post.getRequestingUser();
@@ -136,7 +142,7 @@ class PostPresenter {
         });
     }
 
-    List<Comment> getComments(){
+    List<Comment> getComments() {
         return comments;
     }
 

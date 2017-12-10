@@ -20,6 +20,9 @@ class PostModel {
         return sharedPreferences.getString(Constants.USER_ID, "");
 
     }
+    String getLocalImageStringFromSharePf() {
+        return sharedPreferences.getString(Constants.USER_PROFILE_PIC_PATH, "");
+    }
 
     double getUserLat() {
         return gpsTracker.getLatitude();
