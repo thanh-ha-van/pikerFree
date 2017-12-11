@@ -62,6 +62,7 @@ class PostPresenter {
     private void initData() {
         requestingUsers = new ArrayList<>();
         imagePostList = new ArrayList<>();
+        comments = new ArrayList<>();
         mStorageRef = FirebaseStorage
                 .getInstance()
                 .getReference()
@@ -101,6 +102,12 @@ class PostPresenter {
         });
     }
 
+    void deleteComment(int posttion) {
+        comments.remove(posttion);
+        UploadComment();
+        mView.onDeleteCommentDone();
+    }
+
     void getPostData(final String postId) {
 
         postID = Integer.parseInt(postId);
@@ -115,14 +122,12 @@ class PostPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
-                        comments = post.getComments();
-                        if (comments == null)
-                            comments = new ArrayList<>();
+                        if (post.getComments() != null)
+                            comments = post.getComments();
+                        mView.onGetCommentDone();
                         mView.getPostDone(post);
                         requestingUserIDs = post.getRequestingUser();
                         if (post.getOwnerId().equals(mModel.getUserIdFromSharePref())) {
-
-                            // if user is owner then show requesting list and notify text to UI
                             mView.onUserIsOwner();
                             isUserOwner = true;
                             if (post.getStatus() == Constants.STATUS_OPEN)
@@ -143,7 +148,10 @@ class PostPresenter {
     }
 
     List<Comment> getComments() {
-        return comments;
+        if (comments != null)
+            return comments;
+        else
+            return comments = new ArrayList<>();
     }
 
     private void getGrantedUserData() {
@@ -177,6 +185,10 @@ class PostPresenter {
 
     String getOwnerId() {
         return post.getOwnerId();
+    }
+
+    String getUserId() {
+        return mModel.getUserIdFromSharePref();
     }
 
     void handleRequestOrDelete() {

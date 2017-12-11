@@ -46,5 +46,7 @@ class PostInterface {
         void onShowError(String error);
 
         void onGetCommentDone();
+
+        void onDeleteCommentDone();
     }
 }

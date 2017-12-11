@@ -34,7 +34,7 @@ public class Utils {
             case Constants.CATE_ELECTRONIC:
                 return "ELECTRONIC";
             case Constants.CATE_FASHION:
-                return "FASHION";
+                return "CLOTHS";
             case Constants.CATE_GROCERY:
                 return "GROCERIES";
             case Constants.CATE_HOME:

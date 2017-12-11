@@ -4,12 +4,11 @@
     <string-array name="Section">
         <item>Accessories</item>
         <item>Baby and toys</item>
-        <item>Fashion</item>
+        <item>Cloths</item>
         <item>Electronics</item>
         <item>Groceries</item>
         <item>Home stuffs</item>
         <item>Pets</item>
         <item>Others</item>
     </string-array>
-
 </resources>

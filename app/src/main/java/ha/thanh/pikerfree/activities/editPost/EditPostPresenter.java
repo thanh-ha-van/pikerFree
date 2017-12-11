@@ -1,7 +1,6 @@
 package ha.thanh.pikerfree.activities.editPost;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -23,22 +22,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.activities.editPost.EditPostInterface;
-import ha.thanh.pikerfree.activities.editPost.EditPostModel;
-import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.ImagePost;
 import ha.thanh.pikerfree.models.Post;
-import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
-import static android.app.Activity.RESULT_OK;
-
-/**
- * Created by HaVan on 10/16/2017.
- */
-
-public class EditPostPresenter {
+class EditPostPresenter {
 
 
     private EditPostInterface.RequiredViewOps mView;
@@ -51,7 +39,7 @@ public class EditPostPresenter {
     private Handler handler;
     private Context con;
     private int postID;
-    public int selectedCategory = 8;
+    int selectedCategory = 8;
 
     EditPostPresenter(Context context, EditPostInterface.RequiredViewOps mView) {
         this.mView = mView;

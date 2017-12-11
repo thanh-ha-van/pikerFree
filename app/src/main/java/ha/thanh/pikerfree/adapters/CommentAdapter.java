@@ -1,12 +1,14 @@
 package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,21 +40,21 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     private Handler handler;
     private FirebaseDatabase database;
     private String ownerId;
+    private String userId;
 
-
-    public CommentAdapter(Context context, List<Comment> dataSet, CommentClickListener listener, String OwnerId) {
+    public CommentAdapter(Context context, List<Comment> dataSet, CommentClickListener listener, String OwnerId, String userID) {
 
         this.dataSet = dataSet;
         this.mConText = context;
         this.mClickListener = listener;
         this.ownerId = OwnerId;
+        this.userId = userID;
         database = FirebaseDatabase.getInstance();
         handler = new Handler();
+
     }
 
-
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
 
         @BindView(R.id.op_pic)
         CircleImageView OpImage;
@@ -62,6 +64,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         TextView tvTime;
         @BindView(R.id.tv_userName)
         TextView tvOpName;
+        @BindView(R.id.img_delete_comment)
+        ImageView btnDelete;
 
         MyViewHolder(View view) {
             super(view);
@@ -73,6 +77,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         public void onClick(View view) {
 
             if (mClickListener != null) {
+                if(view.getId() == R.id.img_delete_comment)
+                    mClickListener.onCommentDelete(getAdapterPosition());
+                else
                 mClickListener.onCommentClicked(getAdapterPosition());
             }
         }
@@ -88,13 +95,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final String userID = dataSet.get(position).getIdUser();
+        final String itemUser = dataSet.get(position).getIdUser();
 
         FirebaseStorage
                 .getInstance()
                 .getReference()
                 .child("userImages")
-                .child(userID + ".jpg").getDownloadUrl()
+                .child(itemUser + ".jpg").getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
@@ -115,7 +122,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
                 final DatabaseReference userPref;
                 userPref = database
                         .getReference("users")
-                        .child(userID);
+                        .child(itemUser);
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -130,8 +137,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
                 });
             }
         });
-        if (ownerId.equalsIgnoreCase(userID))
-            holder.tvOpName.setText(holder.tvOpName.getText() + "(Owner)");
+        if (ownerId.equalsIgnoreCase(itemUser))
+            holder.tvOpName.setText(holder.tvOpName.getText() + " (Owner)");
+        if (userId.equalsIgnoreCase(itemUser)) {
+            holder.tvOpName.setText(holder.tvOpName.getText() + " (You)");
+            holder.btnDelete.setVisibility(View.VISIBLE);
+        }
         holder.tvComment.setText(dataSet.get(position).getComment());
         holder.tvTime.setText(Utils.getTimeInHour(dataSet.get(position).getTime()));
     }
@@ -143,5 +154,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
     public interface CommentClickListener {
         void onCommentClicked(int position);
+        void onCommentDelete(int position);
     }
 }

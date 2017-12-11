@@ -2,11 +2,7 @@ package ha.thanh.pikerfree.activities.viewPost;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Shader;
-import android.media.Image;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,14 +15,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.share.Sharer;
-import com.facebook.share.model.ShareContent;
-import com.facebook.share.model.ShareHashtag;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.ShareMediaContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
@@ -38,7 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +43,7 @@ import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
+import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.customviews.UserInforDialog;
@@ -121,7 +110,7 @@ public class PostActivity extends AppCompatActivity implements
     @BindView(R.id.user_comment_pic)
     CircleImageView userPic;
     @BindView(R.id.tv_add_comment)
-    CustomTextView tvAddComment;
+    CustomEditText tvAddComment;
 
     @BindView(R.id.mapView)
     MapView mMapView;
@@ -189,6 +178,7 @@ public class PostActivity extends AppCompatActivity implements
     public void addComment() {
         if (!tvAddComment.getText().toString().equalsIgnoreCase(""))
             mPresenter.addComment(tvAddComment.getText().toString());
+        tvAddComment.setText("");
     }
 
     private void initData() {
@@ -202,6 +192,7 @@ public class PostActivity extends AppCompatActivity implements
 
     private void initView() {
         ButterKnife.bind(this);
+        requestingUserView.setVisibility(View.GONE);
         confirmDialog = new CustomYesNoDialog(this, this);
         alertDialog = new CustomAlertDialog(this);
         scrollView.setVisibility(View.INVISIBLE);
@@ -217,8 +208,12 @@ public class PostActivity extends AppCompatActivity implements
         rvRequestingUser.setLayoutManager(layoutManager);
         rvRequestingUser.setAdapter(userAdapter);
 
-        commentAdapter = new CommentAdapter(this, mPresenter.getComments(), this, mPresenter.getOwnerId());
-        rvComments.setLayoutManager(layoutManager);
+        commentAdapter = new CommentAdapter(this, mPresenter.getComments(),
+                this, mPresenter.getOwnerId(), mPresenter.getUserId());
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+        layoutManager2.setStackFromEnd(true);
+        rvComments.setLayoutManager(layoutManager2);
         rvComments.setAdapter(userAdapter);
 
         Glide.with(this)
@@ -230,11 +225,31 @@ public class PostActivity extends AppCompatActivity implements
                         .override(160, 160)
                         .dontTransform())
                 .into(userPic);
+
+
     }
 
     @Override
     public void onCommentClicked(int position) {
 
+        onViewProfile(mPresenter.getComments().get(position).getIdUser());
+    }
+
+    @Override
+    public void onCommentDelete(final int position) {
+
+        confirmDialog.showAlertDialog("Comfirm", "Do you want to delete this comment?");
+        confirmDialog.setListener(null);
+        confirmDialog.setListener(new CustomYesNoDialog.YesNoInterFace() {
+            @Override
+            public void onYesClicked() {
+                mPresenter.deleteComment(position);
+            }
+
+            @Override
+            public void onNoClicked() {
+            }
+        });
     }
 
     @Override
@@ -263,12 +278,16 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onDeleteCommentDone() {
+        alertDialog.showAlertDialog("Deleted", "Your comment has been deleted");
+    }
+
+    @Override
     public void onUserIsOwner() {
         ownerView.setVisibility(View.GONE);
         meetOwner.setText(getResources().getString(R.string.you_own_this));
         sendRequest.setText(getResources().getString(R.string.delete_this));
         chatToOwner.setText(getResources().getString(R.string.edit_this));
-        requestingUserView.setVisibility(View.GONE);
     }
 
     void updateMap(double lat, double lng) {

@@ -25,9 +25,10 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:weightSum="3">
 
@@ -44,7 +45,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -65,6 +66,16 @@
                 android:textColor="@color/GrayScale"
                 android:textSize="14sp" />
         </LinearLayout>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/img_delete_comment"
+            android:layout_width="40dp"
+            android:src="@drawable/ic_dustbin"
+            android:tint="@color/GrayScale"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:layout_height="40dp" />
     </LinearLayout>
 
     <View

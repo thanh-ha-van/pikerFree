@@ -39,6 +39,10 @@ public class CustomYesNoDialog {
         this.interFace = yesNoInterFace;
     }
 
+    public void setListener(YesNoInterFace yesNoInterFace){
+        this.interFace = yesNoInterFace;
+    }
+
     public void showAlertDialog(String title, String message) {
 
         CustomTextView tvContent = (CustomTextView) alertDialog.findViewById(R.id.tv_content);
