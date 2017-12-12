@@ -50,6 +50,7 @@ import ha.thanh.pikerfree.customviews.UserInforDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
+import ha.thanh.pikerfree.services.PostDataHelper;
 import ha.thanh.pikerfree.utils.Utils;
 
 import static com.facebook.share.widget.ShareDialog.canShow;
@@ -111,9 +112,13 @@ public class PostActivity extends AppCompatActivity implements
     CircleImageView userPic;
     @BindView(R.id.tv_add_comment)
     CustomEditText tvAddComment;
+    @BindView(R.id.btn_save_local)
+    CustomTextView tvSaveLocal;
 
     @BindView(R.id.mapView)
     MapView mMapView;
+
+    int postID;
 
 
     private ImageSlideAdapter imageSlideAdapter;
@@ -124,7 +129,7 @@ public class PostActivity extends AppCompatActivity implements
     private CustomYesNoDialog confirmDialog;
     private CustomAlertDialog alertDialog;
     private GoogleMap googleMap;
-
+    PostDataHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,11 +141,27 @@ public class PostActivity extends AppCompatActivity implements
         mMapView.getMapAsync(this);
     }
 
-    @OnClick(R.id.tv_share)
+    @OnClick(R.id.btn_share)
     public void doSharePost() {
         waitingDialog.showDialog();
         PostPresenter.DownloadImgTask imgTask = mPresenter.new DownloadImgTask();
         imgTask.execute("");
+    }
+
+
+    @OnClick(R.id.btn_save_local)
+    public void doAddToFavList() {
+
+        alertDialog.setListener(null);
+        if (tvSaveLocal.getText().toString().equalsIgnoreCase("Add to favorite")) {
+            db.addPost(postID);
+            alertDialog.showAlertDialog("Completed", "This post was added to your favorite list");
+            tvSaveLocal.setText("Remove from favorite");
+        } else {
+            db.deletePost(postID);
+            alertDialog.showAlertDialog("Completed", "This post was removed from your favorite list");
+            tvSaveLocal.setText("Add to favorite");
+        }
     }
 
     @OnClick(R.id.ic_back)
@@ -182,9 +203,9 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     private void initData() {
-
+        db = new PostDataHelper(this);
         Intent in = getIntent();
-        int postID = in.getIntExtra(Constants.POST_VIEW, 1);
+        postID = in.getIntExtra(Constants.POST_VIEW, 1);
         mPresenter = new PostPresenter(this, this);
         mPresenter.getPostData(postID + "");
         mPresenter.getImageLinksFromId(postID + "");
@@ -207,8 +228,13 @@ public class PostActivity extends AppCompatActivity implements
                 LinearLayoutManager.VERTICAL, false);
         rvRequestingUser.setLayoutManager(layoutManager);
         rvRequestingUser.setAdapter(userAdapter);
+        checkLocal();
     }
 
+    private  void checkLocal(){
+        if(db.hasObject(postID))
+            tvSaveLocal.setText("Remove from favorite");
+    }
     @Override
     public void onCommentClicked(int position) {
 
@@ -254,8 +280,8 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onGetCommentDone() {
         tvNoComment.setVisibility(View.GONE);
-        if(commentAdapter != null)
-        commentAdapter.notifyDataSetChanged();
+        if (commentAdapter != null)
+            commentAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -302,7 +328,7 @@ public class PostActivity extends AppCompatActivity implements
         setUpComment();
     }
 
-    private void setUpComment(){
+    private void setUpComment() {
 
         commentAdapter = new CommentAdapter(this, mPresenter.getComments(),
                 this, mPresenter.getOwnerId(), mPresenter.getUserId());
@@ -324,6 +350,7 @@ public class PostActivity extends AppCompatActivity implements
 
 
     }
+
     @Override
     public void getPostFail() {
 

@@ -47,5 +47,7 @@ public class Constants {
 
     public static final int CATE_RECENT = 10;
 
+    public static final int CATE_LOCAL = 11;
+
 
 }

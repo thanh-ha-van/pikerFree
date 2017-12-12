@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal"
-            android:text="Manage account"
+            android:text="Settings"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -39,7 +39,7 @@
 
 
     <LinearLayout
-        android:id="@+id/view_log_out"
+        android:id="@+id/vew_log_out"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
@@ -50,14 +50,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Log out"
+            android:text="Notification: off"
             android:textColor="@color/text_black_3"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="20dp"
+        <Switch
+            android:id="@+id/sw_mess_notification"
+            android:layout_width="60dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_right_arrow"
+            android:shadowColor="@color/gray"
             android:tint="@color/GrayScale" />
     </LinearLayout>
 
@@ -69,7 +70,7 @@
         android:background="@color/gray" />
 
     <LinearLayout
-        android:id="@+id/view_change_pass"
+        android:id="@+id/view_distance_search"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
@@ -80,14 +81,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change password"
+            android:text="Search distance"
             android:textColor="@color/text_black_3"
             android:textSize="16sp" />
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_right_arrow"
+        <TextView
+            android:id="@+id/tv_search_distance"
+            android:layout_width="wrap_content"
+            android:text="10km"
+            android:textColor="@color/GrayScale"
+            android:textSize="18sp"
+            android:layout_height="40dp"
+            android:gravity="center"
             android:tint="@color/GrayScale" />
     </LinearLayout>
 
@@ -134,6 +139,29 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:background="@color/gray" />
+
+    <LinearLayout
+        android:id="@+id/view_help"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ha.thanh.pikerfree.customviews.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Help"
+            android:textColor="@color/text_black_3"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_right_arrow"
+            android:tint="@color/GrayScale" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

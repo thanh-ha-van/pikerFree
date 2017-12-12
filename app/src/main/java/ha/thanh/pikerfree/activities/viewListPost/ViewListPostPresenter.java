@@ -21,6 +21,7 @@ import java.util.List;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
 import ha.thanh.pikerfree.models.Post;
+import ha.thanh.pikerfree.services.PostDataHelper;
 import ha.thanh.pikerfree.utils.Utils;
 
 
@@ -35,6 +36,7 @@ class ViewListPostPresenter {
     private boolean hasCategory = false;
     private boolean hasCount = false;
     private int postCount = -1;
+    private Context context;
 
     void setCurrentCategory(int currentCategory) {
         this.currentCategory = currentCategory;
@@ -57,6 +59,7 @@ class ViewListPostPresenter {
 
     ViewListPostPresenter(Context context, ViewListPostInterface.RequiredViewOps mView) {
         this.mView = mView;
+        this.context = context;
         mModel = new ViewListPostModel(context);
         postList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
@@ -100,6 +103,17 @@ class ViewListPostPresenter {
         } else if (currentCategory == Constants.CATE_NEAR_BY) {
             // search near by posts
             searchNearBy();
+        } else if (currentCategory == Constants.CATE_LOCAL) {
+            getLocal();
+        }
+    }
+
+    private void getLocal() {
+
+        PostDataHelper db = new PostDataHelper(context);
+        List<Integer> list = db.getAllPosts();
+        for (Integer id : list) {
+            getPostByID(id);
         }
     }
 
@@ -134,16 +148,16 @@ class ViewListPostPresenter {
 
     private void searchRecent() {
 
-        for ( int i = postCount; i > 0 && i > postCount - 10; i--) {
+        for (int i = postCount; i > 0 && i > postCount - 10; i--) {
             getPostByID(i);
         }
     }
 
-    private  void getPostByID(int i) {
+    private void getPostByID(int i) {
         DatabaseReference postRef;
         postRef = database
                 .getReference("posts")
-                .child(i+ "");
+                .child(i + "");
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -157,6 +171,7 @@ class ViewListPostPresenter {
             }
         });
     }
+
     private void searchNearBy() {
         handler.post(new Runnable() {
             @Override

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
@@ -20,12 +23,17 @@ import ha.thanh.pikerfree.activities.information.ManageActivity;
 import ha.thanh.pikerfree.activities.information.NotificationActivity;
 import ha.thanh.pikerfree.activities.information.TermActivity;
 import ha.thanh.pikerfree.activities.login.LoginActivity;
+import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
+import ha.thanh.pikerfree.services.PostDataHelper;
 
 
 public class SettingFragment extends Fragment {
 
+    @BindView(R.id.tv_favorite_count)
+    CustomTextView tvFavCount;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,13 @@ public class SettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PostDataHelper db = new PostDataHelper(this.getContext());
+        tvFavCount.setText("Favorite posts (" + db.getPostCount() + ")");
     }
 
     @OnClick(R.id.view_privacy)
@@ -57,36 +72,17 @@ public class SettingFragment extends Fragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.view_log_out)
+    @OnClick(R.id.view_manage_account)
     public void LogOut() {
-        CustomYesNoDialog customYesNoDialog = new CustomYesNoDialog(this.getActivity(), new CustomYesNoDialog.YesNoInterFace() {
-            @Override
-            public void onYesClicked() {
-                doLogOut();
-            }
-
-            @Override
-            public void onNoClicked() {
-
-            }
-        });
-        customYesNoDialog.showAlertDialog("Confirm", "Are you sure you want to log out?");
-    }
-
-    private void doLogOut() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putString(Constants.USER_ID, null);
-        edit.putString(Constants.USER_ADDRESS, null);
-        edit.putString(Constants.USER_LAT, null);
-        edit.putString(Constants.USER_LNG, null);
-        edit.putString(Constants.USER_NAME, null);
-        edit.putString(Constants.USER_PROFILE_PIC_PATH, null);
-
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(this.getContext(), LoginActivity.class);
+        Intent intent = new Intent(this.getContext(), ManageActivity.class);
         startActivity(intent);
-        getActivity().finish();
+
+    }
+    @OnClick(R.id.view_favorite)
+    public void goToList() {
+        Intent intent = new Intent(this.getContext(), ViewListPostActivity.class);
+        intent.putExtra(Constants.CATEGORY, Constants.CATE_LOCAL);
+        startActivity(intent);
     }
 
     @OnClick(R.id.view_notification)
@@ -94,11 +90,4 @@ public class SettingFragment extends Fragment {
         Intent intent = new Intent(this.getContext(), NotificationActivity.class);
         startActivity(intent);
     }
-
-    @OnClick(R.id.view_manage)
-    public void goToManage() {
-        Intent intent = new Intent(this.getContext(), ManageActivity.class);
-        startActivity(intent);
-    }
-
 }

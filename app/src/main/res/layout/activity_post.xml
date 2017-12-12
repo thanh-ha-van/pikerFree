@@ -194,8 +194,7 @@
             android:layout_width="0dp"
             android:layout_height="42dp"
             android:layout_gravity="center"
-            android:layout_marginEnd="-15dp"
-            android:layout_marginStart="-20dp"
+            android:layout_marginEnd="-25dp"
             android:layout_weight="1"
             android:background="@color/white"
             android:gravity="center"
@@ -209,6 +208,7 @@
             android:id="@+id/tv_send_request"
             android:layout_width="0dp"
             android:layout_height="42dp"
+            android:layout_marginStart="5dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/parallelogram"
@@ -219,20 +219,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ha.thanh.pikerfree.customviews.CustomTextView
-            android:id="@+id/tv_share"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="-20dp"
-            android:layout_weight="1"
-            android:background="@drawable/parallelogram_white"
-            android:gravity="center"
-            android:text="Share"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
