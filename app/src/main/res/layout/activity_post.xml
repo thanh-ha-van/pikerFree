@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     android:background="@color/whiteShade"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -102,18 +103,18 @@
             <LinearLayout
                 android:id="@+id/view_owner"
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/owner_pic"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="15dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:src="@drawable/ic_user"
                         app:civ_border_color="@color/colorPrimary"
@@ -166,14 +167,12 @@
                 android:id="@+id/view_requesting_user_list"
                 layout="@layout/view_requesting_user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" />
+                android:layout_height="wrap_content"/>
             <include
                 android:id="@+id/view_comment_section"
                 layout="@layout/view_comment_section"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" />
+                android:layout_height="wrap_content"/>
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"

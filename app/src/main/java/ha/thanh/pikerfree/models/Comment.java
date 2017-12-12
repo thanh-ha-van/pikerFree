@@ -7,15 +7,13 @@ package ha.thanh.pikerfree.models;
 public class Comment {
     private String idUser;
     private String comment;
-    private long time;
 
     public Comment() {
     }
 
-    public Comment(String idUser, String comment, long time) {
+    public Comment(String idUser, String comment) {
         this.idUser = idUser;
         this.comment = comment;
-        this.time = time;
     }
 
     public String getIdUser() {
@@ -32,13 +30,5 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
     }
 }

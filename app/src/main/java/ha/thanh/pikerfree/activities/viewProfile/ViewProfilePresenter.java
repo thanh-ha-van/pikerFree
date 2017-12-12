@@ -43,6 +43,12 @@ public class ViewProfilePresenter {
         gpsTracker = new GPSTracker(context);
     }
 
+    String getOPId(){
+        return user.getId();
+    }
+    String getUserId(){
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
     void updateRating(double rate) {
         List<String> list;
         list = user.getRatedUsers();

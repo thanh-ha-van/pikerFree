@@ -1,6 +1,5 @@
 package ha.thanh.pikerfree.models.Messages;
 
-import com.firebase.geofire.GeoLocation;
 
 public class MyGeoLocation {
     /**
@@ -21,7 +20,7 @@ public class MyGeoLocation {
      * @throws java.lang.IllegalArgumentException If the coordinates are not valid geo coordinates
      */
     public MyGeoLocation(double latitude, double longitude) {
-        if (!GeoLocation.coordinatesValid(latitude, longitude)) {
+        if (!MyGeoLocation.coordinatesValid(latitude, longitude)) {
             throw new IllegalArgumentException("Not a valid geo location: " + latitude + ", " + longitude);
         }
         this.latitude = latitude;
@@ -49,7 +48,7 @@ public class MyGeoLocation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GeoLocation that = (GeoLocation) o;
+        MyGeoLocation that = (MyGeoLocation) o;
 
         if (Double.compare(that.latitude, latitude) != 0) return false;
         if (Double.compare(that.longitude, longitude) != 0) return false;

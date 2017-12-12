@@ -37,8 +37,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     private List<Comment> dataSet;
     private CommentClickListener mClickListener;
     private Context mConText;
-    private Handler handler;
-    private FirebaseDatabase database;
     private String ownerId;
     private String userId;
 
@@ -49,8 +47,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         this.mClickListener = listener;
         this.ownerId = OwnerId;
         this.userId = userID;
-        database = FirebaseDatabase.getInstance();
-        handler = new Handler();
 
     }
 
@@ -60,10 +56,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         CircleImageView OpImage;
         @BindView(R.id.tv_comment)
         TextView tvComment;
-        @BindView(R.id.tv_time)
-        TextView tvTime;
-        @BindView(R.id.tv_userName)
-        TextView tvOpName;
         @BindView(R.id.img_delete_comment)
         ImageView btnDelete;
 
@@ -77,10 +69,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         public void onClick(View view) {
 
             if (mClickListener != null) {
-                if(view.getId() == R.id.img_delete_comment)
+                if (view.getId() == R.id.img_delete_comment)
                     mClickListener.onCommentDelete(getAdapterPosition());
                 else
-                mClickListener.onCommentClicked(getAdapterPosition());
+                    mClickListener.onCommentClicked(getAdapterPosition());
             }
         }
     }
@@ -116,35 +108,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
                                 .into(holder.OpImage);
                     }
                 });
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                final DatabaseReference userPref;
-                userPref = database
-                        .getReference("users")
-                        .child(itemUser);
-                userPref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        holder.tvOpName.setText(user.getName());
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
         if (ownerId.equalsIgnoreCase(itemUser))
-            holder.tvOpName.setText(holder.tvOpName.getText() + " (Owner)");
+            holder.tvComment.setTextColor(mConText.getResources().getColor(R.color.blue));
         if (userId.equalsIgnoreCase(itemUser)) {
-            holder.tvOpName.setText(holder.tvOpName.getText() + " (You)");
+
             holder.btnDelete.setVisibility(View.VISIBLE);
         }
         holder.tvComment.setText(dataSet.get(position).getComment());
-        holder.tvTime.setText(Utils.getTimeInHour(dataSet.get(position).getTime()));
     }
 
     @Override
@@ -154,6 +125,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
     public interface CommentClickListener {
         void onCommentClicked(int position);
+
         void onCommentDelete(int position);
     }
 }

@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.activities.viewListPost;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -132,34 +133,30 @@ class ViewListPostPresenter {
     }
 
     private void searchRecent() {
-        handler.post(new Runnable() {
+
+        for ( int i = postCount; i > 0 && i > postCount - 10; i--) {
+            getPostByID(i);
+        }
+    }
+
+    private  void getPostByID(int i) {
+        DatabaseReference postRef;
+        postRef = database
+                .getReference("posts")
+                .child(i+ "");
+        postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void run() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                postList.add(dataSnapshot.getValue(Post.class));
+                mView.onGetPostDone();
+            }
 
-                Query query = database.getReference()
-                        .child("posts")
-                        .orderByChild("timePosted")
-                        .endAt(Utils.getCurrentTimestamp() - 86400 * Globals.getIns().getConfig().getLastDay());
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                                postList.add(issue.getValue(Post.class));
-                                mView.onGetPostDone();
-                            }
-                        }
-                    }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
             }
         });
     }
-
     private void searchNearBy() {
         handler.post(new Runnable() {
             @Override

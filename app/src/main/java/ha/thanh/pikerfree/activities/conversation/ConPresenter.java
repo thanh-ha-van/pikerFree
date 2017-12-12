@@ -182,6 +182,7 @@ class ConPresenter {
     private void startNewConversation() {
 
         conversation = new Conversation(id1, id2, id1 + id2, 0);
+        conversationID = conversation.getConversationId();
         if (conversationList1 == null)
             conversationList1 = new ArrayList<>();
         if (conversationList2 == null)

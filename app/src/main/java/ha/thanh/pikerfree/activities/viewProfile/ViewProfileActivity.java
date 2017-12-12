@@ -17,12 +17,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.RatingDialog;
+import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.User;
 
 public class ViewProfileActivity extends AppCompatActivity implements ViewProfileInterface.RequiredViewOps, PostAdapter.ItemClickListener {
@@ -87,6 +89,14 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         else presenter.unfollowUser();
     }
 
+    @OnClick(R.id.btn_send_mess)
+    public void sendMess() {
+        Intent intent = new Intent(this, ConActivity.class);
+        intent.putExtra(Constants.U_ID_1, presenter.getOPId());
+        intent.putExtra(Constants.U_ID_2, presenter.getUserId());
+        startActivity(intent);
+    }
+
     @Override
     public void onUnFollowSuccess(String inform) {
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
@@ -120,15 +130,19 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
 
     @Override
     public void getOwnerImageDone(Uri uri) {
-        Glide.with(this)
-                .load(uri)
-                .apply(new RequestOptions()
-                        .error(R.drawable.action_button_bg)
-                        .centerCrop()
-                        .dontAnimate()
-                        .override(150, 150)
-                        .dontTransform())
-                .into(userImage);
+        try {
+            Glide.with(this)
+                    .load(uri)
+                    .apply(new RequestOptions()
+                            .error(R.drawable.action_button_bg)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(150, 150)
+                            .dontTransform())
+                    .into(userImage);
+        } catch (IllegalArgumentException e){
+            e.getMessage();
+        }
     }
 
     @Override

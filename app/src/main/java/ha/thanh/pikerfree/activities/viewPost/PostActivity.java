@@ -207,26 +207,6 @@ public class PostActivity extends AppCompatActivity implements
                 LinearLayoutManager.VERTICAL, false);
         rvRequestingUser.setLayoutManager(layoutManager);
         rvRequestingUser.setAdapter(userAdapter);
-
-        commentAdapter = new CommentAdapter(this, mPresenter.getComments(),
-                this, mPresenter.getOwnerId(), mPresenter.getUserId());
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-        layoutManager2.setStackFromEnd(true);
-        rvComments.setLayoutManager(layoutManager2);
-        rvComments.setAdapter(userAdapter);
-
-        Glide.with(this)
-                .load(mPresenter.getLocalImage())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.loading)
-                        .centerCrop()
-                        .dontAnimate()
-                        .override(160, 160)
-                        .dontTransform())
-                .into(userPic);
-
-
     }
 
     @Override
@@ -274,6 +254,7 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onGetCommentDone() {
         tvNoComment.setVisibility(View.GONE);
+        if(commentAdapter != null)
         commentAdapter.notifyDataSetChanged();
     }
 
@@ -318,8 +299,31 @@ public class PostActivity extends AppCompatActivity implements
         postStatus.setText(mPresenter.getStatus());
         tvCategory.setText(Utils.getTextFromIntCategory(post.getCategory()));
         updateMap(post.getLocation().latitude, post.getLocation().longitude);
+        setUpComment();
     }
 
+    private void setUpComment(){
+
+        commentAdapter = new CommentAdapter(this, mPresenter.getComments(),
+                this, mPresenter.getOwnerId(), mPresenter.getUserId());
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+        layoutManager2.setStackFromEnd(true);
+        rvComments.setLayoutManager(layoutManager2);
+        rvComments.setAdapter(commentAdapter);
+
+        Glide.with(this)
+                .load(mPresenter.getLocalImage())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.loading)
+                        .centerCrop()
+                        .dontAnimate()
+                        .override(160, 160)
+                        .dontTransform())
+                .into(userPic);
+
+
+    }
     @Override
     public void getPostFail() {
 

@@ -59,10 +59,11 @@
             android:id="@+id/tv_add_comment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@color/gray"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:background="@drawable/plate_small_corner"
             android:gravity="center_vertical"
             android:hint="Add a comment..."
             android:textColor="@color/text_black_3"
@@ -76,7 +77,7 @@
             android:layout_marginEnd="10dp"
             android:padding="6dp"
             android:src="@drawable/ic_paper_plane"
-            android:tint="@color/blue" />
+            android:tint="@color/GrayScale" />
     </LinearLayout>
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -88,5 +89,7 @@
         android:text="No comment on this post"
         android:textColor="@color/orange"
         android:textSize="16sp" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 </LinearLayout>

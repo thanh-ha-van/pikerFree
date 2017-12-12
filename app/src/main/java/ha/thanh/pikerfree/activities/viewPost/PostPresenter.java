@@ -84,7 +84,6 @@ class PostPresenter {
         comment.setIdUser(mModel.getUserIdFromSharePref());
         if (comment.getIdUser() == null)
             comment.setIdUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        comment.setTime(Utils.getCurrentTimestamp());
         comments.add(comment);
         UploadComment();
     }
@@ -102,8 +101,8 @@ class PostPresenter {
         });
     }
 
-    void deleteComment(int posttion) {
-        comments.remove(posttion);
+    void deleteComment(int position) {
+        comments.remove(position);
         UploadComment();
         mView.onDeleteCommentDone();
     }
@@ -122,8 +121,8 @@ class PostPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
-                        if (post.getComments() != null)
-                            comments = post.getComments();
+                        if(post.getComments() != null)
+                        comments.addAll(post.getComments());
                         mView.onGetCommentDone();
                         mView.getPostDone(post);
                         requestingUserIDs = post.getRequestingUser();
@@ -148,10 +147,7 @@ class PostPresenter {
     }
 
     List<Comment> getComments() {
-        if (comments != null)
-            return comments;
-        else
-            return comments = new ArrayList<>();
+        return comments;
     }
 
     private void getGrantedUserData() {
@@ -264,7 +260,6 @@ class PostPresenter {
     }
 
     private void initChat() {
-
         String id1 = dataUser.getId();
         String id2 = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mView.OnStartConversation(id1, id2);
@@ -402,7 +397,7 @@ class PostPresenter {
 
     }
 
-    public class DownloadImgTask extends AsyncTask<String, Void, List<Bitmap>> {
+    public  class DownloadImgTask extends AsyncTask<String, Void, List<Bitmap>> {
 
         @Override
         protected void onPreExecute() {
@@ -412,7 +407,7 @@ class PostPresenter {
         protected List<Bitmap> doInBackground(String... urls) {
             List<Bitmap> bms = new ArrayList<>();
             for (int i = 0; i < imagePostList.size(); i++) {
-                Bitmap bm = null;
+                Bitmap bm;
                 try {
                     InputStream in = new java.net.URL(imagePostList.get(i)).openStream();
                     bm = BitmapFactory.decodeStream(in);
