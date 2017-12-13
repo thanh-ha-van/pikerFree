@@ -13,8 +13,8 @@
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/tv_search_post"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="2dp"
+            android:layout_height="44dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/plate_small_corner"
             android:hint="Search for post..."
@@ -38,24 +38,22 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:text="What do whant to search?"
+        android:text="Which do want to search?"
         android:textColor="@color/GrayScale"
         android:textSize="16sp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@color/whiteShade"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="10dp">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/search_post"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:background="@drawable/bg_rectangle_green_bold"
             android:gravity="center"
             android:text="Post"
@@ -65,10 +63,8 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/search_user"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:background="@drawable/bg_rectangle_greeen_bold_right"
             android:gravity="center"
             android:text="User"

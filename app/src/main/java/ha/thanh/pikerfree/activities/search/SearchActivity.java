@@ -33,7 +33,7 @@ import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.services.GPSTracker;
 
-public class SearchActivity extends AppCompatActivity  implements  UserAdapter.ItemClickListener, PostAdapter.ItemClickListener{
+public class SearchActivity extends AppCompatActivity implements UserAdapter.ItemClickListener, PostAdapter.ItemClickListener {
 
     private FirebaseDatabase database;
     private List<Post> postList;
@@ -42,7 +42,6 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
     private String key;
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
-    private boolean isSearchingPost = true;
     private GPSTracker gpsTracker;
 
     @BindView(R.id.search_post)
@@ -59,7 +58,6 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
     private UserAdapter userAdapter;
     private PostAdapter postAdapter;
     private int type = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,22 +76,28 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
         key = intent.getStringExtra(Constants.POST_SEARCH);
         editTextKey.setText(key);
         type = intent.getIntExtra(Constants.CATEGORY, 1);
-        if(type == 1)
-        getCurrentPostCount();
+        if (type == 1)
+            getCurrentPostCount();
         else searchUserByString(key);
         gpsTracker = new GPSTracker(this);
     }
 
     @OnClick(R.id.btn_search)
     public void searchClicked() {
-        if(editTextKey.getText().toString().equalsIgnoreCase(""))
+
+        if (editTextKey.getText().toString().equalsIgnoreCase(""))
             return;
         postList.clear();
         userList.clear();
+        waitingDialog.showDialog();
+        if (type == 1) {
+            searchByString(editTextKey.getText().toString());
+        } else searchUserByString(editTextKey.getText().toString());
     }
 
     @OnClick(R.id.search_user)
     public void onSearchUserClicked() {
+        type = 2;
         editTextKey.setHint("Search for user");
         tvSearchPost.setClickable(true);
         tvSearchUser.setClickable(false);
@@ -105,6 +109,7 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
 
     @OnClick(R.id.search_post)
     public void onSearchPostClicked() {
+        type = 1;
         editTextKey.setHint("Search for post");
         tvSearchPost.setClickable(false);
         tvSearchUser.setClickable(true);
@@ -116,6 +121,27 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
 
     private void searchUserByString(String key) {
 
+        Query query = database.getReference()
+                .child("users")
+                .orderByChild("name")
+                .startAt(key);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                        waitingDialog.hideDialog();
+                        userList.add(issue.getValue(User.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        setTimeOut();
     }
 
     private void initView() {
@@ -136,12 +162,14 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
         rvUsers.setAdapter(userAdapter);
     }
 
-    private double getUserLat(){
+    private double getUserLat() {
         return gpsTracker.getLatitude();
     }
-    private double getUserLng(){
+
+    private double getUserLng() {
         return gpsTracker.getLongitude();
     }
+
     @Override
     public void onChooseUser(int position) {
 
@@ -175,20 +203,30 @@ public class SearchActivity extends AppCompatActivity  implements  UserAdapter.I
 
         for (int i = postCount; i > 0; i--) {
             searchKeyInId(i, key);
-            if(i == 1)
+            if (i == 1)
                 setTimeOut();
         }
     }
 
-    private void setTimeOut(){
+    private void setTimeOut() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(postList.size()== 0)
-                onNoResult();
-            }
-        }, 3000);
+        if (type == 1) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (postList.size() == 0)
+                        onNoResult();
+                }
+            }, 6000);
+        } else {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (userList.size() == 0)
+                        onNoResult();
+                }
+            }, 6000);
+        }
     }
 
     private void onNoResult() {
