@@ -54,11 +54,11 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
         if (auth.getCurrentUser() != null) {
             mView.onLogInSuccess();
         }
-
     }
 
     void doLogin(String email, final String password) {
         //authenticate user
+        if (!email.contains("@")) email = email + "@gmail.com";
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -84,6 +84,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                         }
                     }
                 });
+
     }
 
     private void getDataFromServer() {

@@ -38,10 +38,15 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
         presenter.checkLogIn();
     }
 
-    @OnClick(R.id.btn_log_up)
+    @OnClick(R.id.btn_sign_up)
     public void doSignUp() {
         startActivity(new Intent(this, SignUpActivity.class));
         finish();
+    }
+
+    @OnClick(R.id.tv_help)
+    public void showHelp(){
+        alertDialog.showAlertDialog("Help", "Username is email without suffixes. If you get trouble logging in please contact email thanhahvan1@gmail.com for help.");
     }
 
     @OnClick(R.id.btn_forget)

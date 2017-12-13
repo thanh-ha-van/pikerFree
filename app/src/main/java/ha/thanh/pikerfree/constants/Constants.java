@@ -17,6 +17,7 @@ public class Constants {
     public static final int STATUS_OPEN = 1;
     public static final int STATUS_CLOSE = 2;
     public static final String POST_VIEW = "post_view";
+    public static final String POST_SEARCH = "post_search";
 
     public static final String U_ID_1 = "user_1";
     public static final String U_ID_2 = "user_2";

@@ -7,16 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.search.SearchActivity;
 import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomEditText;
 
 public class NewsFragment extends Fragment
         implements NewsInterface.RequiredViewOps {
 
     NewsPresenter newsPresenter;
+    @BindView(R.id.tv_search_post)
+    CustomEditText editTextSearchKey;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,13 +34,22 @@ public class NewsFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
-        newsPresenter = new NewsPresenter(this.getContext(), this);
         initData();
         return view;
     }
 
     private void initData() {
+        newsPresenter = new NewsPresenter(this.getContext(), this);
+    }
 
+    @OnClick(R.id.btn_search)
+    public void onbtnSearchClicked(){
+        if(editTextSearchKey.getText().toString().equalsIgnoreCase(""))
+            return;
+        Intent intent = new Intent(this.getContext(), SearchActivity.class);
+        intent.putExtra(Constants.POST_SEARCH, editTextSearchKey.getText().toString());
+        intent.putExtra(Constants.CATEGORY, 1); //1 mean searching for post;
+        startActivity(intent);
     }
 
     @OnClick(R.id.accessories)
