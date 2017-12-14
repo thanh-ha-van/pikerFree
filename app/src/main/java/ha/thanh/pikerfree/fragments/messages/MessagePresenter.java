@@ -16,6 +16,8 @@ import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
+import ha.thanh.pikerfree.models.SQLiteMess;
+import ha.thanh.pikerfree.services.MessageDataHelper;
 
 
 class MessagePresenter {
@@ -24,8 +26,10 @@ class MessagePresenter {
     private Handler handler;
     private FirebaseDatabase database;
     private List<Conversation> conversationList;
+    private List<SQLiteMess> localConList;
     private List<String> conversationIdList;
     private String userId;
+    private MessageDataHelper messageDataHelper;
 
     List<Conversation> getConversationList() {
         if (conversationList != null)
@@ -33,13 +37,16 @@ class MessagePresenter {
         else return conversationList = new ArrayList<>();
     }
 
-    MessagePresenter(MessageInterface.RequiredViewOps mView) {
+    MessagePresenter( Context context, MessageInterface.RequiredViewOps mView) {
         this.mView = mView;
         handler = new Handler();
         conversationList = new ArrayList<>();
         conversationIdList = new ArrayList<>();
+        localConList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        messageDataHelper = new MessageDataHelper(context);
+        localConList = messageDataHelper.getAllMess();
     }
 
     void loadAllConversation() {
@@ -95,4 +102,5 @@ class MessagePresenter {
 
             }
     }
+
 }

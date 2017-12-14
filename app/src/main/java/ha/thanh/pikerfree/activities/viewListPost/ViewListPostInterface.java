@@ -8,5 +8,6 @@ public class ViewListPostInterface {
 
     interface RequiredViewOps {
         void onGetPostDone();
+        void onNoResult();
     }
 }

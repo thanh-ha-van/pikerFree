@@ -43,7 +43,7 @@ class ConPresenter {
     private FirebaseDatabase database;
     private User OPUser;
 
-    public String getOpId() {
+    String getOpId() {
         return OPUser.getId();
     }
 
@@ -247,7 +247,7 @@ class ConPresenter {
     }
 
     private void uploadNotification(String text) {
-        if(OPUser.isOnline()) return;
+        if (OPUser.isOnline()) return;
         MessageNotification message =
                 new MessageNotification(text, mModel.getUserIdFromSharePref(), OPUser.getId());
         database.getReference()

@@ -13,6 +13,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.utils.Utils;
@@ -53,6 +54,13 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
+    }
+
+    @Override
+    public void onNoResult() {
+        waitingDialog.hideDialog();
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog(this);
+        customAlertDialog.showAlertDialog("Not found", "There is nothing to show you at this moment");
     }
 
     @Override

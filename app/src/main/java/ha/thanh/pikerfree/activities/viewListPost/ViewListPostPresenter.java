@@ -223,5 +223,18 @@ class ViewListPostPresenter {
                 });
             }
         });
+
+    }
+    private void setTimeOut() {
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (postList.size() == 0)
+                mView.onNoResult();
+            }
+        }, 6000);
+
     }
 }
