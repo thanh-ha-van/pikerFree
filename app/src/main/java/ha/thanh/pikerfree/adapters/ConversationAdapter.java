@@ -105,15 +105,19 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(mConText)
-                                .load(uri)
-                                .apply(new RequestOptions()
-                                        .placeholder(R.drawable.loading)
-                                        .centerCrop()
-                                        .dontAnimate()
-                                        .override(100, 100)
-                                        .dontTransform())
-                                .into(holder.OpImage);
+                        try {
+                            Glide.with(mConText)
+                                    .load(uri)
+                                    .apply(new RequestOptions()
+                                            .placeholder(R.drawable.loading)
+                                            .centerCrop()
+                                            .dontAnimate()
+                                            .override(100, 100)
+                                            .dontTransform())
+                                    .into(holder.OpImage);
+                        } catch (IllegalArgumentException e) {
+                            e.getMessage();
+                        }
                     }
                 });
 

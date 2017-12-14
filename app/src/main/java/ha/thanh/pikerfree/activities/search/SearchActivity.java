@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.common.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,8 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+        waitingDialog = new WaitingDialog(this);
+        waitingDialog.showDialog();
         initData();
         initView();
     }
@@ -78,7 +81,10 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         type = intent.getIntExtra(Constants.CATEGORY, 1);
         if (type == 1)
             getCurrentPostCount();
-        else searchUserByString(key);
+        else {
+            onSearchUserClicked();
+            searchUserByString(key);
+        }
         gpsTracker = new GPSTracker(this);
     }
 
@@ -119,19 +125,21 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));
     }
 
-    private void searchUserByString(String key) {
+    private void searchUserByString(final String key) {
 
         Query query = database.getReference()
                 .child("users")
-                .orderByChild("name")
-                .startAt(key);
+                .orderByChild("name");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                        User user = issue.getValue(User.class);
+                        if (user.getName().toLowerCase().contains(key))
+                            userList.add(user);
+                        userAdapter.notifyDataSetChanged();
                         waitingDialog.hideDialog();
-                        userList.add(issue.getValue(User.class));
                     }
                 }
             }
@@ -145,8 +153,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
     }
 
     private void initView() {
-        waitingDialog = new WaitingDialog(this);
-        waitingDialog.showDialog();
+
         alertDialog = new CustomAlertDialog(this);
 
         postAdapter = new PostAdapter(this, postList, this, getUserLat(), getUserLng());
@@ -160,6 +167,9 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvUsers.setLayoutManager(layoutManager2);
         rvUsers.setAdapter(userAdapter);
+
+        userAdapter.notifyDataSetChanged();
+        postAdapter.notifyDataSetChanged();
     }
 
     private double getUserLat() {
@@ -247,7 +257,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String string = dataSnapshot.getValue(String.class);
-                if (string.contains(key)) {
+                if (string.toLowerCase().contains(key.toLowerCase())) {
                     getPostByID(i);
                 }
             }
@@ -268,6 +278,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postList.add(dataSnapshot.getValue(Post.class));
+                postAdapter.notifyDataSetChanged();
                 onHasResult();
             }
 
@@ -277,4 +288,5 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
             }
         });
     }
+
 }

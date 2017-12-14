@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.conversation.ConActivity;
+import ha.thanh.pikerfree.activities.search.SearchActivity;
 import ha.thanh.pikerfree.adapters.ConversationAdapter;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Conversation;
 
@@ -26,6 +29,9 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
     public CustomTextView tvNotData;
     @BindView(R.id.rv_conversation)
     public RecyclerView rvConversation;
+
+    @BindView(R.id.tv_search_user)
+    CustomEditText editTextSearchKey;
 
     private MessagePresenter presenter;
     private ConversationAdapter adapter;
@@ -47,6 +53,17 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
         return view;
 
     }
+
+    @OnClick(R.id.btn_search)
+    public void onbtnSearchClicked(){
+        if(editTextSearchKey.getText().toString().equalsIgnoreCase(""))
+            return;
+        Intent intent = new Intent(this.getContext(), SearchActivity.class);
+        intent.putExtra(Constants.POST_SEARCH, editTextSearchKey.getText().toString());
+        intent.putExtra(Constants.CATEGORY, 2); //1 mean searching for user;
+        startActivity(intent);
+    }
+
 
 
     @Override

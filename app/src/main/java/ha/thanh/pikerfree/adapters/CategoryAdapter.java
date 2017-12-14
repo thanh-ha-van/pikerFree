@@ -24,10 +24,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
         @BindView(R.id.tvSectionTitle)
         TextView tvTitle;
-
 
         MyViewHolder(View view) {
             super(view);
@@ -53,9 +51,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-
         holder.tvTitle.setText(dataSet[position]);
-
     }
 
     @Override
