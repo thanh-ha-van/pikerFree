@@ -26,6 +26,7 @@ import java.util.List;
 
 import ha.thanh.pikerfree.models.ImagePost;
 import ha.thanh.pikerfree.models.Messages.MyGeoLocation;
+import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -96,6 +97,26 @@ class NewPostPresenter {
         createPost(title, description, selectedCategory);
         uploadPostData();
         updateCurrentPostCount();
+        uploadNotificationToFollower();
+    }
+
+    private void uploadNotificationToFollower() {
+        if (dataUser.getFollowingUsers() != null) {
+            for (String receiver : dataUser.getFollowingUsers()
+                    ) {
+                uploadNotification("", receiver);
+            }
+        }
+    }
+
+    private void uploadNotification(String text, String receiverId) {
+        MessageNotification message =
+                new MessageNotification(text, dataUser.getId(), receiverId);
+        database.getReference()
+                .child("notifications")
+                .child("newPost")
+                .push()
+                .setValue(message);
     }
 
     private void getCurrentUser() {

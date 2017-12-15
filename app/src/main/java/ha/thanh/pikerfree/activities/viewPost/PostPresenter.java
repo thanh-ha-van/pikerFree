@@ -24,6 +24,7 @@ import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Comment;
+import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
@@ -191,11 +192,30 @@ class PostPresenter {
         if (isUserOwner) {
             deletePost();
         } else {
-            if (post.getStatus() == Constants.STATUS_OPEN)
+            if (post.getStatus() == Constants.STATUS_OPEN) {
                 updateRequestingUserList();
+                uploadRequestNotification();
+            }
             else
                 mView.onShowError("This post is closed by owner so you can not send request anymore");
         }
+    }
+
+    private void uploadRequestNotification() {
+        uploadNotification(getOwnerId(), getUserId(), "requesting", "");
+    }
+    private void uploadGrantedNotification(String receiver) {
+        uploadNotification(receiver, getOwnerId(), "granted", "");
+    }
+
+    private void uploadNotification(String receiverId, String senderId, String child, String mess) {
+        MessageNotification message =
+                new MessageNotification(mess, senderId, receiverId);
+        database.getReference()
+                .child("notifications")
+                .child(child)
+                .push()
+                .setValue(message);
     }
 
     private void deletePost() {
@@ -270,8 +290,8 @@ class PostPresenter {
         post.setStatus(Constants.STATUS_CLOSE);
         post.setRequestingUser(null);
         post.setGrantedUser(userId);
-
         savePost(userId);
+        uploadGrantedNotification(userId);
     }
 
     private void savePost(String userid) {

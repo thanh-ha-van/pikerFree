@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.models;
+package ha.thanh.pikerfree.models.Notification;
 
 /**
  * Created by HaVan on 12/6/2017.
@@ -6,6 +6,7 @@ package ha.thanh.pikerfree.models;
 
 public class MessageNotification {
 
+    // use this when need to push notification to user when they have new message and they are offline.
     private String body;
     private String from;
     private String to;
