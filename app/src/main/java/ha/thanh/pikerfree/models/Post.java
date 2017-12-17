@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.models.Messages.MyGeoLocation;
 
 @IgnoreExtraProperties
 public class Post {

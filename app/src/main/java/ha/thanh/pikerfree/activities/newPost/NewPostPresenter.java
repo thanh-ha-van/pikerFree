@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.models.ImagePost;
-import ha.thanh.pikerfree.models.Messages.MyGeoLocation;
+import ha.thanh.pikerfree.models.MyGeoLocation;
 import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
@@ -104,7 +104,7 @@ class NewPostPresenter {
         if (dataUser.getFollowingUsers() != null) {
             for (String receiver : dataUser.getFollowingUsers()
                     ) {
-                uploadNotification("", receiver);
+                uploadNotification(post.getPostId() + "", receiver);
             }
         }
     }

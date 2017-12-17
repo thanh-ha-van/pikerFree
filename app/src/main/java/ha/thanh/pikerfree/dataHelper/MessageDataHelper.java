@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.services;
+package ha.thanh.pikerfree.dataHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,10 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ha.thanh.pikerfree.models.Conversation;
-import ha.thanh.pikerfree.models.Messages.Message;
-import ha.thanh.pikerfree.models.SQLiteMess;
 
 
 /**
@@ -25,7 +21,7 @@ public class MessageDataHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "contactsManager";
+    private static final String DATABASE_NAME = "messDatabase";
 
     // Contacts table name
     private static final String TABLE_CONTACTS = "messages";

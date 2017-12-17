@@ -4,8 +4,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -16,27 +14,46 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.main.MainActivity;
+import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
+import ha.thanh.pikerfree.models.Notification.DataPayload;
+import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
 
 
 public class MessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessageService";
-    Bitmap bitmap;
+    private NotificationDataHelper dataHelper;
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        android.os.Debug.waitForDebugger();  //
+        dataHelper = new NotificationDataHelper(this);
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
+        try {
+            DataPayload dataPayload = (DataPayload) remoteMessage.getData();
+            SQLiteNotification sqLiteNotification = new SQLiteNotification();
+            sqLiteNotification.setRead(0);
+            sqLiteNotification.setDataID(dataPayload.getDataID());
+            sqLiteNotification.setType(Integer.valueOf(dataPayload.getType()));
+            sqLiteNotification.setMess(remoteMessage.getNotification().getBody());
+
+        }
+        catch (Exception e){
+            Log.e("Service", e.getMessage());
+        }
         String notificationTitle = null, notificationBody = null;
 
-        // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             notificationTitle = remoteMessage.getNotification().getTitle();
             notificationBody = remoteMessage.getNotification().getBody();
         }
 
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
         sendNotification(notificationTitle, notificationBody);
     }
 
@@ -46,10 +63,11 @@ public class MessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)   //Automatically delete the notification
-                .setSmallIcon(R.drawable.ic_done_all) //Notification icon
+                .setSmallIcon(R.mipmap.ic_launcher) //Notification icon
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)

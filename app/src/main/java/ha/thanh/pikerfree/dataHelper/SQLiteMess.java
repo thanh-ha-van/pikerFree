@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.models;
+package ha.thanh.pikerfree.dataHelper;
 
 /**
  * Created by HaVan on 8/27/2017.

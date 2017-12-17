@@ -22,7 +22,7 @@ public class PostDataHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "contactsManager";
+    private static final String DATABASE_NAME = "postDatabase";
 
     // Contacts table name
     private static final String TABLE_CONTACTS = "contacts";
@@ -39,7 +39,7 @@ public class PostDataHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 

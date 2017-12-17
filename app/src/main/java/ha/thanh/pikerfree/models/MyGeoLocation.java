@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.models.Messages;
+package ha.thanh.pikerfree.models;
 
 
 public class MyGeoLocation {

@@ -27,6 +27,7 @@ public class InstanceIDService extends FirebaseInstanceIdService {
                     .child("instanceId")
                     .setValue(instanceId);
         }
+
     }
 
 }

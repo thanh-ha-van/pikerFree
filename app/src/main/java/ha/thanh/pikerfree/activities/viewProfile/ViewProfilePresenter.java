@@ -17,6 +17,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.services.GPSTracker;
@@ -43,12 +44,14 @@ public class ViewProfilePresenter {
         gpsTracker = new GPSTracker(context);
     }
 
-    String getOPId(){
+    String getOPId() {
         return user.getId();
     }
-    String getUserId(){
+
+    String getUserId() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
+
     void updateRating(double rate) {
         List<String> list;
         list = user.getRatedUsers();
@@ -61,7 +64,7 @@ public class ViewProfilePresenter {
             }
             list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
             user.setRatedUsers(list);
-            double newRate = (rate + list.size() * user.getRating()) / (list.size() + 1);
+            double newRate = Math.round((((rate + list.size() * user.getRating()) / (list.size() + 1) * 100) * 10) / 10.0);
             user.setRating(newRate);
             updateUser(newRate);
         } else {
@@ -122,12 +125,12 @@ public class ViewProfilePresenter {
         });
     }
 
-    private void checkFollowStatus(){
+    private void checkFollowStatus() {
         List<String> followingUsers = new ArrayList<>();
         if (user.getFollowingUsers() != null)
             followingUsers = user.getFollowingUsers();
 
-        if(followingUsers.contains(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+        if (followingUsers.contains(FirebaseAuth.getInstance().getCurrentUser().getUid()))
             mView.onAlreadyFollow();
     }
 
@@ -144,12 +147,24 @@ public class ViewProfilePresenter {
                 .child(user.getId())
                 .child("followingUsers");
         databaseReference.setValue(followingUsers);
+        uploadNotification(getOPId(), getUserId(), "followers", "");
         mView.onFollowSuccess("You now following this user, you will get notification when this user have new post.");
+    }
+
+
+    private void uploadNotification(String receiverId, String senderId, String child, String mess) {
+        MessageNotification message =
+                new MessageNotification(mess, senderId, receiverId);
+        database.getReference()
+                .child("notifications")
+                .child(child)
+                .push()
+                .setValue(message);
     }
 
     void unfollowUser() {
 
-        List<String> followingUsers = new ArrayList<>();
+        List<String> followingUsers;
         followingUsers = user.getFollowingUsers();
         followingUsers.remove(FirebaseAuth.getInstance().getCurrentUser().getUid());
         DatabaseReference databaseReference = FirebaseDatabase

@@ -202,10 +202,10 @@ class PostPresenter {
     }
 
     private void uploadRequestNotification() {
-        uploadNotification(getOwnerId(), getUserId(), "requesting", "");
+        uploadNotification(getOwnerId(), getUserId(), "requesting", post.getPostId() + "");
     }
     private void uploadGrantedNotification(String receiver) {
-        uploadNotification(receiver, getOwnerId(), "granted", "");
+        uploadNotification(receiver, getOwnerId(), "granted", post.getPostId() + "");
     }
 
     private void uploadNotification(String receiverId, String senderId, String child, String mess) {
