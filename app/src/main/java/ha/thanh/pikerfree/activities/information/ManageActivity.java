@@ -40,6 +40,13 @@ public class ManageActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.img_back)
+    public void getBack() {
+        onBackPressed();
+    }
+
+
+
     @OnClick(R.id.view_log_out)
     public void LogOut() {
 

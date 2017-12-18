@@ -66,8 +66,13 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     @Override
     public void onItemClick(int position) {
         Intent in = new Intent(this, PostActivity.class);
-        in.putExtra(Constants.POST_VIEW, presenter.getPostList().get(position).getPostId());
-        startActivity(in);
+        try {
+            int id = presenter.getPostList().get(position).getPostId();
+            in.putExtra(Constants.POST_VIEW, id);
+            startActivity(in);
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     @OnClick(R.id.ic_back)

@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.services;
+package ha.thanh.pikerfree.customviews;
 
 import android.app.AlertDialog;
 import android.content.Context;

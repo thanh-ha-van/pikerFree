@@ -26,20 +26,42 @@
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_comment"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
             android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="center_vertical"
+            android:lines="2"
             android:textColor="@color/GrayScale"
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/img_delete_comment"
+            android:id="@+id/img_delete"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:padding="8dp"
             android:src="@drawable/ic_dustbin"
+            android:tint="@color/GrayScale"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:src="@drawable/ic_edit_profile"
+            android:tint="@color/GrayScale"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_options"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:src="@drawable/ic_more_2"
             android:tint="@color/GrayScale"
             android:visibility="gone" />
     </LinearLayout>

@@ -37,17 +37,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:paddingStart="5dp"
-        android:background="@color/gray">
+        android:background="@drawable/plate_small_corner_blue"
+        android:paddingStart="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_comment_pic"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
             android:layout_gravity="center"
+            android:layout_margin="4dp"
             android:src="@drawable/ic_user"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="2dp">
@@ -59,13 +61,16 @@
             android:id="@+id/tv_add_comment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="4dp"
+            android:layout_margin="2dp"
             android:layout_weight="1"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
             android:background="@drawable/plate_small_corner"
+            android:ellipsize="end"
             android:gravity="center_vertical"
             android:hint="Add a comment..."
+            android:lines="2"
+            android:maxLength="50"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
             android:textColor="@color/text_black_3"
             android:textSize="18sp" />
 
@@ -74,10 +79,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
             android:padding="6dp"
             android:src="@drawable/ic_paper_plane"
-            android:tint="@color/GrayScale" />
+            android:tint="@color/white" />
     </LinearLayout>
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -89,7 +93,8 @@
         android:text="No comment on this post"
         android:textColor="@color/orange"
         android:textSize="16sp" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 </LinearLayout>

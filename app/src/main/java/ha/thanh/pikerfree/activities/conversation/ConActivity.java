@@ -143,7 +143,7 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     public void onGetMessDone(Message message) {
 
         messageAdapter.notifyDataSetChanged();
-        rvMess.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+        rvMess.smoothScrollToPosition(0);
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }

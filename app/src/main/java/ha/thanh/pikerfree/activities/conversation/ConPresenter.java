@@ -170,6 +170,7 @@ class ConPresenter {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 lastMessId = dataSnapshot.getValue(Integer.class);
                 lassMessIdPref.removeEventListener(this);
+
             }
 
             @Override
@@ -249,7 +250,7 @@ class ConPresenter {
     private void uploadNotification(String text) {
         if (OPUser.isOnline()) return;
         MessageNotification message =
-                new MessageNotification(text, mModel.getUserIdFromSharePref(), OPUser.getId());
+                new MessageNotification(text, mModel.getUserIdFromSharePref(), OPUser.getId(), Utils.getCurrentTimestamp());
         database.getReference()
                 .child("notifications")
                 .child("messages")
@@ -299,18 +300,17 @@ class ConPresenter {
             mView.onPullDone();
             return;
         }
-        nextPull = currentPull - 8;
+        nextPull = currentPull - 10;
         // show the last 8 messages to UI. If user pull show the next 10 mess;
         while (currentPull > 0) {
             getMessData(currentPull, false);
             currentPull--;
             if (currentPull == nextPull) {
-                nextPull = currentPull - 8;
+                nextPull = currentPull - 10;
                 mView.onPullDone();
                 return;
             }
         }
-
     }
 
     void onPull() {

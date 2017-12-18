@@ -3,6 +3,8 @@ package ha.thanh.pikerfree.activities.information;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 
 public class SettingActivity extends AppCompatActivity {
@@ -11,5 +13,11 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.img_back)
+    public void getBack() {
+        onBackPressed();
     }
 }

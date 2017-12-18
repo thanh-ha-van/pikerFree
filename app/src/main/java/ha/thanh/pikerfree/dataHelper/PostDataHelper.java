@@ -1,4 +1,4 @@
-package ha.thanh.pikerfree.services;
+package ha.thanh.pikerfree.dataHelper;
 
 import android.content.ContentValues;
 import android.content.Context;

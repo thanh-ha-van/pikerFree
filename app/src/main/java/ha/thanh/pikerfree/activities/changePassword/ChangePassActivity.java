@@ -41,6 +41,11 @@ public class ChangePassActivity extends AppCompatActivity {
         alertDialog = new CustomAlertDialog(this);
     }
 
+    @OnClick(R.id.ic_back)
+    public void getBack() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.btn_save)
 
     public void checkInfor() {

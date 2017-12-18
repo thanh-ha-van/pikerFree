@@ -12,7 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-import ha.thanh.pikerfree.services.DialogMessage;
+import ha.thanh.pikerfree.customviews.DialogMessage;
 
 public class HandlePermission {
     private static final String[] PERMISSIONS = {

@@ -21,7 +21,6 @@ public class CustomYesNoDialog {
     private Dialog alertDialog;
     private YesNoInterFace interFace;
 
-
     public interface YesNoInterFace {
 
         void onYesClicked();

@@ -50,30 +50,40 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.op_pic)
         CircleImageView OpImage;
         @BindView(R.id.tv_comment)
         TextView tvComment;
-        @BindView(R.id.img_delete_comment)
+        @BindView(R.id.img_delete)
         ImageView btnDelete;
+        @BindView(R.id.img_edit)
+        ImageView btnEdit;
+        @BindView(R.id.img_options)
+        ImageView btnOptions;
 
         MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-            if (mClickListener != null) {
-                if (view.getId() == R.id.img_delete_comment)
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     mClickListener.onCommentDelete(getAdapterPosition());
-                else
+                }
+            });
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mClickListener.onCommentEdit(getAdapterPosition());
+                }
+            });
+            tvComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     mClickListener.onCommentClicked(getAdapterPosition());
-            }
+                }
+            });
         }
     }
 
@@ -88,7 +98,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         final String itemUser = dataSet.get(position).getIdUser();
-
         FirebaseStorage
                 .getInstance()
                 .getReference()
@@ -108,12 +117,36 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
                                 .into(holder.OpImage);
                     }
                 });
-
-        if (ownerId.equalsIgnoreCase(itemUser))
+        if (ownerId.equalsIgnoreCase(userId)) {// owner have right to delete all comment
+            holder.btnOptions.setVisibility(View.VISIBLE);
+            holder.btnOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.btnDelete.getVisibility() == View.GONE) {
+                        holder.btnDelete.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.btnDelete.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+        if (ownerId.equalsIgnoreCase(itemUser)) { // this comment is of owner. must highlight it
             holder.tvComment.setTextColor(mConText.getResources().getColor(R.color.blue));
-        if (userId.equalsIgnoreCase(itemUser)) {
-
-            holder.btnDelete.setVisibility(View.VISIBLE);
+        }
+        if (userId.equalsIgnoreCase(itemUser)) { // user have right to edit or delete their own comment
+            holder.btnOptions.setVisibility(View.VISIBLE);
+            holder.btnOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.btnDelete.getVisibility() == View.GONE) {
+                        holder.btnDelete.setVisibility(View.VISIBLE);
+                        holder.btnEdit.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.btnDelete.setVisibility(View.GONE);
+                        holder.btnEdit.setVisibility(View.GONE);
+                    }
+                }
+            });
         }
         holder.tvComment.setText(dataSet.get(position).getComment());
     }
@@ -124,6 +157,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     }
 
     public interface CommentClickListener {
+
+        void onCommentEdit(int position);
+
         void onCommentClicked(int position);
 
         void onCommentDelete(int position);

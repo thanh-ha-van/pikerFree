@@ -23,6 +23,7 @@ import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.utils.Utils;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
+
     private List<Post> dataSet;
     private ItemClickListener mClickListener;
     private Context mConText;
@@ -75,35 +76,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        Post post = dataSet.get(position);
-        holder.tvDistance.setText(Utils.getDistance(lat, lng, post.getLocation().latitude, post.getLocation().longitude));
-        holder.tvTitle.setText(post.getTitle());
-        holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
-        holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
-        FirebaseStorage
-                .getInstance()
-                .getReference()
-                .child("postImages")
-                .child(post.getPostId() + "")
-                .child("image_no_1.jpg").getDownloadUrl()
-                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        try {
-                            Glide.with(mConText)
-                                    .load(uri)
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.background)
-                                            .centerCrop()
-                                            .dontAnimate()
-                                            .override(400, 250)
-                                            .dontTransform())
-                                    .into(holder.imgPostImage);
-                        } catch (IllegalArgumentException e) {
-                            e.getMessage();
+        try {
+
+            Post post = dataSet.get(position);
+            holder.tvDistance.setText(Utils.getDistance(lat, lng, post.getLocation().latitude, post.getLocation().longitude));
+            holder.tvTitle.setText(post.getTitle());
+            holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
+            holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
+            FirebaseStorage
+                    .getInstance()
+                    .getReference()
+                    .child("postImages")
+                    .child(post.getPostId() + "")
+                    .child("image_no_1.jpg").getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            try {
+                                Glide.with(mConText)
+                                        .load(uri)
+                                        .apply(new RequestOptions()
+                                                .placeholder(R.drawable.background)
+                                                .centerCrop()
+                                                .dontAnimate()
+                                                .override(400, 250)
+                                                .dontTransform())
+                                        .into(holder.imgPostImage);
+                            } catch (IllegalArgumentException e) {
+                                e.getMessage();
+                            }
                         }
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     private String getTextFromStatus(int status) {

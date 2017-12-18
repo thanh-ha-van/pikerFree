@@ -210,7 +210,7 @@ class PostPresenter {
 
     private void uploadNotification(String receiverId, String senderId, String child, String mess) {
         MessageNotification message =
-                new MessageNotification(mess, senderId, receiverId);
+                new MessageNotification(mess, senderId, receiverId, Utils.getCurrentTimestamp());
         database.getReference()
                 .child("notifications")
                 .child(child)

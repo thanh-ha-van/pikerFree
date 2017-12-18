@@ -52,16 +52,6 @@ public class Utils {
         }
     }
 
-    public static void sendNotificationToUser(String user, final String message) {
-        Firebase ref = new Firebase(FirebaseDatabase.getInstance().toString());
-        final Firebase notifications = ref.child("notificationRequests");
-
-        Map notification = new HashMap<>();
-        notification.put("username", user);
-        notification.put("message", message);
-
-        notifications.push().setValue(notification);
-    }
     public static String getTimeString(long timestamp) {
         try {
             Calendar calendar = Calendar.getInstance();

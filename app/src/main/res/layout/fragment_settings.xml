@@ -26,13 +26,28 @@
             android:paddingStart="16dp">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="0dp"
-                android:id="@+id/tv_favorite_count"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Favorite posts"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/tv_favorite_count"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/plate"
+                android:gravity="center"
+                android:paddingEnd="7dp"
+                android:paddingStart="7dp"
+                android:text="1"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -57,12 +72,29 @@
             android:paddingStart="16dp">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="0dp"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Notification"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
+
+            <ha.thanh.pikerfree.customviews.CustomTextView
+                android:id="@+id/tv_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/plate_red"
+                android:gravity="center"
+                android:paddingEnd="7dp"
+                android:paddingStart="7dp"
+                android:text="1"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -77,7 +109,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:background="@color/gray" />
-
         <LinearLayout
             android:id="@+id/view_privacy"
             android:layout_width="match_parent"
@@ -101,12 +132,6 @@
                 android:tint="@color/GrayScale" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:background="@color/gray" />
 
         <View
             android:layout_width="match_parent"
@@ -174,7 +199,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:background="@color/gray" />
-
 
         <LinearLayout
             android:id="@+id/view_manage_account"

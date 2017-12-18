@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -16,6 +17,7 @@ import java.util.Map;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
+import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
 
 
 public class MessagingService extends FirebaseMessagingService {
@@ -34,9 +36,21 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        Map<String, String> data = remoteMessage.getData();
-        String type = data.get("type");
-        String dataId = data.get("dataId");
+        try {
+            Map<String, String> data = remoteMessage.getData();
+            String type = data.get("type");
+            String dataId = data.get("dataId");
+            String mess = data.get("body");
+            SQLiteNotification sqLiteNotification = new SQLiteNotification();
+            sqLiteNotification.setType(Integer.valueOf(type));
+            sqLiteNotification.setDataID(dataId);
+            sqLiteNotification.setMess(mess);
+            sqLiteNotification.setRead(0);
+            dataHelper.addNotification(sqLiteNotification);
+        } catch (Exception e) {
+            Log.e("Message service", e.getMessage());
+        }
+
         String notificationTitle = null, notificationBody = null;
 
         if (remoteMessage.getNotification() != null) {

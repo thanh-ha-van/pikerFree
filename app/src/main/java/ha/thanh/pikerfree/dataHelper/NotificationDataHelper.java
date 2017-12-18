@@ -65,7 +65,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
      */
 
     // Adding new contact
-    void addNotification(SQLiteNotification mess) {
+    public void addNotification(SQLiteNotification mess) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

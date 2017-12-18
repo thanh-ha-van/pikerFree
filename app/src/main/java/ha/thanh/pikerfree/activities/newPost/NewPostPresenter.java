@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,7 +112,7 @@ class NewPostPresenter {
 
     private void uploadNotification(String text, String receiverId) {
         MessageNotification message =
-                new MessageNotification(text, dataUser.getId(), receiverId);
+                new MessageNotification(text, dataUser.getId(), receiverId, Utils.getCurrentTimestamp());
         database.getReference()
                 .child("notifications")
                 .child("newPost")
@@ -168,6 +170,12 @@ class NewPostPresenter {
                 postPref.setValue(post);
                 isUpdatedPostDatabase = true;
                 Log.e("thanh", "done save database post to server");
+
+                // save geofire data to search nearby object later
+                DatabaseReference ref = database.getReference("geofire");
+                GeoFire geoFire = new GeoFire(ref);
+                geoFire.setLocation(post.getPostId() + "", new GeoLocation(mModel.getUserLat(), mModel.getUserLng()));
+
                 checkIfCanHideDialog();
             }
         });

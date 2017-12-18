@@ -50,7 +50,7 @@ import ha.thanh.pikerfree.customviews.UserInforDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
-import ha.thanh.pikerfree.services.PostDataHelper;
+import ha.thanh.pikerfree.dataHelper.PostDataHelper;
 import ha.thanh.pikerfree.utils.Utils;
 
 import static com.facebook.share.widget.ShareDialog.canShow;
@@ -282,6 +282,11 @@ public class PostActivity extends AppCompatActivity implements
         tvNoComment.setVisibility(View.GONE);
         if (commentAdapter != null)
             commentAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCommentEdit(int position) {
+        //TODO handle edit a comment stuffs
     }
 
     @Override
@@ -524,4 +529,5 @@ public class PostActivity extends AppCompatActivity implements
             Log.d("Activity", "you cannot share photos :(");
         }
     }
+
 }

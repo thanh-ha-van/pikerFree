@@ -1,17 +1,11 @@
 package ha.thanh.pikerfree.fragments.settings;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,18 +16,20 @@ import ha.thanh.pikerfree.activities.information.HelpActivity;
 import ha.thanh.pikerfree.activities.information.ManageActivity;
 import ha.thanh.pikerfree.activities.information.NotificationActivity;
 import ha.thanh.pikerfree.activities.information.TermActivity;
-import ha.thanh.pikerfree.activities.login.LoginActivity;
 import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomTextView;
-import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
-import ha.thanh.pikerfree.services.PostDataHelper;
+import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
+import ha.thanh.pikerfree.dataHelper.PostDataHelper;
 
 
 public class SettingFragment extends Fragment {
 
     @BindView(R.id.tv_favorite_count)
     CustomTextView tvFavCount;
+    @BindView(R.id.tv_notification)
+    CustomTextView tvNotification;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +47,9 @@ public class SettingFragment extends Fragment {
     public void onResume() {
         super.onResume();
         PostDataHelper db = new PostDataHelper(this.getContext());
-        tvFavCount.setText("Favorite posts (" + db.getPostCount() + ")");
+        NotificationDataHelper notificationDataHelper = new NotificationDataHelper(this.getContext());
+        tvFavCount.setText(db.getPostCount() + "");
+        tvNotification.setText(notificationDataHelper.getNotificationCount() + "");
     }
 
     @OnClick(R.id.view_privacy)
@@ -78,6 +76,7 @@ public class SettingFragment extends Fragment {
         startActivity(intent);
 
     }
+
     @OnClick(R.id.view_favorite)
     public void goToList() {
         Intent intent = new Intent(this.getContext(), ViewListPostActivity.class);

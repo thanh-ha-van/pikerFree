@@ -21,6 +21,7 @@ import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.services.GPSTracker;
+import ha.thanh.pikerfree.utils.Utils;
 
 public class ViewProfilePresenter {
     private ViewProfileInterface.RequiredViewOps mView;
@@ -154,7 +155,7 @@ public class ViewProfilePresenter {
 
     private void uploadNotification(String receiverId, String senderId, String child, String mess) {
         MessageNotification message =
-                new MessageNotification(mess, senderId, receiverId);
+                new MessageNotification(mess, senderId, receiverId, Utils.getCurrentTimestamp());
         database.getReference()
                 .child("notifications")
                 .child(child)

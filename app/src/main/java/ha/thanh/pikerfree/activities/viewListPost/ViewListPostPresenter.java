@@ -21,8 +21,7 @@ import java.util.List;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
 import ha.thanh.pikerfree.models.Post;
-import ha.thanh.pikerfree.services.PostDataHelper;
-import ha.thanh.pikerfree.utils.Utils;
+import ha.thanh.pikerfree.dataHelper.PostDataHelper;
 
 
 class ViewListPostPresenter {
@@ -173,58 +172,39 @@ class ViewListPostPresenter {
     }
 
     private void searchNearBy() {
-        handler.post(new Runnable() {
+        DatabaseReference ref = database.getReference("geofire");
+        GeoFire geoFire = new GeoFire(ref);
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(mModel.getUserLat(), mModel.getUserLng()), 16);
+        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
-            public void run() {
-                GeoFire geoFire;
-                final DatabaseReference mDatabase = database.getReference().child("posts");
-                geoFire = new GeoFire(database.getReference().child("posts"));
-                GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(
-                                mModel.getUserLat(),
-                                mModel.getUserLng()),
-                        Globals.getIns().getConfig().getDistanceSearch()
-                );
-                geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
-                    @Override
-                    public void onKeyEntered(String key, GeoLocation location) {
+            public void onKeyEntered(String key, GeoLocation location) {
 
-                        mDatabase.child(key).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot snapshot) {
-                                Post post = snapshot.getValue(Post.class);
-                                postList.add(post);
-                                mView.onGetPostDone();
-                            }
+                getPostByID(Integer.valueOf(key));
+            }
 
-                            @Override
-                            public void onCancelled(DatabaseError error) {
+            @Override
+            public void onKeyExited(String key) {
+                Log.d("Search","Key is no longer in the search area");
+            }
 
-                            }
-                        });
-                    }
+            @Override
+            public void onKeyMoved(String key, GeoLocation location) {
+                Log.d("Search","Key moved within the search area");
+            }
 
-                    @Override
-                    public void onKeyExited(String key) {
-                    }
+            @Override
+            public void onGeoQueryReady() {
+                Log.d("Search","All initial data has been loaded and events have been fired!");
+            }
 
-                    @Override
-                    public void onKeyMoved(String key, GeoLocation location) {
-
-                    }
-
-                    @Override
-                    public void onGeoQueryReady() {
-                    }
-
-                    @Override
-                    public void onGeoQueryError(DatabaseError error) {
-
-                    }
-                });
+            @Override
+            public void onGeoQueryError(DatabaseError error) {
+                mView.onNoResult();
+                Log.d("Search","There was an error with this query");
             }
         });
-
     }
+
     private void setTimeOut() {
         Handler handler = new Handler();
 
@@ -232,7 +212,7 @@ class ViewListPostPresenter {
             @Override
             public void run() {
                 if (postList.size() == 0)
-                mView.onNoResult();
+                    mView.onNoResult();
             }
         }, 6000);
 

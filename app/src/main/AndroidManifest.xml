@@ -78,10 +78,11 @@
             android:name=".activities.forgetPassword.ForgetPassActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.selectCategory.SelectCategoryActivity" />
-        <activity android:name=".activities.viewPost.PostActivity" />
+        <activity
+            android:name=".activities.viewPost.PostActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activities.editPost.EditPostActivity" />
         <activity android:name=".activities.conversation.ConActivity" />
-        <activity android:name=".activities.augmentedReality.ARActivity" />
         <activity android:name=".activities.viewListPost.ViewListPostActivity" />
         <activity android:name=".activities.information.AboutActivity" />
         <activity android:name=".activities.viewProfile.ViewProfileActivity" />
