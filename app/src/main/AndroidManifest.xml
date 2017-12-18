@@ -89,7 +89,8 @@
         <activity android:name=".activities.information.HelpActivity" />
         <activity android:name=".activities.information.NotificationActivity" />
         <activity android:name=".activities.information.ManageActivity" />
-        <activity android:name=".activities.search.SearchActivity"></activity>
+        <activity android:name=".activities.search.SearchActivity" />
+        <activity android:name=".activities.changePassword.ChangePassActivity"></activity>
     </application>
 
 </manifest>

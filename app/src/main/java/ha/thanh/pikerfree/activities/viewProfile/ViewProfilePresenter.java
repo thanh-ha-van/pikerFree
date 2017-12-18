@@ -147,7 +147,7 @@ public class ViewProfilePresenter {
                 .child(user.getId())
                 .child("followingUsers");
         databaseReference.setValue(followingUsers);
-        uploadNotification(getOPId(), getUserId(), "followers", "");
+        uploadNotification(getOPId(), getUserId(), "followers", getUserId());
         mView.onFollowSuccess("You now following this user, you will get notification when this user have new post.");
     }
 

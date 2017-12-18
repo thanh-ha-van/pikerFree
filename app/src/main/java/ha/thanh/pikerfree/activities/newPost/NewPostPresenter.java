@@ -97,7 +97,6 @@ class NewPostPresenter {
         createPost(title, description, selectedCategory);
         uploadPostData();
         updateCurrentPostCount();
-        uploadNotificationToFollower();
     }
 
     private void uploadNotificationToFollower() {
@@ -137,6 +136,7 @@ class NewPostPresenter {
                         postList.add(postCount);
                         dataUser.setPosts(postList);
                         updateUserData();
+                        uploadNotificationToFollower();
                     }
 
                     @Override
