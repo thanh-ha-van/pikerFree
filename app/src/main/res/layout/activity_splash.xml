@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="0dp"
         android:src="@drawable/piker"
-        android:tint="@color/white" />
+        android:tint="@color/blue" />
 
     <View
         android:layout_width="70dp"

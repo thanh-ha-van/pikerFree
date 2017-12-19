@@ -99,10 +99,8 @@ class ViewListPostPresenter {
         } else if (currentCategory == Constants.CATE_RECENT) {
             // search recent posts
             searchRecent();
-        } else if (currentCategory == Constants.CATE_NEAR_BY) {
-            // search near by posts
-            searchNearBy();
-        } else if (currentCategory == Constants.CATE_LOCAL) {
+        }
+        else if (currentCategory == Constants.CATE_LOCAL) {
             getLocal();
         }
     }
@@ -117,6 +115,7 @@ class ViewListPostPresenter {
     }
 
     private void searchCategory() {
+        setTimeOut();
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -167,40 +166,6 @@ class ViewListPostPresenter {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-    }
-
-    private void searchNearBy() {
-        DatabaseReference ref = database.getReference("geofire");
-        GeoFire geoFire = new GeoFire(ref);
-        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(mModel.getUserLat(), mModel.getUserLng()), 16);
-        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
-            @Override
-            public void onKeyEntered(String key, GeoLocation location) {
-
-                getPostByID(Integer.valueOf(key));
-            }
-
-            @Override
-            public void onKeyExited(String key) {
-                Log.d("Search","Key is no longer in the search area");
-            }
-
-            @Override
-            public void onKeyMoved(String key, GeoLocation location) {
-                Log.d("Search","Key moved within the search area");
-            }
-
-            @Override
-            public void onGeoQueryReady() {
-                Log.d("Search","All initial data has been loaded and events have been fired!");
-            }
-
-            @Override
-            public void onGeoQueryError(DatabaseError error) {
-                mView.onNoResult();
-                Log.d("Search","There was an error with this query");
             }
         });
     }

@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.nearby.NearByActivity;
 import ha.thanh.pikerfree.activities.search.SearchActivity;
 import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;
@@ -59,7 +60,8 @@ public class NewsFragment extends Fragment
 
     @OnClick(R.id.near_by)
     public void goToAC1() {
-        goToList(Constants.CATE_NEAR_BY);
+        Intent intent = new Intent(this.getContext(), NearByActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.recent)

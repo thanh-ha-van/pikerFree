@@ -40,7 +40,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:padding="8dp"
+            android:padding="9dp"
             android:src="@drawable/ic_dustbin"
             android:tint="@color/GrayScale"
             android:visibility="gone" />
@@ -50,7 +50,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:padding="8dp"
+            android:padding="9dp"
             android:src="@drawable/ic_edit_profile"
             android:tint="@color/GrayScale"
             android:visibility="gone" />
@@ -60,7 +60,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:padding="8dp"
+            android:padding="9dp"
             android:src="@drawable/ic_more_2"
             android:tint="@color/GrayScale"
             android:visibility="gone" />

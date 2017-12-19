@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/plate_small_corner"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Title"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opening"
+        android:textColor="@color/text_black_3"
+        android:textSize="16sp" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10-27-2017"
+        android:textColor="@color/text_black_3"
+        android:textSize="16sp" />
+
+</LinearLayout>
