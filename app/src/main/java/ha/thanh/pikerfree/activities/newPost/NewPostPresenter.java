@@ -70,6 +70,8 @@ class NewPostPresenter {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
         getCurrentPostCount();
+        if(!mModel.canGetLocation())
+            mView.onNoGPS();
     }
 
     void startUploadImages() {

@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.fragments.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ import ha.thanh.pikerfree.activities.newPost.NewPostActivity;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.User;
 
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment
         return view;
     }
 
+
     private void initView() {
 
         adapter = new PostAdapter(this.getContext(),
@@ -67,6 +70,7 @@ public class HomeFragment extends Fragment
                 homePresenter.getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        layoutManager.setStackFromEnd(true);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
 
@@ -98,6 +102,23 @@ public class HomeFragment extends Fragment
     public void onResume() {
         super.onResume();
         homePresenter.loadAllMyPost();
+    }
+
+    @Override
+    public void onNoGPS() {
+
+
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this.getActivity());
+        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+
+        alertDialog.showAlertDialog("GPS is off", "Please turn on your GPS so we can determine your posts distance");
+        alertDialog.setListener(new CustomAlertDialog.AlertListener() {
+            @Override
+            public void onOkClicked() {
+                startActivity(new Intent(action));
+            }
+        });
+
     }
 
     @Override

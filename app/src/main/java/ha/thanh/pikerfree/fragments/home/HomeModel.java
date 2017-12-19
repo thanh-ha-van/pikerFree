@@ -16,6 +16,10 @@ class HomeModel {
 
     }
 
+    boolean canGetLocation() {
+        return gpsTracker.canGetLocation();
+    }
+
     String getUserNameStringFromSharePf() {
         return sharedPreferences.getString(Constants.USER_NAME, "");
     }

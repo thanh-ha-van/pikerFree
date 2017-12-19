@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         viewPager.setCurrentItem(1);
         viewPager.setOffscreenPageLimit(3);
         changeOnlineStatus();
+
     }
 
     private void changeOnlineStatus() {

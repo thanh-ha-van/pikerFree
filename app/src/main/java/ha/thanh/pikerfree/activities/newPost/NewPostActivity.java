@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.activities.newPost;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,6 +24,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.selectCategory.SelectCategoryActivity;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
+import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.utils.Utils;
 
@@ -118,6 +120,21 @@ public class NewPostActivity extends AppCompatActivity
     public void startSelectActivity() {
         Intent intent = new Intent(this, SelectCategoryActivity.class);
         startActivityForResult(intent, SELECT_CODE);
+    }
+
+    @Override
+    public void onNoGPS() {
+
+        CustomAlertDialog  alertDialog =  new CustomAlertDialog(this);
+        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+
+        alertDialog.showAlertDialog("GPS is off", "Please turn on your GPS so the other can see where your post is.");
+        alertDialog.setListener(new CustomAlertDialog.AlertListener() {
+            @Override
+            public void onOkClicked() {
+                startActivity(new Intent(action));
+            }
+        });
     }
 
     @Override

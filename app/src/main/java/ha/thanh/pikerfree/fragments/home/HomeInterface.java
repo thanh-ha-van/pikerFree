@@ -10,5 +10,7 @@ class HomeInterface {
         void onGetUserDataDone(User user);
 
         void onGetUserPostsDone();
+
+        void onNoGPS();
     }
 }

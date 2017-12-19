@@ -9,6 +9,8 @@ class NewPostInterface {
         void onUploadSingleImageDone();
 
         void onPostFail(String error);
+
+        void onNoGPS();
     }
 
 }

@@ -36,7 +36,8 @@ class HomePresenter {
         handler = new Handler();
         postList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
-
+        if (!mModel.canGetLocation())
+            mView.onNoGPS();
     }
 
     double getUserLat() {

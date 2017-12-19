@@ -47,6 +47,8 @@ public class Utils {
                 return "RECENT";
             case Constants.CATE_NEAR_BY:
                 return "NEAR BY";
+            case Constants.CATE_LOCAL:
+                return "FAVORITE LIST";
             default:
                 return "OTHERS";
         }

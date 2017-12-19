@@ -29,13 +29,13 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
-        android.os.Debug.waitForDebugger();  //
         dataHelper = new NotificationDataHelper(this);
     }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
+        // handle when app is killed or backgrounded
         try {
             Map<String, String> data = remoteMessage.getData();
             String type = data.get("type");
@@ -47,10 +47,12 @@ public class MessagingService extends FirebaseMessagingService {
             sqLiteNotification.setMess(mess);
             sqLiteNotification.setRead(0);
             dataHelper.addNotification(sqLiteNotification);
+            Log.e("Message service", "saved data");
         } catch (Exception e) {
             Log.e("Message service", e.getMessage());
         }
 
+        // notification when app is foreground
         String notificationTitle = null, notificationBody = null;
 
         if (remoteMessage.getNotification() != null) {

@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.activities.search;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.viewPost.PostActivity;
+import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.adapters.UserAdapter;
 import ha.thanh.pikerfree.constants.Constants;
@@ -86,6 +89,24 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
             searchUserByString(key);
         }
         gpsTracker = new GPSTracker(this);
+        if (!gpsTracker.canGetLocation()) {
+            showGPSRequest();
+        }
+    }
+
+    void showGPSRequest() {
+
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
+        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+
+        alertDialog.showAlertDialog("GPS is off", "Please turn on your GPS so you can search near by post.");
+        alertDialog.setListener(new CustomAlertDialog.AlertListener() {
+            @Override
+            public void onOkClicked() {
+                startActivity(new Intent(action));
+            }
+        });
+
     }
 
     @OnClick(R.id.btn_search)
@@ -159,12 +180,14 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         postAdapter = new PostAdapter(this, postList, this, getUserLat(), getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager.setStackFromEnd(true);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(postAdapter);
 
         userAdapter = new UserAdapter(this, userList, this);
         LinearLayoutManager layoutManager2 =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager2.setStackFromEnd(true);
         rvUsers.setLayoutManager(layoutManager2);
         rvUsers.setAdapter(userAdapter);
 
@@ -182,12 +205,16 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
 
     @Override
     public void onChooseUser(int position) {
-
+        Intent intent = new Intent(this, ViewProfileActivity.class);
+        intent.putExtra(Constants.USER_ID, userList.get(position).getId());
+        startActivity(intent);
     }
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra(Constants.POST_VIEW, postList.get(position).getPostId());
+        startActivity(intent);
     }
 
     private void getCurrentPostCount() {
@@ -256,6 +283,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         postTitlePref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()) return;
                 String string = dataSnapshot.getValue(String.class);
                 if (string.toLowerCase().contains(key.toLowerCase())) {
                     getPostByID(i);
