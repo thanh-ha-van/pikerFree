@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_margin="5dp">
-    s
 
     <ImageView
         android:layout_width="20dp"
@@ -17,7 +16,6 @@
         android:layout_height="20dp"
         android:textSize="16sp"
         android:layout_marginStart="10dp"
-        android:text="4.2"
         android:textColor="@color/orange"
         android:textStyle="bold" />
 </LinearLayout>

@@ -1,9 +1,11 @@
 package ha.thanh.pikerfree.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -19,9 +21,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private List<SQLiteNotification> dataSet;
     private CommentClickListener mClickListener;
+    private Context context;
 
-    public NotificationAdapter(List<SQLiteNotification> dataSet, CommentClickListener listener) {
-
+    public NotificationAdapter(Context context, List<SQLiteNotification> dataSet, CommentClickListener listener) {
+        this.context = context;
         this.dataSet = dataSet;
         this.mClickListener = listener;
     }
@@ -31,6 +34,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         @BindView(R.id.tv_body)
         TextView tvBody;
 
+        @BindView(R.id.btn_delete)
+        ImageView btnDelete;
 
         MyViewHolder(View view) {
             super(view);
@@ -38,7 +43,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tvBody.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dataSet.get(getAdapterPosition()).setRead(1);
                     mClickListener.onClicked(getAdapterPosition());
+                }
+            });
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mClickListener.onDeleted(getAdapterPosition());
                 }
             });
         }
@@ -54,6 +66,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.tvBody.setText(dataSet.get(position).getMess());
+        if (dataSet.get(position).isRead() == 0) {
+            holder.tvBody.setTextColor(context.getResources().getColor(R.color.black));
+        } else {
+            holder.tvBody.setTextColor(context.getResources().getColor(R.color.GrayScale));
+        }
     }
 
     @Override
@@ -64,6 +81,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public interface CommentClickListener {
 
         void onClicked(int position);
+        void onDeleted(int position);
 
     }
 }

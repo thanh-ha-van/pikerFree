@@ -12,13 +12,30 @@ public class SQLiteNotification {
     private int type;
     private String dataID;
     private int isRead;
+    private  boolean isSelected = false;
 
-    public SQLiteNotification(int id, String mess, int type, String dataID, int isRead) {
+    SQLiteNotification(int id, String mess, int type, String dataID, int isRead) {
         this.id = id;
         this.mess = mess;
         this.type = type;
         this.dataID = dataID;
         this.isRead = isRead;
+    }
+
+    public int getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(int isRead) {
+        this.isRead = isRead;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public SQLiteNotification() {

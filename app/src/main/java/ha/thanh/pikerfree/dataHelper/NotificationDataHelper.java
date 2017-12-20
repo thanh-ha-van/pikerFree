@@ -159,7 +159,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
     // Getting contacts Count
     public int getNotificationCount() {
 
-        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS + " WHERE " + KEY_IS_READ + " = 0 " ; // 0 mean unread
+        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS; // read all
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

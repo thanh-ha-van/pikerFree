@@ -16,15 +16,16 @@ import java.util.Map;
 
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.main.MainActivity;
+import ha.thanh.pikerfree.activities.viewPost.PostActivity;
+import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
 import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
 
 
 public class MessagingService extends FirebaseMessagingService {
 
-    private static final String TAG = "FirebaseMessageService";
     private NotificationDataHelper dataHelper;
-
 
     @Override
     public void onCreate() {
@@ -34,13 +35,15 @@ public class MessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
+        String type = "";
+        String dataId = "";
+        String mess;
         // handle when app is killed or backgrounded
         try {
             Map<String, String> data = remoteMessage.getData();
-            String type = data.get("type");
-            String dataId = data.get("dataId");
-            String mess = data.get("body");
+            type = data.get("type");
+            dataId = data.get("dataID");
+            mess = data.get("body");
             SQLiteNotification sqLiteNotification = new SQLiteNotification();
             sqLiteNotification.setType(Integer.valueOf(type));
             sqLiteNotification.setDataID(dataId);
@@ -59,15 +62,33 @@ public class MessagingService extends FirebaseMessagingService {
             notificationTitle = remoteMessage.getNotification().getTitle();
             notificationBody = remoteMessage.getNotification().getBody();
         }
-        sendNotification(notificationTitle, notificationBody);
+        sendNotification(notificationTitle, notificationBody, type, dataId);
     }
 
-    private void sendNotification(String notificationTitle, String notificationBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void sendNotification(String notificationTitle, String notificationBody, String type, String id) {
+
+        Intent intent;
+        switch (type) {
+
+            case "2": // got new follower
+                intent = new Intent(this, ViewProfileActivity.class);
+                intent.putExtra(Constants.USER_ID, id);
+                break;
+            case "3":
+            case "4":
+            case "5":// got new post request
+                intent = new Intent(this, PostActivity.class);
+                intent.putExtra(Constants.POST_VIEW, Integer.valueOf(id));
+                break;
+            default:
+                intent = new Intent(this, MainActivity.class);
+                break;
+
+        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
-
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)   //Automatically delete the notification

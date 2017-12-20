@@ -14,7 +14,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.information.AboutActivity;
 import ha.thanh.pikerfree.activities.information.HelpActivity;
 import ha.thanh.pikerfree.activities.information.ManageActivity;
-import ha.thanh.pikerfree.activities.information.NotificationActivity;
+import ha.thanh.pikerfree.activities.notification.NotificationActivity;
 import ha.thanh.pikerfree.activities.information.TermActivity;
 import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;

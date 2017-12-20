@@ -26,6 +26,7 @@
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"
+            android:layout_marginEnd="46dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -35,13 +36,6 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/img_next"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_more"
-            android:tint="@color/white" />
     </LinearLayout>
 
     <LinearLayout
