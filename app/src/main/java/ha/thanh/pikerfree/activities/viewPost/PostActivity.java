@@ -84,6 +84,8 @@ public class PostActivity extends AppCompatActivity implements
     CircleImageView ownerPic;
     @BindView(R.id.tv_meet_owner)
     CustomTextView meetOwner;
+    @BindView(R.id.tv_rating_num)
+    CustomTextView ownerRating;
     @BindView(R.id.tv_chat)
     CustomTextView chatToOwner;
     @BindView(R.id.tv_send_request)
@@ -108,8 +110,6 @@ public class PostActivity extends AppCompatActivity implements
     RecyclerView rvComments;
     @BindView(R.id.tv_no_comment)
     CustomTextView tvNoComment;
-    @BindView(R.id.user_comment_pic)
-    CircleImageView userPic;
     @BindView(R.id.tv_add_comment)
     CustomEditText tvAddComment;
     @BindView(R.id.btn_save_local)
@@ -130,6 +130,7 @@ public class PostActivity extends AppCompatActivity implements
     private CustomAlertDialog alertDialog;
     private GoogleMap googleMap;
     PostDataHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -231,10 +232,16 @@ public class PostActivity extends AppCompatActivity implements
         checkLocal();
     }
 
-    private  void checkLocal(){
-        if(db.hasObject(postID))
+    private void checkLocal() {
+        if (db.hasObject(postID))
             tvSaveLocal.setText("Remove from favorite");
     }
+
+    @Override
+    public void onUserGranted() {
+        alertDialog.showAlertDialog("Granted", "The owner of this post had granted you this post. This mean you are chosen by the owner to receive the items. Please contact the owner to get the items. Our mission here is complete.\nHave a nice day!");
+    }
+
     @Override
     public void onCommentClicked(int position) {
 
@@ -343,17 +350,6 @@ public class PostActivity extends AppCompatActivity implements
         rvComments.setLayoutManager(layoutManager2);
         rvComments.setAdapter(commentAdapter);
 
-        Glide.with(this)
-                .load(mPresenter.getLocalImage())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.loading)
-                        .centerCrop()
-                        .dontAnimate()
-                        .override(160, 160)
-                        .dontTransform())
-                .into(userPic);
-
-
     }
 
     @Override
@@ -371,6 +367,7 @@ public class PostActivity extends AppCompatActivity implements
         ownerName.setText(user.getName());
         if (user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
         else opStatus.setImageResource(R.drawable.bg_circle_gray);
+        ownerRating.setText(user.getRating() + "");
     }
 
     @Override
@@ -500,7 +497,7 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onGrantedDone(final String userId) {
         waitingDialog.hideDialog();
-        alertDialog.showAlertDialog("Done", "You just decide to give item in this post to user. We now will provide you information of this user. Click OK to go to their profile.");
+        alertDialog.showAlertDialog("Done", "You just decide to give item in this post to user. We now will provide you information of this user. Click OK to go to their profile. Please contact them to discus where and when for you to give the item. We will notify them about this even. Have a nice day!");
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {

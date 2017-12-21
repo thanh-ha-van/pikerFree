@@ -13,13 +13,23 @@ public class SQLiteNotification {
     private String dataID;
     private int isRead;
     private  boolean isSelected = false;
+    private long timestamp;
 
-    SQLiteNotification(int id, String mess, int type, String dataID, int isRead) {
+    SQLiteNotification(int id, String mess, int type, String dataID, int isRead, long timestamp) {
         this.id = id;
         this.mess = mess;
         this.type = type;
         this.dataID = dataID;
         this.isRead = isRead;
+        this.timestamp = timestamp;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public int getIsRead() {

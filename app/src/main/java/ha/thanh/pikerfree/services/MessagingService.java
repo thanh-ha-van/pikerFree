@@ -21,6 +21,7 @@ import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
 import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
+import ha.thanh.pikerfree.utils.Utils;
 
 
 public class MessagingService extends FirebaseMessagingService {
@@ -37,33 +38,30 @@ public class MessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         String type = "";
         String dataId = "";
-        String mess;
-        // handle when app is killed or backgrounded
+        String mess = "";
+        String title = "";
         try {
             Map<String, String> data = remoteMessage.getData();
             type = data.get("type");
             dataId = data.get("dataID");
             mess = data.get("body");
-            SQLiteNotification sqLiteNotification = new SQLiteNotification();
-            sqLiteNotification.setType(Integer.valueOf(type));
-            sqLiteNotification.setDataID(dataId);
-            sqLiteNotification.setMess(mess);
-            sqLiteNotification.setRead(0);
-            dataHelper.addNotification(sqLiteNotification);
-            Log.e("Message service", "saved data");
+            title = data.get("title");
+            if (!type.equalsIgnoreCase("1")) {
+                SQLiteNotification sqLiteNotification = new SQLiteNotification();
+                sqLiteNotification.setType(Integer.valueOf(type));
+                sqLiteNotification.setDataID(dataId);
+                sqLiteNotification.setMess(mess);
+                sqLiteNotification.setRead(0);
+                sqLiteNotification.setTimestamp(Utils.getCurrentTimestamp());
+                dataHelper.addNotification(sqLiteNotification);
+                Log.e("Message service", "saved data");
+            }
         } catch (Exception e) {
             Log.e("Message service", e.getMessage());
         }
-
-        // notification when app is foreground
-        String notificationTitle = null, notificationBody = null;
-
-        if (remoteMessage.getNotification() != null) {
-            notificationTitle = remoteMessage.getNotification().getTitle();
-            notificationBody = remoteMessage.getNotification().getBody();
-        }
-        sendNotification(notificationTitle, notificationBody, type, dataId);
+        sendNotification(title, mess, type, dataId);
     }
+
 
     private void sendNotification(String notificationTitle, String notificationBody, String type, String id) {
 
@@ -82,6 +80,7 @@ public class MessagingService extends FirebaseMessagingService {
                 break;
             default:
                 intent = new Intent(this, MainActivity.class);
+                intent.putExtra(Constants.POST_VIEW, 1);
                 break;
 
         }

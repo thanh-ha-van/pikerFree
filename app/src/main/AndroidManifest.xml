@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -35,7 +37,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -83,18 +84,42 @@
         <activity
             android:name=".activities.viewPost.PostActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activities.editPost.EditPostActivity" />
-        <activity android:name=".activities.conversation.ConActivity" />
-        <activity android:name=".activities.viewListPost.ViewListPostActivity" />
-        <activity android:name=".activities.information.AboutActivity" />
-        <activity android:name=".activities.viewProfile.ViewProfileActivity" />
-        <activity android:name=".activities.information.TermActivity" />
-        <activity android:name=".activities.information.HelpActivity" />
-        <activity android:name=".activities.notification.NotificationActivity" />
-        <activity android:name=".activities.information.ManageActivity" />
-        <activity android:name=".activities.search.SearchActivity" />
-        <activity android:name=".activities.changePassword.ChangePassActivity" />
-        <activity android:name=".activities.nearby.NearByActivity"></activity>
+        <activity
+            android:name=".activities.editPost.EditPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.conversation.ConActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.viewListPost.ViewListPostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.information.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.viewProfile.ViewProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.information.TermActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.information.HelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.notification.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.information.ManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.changePassword.ChangePassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.nearby.NearByActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

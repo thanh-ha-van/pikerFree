@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "485455843827-ntvkoi70r35ag7cqa6m5jor1jmd9esar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ha.thanh.pikerfree",
+            "certificate_hash": "ac4595e0ad634c1a978345b228f436bed59faf5d"
+          }
+        },
+        {
           "client_id": "485455843827-5gunv6eargnnaf5mehvu7cckojkak4id.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -29,7 +37,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBzW0M_fyOxuSdoCtxZeHiyIELwbNL1p5M"
+          "current_key": "AIzaSyCEARMOit5kB0GcHIXDb6BTfZc2Sm5d4us"
         }
       ],
       "services": {

@@ -19,4 +19,5 @@
     <color name="GrayScale">#757a72</color>
     <color name="red">#fd2017</color>
     <color name="grayGround">#d8e1e7</color>
+    <color name="light">#cfebfb</color>
 </resources>

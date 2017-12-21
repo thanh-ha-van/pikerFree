@@ -74,9 +74,6 @@ class PostPresenter {
         handler = new Handler();
     }
 
-    String getLocalImage() {
-        return mModel.getLocalImageStringFromSharePf();
-    }
 
     void addComment(String commentContent) {
 
@@ -122,18 +119,18 @@ class PostPresenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         post = dataSnapshot.getValue(Post.class);
-                        if(post.getComments() != null)
-                        comments.addAll(post.getComments());
+                        if (post.getComments() != null)
+                            comments.addAll(post.getComments());
                         mView.onGetCommentDone();
                         mView.getPostDone(post);
                         requestingUserIDs = post.getRequestingUser();
                         if (post.getOwnerId().equals(mModel.getUserIdFromSharePref())) {
                             mView.onUserIsOwner();
                             isUserOwner = true;
-                            if (post.getStatus() == Constants.STATUS_OPEN)
-                                getRequestingUserList();
-                            else getGrantedUserData();
+                            getRequestingUserList();
                         }
+                        if (post.getStatus() == Constants.STATUS_CLOSE)
+                            getGrantedUserData();
                         getOwnerData(post.getOwnerId());
                     }
 
@@ -167,6 +164,7 @@ class PostPresenter {
                             user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                             requestingUsers.add(user);
                             mView.onGetRequestingUserDone(2);
+                            mView.onUserGranted();
                         }
 
                         @Override
@@ -195,8 +193,7 @@ class PostPresenter {
             if (post.getStatus() == Constants.STATUS_OPEN) {
                 updateRequestingUserList();
                 uploadRequestNotification();
-            }
-            else
+            } else
                 mView.onShowError("This post is closed by owner so you can not send request anymore");
         }
     }
@@ -204,6 +201,7 @@ class PostPresenter {
     private void uploadRequestNotification() {
         uploadNotification(getOwnerId(), getUserId(), "requesting", post.getPostId() + "");
     }
+
     private void uploadGrantedNotification(String receiver) {
         uploadNotification(receiver, getOwnerId(), "granted", post.getPostId() + "");
     }
@@ -417,7 +415,7 @@ class PostPresenter {
 
     }
 
-    public  class DownloadImgTask extends AsyncTask<String, Void, List<Bitmap>> {
+    public class DownloadImgTask extends AsyncTask<String, Void, List<Bitmap>> {
 
         @Override
         protected void onPreExecute() {

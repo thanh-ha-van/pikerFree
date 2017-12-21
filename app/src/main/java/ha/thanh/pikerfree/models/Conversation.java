@@ -1,5 +1,7 @@
 package ha.thanh.pikerfree.models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by HaVan on 8/27/2017.
  */

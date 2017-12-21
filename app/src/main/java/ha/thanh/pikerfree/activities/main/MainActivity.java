@@ -1,5 +1,6 @@
 package ha.thanh.pikerfree.activities.main;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.adapters.ViewPagerAdapter;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
 import ha.thanh.pikerfree.fragments.home.HomeFragment;
 import ha.thanh.pikerfree.fragments.messages.MessageFragment;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     ViewPager viewPager;
     private MenuItem prevMenuItem;
     private HandlePermission handlePermission;
+    private int intentData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,12 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         viewPager.addOnPageChangeListener(onPageChangeListener);
+        Intent intent = getIntent();
+        intentData = intent.getIntExtra(Constants.POST_VIEW, 0);
         setupViewPager(viewPager);
-        viewPager.setCurrentItem(1);
+        if(intentData == 1)
+        viewPager.setCurrentItem(2);
+        else viewPager.setCurrentItem(1);
         viewPager.setOffscreenPageLimit(3);
         changeOnlineStatus();
 

@@ -18,7 +18,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "notificationDatabase";
@@ -32,6 +32,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
     private static final String KEY_TYPE = "type";
     private static final String KEY_DATA_ID = "data_id"; // relative to post id or user id
     private static final String KEY_IS_READ = "is_read"; // is read or clicked by user
+    private static final String KEY_TIME = "timestamp"; // is read or clicked by user
 
     public NotificationDataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +48,8 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
                         + KEY_MESS + " TEXT,"
                         + KEY_TYPE + " INTEGER,"
                         + KEY_DATA_ID + " TEXT,"
-                        + KEY_IS_READ + " INTEGER" + ")";
+                        + KEY_IS_READ + " INTEGER,"
+                        + KEY_TIME + " INTEGER" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -73,6 +75,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
         values.put(KEY_TYPE, mess.getType());
         values.put(KEY_DATA_ID, mess.getDataID()); // post id or user id
         values.put(KEY_IS_READ, mess.isRead()); // Contact Phone
+        values.put(KEY_TIME, mess.getTimestamp()); // Contact Phone
 
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
@@ -88,7 +91,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
                         KEY_MESS,
                         KEY_TYPE,
                         KEY_DATA_ID,
-                        KEY_IS_READ}, KEY_ID + "=?",
+                        KEY_IS_READ, KEY_TIME}, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -97,8 +100,9 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getInt(2),
-                cursor.getString (3),
-                cursor.getInt(4));
+                cursor.getString(3),
+                cursor.getInt(4),
+                cursor.getLong(5));
         // return contact
         cursor.close();
         db.close();
@@ -123,6 +127,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
                 contact.setType(cursor.getInt(2));
                 contact.setDataID(cursor.getString(3));
                 contact.setRead(cursor.getInt(4));
+                contact.setTimestamp(cursor.getLong(5));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
@@ -142,6 +147,7 @@ public class NotificationDataHelper extends SQLiteOpenHelper {
         values.put(KEY_TYPE, contact.getType());
         values.put(KEY_DATA_ID, contact.getDataID());
         values.put(KEY_IS_READ, contact.isRead());
+        values.put(KEY_TIME, contact.getTimestamp());
 
         // updating row
         return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",

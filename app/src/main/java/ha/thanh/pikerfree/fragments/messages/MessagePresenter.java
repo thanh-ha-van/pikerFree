@@ -12,6 +12,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
@@ -37,7 +38,7 @@ class MessagePresenter {
         else return conversationList = new ArrayList<>();
     }
 
-    MessagePresenter( Context context, MessageInterface.RequiredViewOps mView) {
+    MessagePresenter(Context context, MessageInterface.RequiredViewOps mView) {
         this.mView = mView;
         handler = new Handler();
         conversationList = new ArrayList<>();
@@ -69,6 +70,7 @@ class MessagePresenter {
                         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
                         };
                         conversationIdList = dataSnapshot.getValue(t);
+
                         getConversations();
                     }
 

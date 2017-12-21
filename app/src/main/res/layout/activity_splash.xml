@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -12,11 +12,20 @@
         android:layout_gravity="center"
         android:layout_marginBottom="0dp"
         android:src="@drawable/piker"
-        android:tint="@color/blue" />
+        android:tint="@color/white" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Share the world"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <View
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_width="170dp"
+        android:layout_height="170dp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/tv_network_error"
@@ -26,5 +35,23 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Version 1.1"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="From university of Information Technology"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
 
 </LinearLayout>

@@ -49,10 +49,11 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     private void initView() {
 
-
         adapter = new NotificationAdapter(this, dataList, this);
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         rvNotification.setLayoutManager(layoutManager);
         rvNotification.setAdapter(adapter);
 
@@ -69,6 +70,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
     @Override
     public void onClicked(int position) {
 
+        dataList.get(position).setRead(1);
         dataHelper.updateNotification(dataList.get(position));
         SQLiteNotification notification = dataList.get(position);
 

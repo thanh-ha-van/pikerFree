@@ -1,44 +1,49 @@
 package ha.thanh.pikerfree.customviews;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-/**
- * Created by HaVan on 6/1/2017.
- */
+import ha.thanh.pikerfree.R;
+
+
 public class CustomTextView extends android.support.v7.widget.AppCompatTextView {
 
     public CustomTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs);
+        applyAttributes(context, attrs);
     }
 
     public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
-
+        applyAttributes(context, attrs);
     }
 
     public CustomTextView(Context context) {
         super(context);
-        init(null);
     }
 
-    private void init(AttributeSet attrs) {
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
-        this.setTypeface(font);
+    private void applyAttributes(Context context, AttributeSet attrs) {
+        Typeface fontDefault = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
+        this.setTypeface(fontDefault);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CustomTextView);
+        final int N = a.getIndexCount();
+        for (int i = 0; i < N; i++) {
+            int attr = a.getIndex(i);
+            switch (attr) {
+                case R.styleable.CustomTextView_fontAssetName:
+                    try {
+                        Typeface font = Typeface.createFromAsset(getResources().getAssets(), a.getString(attr));
+                        if (font != null) {
+                            this.setTypeface(font);
+                        }
+                    } catch (RuntimeException e) {
+                        e.getMessage();
+                    }
+            }
+        }
+        a.recycle();
     }
 
-    @Override
-    public void setTypeface(Typeface tf, int style) {
-        tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
-        super.setTypeface(tf, style);
-    }
-
-    @Override
-    public void setTypeface(Typeface tf) {
-        tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
-        super.setTypeface(tf);
-    }
 }

@@ -48,5 +48,7 @@ class PostInterface {
         void onGetCommentDone();
 
         void onDeleteCommentDone();
+
+        void onUserGranted();
     }
 }

@@ -75,8 +75,8 @@ public class Utils {
 
         Calendar now = Calendar.getInstance();
 
-        final String timeFormatString = "h:mm";
-        final String dateTimeFormatString = "dd-MM-yyyy, h:mm";
+        final String timeFormatString = "h:mm a";
+        final String dateTimeFormatString = "dd-MM-yyyy, h:mm a";
         if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE)) {
             return "Today " + DateFormat.format(timeFormatString, smsTime);
         } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1) {
@@ -84,7 +84,7 @@ public class Utils {
         } else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
             return DateFormat.format(dateTimeFormatString, smsTime).toString();
         } else {
-            return DateFormat.format("dd-MM-yyyy, h:mm", smsTime).toString();
+            return DateFormat.format("dd-MM-yyyy, h:mm a", smsTime).toString();
         }
     }
 
