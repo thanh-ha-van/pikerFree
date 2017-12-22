@@ -19,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.utils.Utils;
 
@@ -83,6 +84,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.tvTitle.setText(post.getTitle());
             holder.tvDay.setText(Utils.getTimeString(post.getTimePosted()));
             holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
+            if (post.getStatus() == Constants.STATUS_CLOSE) {
+                holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.orange));
+            } else holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.green));
             FirebaseStorage
                     .getInstance()
                     .getReference()
@@ -99,7 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                                                 .placeholder(R.drawable.background)
                                                 .centerCrop()
                                                 .dontAnimate()
-                                                .override(400, 250)
+                                                .override(200, 150)
                                                 .dontTransform())
                                         .into(holder.imgPostImage);
                             } catch (IllegalArgumentException e) {

@@ -181,7 +181,8 @@ class PostPresenter {
                             user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                             requestingUsers.add(user);
                             mView.onGetRequestingUserDone(2);
-                            mView.onUserGranted();
+                            if (user.getId().equalsIgnoreCase(mModel.getUserIdFromSharePref()))
+                                mView.onUserGranted();
                         }
 
                         @Override
