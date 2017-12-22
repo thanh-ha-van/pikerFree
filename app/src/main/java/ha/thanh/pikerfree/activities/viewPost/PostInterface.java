@@ -50,5 +50,7 @@ class PostInterface {
         void onDeleteCommentDone();
 
         void onUserGranted();
+
+        void onSavedComment();
     }
 }

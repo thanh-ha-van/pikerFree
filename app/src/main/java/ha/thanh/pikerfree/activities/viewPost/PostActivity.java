@@ -46,6 +46,7 @@ import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
+import ha.thanh.pikerfree.customviews.EditCommentDialog;
 import ha.thanh.pikerfree.customviews.UserInforDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.models.Post;
@@ -60,6 +61,7 @@ public class PostActivity extends AppCompatActivity implements
         CustomYesNoDialog.YesNoInterFace,
         UserAdapter.ItemClickListener,
         OnMapReadyCallback,
+        EditCommentDialog.optionInterface,
         CommentAdapter.CommentClickListener,
         UserInforDialog.optionInterface {
 
@@ -293,7 +295,18 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onCommentEdit(int position) {
-        //TODO handle edit a comment stuffs
+        EditCommentDialog editCommentDialog = new EditCommentDialog(this, this);
+        editCommentDialog.showAlertDialog(mPresenter.getCommentForEdit(position).getComment());
+    }
+
+    @Override
+    public void onSaveEdit(String string) {
+        mPresenter.saveEditComment(string);
+    }
+
+    @Override
+    public void onSavedComment() {
+        commentAdapter.notifyDataSetChanged();
     }
 
     @Override

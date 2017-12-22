@@ -45,6 +45,7 @@ class PostPresenter {
     private Handler handler;
     boolean isUserOwner = false;
     private int postID;
+    private int currentEditingComment = -1;
 
     PostPresenter(Context context, PostInterface.RequiredViewOps mView) {
         this.mView = mView;
@@ -146,6 +147,22 @@ class PostPresenter {
 
     List<Comment> getComments() {
         return comments;
+    }
+
+    Comment getCommentForEdit(int id) {
+
+        currentEditingComment = id;
+        return comments.get(id);
+    }
+
+    void saveEditComment(String string) {
+        comments.get(currentEditingComment).setComment(string);
+
+        DatabaseReference postPref;
+        postPref = database.getReference("posts").child("" + post.getPostId()).child("comments").child(currentEditingComment + "").child("comment");
+        postPref.setValue(comments.get(currentEditingComment).getComment());
+        mView.onSavedComment();
+
     }
 
     private void getGrantedUserData() {

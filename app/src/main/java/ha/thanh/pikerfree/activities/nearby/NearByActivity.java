@@ -187,7 +187,6 @@ public class NearByActivity extends AppCompatActivity
         postAdapter = new PostAdapter(this, postList, this, getUserLat(), getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        layoutManager.setStackFromEnd(true);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(postAdapter);
 
@@ -254,7 +253,7 @@ public class NearByActivity extends AppCompatActivity
     }
 
     private void getPostByID(int i) {
-        DatabaseReference postRef;
+        final DatabaseReference postRef;
         postRef = database
                 .getReference("posts")
                 .child(i + "");
