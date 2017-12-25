@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:layout_margin="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="16dp"
+    android:padding="1dp"
     android:background="@drawable/bg_rectangle_blue_boder"
-    android:orientation="horizontal"
-    android:padding="1dp">
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/img_post_image"
-        android:background="@drawable/background"
         android:layout_width="160dp"
         android:layout_height="120dp"
+        android:background="@drawable/background"
         android:scaleType="centerCrop" />
 
     <View
@@ -22,8 +24,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="5dp">

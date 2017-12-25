@@ -182,7 +182,14 @@ class ConPresenter {
 
     private void startNewConversation() {
 
-        conversation = new Conversation(id1, id2, id1 + id2, 0);
+        conversation = new Conversation(id1,
+                id2,
+                id1 + id2,
+                0,
+                0,
+                0,
+                Utils.getCurrentTimestamp()
+        );
         conversationID = conversation.getConversationId();
         if (conversationList1 == null)
             conversationList1 = new ArrayList<>();
@@ -217,6 +224,31 @@ class ConPresenter {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                final DatabaseReference conPref;
+                conPref = database
+                        .getReference(Constants.CONVERSATION)
+                        .child(id);
+                conPref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        conversation = dataSnapshot.getValue(Conversation.class);
+                        conPref.removeEventListener(this);
+                        addListenerForNewMess(id);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+    }
+
+    private void addListenerForNewMess(final String id) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
                 DatabaseReference conPref;
                 conPref = database
                         .getReference(Constants.CONVERSATION)
@@ -240,8 +272,6 @@ class ConPresenter {
 
     void onUserAddNewMess(String text) {
         lastMessId++;
-        currentPull = lastMessId;
-        nextPull = lastMessId - 10;
         Message mess = new Message(lastMessId, mModel.getUserIdFromSharePref(), text, Utils.getCurrentTimestamp());
         uploadMess(mess);
         uploadNotification(text);
@@ -260,6 +290,8 @@ class ConPresenter {
 
     private void uploadMess(final Message message) {
         isUploadedMess = true;
+
+        // update last message
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -272,6 +304,7 @@ class ConPresenter {
             }
         });
 
+        // update last mess id
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -280,6 +313,45 @@ class ConPresenter {
                         .child(conversationID)
                         .child("lastMessId");
                 messPref.setValue(lastMessId);
+            }
+        });
+
+        /// update last current user mess.
+        if (OPUser.getId().equalsIgnoreCase(conversation.getIdUser1())) {
+            // this mean current user is User 2 and op is User 1
+            // upload last mess to user current user is upload to user 2.
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+
+                    DatabaseReference lastMess2Pref;
+                    lastMess2Pref = database.getReference(Constants.CONVERSATION)
+                            .child(conversationID)
+                            .child("lastUser2Mess");
+                    lastMess2Pref.setValue(lastMessId);
+
+                }
+            });
+        } else {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    DatabaseReference lastMess1Pref;
+                    lastMess1Pref = database.getReference(Constants.CONVERSATION)
+                            .child(conversationID)
+                            .child("lastUser1Mess");
+                    lastMess1Pref.setValue(lastMessId);
+                }
+            });
+        }
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseReference messPref;
+                messPref = database.getReference(Constants.CONVERSATION)
+                        .child(conversationID)
+                        .child("lastMessTime");
+                messPref.setValue(Utils.getCurrentTimestamp());
             }
         });
     }
@@ -301,7 +373,7 @@ class ConPresenter {
             return;
         }
         nextPull = currentPull - 10;
-        // show the last 8 messages to UI. If user pull show the next 10 mess;
+        // show the last 10 messages to UI. If user pull show the next 10 mess;
         while (currentPull > 0) {
             getMessData(currentPull, false);
             currentPull--;
@@ -316,7 +388,6 @@ class ConPresenter {
     void onPull() {
 
         if (currentPull == 0) mView.onEndOfConversation();
-        nextPull = currentPull - 10;
         // show the last 10 messages to UI. If user pull show the next 10 mess;
         while (currentPull > 0) {
             getMessData(currentPull, false);
@@ -350,6 +421,7 @@ class ConPresenter {
                     messageList.add(mess);
                 mView.onGetMessDone(mess);
                 messPref.removeEventListener(this);
+                uploadLastMessIdForCurrentUser();
             }
 
             @Override
@@ -357,6 +429,38 @@ class ConPresenter {
 
             }
         });
+    }
+
+    private void uploadLastMessIdForCurrentUser() {
+
+        /// update last current user mess.
+        if (OPUser.getId().equalsIgnoreCase(conversation.getIdUser1())) {
+            // this mean current user is User 2 and op is User 1
+            // upload last mess to user current user is upload to user 2.
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+
+                    DatabaseReference lastMess2Pref;
+                    lastMess2Pref = database.getReference(Constants.CONVERSATION)
+                            .child(conversationID)
+                            .child("lastUser2Mess");
+                    lastMess2Pref.setValue(lastMessId);
+
+                }
+            });
+        } else {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    DatabaseReference lastMess1Pref;
+                    lastMess1Pref = database.getReference(Constants.CONVERSATION)
+                            .child(conversationID)
+                            .child("lastUser1Mess");
+                    lastMess1Pref.setValue(lastMessId);
+                }
+            });
+        }
     }
 
     private void getOPData(final String UserId) {

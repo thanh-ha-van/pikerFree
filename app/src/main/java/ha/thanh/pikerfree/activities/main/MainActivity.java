@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -17,13 +18,18 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.activities.viewPost.PostActivity;
+import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.ViewPagerAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
+import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
+import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
 import ha.thanh.pikerfree.fragments.home.HomeFragment;
 import ha.thanh.pikerfree.fragments.messages.MessageFragment;
 import ha.thanh.pikerfree.fragments.news.NewsFragment;
@@ -41,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     private MenuItem prevMenuItem;
     private HandlePermission handlePermission;
     private int intentData;
+    private List<Fragment> fragments;
+    private HomeFragment homeFragment;
+    private MessageFragment messageFragment;
+    private NewsFragment newsFragment;
+    private SettingFragment settingFragment;
+    private NotificationDataHelper dataHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +63,55 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         viewPager.addOnPageChangeListener(onPageChangeListener);
+        dataHelper = new NotificationDataHelper(this);
         Intent intent = getIntent();
-        intentData = intent.getIntExtra(Constants.POST_VIEW, 0);
+        getIntentOfNotification(intent);
         setupViewPager(viewPager);
-        if(intentData == 1)
-        viewPager.setCurrentItem(2);
-        else viewPager.setCurrentItem(1);
         viewPager.setOffscreenPageLimit(3);
         changeOnlineStatus();
 
+    }
+
+    private void getIntentOfNotification(Intent intent) {
+
+        if (intent != null && intent.getExtras() != null) {
+            Bundle extras = intent.getExtras();
+            String type = extras.getString("type");
+            String dataId = extras.getString("dataID");
+            String mess = extras.getString("body");
+
+            if(type == null) return;
+            if (!type.equalsIgnoreCase("1")) {
+                SQLiteNotification sqLiteNotification = new SQLiteNotification();
+                sqLiteNotification.setType(Integer.valueOf(type));
+                sqLiteNotification.setDataID(dataId);
+                sqLiteNotification.setMess(mess);
+                sqLiteNotification.setRead(0);
+                sqLiteNotification.setTimestamp(Utils.getCurrentTimestamp());
+                dataHelper.addNotification(sqLiteNotification);
+                processFlow(sqLiteNotification);
+            }
+        }
+    }
+
+    private void processFlow(SQLiteNotification sqLiteNotification) {
+        Intent intent;
+        switch (sqLiteNotification.getType()) {
+            case 2: // got new follower
+                intent = new Intent(this, ViewProfileActivity.class);
+                intent.putExtra(Constants.USER_ID, sqLiteNotification.getDataID());
+                startActivity(intent);
+                break;
+            case 3:
+            case 4:
+            case 5:// got new post request
+                intent = new Intent(this, PostActivity.class);
+                intent.putExtra(Constants.POST_VIEW, Integer.valueOf(sqLiteNotification.getDataID()));
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
     private void changeOnlineStatus() {
@@ -119,11 +171,15 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     };
 
     private void setupViewPager(ViewPager viewPager) {
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
-        fragments.add(new NewsFragment());
-        fragments.add(new MessageFragment());
-        fragments.add(new SettingFragment());
+        fragments = new ArrayList<>();
+        homeFragment = new HomeFragment();
+        newsFragment = new NewsFragment();
+        messageFragment = new MessageFragment();
+        settingFragment = new SettingFragment();
+        fragments.add(homeFragment);
+        fragments.add(newsFragment);
+        fragments.add(messageFragment);
+        fragments.add(settingFragment);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
     }
@@ -159,5 +215,11 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         Globals.getIns().getConfig().setPermissionWriteFile(false);
         Globals.getIns().getConfig().setPermissionCamera(false);
         Globals.getIns().getConfig().setPermissionLocation(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        messageFragment = new MessageFragment();
     }
 }

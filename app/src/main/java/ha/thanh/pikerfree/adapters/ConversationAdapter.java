@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,6 +27,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.models.User;
@@ -63,11 +63,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         @BindView(R.id.op_pic)
         CircleImageView OpImage;
         @BindView(R.id.tv_last_mess)
-        TextView tvLastMess;
+        CustomTextView tvLastMess;
         @BindView(R.id.tv_time)
-        TextView tvTime;
+        CustomTextView tvTime;
         @BindView(R.id.tv_userName)
-        TextView tvOpName;
+        CustomTextView tvOpName;
+        @BindView(R.id.ic_new)
+        CustomTextView tvNewCount;
 
         MyViewHolder(View view) {
             super(view);
@@ -171,6 +173,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 }
             });
         }
+        int news = dataSet.get(position).getLastMessId() - getOwnLastMes(position);
+        if (news != 0) {
+            holder.tvNewCount.setVisibility(View.VISIBLE);
+            holder.tvNewCount.setText(news + "");
+            holder.tvLastMess.setTextColor(mConText.getResources().getColor(R.color.black));
+        }
 
     }
 
@@ -183,6 +191,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         if (dataSet.get(position).getIdUser1().equals(currentUserId))
             return dataSet.get(position).getIdUser2();
         return dataSet.get(position).getIdUser1();
+    }
+
+
+    private int getOwnLastMes(int position) {
+        if (dataSet.get(position).getIdUser1().equals(currentUserId))
+            return dataSet.get(position).getLastUser1Mess();
+        return dataSet.get(position).getLastUser2Mess();
     }
 
     public interface ItemClickListener {
