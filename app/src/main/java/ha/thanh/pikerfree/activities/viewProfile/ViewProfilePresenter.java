@@ -65,7 +65,7 @@ public class ViewProfilePresenter {
             }
             list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
             user.setRatedUsers(list);
-            double newRate = Math.round((((rate + list.size() * user.getRating()) / (list.size() + 1) * 100) * 10) / 10.0);
+            double newRate = Math.round((((rate + list.size() * user.getRating()) / (list.size() + 1) * 10) * 10) / 100.0);
             user.setRating(newRate);
             updateUser(newRate);
         } else {

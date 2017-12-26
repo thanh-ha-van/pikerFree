@@ -90,7 +90,6 @@ class MessagePresenter {
                         conversationList.add(conversation);
                         Collections.sort(conversationList);
                         mView.onGetConversationDone();
-                        conversationPref.removeEventListener(this);
                     }
 
                     @Override

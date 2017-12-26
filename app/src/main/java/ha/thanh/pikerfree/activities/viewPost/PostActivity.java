@@ -331,6 +331,11 @@ public class PostActivity extends AppCompatActivity implements
         googleMap.addMarker(new MarkerOptions().position(sydney)
                 .title("Post's location"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+        try {
+            googleMap.setMyLocationEnabled(true);
+        } catch (SecurityException e){
+            e.getMessage();
+        }
     }
 
     @Override

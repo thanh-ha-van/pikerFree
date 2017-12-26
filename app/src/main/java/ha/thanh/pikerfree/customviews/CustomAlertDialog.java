@@ -45,7 +45,11 @@ public class CustomAlertDialog {
             }
         });
 
-        alertDialog.show();
+        try {
+            alertDialog.show();
+        } catch (Exception e) {
+
+        }
 
     }
 

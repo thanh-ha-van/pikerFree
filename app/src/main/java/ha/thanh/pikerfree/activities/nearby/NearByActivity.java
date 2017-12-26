@@ -200,6 +200,11 @@ public class NearByActivity extends AppCompatActivity
         googleMap.setOnInfoWindowClickListener(this);
         LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+        try {
+            googleMap.setMyLocationEnabled(true);
+        } catch (SecurityException e){
+            e.getMessage();
+        }
     }
 
     void updateMap() {

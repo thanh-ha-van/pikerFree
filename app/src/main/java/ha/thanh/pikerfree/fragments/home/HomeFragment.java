@@ -78,9 +78,14 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onItemClick(int position) {
-        Intent in = new Intent(this.getContext(), PostActivity.class);
-        in.putExtra(Constants.POST_VIEW, homePresenter.getPostList().get(position).getPostId());
-        startActivity(in);
+        try {
+            Intent in = new Intent(this.getContext(), PostActivity.class);
+            in.putExtra(Constants.POST_VIEW, homePresenter.getPostList().get(position).getPostId());
+            startActivity(in);
+        } catch (IndexOutOfBoundsException e) {
+            e.getCause();
+        }
+
     }
 
     private void initData() {

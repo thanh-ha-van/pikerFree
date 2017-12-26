@@ -87,4 +87,9 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
         waitingDialog.hideDialog();
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
