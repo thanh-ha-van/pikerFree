@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/red"
         android:textSize="16sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView

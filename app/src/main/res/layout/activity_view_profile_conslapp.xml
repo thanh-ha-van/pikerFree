@@ -66,8 +66,7 @@
                     app:fontAssetName="Roboto-Regular.ttf"
                     android:gravity="center"
                     android:textColor="@color/text_black_3"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp"/>
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/user_phone"
@@ -77,8 +76,7 @@
                     app:fontAssetName="Roboto-Regular.ttf"
                     android:gravity="center"
                     android:textColor="@color/text_black_3"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/user_address"
@@ -110,8 +108,8 @@
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/btn_follow"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_rectangle_green_bold"
                 android:gravity="center"
@@ -123,8 +121,8 @@
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/btn_send_mess"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="20dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_rectangle_greeen_bold_right"
                 android:gravity="center"

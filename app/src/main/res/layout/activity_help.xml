@@ -50,8 +50,7 @@
             android:padding="10dp"
             android:text="@string/help1"
             android:textColor="@color/text_black_3"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"

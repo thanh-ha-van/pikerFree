@@ -3,16 +3,16 @@
     <string name="facebook_app_id">152277168741117</string>
 
     <!-- for the bottom navigation -->
-    <string name="text_summary">Home</string>
+    <string name="text_summary">Profile</string>
     <string name="text_quest">News</string>
-    <string name="text_message">Message</string>
-    <string name="text_setting">Setting</string>
+    <string name="text_message">Messages</string>
+    <string name="text_setting">Settings</string>
     <!-- for intro messages -->
     <string name="intro_1">A wise man once said that "One man's trash is another man treasure"</string>
-    <string name="intro_2">With this application, you will have a sosial network to give and to be received.</string>
+    <string name="intro_2">With this application, you will have a social network to give and to be received.</string>
     <string name="intro_3">Just tap and add some description and give your unused item to someone whom really in need.</string>
     <string name="intro_4">Just tap and seek for want you need that available from good people around you.</string>
-    <string name="intro_5">PikerFree, free and always</string>
+    <string name="intro_5">PikerFree, sharing is caring.</string>
     <string name="start">Start</string>
 
     <!-- dummy string. must be removed later -->

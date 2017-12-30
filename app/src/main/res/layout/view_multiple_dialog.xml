@@ -18,8 +18,7 @@
         android:padding="8dp"
         android:textAllCaps="true"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/btn_view_profile"

@@ -101,7 +101,6 @@
                 android:text="Change Images"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:tint="@color/white" />
 
             <android.support.v7.widget.RecyclerView
@@ -238,8 +237,7 @@
                 android:text="@string/save"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

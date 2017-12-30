@@ -198,8 +198,7 @@
             android:text="@string/chat"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_send_request"
@@ -213,8 +212,7 @@
             android:text="@string/send_request"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="@color/whiteShade"
         android:orientation="horizontal">
 
@@ -17,7 +18,7 @@
             android:id="@+id/profile_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/ic_user"
             app:civ_border_color="@color/colorPrimary"
@@ -33,7 +34,6 @@
             android:paddingStart="20dp"
             android:textColor="@color/text_black_3"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:fontAssetName="Roboto-Regular.ttf" />
     </LinearLayout>
 
@@ -42,13 +42,14 @@
         android:layout_height="wrap_content"
         android:background="@color/whiteShade"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingTop="10dp">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_new_post"
             android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="20dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
             android:layout_weight="1"
             android:background="@drawable/bg_rectangle_green_bold"
             android:gravity="center"
@@ -60,8 +61,8 @@
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_edit_profile"
             android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_weight="1"
             android:background="@drawable/bg_rectangle_greeen_bold_right"
             android:gravity="center"
