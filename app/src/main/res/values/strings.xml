@@ -30,7 +30,7 @@
     <string name="dont_have_account">Don\'t have an account? just sign up</string>
     <string name="already_have_an_account">Already have an account? just log in</string>
     <string name="forgot_password">Forget password</string>
-    <string name="reset_pass">Reset email</string>
+    <string name="reset_pass">Reset password</string>
     <string name="save">Save</string>
 
     <!-- for status of post -->

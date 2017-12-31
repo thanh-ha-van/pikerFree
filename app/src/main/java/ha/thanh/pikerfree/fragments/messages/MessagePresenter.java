@@ -88,7 +88,7 @@ class MessagePresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Conversation conversation = dataSnapshot.getValue(Conversation.class);
                         conversationList.add(conversation);
-                        Collections.sort(conversationList);
+                        //Collections.sort(conversationList);
                         mView.onGetConversationDone();
                     }
 

@@ -202,7 +202,7 @@ public class NearByActivity extends AppCompatActivity
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
         try {
             googleMap.setMyLocationEnabled(true);
-        } catch (SecurityException e){
+        } catch (SecurityException e) {
             e.getMessage();
         }
     }
@@ -211,13 +211,17 @@ public class NearByActivity extends AppCompatActivity
         googleMap.clear();
         for (Post post : postList
                 ) {
-            CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this, post);
-            googleMap.setInfoWindowAdapter(adapter);
-            LatLng sydney = new LatLng(post.getLocation().latitude, post.getLocation().longitude);
-            googleMap.addMarker(new MarkerOptions().position(sydney)
-                    .title(post.getTitle())
-                    .snippet(post.getPostId() + "")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            try {
+                CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this, post);
+                googleMap.setInfoWindowAdapter(adapter);
+                LatLng sydney = new LatLng(post.getLocation().latitude, post.getLocation().longitude);
+                googleMap.addMarker(new MarkerOptions().position(sydney)
+                        .title(post.getTitle())
+                        .snippet(post.getPostId() + "")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            } catch (Exception e) {
+                e.toString();
+            }
         }
     }
 

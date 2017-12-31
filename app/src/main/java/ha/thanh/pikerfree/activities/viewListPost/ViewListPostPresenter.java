@@ -99,8 +99,7 @@ class ViewListPostPresenter {
         } else if (currentCategory == Constants.CATE_RECENT) {
             // search recent posts
             searchRecent();
-        }
-        else if (currentCategory == Constants.CATE_LOCAL) {
+        } else if (currentCategory == Constants.CATE_LOCAL) {
             getLocal();
         }
     }
@@ -159,8 +158,10 @@ class ViewListPostPresenter {
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.add(dataSnapshot.getValue(Post.class));
-                mView.onGetPostDone();
+                if (dataSnapshot.exists()) {
+                    postList.add(dataSnapshot.getValue(Post.class));
+                    mView.onGetPostDone();
+                }
             }
 
             @Override
