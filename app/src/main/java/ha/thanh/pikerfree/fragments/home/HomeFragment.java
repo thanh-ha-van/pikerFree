@@ -70,8 +70,6 @@ public class HomeFragment extends Fragment
                 homePresenter.getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
 

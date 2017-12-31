@@ -235,9 +235,13 @@ public class NearByActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(this, PostActivity.class);
-        intent.putExtra(Constants.POST_VIEW, Integer.valueOf(postList.get(position).getPostId()));
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, PostActivity.class);
+            intent.putExtra(Constants.POST_VIEW, Integer.valueOf(postList.get(position).getPostId()));
+            startActivity(intent);
+        }catch (Exception e){
+            alertDialog.showAlertDialog("Error", "Can not complete your action.");
+        }
     }
 
     private void setTimeOut() {

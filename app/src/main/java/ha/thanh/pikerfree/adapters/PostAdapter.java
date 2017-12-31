@@ -28,7 +28,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Post;
-import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {

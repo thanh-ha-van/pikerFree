@@ -36,12 +36,18 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         CustomTextView tvStatus = (CustomTextView) view.findViewById(R.id.tv_status);
 
         tvTitle.setText(marker.getTitle());
-        tvTime.setText(Utils.getTimeString(post.getTimePosted()));
+        try {
+            tvTime.setText(Utils.getTimeString(post.getTimePosted()));
+        }catch (Exception e){
+            tvTime.setText("Error");
+        }
+
         tvStatus.setText(getStatus());
         return view;
     }
 
     private String getStatus() {
+        if(post!=null)
         if (post.getStatus() == 1)
             return "Opening";
         return "Closed";
