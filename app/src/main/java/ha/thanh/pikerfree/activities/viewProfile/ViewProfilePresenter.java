@@ -202,8 +202,10 @@ public class ViewProfilePresenter {
                 postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        postList.add(dataSnapshot.getValue(Post.class));
-                        mView.onGetUserPostsDone();
+                        if (dataSnapshot.exists()) {
+                            postList.add(dataSnapshot.getValue(Post.class));
+                            mView.onGetUserPostsDone();
+                        }
                     }
 
                     @Override

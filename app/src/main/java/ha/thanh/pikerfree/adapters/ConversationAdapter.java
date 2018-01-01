@@ -98,30 +98,39 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         final String user2Id = getOpString(position);
         // get op images
-        FirebaseStorage
-                .getInstance()
-                .getReference()
-                .child("userImages")
-                .child(user2Id + ".jpg").getDownloadUrl()
-                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        try {
-                            Glide.with(mConText)
-                                    .load(uri)
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.loading)
-                                            .centerCrop()
-                                            .dontAnimate()
-                                            .override(100, 100)
-                                            .dontTransform())
-                                    .into(holder.OpImage);
-                        } catch (IllegalArgumentException e) {
-                            e.getMessage();
-                        }
-                    }
-                });
+        final DatabaseReference userPref;
+        userPref = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(user2Id).child("avatarLink");
+        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String link = dataSnapshot.getValue(String.class);
+                FirebaseStorage
+                        .getInstance()
+                        .getReference()
+                        .child(link).getDownloadUrl()
+                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(mConText)
+                                        .load(uri)
+                                        .apply(new RequestOptions()
+                                                .placeholder(R.drawable.loading)
+                                                .centerCrop()
+                                                .dontAnimate()
+                                                .override(100, 100)
+                                                .dontTransform())
+                                        .into(holder.OpImage);
+                            }
+                        });
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         // Get OP name
         handler.post(new Runnable() {
             @Override

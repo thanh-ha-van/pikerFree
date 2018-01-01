@@ -239,7 +239,7 @@ public class NearByActivity extends AppCompatActivity
             Intent intent = new Intent(this, PostActivity.class);
             intent.putExtra(Constants.POST_VIEW, Integer.valueOf(postList.get(position).getPostId()));
             startActivity(intent);
-        }catch (Exception e){
+        } catch (Exception e) {
             alertDialog.showAlertDialog("Error", "Can not complete your action.");
         }
     }
@@ -273,10 +273,12 @@ public class NearByActivity extends AppCompatActivity
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.add(dataSnapshot.getValue(Post.class));
-                postAdapter.notifyDataSetChanged();
-                updateMap();
-                onHasResult();
+                if (dataSnapshot.exists()) {
+                    postList.add(dataSnapshot.getValue(Post.class));
+                    postAdapter.notifyDataSetChanged();
+                    updateMap();
+                    onHasResult();
+                }
             }
 
             @Override

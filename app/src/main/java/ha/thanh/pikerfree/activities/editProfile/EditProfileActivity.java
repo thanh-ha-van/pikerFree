@@ -112,15 +112,19 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         etUserPhone.setText(userPhone);
         File imgFile = new File(filepath);
         if (imgFile.exists()) {
-            Glide.with(this)
-                    .load(imgFile)
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.loading)
-                            .centerCrop()
-                            .dontAnimate()
-                            .override(160, 160)
-                            .dontTransform())
-                    .into(imageView);
+            try {
+                Glide.with(this)
+                        .load(imgFile)
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.loading)
+                                .centerCrop()
+                                .dontAnimate()
+                                .override(160, 160)
+                                .dontTransform())
+                        .into(imageView);
+            } catch (Exception e) {
+
+            }
         }
     }
 }

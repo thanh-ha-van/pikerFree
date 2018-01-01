@@ -283,7 +283,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         postTitlePref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists()) return;
+                if (!dataSnapshot.exists()) return;
                 String string = dataSnapshot.getValue(String.class);
                 if (string.toLowerCase().contains(key.toLowerCase())) {
                     getPostByID(i);
@@ -305,9 +305,11 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.add(dataSnapshot.getValue(Post.class));
-                postAdapter.notifyDataSetChanged();
-                onHasResult();
+                if (dataSnapshot.exists()) {
+                    postList.add(dataSnapshot.getValue(Post.class));
+                    postAdapter.notifyDataSetChanged();
+                    onHasResult();
+                }
             }
 
             @Override
