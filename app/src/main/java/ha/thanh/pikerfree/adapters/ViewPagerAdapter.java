@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> dataSet;
 

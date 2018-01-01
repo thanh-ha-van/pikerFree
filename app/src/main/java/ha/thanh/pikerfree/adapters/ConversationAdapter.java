@@ -54,8 +54,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         handler = new Handler();
     }
 
-    // todo get OP Image, name from op id
-    // todo get LastMess data from last mess id
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.op_status)
@@ -105,25 +103,31 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         userPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String link = dataSnapshot.getValue(String.class);
-                FirebaseStorage
-                        .getInstance()
-                        .getReference()
-                        .child(link).getDownloadUrl()
-                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(mConText)
-                                        .load(uri)
-                                        .apply(new RequestOptions()
-                                                .placeholder(R.drawable.loading)
-                                                .centerCrop()
-                                                .dontAnimate()
-                                                .override(100, 100)
-                                                .dontTransform())
-                                        .into(holder.OpImage);
-                            }
-                        });
+                if (dataSnapshot.exists()) {
+                    String link = dataSnapshot.getValue(String.class);
+                    FirebaseStorage
+                            .getInstance()
+                            .getReference()
+                            .child(link).getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    try {
+                                        Glide.with(mConText)
+                                                .load(uri)
+                                                .apply(new RequestOptions()
+                                                        .placeholder(R.drawable.loading)
+                                                        .centerCrop()
+                                                        .dontAnimate()
+                                                        .override(100, 100)
+                                                        .dontTransform())
+                                                .into(holder.OpImage);
+                                    } catch (Exception e) {
+                                    }
+                                }
+                            });
+                }
+
             }
 
             @Override
@@ -142,12 +146,16 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        holder.tvOpName.setText(user.getName());
-                        user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
-                        if (user.isOnline())
-                            holder.opStatus.setImageResource(R.drawable.bg_circle_check);
-                        else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
+                        if (dataSnapshot.exists()) {
+                            User user = dataSnapshot.getValue(User.class);
+                            holder.tvOpName.setText(user.getName());
+                            user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
+                            if (user.isOnline())
+                                holder.opStatus.setImageResource(R.drawable.bg_circle_check);
+                            else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
+                        } else {
+                            holder.tvOpName.setText("Error");
+                        }
                     }
 
                     @Override
@@ -171,9 +179,14 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             messPref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Message mess = dataSnapshot.getValue(Message.class);
-                    holder.tvLastMess.setText(mess.getText());
-                    holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
+                    if (dataSnapshot.exists()) {
+                        Message mess = dataSnapshot.getValue(Message.class);
+                        holder.tvLastMess.setText(mess.getText());
+                        holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
+                    } else {
+                        holder.tvLastMess.setText("Error");
+                        holder.tvTime.setText("Error");
+                    }
                 }
 
                 @Override
@@ -201,7 +214,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             return dataSet.get(position).getIdUser2();
         return dataSet.get(position).getIdUser1();
     }
-
 
     private int getOwnLastMes(int position) {
         if (dataSet.get(position).getIdUser1().equals(currentUserId))

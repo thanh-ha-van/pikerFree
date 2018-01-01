@@ -89,7 +89,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
                             Glide.with(context)
                                     .load(uri)
                                     .apply(new RequestOptions()
-                                            .error(R.drawable.action_button_bg)
+                                            .error(R.drawable.ic_user)
                                             .centerCrop()
                                             .dontAnimate()
                                             .override(200, 200)

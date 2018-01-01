@@ -97,7 +97,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
 
         final String itemUser = dataSet.get(position).getIdUser();
 
-
         final DatabaseReference userPref;
         userPref = FirebaseDatabase.getInstance()
                 .getReference("users")
@@ -105,25 +104,27 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         userPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String link = dataSnapshot.getValue(String.class);
-                FirebaseStorage
-                        .getInstance()
-                        .getReference()
-                        .child(link).getDownloadUrl()
-                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(mConText)
-                                        .load(uri)
-                                        .apply(new RequestOptions()
-                                                .placeholder(R.drawable.loading)
-                                                .centerCrop()
-                                                .dontAnimate()
-                                                .override(100, 100)
-                                                .dontTransform())
-                                        .into(holder.OpImage);
-                            }
-                        });
+                if(dataSnapshot.exists()) {
+                    String link = dataSnapshot.getValue(String.class);
+                    FirebaseStorage
+                            .getInstance()
+                            .getReference()
+                            .child(link).getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(mConText)
+                                            .load(uri)
+                                            .apply(new RequestOptions()
+                                                    .placeholder(R.drawable.ic_user)
+                                                    .centerCrop()
+                                                    .dontAnimate()
+                                                    .override(100, 100)
+                                                    .dontTransform())
+                                            .into(holder.OpImage);
+                                }
+                            });
+                }
             }
 
             @Override

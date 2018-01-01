@@ -91,7 +91,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         try {
-
             Post post = dataSet.get(position);
             holder.tvDistance.setText(Utils.getDistance(lat, lng, post.getLocation().latitude, post.getLocation().longitude));
             holder.tvTitle.setText(post.getTitle());
@@ -101,30 +100,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             if (post.getStatus() == Constants.STATUS_CLOSE) {
                 holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.orange));
             } else holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.green));
-            FirebaseStorage
-                    .getInstance()
-                    .getReference()
-                    .child("postImages")
-                    .child(post.getPostId() + "")
-                    .child("image_no_1.jpg").getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            try {
-                                Glide.with(mConText)
-                                        .load(uri)
-                                        .apply(new RequestOptions()
-                                                .placeholder(R.drawable.background)
-                                                .centerCrop()
-                                                .dontAnimate()
-                                                .override(800, 600)
-                                                .dontTransform())
-                                        .into(holder.imgPostImage);
-                            } catch (IllegalArgumentException e) {
-                                e.getMessage();
-                            }
-                        }
-                    });
+
+            final DatabaseReference userImagePref;
+            userImagePref = FirebaseDatabase.getInstance()
+                    .getReference("users")
+                    .child(post.getOwnerId()).child("avatarLink");
+            userImagePref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String link = dataSnapshot.getValue(String.class);
+                    FirebaseStorage
+                            .getInstance()
+                            .getReference()
+                            .child(link).getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(mConText)
+                                            .load(uri)
+                                            .apply(new RequestOptions()
+                                                    .placeholder(R.drawable.ic_user)
+                                                    .centerCrop()
+                                                    .dontAnimate()
+                                                    .override(100, 100)
+                                                    .dontTransform())
+                                            .into(holder.ownerPic);
+                                }
+                            });
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             final DatabaseReference userPref;
             userPref = FirebaseDatabase.getInstance()
                     .getReference("users")
@@ -142,7 +151,29 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
                 }
             });
+
             getUserImageLink("userImages/" + post.getOwnerId() + ".jpg", holder.ownerPic);
+
+            FirebaseStorage.getInstance()
+                    .getReference()
+                    .child("postImages")
+                    .child(post.getPostId() + "")
+                    .child("image_no_1.jpg")
+                    .getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(mConText)
+                                    .load(uri)
+                                    .apply(new RequestOptions()
+                                            .placeholder(R.drawable.background)
+                                            .centerCrop()
+                                            .dontAnimate()
+                                            .override(800, 600)
+                                            .dontTransform())
+                                    .into(holder.imgPostImage);
+                        }
+                    });
 
         } catch (Exception e) {
             e.getMessage();
