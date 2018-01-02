@@ -86,10 +86,11 @@ class MessagePresenter {
                 conversationPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
                         Conversation conversation = dataSnapshot.getValue(Conversation.class);
                         conversationList.add(conversation);
                         //Collections.sort(conversationList);
-                        mView.onGetConversationDone();
+                        mView.onGetConversationDone();}
                     }
 
                     @Override

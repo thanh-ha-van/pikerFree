@@ -67,14 +67,14 @@ class EditProfilePresenter {
         this.isImagesChanged = true;
     }
 
-
     void getLocalData() {
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                mView.onLocalDataReady(user.getName(), user.getAddress(), user.getPhoneNumber(), mModel.getLocalImageStringFromSharePf());
+                mView.onUserDataReady(user.getName(), user.getAddress(), user.getPhoneNumber());
+                getUserImageLink(user.getAvatarLink());
             }
 
             @Override
@@ -160,13 +160,27 @@ class EditProfilePresenter {
         dataUser.setName(userName);
     }
 
+    private void getUserImageLink(String link) {
+
+        StorageReference mStorageRef;
+        mStorageRef = FirebaseStorage.getInstance()
+                .getReference().child(link);
+        mStorageRef.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mView.getOwnerImageDone(uri);
+                    }
+                });
+    }
+
     void saveLocal(Bitmap bitmapImage) {
 
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
 
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
 
-        File myPath = new File(directory, userId+ "profile.jpg");
+        File myPath = new File(directory, userId + "profile.jpg");
 
         FileOutputStream fos = null;
         try {
@@ -210,7 +224,6 @@ class EditProfilePresenter {
                                 public void onFailure(@NonNull Exception exception) {
                                     isUploadDone = true;
                                     checkIfCanHideDialog();
-                                    Log.e("editProfile", " upload file to server get error");
                                 }
                             });
                 }

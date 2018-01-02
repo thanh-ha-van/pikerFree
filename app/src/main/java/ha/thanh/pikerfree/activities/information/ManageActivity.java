@@ -15,6 +15,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -82,7 +84,12 @@ public class ManageActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            FirebaseDatabase.getInstance().getReference()
+                                    .child("users")
+                                    .child(user.getUid())
+                                    .removeValue();
                             showSuccess();
+
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

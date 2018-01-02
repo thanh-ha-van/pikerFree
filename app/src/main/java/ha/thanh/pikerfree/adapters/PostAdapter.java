@@ -116,15 +116,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                             .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Glide.with(mConText)
-                                            .load(uri)
-                                            .apply(new RequestOptions()
-                                                    .placeholder(R.drawable.ic_user)
-                                                    .centerCrop()
-                                                    .dontAnimate()
-                                                    .override(100, 100)
-                                                    .dontTransform())
-                                            .into(holder.ownerPic);
+                                    try {
+                                        Glide.with(mConText)
+                                                .load(uri)
+                                                .apply(new RequestOptions()
+                                                        .placeholder(R.drawable.ic_user)
+                                                        .centerCrop()
+                                                        .dontAnimate()
+                                                        .override(100, 100)
+                                                        .dontTransform())
+                                                .into(holder.ownerPic);
+                                    } catch (Exception e) {
+                                    }
                                 }
                             });
                 }
@@ -153,7 +156,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             });
 
             getUserImageLink("userImages/" + post.getOwnerId() + ".jpg", holder.ownerPic);
-
             FirebaseStorage.getInstance()
                     .getReference()
                     .child("postImages")

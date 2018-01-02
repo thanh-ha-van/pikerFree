@@ -53,6 +53,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         profilePresenter.addTextChangeListener(etUserName, etUserAddress, etUserPhone);
         profilePresenter.getLocalData();
         waitingDialog = new WaitingDialog(this);
+        waitingDialog.showDialog();
     }
 
     @OnClick(R.id.btn_change_image)
@@ -106,25 +107,28 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     }
 
     @Override
-    public void onLocalDataReady(String name, String address, String userPhone, String filepath) {
+    public void onUserDataReady(String name, String address, String userPhone) {
+
         etUserName.setText(name);
         etUserAddress.setText(address);
         etUserPhone.setText(userPhone);
-        File imgFile = new File(filepath);
-        if (imgFile.exists()) {
-            try {
-                Glide.with(this)
-                        .load(imgFile)
-                        .apply(new RequestOptions()
-                                .placeholder(R.drawable.loading)
-                                .centerCrop()
-                                .dontAnimate()
-                                .override(160, 160)
-                                .dontTransform())
-                        .into(imageView);
-            } catch (Exception e) {
+    }
 
-            }
+    @Override
+    public void getOwnerImageDone(Uri uri) {
+        waitingDialog.hideDialog();
+        try {
+            Glide.with(this)
+                    .load(uri)
+                    .apply(new RequestOptions()
+                            .error(R.drawable.ic_user)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(150, 150)
+                            .dontTransform())
+                    .into(imageView);
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
         }
     }
 }
