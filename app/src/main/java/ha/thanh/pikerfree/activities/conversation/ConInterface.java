@@ -20,6 +20,8 @@ public class ConInterface {
         void onEndOfConversation();
 
         void onPullDone();
+
+        void onOpNotFound();
     }
 
 }

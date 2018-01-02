@@ -12,12 +12,11 @@ import ha.thanh.pikerfree.constants.Globals;
 
 class SplashModel {
 
-    private Context context;
     private SharedPreferences sPref;
     private SplashInterface.RequiredPresenterOps mPresenter;
 
     SplashModel(Context context, SplashInterface.RequiredPresenterOps mPresenter) {
-        this.context = context;
+
         this.mPresenter = mPresenter;
         sPref = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
         loadAllConfig();
@@ -29,7 +28,7 @@ class SplashModel {
         mPresenter.loadConfigDone();
     }
 
-    public void setIsFirstRun() {
+    void setIsFirstRun() {
         SharedPreferences.Editor editor = sPref.edit();
         editor.putBoolean(Constants.IS_FIRST_RUN, false);
         editor.apply();

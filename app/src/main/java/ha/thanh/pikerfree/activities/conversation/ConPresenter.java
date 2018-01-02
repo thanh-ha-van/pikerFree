@@ -115,7 +115,6 @@ class ConPresenter {
 
                         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
                         };
-
                         conversationList2 = dataSnapshot.getValue(t);
                     }
 
@@ -231,9 +230,11 @@ class ConPresenter {
                 conPref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        conversation = dataSnapshot.getValue(Conversation.class);
-                        conPref.removeEventListener(this);
-                        addListenerForNewMess(id);
+                        if (dataSnapshot.exists()) {
+                            conversation = dataSnapshot.getValue(Conversation.class);
+                            conPref.removeEventListener(this);
+                            addListenerForNewMess(id);
+                        }
                     }
 
                     @Override
@@ -474,10 +475,14 @@ class ConPresenter {
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        OPUser = dataSnapshot.getValue(User.class);
-                        OPUser.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
-                        mView.getOPDone(OPUser);
-                        getUserImageLink(OPUser.getAvatarLink());
+                        if (dataSnapshot.exists()) {
+                            OPUser = dataSnapshot.getValue(User.class);
+                            OPUser.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
+                            mView.getOPDone(OPUser);
+                            getUserImageLink(OPUser.getAvatarLink());
+                        } else {
+                            mView.onOpNotFound();
+                        }
                     }
 
                     @Override

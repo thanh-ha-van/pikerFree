@@ -81,10 +81,20 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
 
     @OnClick(R.id.tv_op_name)
     public void goToProfile() {
-        Intent intent = new Intent(this, ViewProfileActivity.class);
-        intent.putExtra(Constants.USER_ID, presenter.getOpId());
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, ViewProfileActivity.class);
+            intent.putExtra(Constants.USER_ID, presenter.getOpId());
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    @OnClick(R.id.op_pic)
+    public void goProfile() {
+        goToProfile();
+    }
+
 
     @OnClick(R.id.ic_back)
     public void getBack() {
@@ -124,6 +134,12 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
             opStatus.setImageResource(R.drawable.bg_circle_check);
         else opStatus.setImageResource(R.drawable.bg_circle_gray);
 
+    }
+
+    @Override
+    public void onOpNotFound() {
+        OPName.setText("Deleted User");
+        opStatus.setImageResource(R.drawable.bg_circle_gray);
     }
 
     @Override
