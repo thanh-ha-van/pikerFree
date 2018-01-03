@@ -17,7 +17,6 @@ import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
-import ha.thanh.pikerfree.dataHelper.SQLiteMess;
 
 
 class MessagePresenter {

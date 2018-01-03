@@ -74,14 +74,18 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
             case 2: // got new follower
                 intent = new Intent(this, ViewProfileActivity.class);
                 intent.putExtra(Constants.USER_ID, sqLiteNotification.getDataID());
+                intent.putExtra(Constants.IS_FIRST_RUN, 1);
                 startActivity(intent);
+                finish();
                 break;
             case 3:
             case 4:
             case 5:// got new post request
                 intent = new Intent(this, PostActivity.class);
                 intent.putExtra(Constants.POST_VIEW, Integer.valueOf(sqLiteNotification.getDataID()));
+                intent.putExtra(Constants.IS_FIRST_RUN, 1);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 startMain();

@@ -22,6 +22,10 @@ public class ConInterface {
         void onPullDone();
 
         void onOpNotFound();
+
+        void onDeleteDone();
+
+        void onDeleteFailed();
     }
 
 }

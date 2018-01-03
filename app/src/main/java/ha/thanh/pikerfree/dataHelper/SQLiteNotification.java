@@ -7,12 +7,19 @@ package ha.thanh.pikerfree.dataHelper;
 public class SQLiteNotification {
 
     // use this when need to push notification to user when they have new follower and they are offline.
+    // id cua notification
     private int id;
+    // noi dung cua notification
     private String mess;
+    // type1: mess, type2 = follower, type3= request, type4 = new post, type5 = granted
     private int type;
+    // data id la postId hoac User id
     private String dataID;
+    // is read la trang thai cua notification voi user. user da doc notifcation hay chua
     private int isRead;
+    // k them cai isSelected vao cung dc
     private  boolean isSelected = false;
+    // thoi gian cua notification
     private long timestamp;
 
     SQLiteNotification(int id, String mess, int type, String dataID, int isRead, long timestamp) {

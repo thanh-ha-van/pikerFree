@@ -55,6 +55,13 @@
             android:textSize="18sp"
             app:fontAssetName="Roboto-Regular.ttf" />
 
+        <ImageView
+            android:id="@+id/delete_con"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_delete_button"
+            android:tint="@color/white" />
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout

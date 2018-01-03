@@ -42,6 +42,7 @@ class ConPresenter {
     private Handler handler;
     private FirebaseDatabase database;
     private User OPUser;
+    private boolean deleteOne = false, deleteOp = false;
 
     String getOpId() {
         return OPUser.getId();
@@ -98,8 +99,8 @@ class ConPresenter {
 
                         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
                         };
-
-                        conversationList1 = dataSnapshot.getValue(t);
+                        if (dataSnapshot.getValue(t) != null)
+                            conversationList1 = dataSnapshot.getValue(t);
                     }
 
                     @Override
@@ -115,7 +116,8 @@ class ConPresenter {
 
                         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
                         };
-                        conversationList2 = dataSnapshot.getValue(t);
+                        if (dataSnapshot.getValue(t) != null)
+                            conversationList2 = dataSnapshot.getValue(t);
                     }
 
                     @Override
@@ -167,8 +169,10 @@ class ConPresenter {
         lassMessIdPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                lastMessId = dataSnapshot.getValue(Integer.class);
-                lassMessIdPref.removeEventListener(this);
+                if (dataSnapshot.exists()) {
+                    lastMessId = dataSnapshot.getValue(Integer.class);
+                    lassMessIdPref.removeEventListener(this);
+                }
 
             }
 
@@ -177,6 +181,92 @@ class ConPresenter {
 
             }
         });
+    }
+
+    void deleteConversation() {
+
+        final List<String> conversationIdList = new ArrayList<>();
+        final DatabaseReference userPref;
+        userPref = database
+                .getReference("users")
+                .child(userId)
+                .child(Constants.MESS_STRING);
+        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
+                };
+                if (dataSnapshot.getValue(t) != null)
+                    conversationIdList.addAll(dataSnapshot.getValue(t));
+                userPref.removeEventListener(this);
+                reUpdate(conversationIdList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final List<String> conversationIdList2 = new ArrayList<>();
+        final DatabaseReference user2Pref;
+        user2Pref = database
+                .getReference("users")
+                .child(OPUser.getId())
+                .child(Constants.MESS_STRING);
+        user2Pref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
+                };
+                if (dataSnapshot.getValue(t) != null)
+                    conversationIdList2.addAll(dataSnapshot.getValue(t));
+                userPref.removeEventListener(this);
+                reUpdateOp(conversationIdList2);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void reUpdate(List<String> conversationIdList) {
+        try {
+            conversationIdList.remove(conversationID);
+            DatabaseReference postPref;
+            postPref = database.getReference("users").child(userId).child(Constants.MESS_STRING);
+            postPref.setValue(conversationIdList);
+
+            DatabaseReference conPref;
+            conPref = database.getReference(Constants.CONVERSATION).child(conversationID);
+            conPref.removeValue();
+            deleteOne = true;
+            checkIfDeleteDone();
+        } catch (Exception e) {
+            mView.onDeleteFailed();
+        }
+    }
+
+    private void reUpdateOp(List<String> conversationIdList) {
+        try {
+            conversationIdList.remove(conversationID);
+            DatabaseReference postPref;
+            postPref = database.getReference("users").child(OPUser.getId()).child(Constants.MESS_STRING);
+            postPref.setValue(conversationIdList);
+            deleteOp = true;
+            checkIfDeleteDone();
+        } catch (Exception e) {
+            mView.onDeleteFailed();
+        }
+    }
+
+    private void checkIfDeleteDone() {
+
+        if (deleteOp && deleteOne) mView.onDeleteDone();
     }
 
     private void startNewConversation() {
@@ -257,9 +347,11 @@ class ConPresenter {
                 conPref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        lastMessId = dataSnapshot.getValue(Integer.class);
-                        showData();
-                        isFirstTime = false;
+                        if (dataSnapshot.exists()) {
+                            lastMessId = dataSnapshot.getValue(Integer.class);
+                            showData();
+                            isFirstTime = false;
+                        }
                     }
 
                     @Override

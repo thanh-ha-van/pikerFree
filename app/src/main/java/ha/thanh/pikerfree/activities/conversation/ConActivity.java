@@ -21,8 +21,10 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.MessageAdapter;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
+import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.models.User;
 
@@ -90,11 +92,27 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         }
     }
 
-    @OnClick(R.id.op_pic)
+    @OnClick(R.id.img_op)
     public void goProfile() {
         goToProfile();
     }
 
+    @OnClick(R.id.delete_con)
+    public void deleteConversation() {
+        CustomYesNoDialog customYesNoDialog = new CustomYesNoDialog(this, new CustomYesNoDialog.YesNoInterFace() {
+            @Override
+            public void onYesClicked() {
+
+                presenter.deleteConversation();
+            }
+
+            @Override
+            public void onNoClicked() {
+
+            }
+        });
+        customYesNoDialog.showAlertDialog("Confirm", "Are you sure that you want to delete this conversation?");
+    }
 
     @OnClick(R.id.ic_back)
     public void getBack() {
@@ -125,6 +143,16 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         }
         swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(this, "No more messages", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeleteDone() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onDeleteFailed() {
+        Toast.makeText(this, "Error deleteing this conversation", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.models.Messages;
 
 
 public class Message {
+
     private int id;
     private String author;
     private String text;

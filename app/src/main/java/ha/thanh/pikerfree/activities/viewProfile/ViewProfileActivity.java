@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.conversation.ConActivity;
+import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
@@ -52,6 +53,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     CustomTextView tvRateNum;
     private ViewProfilePresenter presenter;
     PostAdapter adapter;
+    int fromSplast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +81,15 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     private void initData() {
         Intent intent = getIntent();
         String userId = intent.getStringExtra(Constants.USER_ID);
+        fromSplast = intent.getIntExtra(Constants.IS_FIRST_RUN, 0);
+
         presenter = new ViewProfilePresenter(this, this, userId);
     }
 
     @OnClick(R.id.btn_follow)
     public void followUser() {
-        if(followBtn.getText().toString().equalsIgnoreCase("follow"))
-        presenter.followUser();
+        if (followBtn.getText().toString().equalsIgnoreCase("follow"))
+            presenter.followUser();
         else presenter.unfollowUser();
     }
 
@@ -119,6 +123,20 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     }
 
     @Override
+    public void onBackPressed() {
+        if (fromSplast == 1) {
+            startMain();
+        }
+        super.onBackPressed();
+    }
+
+    public void startMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     public void onGetUserDataDone(User user) {
         tvUserAddress.setText(user.getAddress());
         tvUserName.setText(user.getName());
@@ -140,7 +158,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
                             .override(150, 150)
                             .dontTransform())
                     .into(userImage);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             e.getMessage();
         }
     }
