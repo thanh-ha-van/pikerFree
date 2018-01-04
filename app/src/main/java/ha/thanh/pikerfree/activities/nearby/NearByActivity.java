@@ -175,9 +175,6 @@ public class NearByActivity extends AppCompatActivity
 
     @OnClick(R.id.ic_back)
     public void goback() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constants.DISTANCE, distance);
-        editor.apply();
         onBackPressed();
     }
 
@@ -191,6 +188,14 @@ public class NearByActivity extends AppCompatActivity
         rvPost.setAdapter(postAdapter);
 
         postAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(Constants.DISTANCE, distance);
+        editor.commit();
+        super.onBackPressed();
     }
 
     @Override

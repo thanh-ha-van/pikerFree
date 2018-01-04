@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -92,6 +93,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
                 break;
         }
     }
+
     public void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -105,6 +107,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
                 if (statusLoadLanguage == LOAD_SUCCESS) {
                     getIntentOfNotification(intent);
                 } else if (statusLoadLanguage == LOAD_ERROR) {
+                    tvNetworkError.setVisibility(View.VISIBLE);
                     tvNetworkError.setText(getResources().getString(R.string.turn_network_on));
                 } else {
                     handler.postDelayed(this, 100);
@@ -129,6 +132,11 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
+    }
+
+    @Override
+    public void onAutoLoginFail() {
+        startLoginActivity();
     }
 
     @Override

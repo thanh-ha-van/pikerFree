@@ -54,6 +54,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 public void onClick(View view) {
                     dataSet.get(getAdapterPosition()).setRead(1);
                     linearLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    tvBody.setTextColor(context.getResources().getColor(R.color.GrayScale));
                     mClickListener.onClicked(getAdapterPosition());
                 }
             });
@@ -78,7 +79,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.tvBody.setText(dataSet.get(position).getMess());
         if (dataSet.get(position).isRead() == 0) {
             holder.tvBody.setTextColor(context.getResources().getColor(R.color.black));
-            holder.tvBody.setTypeface(Typeface.DEFAULT_BOLD);
             holder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.light));
         } else {
             holder.tvBody.setTextColor(context.getResources().getColor(R.color.GrayScale));

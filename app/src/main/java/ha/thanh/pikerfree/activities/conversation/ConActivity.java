@@ -102,13 +102,11 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         CustomYesNoDialog customYesNoDialog = new CustomYesNoDialog(this, new CustomYesNoDialog.YesNoInterFace() {
             @Override
             public void onYesClicked() {
-
                 presenter.deleteConversation();
             }
 
             @Override
             public void onNoClicked() {
-
             }
         });
         customYesNoDialog.showAlertDialog("Confirm", "Are you sure that you want to delete this conversation?");

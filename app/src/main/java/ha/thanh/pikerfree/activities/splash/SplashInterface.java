@@ -11,6 +11,8 @@ interface SplashInterface {
         void onLoadConfigDone();
 
         void onNetworkFail();
+
+        void onAutoLoginFail();
     }
 
     interface RequiredPresenterOps {

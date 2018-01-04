@@ -70,9 +70,7 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
             presenter.loadAllConversation();
             adapter.notifyDataSetChanged();
         } catch (Exception e) {
-
         }
-
     }
 
     private void initData() {

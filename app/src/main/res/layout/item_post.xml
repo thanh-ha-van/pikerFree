@@ -114,7 +114,7 @@
     <ImageView
         android:id="@+id/img_post_image"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="220dp"
         android:layout_margin="10dp"
         android:background="@drawable/background"
         android:scaleType="centerCrop" />

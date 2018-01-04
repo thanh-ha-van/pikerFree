@@ -46,6 +46,9 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
                     if (dataSnapshot.exists()) {
                         mView.onLoadConfigDone();
                     }
+                    else {
+                        mView.onAutoLoginFail();
+                    }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
