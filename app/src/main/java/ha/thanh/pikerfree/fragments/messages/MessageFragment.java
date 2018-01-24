@@ -66,15 +66,19 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void refreshLayout() {
         try {
-            presenter.loadAllConversation();
             adapter.notifyDataSetChanged();
         } catch (Exception e) {
+
         }
     }
 
     private void initData() {
         presenter = new MessagePresenter(this.getContext(), this);
+        presenter.loadAllConversation();
     }
 
     private void initView() {

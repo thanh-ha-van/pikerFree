@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     private Bitmap bitmap;
     private static final int PICK_IMAGE_REQUEST = 234;
     private EditProfilePresenter profilePresenter;
+    private boolean isPickedImage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 && resultCode == RESULT_OK
                 && data != null
                 && data.getData() != null) {
+            isPickedImage = true;
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
@@ -102,21 +105,29 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void hideDialog() {
-        waitingDialog.hideDialog();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                waitingDialog.hideDialog();
+            }
+        }, 1000);
+
     }
 
     @Override
     public void onUserDataReady(String name, String address, String userPhone) {
 
+        waitingDialog.hideDialog();
         etUserName.setText(name);
         etUserAddress.setText(address);
         etUserPhone.setText(userPhone);
+        etUserName.setSelection(etUserName.getText().length());
     }
 
     @Override
     public void getOwnerImageDone(Uri uri) {
-        waitingDialog.hideDialog();
+        if (isPickedImage) return;
         try {
             Glide.with(this)
                     .load(uri)

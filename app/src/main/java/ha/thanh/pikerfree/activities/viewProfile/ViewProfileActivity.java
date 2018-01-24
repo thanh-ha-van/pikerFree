@@ -21,6 +21,7 @@ import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
+import ha.thanh.pikerfree.adapters.UserAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
@@ -28,13 +29,18 @@ import ha.thanh.pikerfree.customviews.RatingDialog;
 import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.User;
 
-public class ViewProfileActivity extends AppCompatActivity implements ViewProfileInterface.RequiredViewOps, PostAdapter.ItemClickListener {
+public class ViewProfileActivity extends AppCompatActivity
+        implements ViewProfileInterface.RequiredViewOps,
+        PostAdapter.ItemClickListener,
+        UserAdapter.ItemClickListener {
 
 
     @BindView(R.id.op_status)
     ImageView opStatus;
     @BindView(R.id.rv_my_post)
     public RecyclerView rvPost;
+    @BindView(R.id.rv_my_followers)
+    public RecyclerView rvFollowers;
     @BindView(R.id.profile_image)
     public CircleImageView userImage;
     @BindView(R.id.user_address)
@@ -49,10 +55,15 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     CustomTextView tvPhone;
     @BindView(R.id.btn_follow)
     CustomTextView followBtn;
+    @BindView(R.id.btn_send_mess)
+    CustomTextView btnSendMess;
     @BindView(R.id.tv_rating_num)
     CustomTextView tvRateNum;
+    @BindView(R.id.user_email)
+    CustomTextView tvEmail;
     private ViewProfilePresenter presenter;
     PostAdapter adapter;
+    UserAdapter userAdapter;
     int fromSplast;
 
     @Override
@@ -74,6 +85,13 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
+
+        userAdapter = new UserAdapter(this,
+                presenter.getFolowingUserList(), this);
+        LinearLayoutManager layoutManager2 =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvFollowers.setLayoutManager(layoutManager2);
+        rvFollowers.setAdapter(userAdapter);
 
     }
 
@@ -117,6 +135,30 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
     }
 
     @Override
+    public void onIsMyProfile() {
+        tvRateNum.setClickable(false);
+        followBtn.setVisibility(View.GONE);
+        btnSendMess.setVisibility(View.GONE);
+        rvPost.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void getFollowingUserDone() {
+        rvFollowers.setVisibility(View.VISIBLE);
+        tvNoData.setVisibility(View.GONE);
+        tvLoadingPost.setText("Your followers");
+        userAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onChooseUser(int position) {
+
+        Intent intent = new Intent(this, ViewProfileActivity.class);
+        intent.putExtra(Constants.USER_ID, presenter.getFllowingLisst().get(position));
+        startActivity(intent);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         presenter.loadAllMyPost();
@@ -142,6 +184,7 @@ public class ViewProfileActivity extends AppCompatActivity implements ViewProfil
         tvUserName.setText(user.getName());
         tvPhone.setText(user.getPhoneNumber());
         tvRateNum.setText(String.valueOf(user.getRating()));
+        tvEmail.setText(user.getEmail());
         if (user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
         else opStatus.setImageResource(R.drawable.bg_circle_gray);
     }

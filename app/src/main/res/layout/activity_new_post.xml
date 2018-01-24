@@ -75,7 +75,8 @@
                     android:singleLine="true"
                     android:textColor="@color/text_black_3"
                     android:textColorHint="@color/GrayScale"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    app:fontAssetName="Roboto-Regular.ttf" />
             </LinearLayout>
 
             <View
@@ -173,7 +174,8 @@
                     android:padding="@dimen/item_padding_small"
                     android:textColor="@color/text_black_3"
                     android:textColorHint="@color/GrayScale"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:fontAssetName="Roboto-Regular.ttf" />
 
             </LinearLayout>
 

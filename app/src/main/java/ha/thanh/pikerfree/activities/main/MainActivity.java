@@ -174,6 +174,6 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     @Override
     protected void onResume() {
         super.onResume();
-        messageFragment = new MessageFragment();
+        messageFragment.refreshLayout();
     }
 }

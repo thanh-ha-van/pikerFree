@@ -141,9 +141,13 @@ public class PostActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_post);
         initData();
         initView();
-        mMapView.onCreate(savedInstanceState);
-        mMapView.onResume();
-        mMapView.getMapAsync(this);
+        try {
+            mMapView.onCreate(savedInstanceState);
+            mMapView.onResume();
+            mMapView.getMapAsync(this);
+        } catch (Exception e) {
+        }
+
     }
 
     @OnClick(R.id.btn_share)
@@ -340,24 +344,26 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     void updateMap(double lat, double lng) {
+
         if (lat == 0) {
             mMapView.setVisibility(View.GONE);
             return;
         }
         LatLng sydney = new LatLng(lat, lng);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Post's location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
-        try {
-            googleMap.setMyLocationEnabled(true);
-        } catch (SecurityException e) {
-            e.getMessage();
+        if (googleMap != null) {
+            googleMap.addMarker(new MarkerOptions().position(sydney)
+                    .title("Post's location"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+            try {
+                googleMap.setMyLocationEnabled(true);
+            } catch (SecurityException e) {
+                e.getMessage();
+            }
         }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         this.googleMap = googleMap;
     }
 

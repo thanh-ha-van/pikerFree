@@ -63,23 +63,32 @@
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
-                    app:fontAssetName="Roboto-Regular.ttf"
                     android:gravity="center"
                     android:textColor="@color/text_black_3"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    app:fontAssetName="Roboto-Regular.ttf" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/user_phone"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:autoLink="phone"
-                    app:fontAssetName="Roboto-Regular.ttf"
                     android:gravity="center"
                     android:textColor="@color/text_black_3"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:fontAssetName="Roboto-Regular.ttf" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/user_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:autoLink="map"
+                    android:gravity="center"
+                    android:textColor="@color/text_black_3"
+                    android:textSize="14sp" />
+
+                <ha.thanh.pikerfree.customviews.CustomTextView
+                    android:id="@+id/user_email"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:autoLink="map"
@@ -162,6 +171,14 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_my_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_my_followers"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"

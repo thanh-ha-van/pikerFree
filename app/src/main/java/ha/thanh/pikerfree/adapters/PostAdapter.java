@@ -165,15 +165,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                     .addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Glide.with(mConText)
-                                    .load(uri)
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.background)
-                                            .centerCrop()
-                                            .dontAnimate()
-                                            .override(800, 600)
-                                            .dontTransform())
-                                    .into(holder.imgPostImage);
+                            try {
+                                Glide.with(mConText)
+                                        .load(uri)
+                                        .apply(new RequestOptions()
+                                                .placeholder(R.drawable.background)
+                                                .centerCrop()
+                                                .dontAnimate()
+                                                .override(800, 600)
+                                                .dontTransform())
+                                        .into(holder.imgPostImage);
+                            } catch (IllegalArgumentException e) {
+                            }
                         }
                     });
 

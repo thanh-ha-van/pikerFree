@@ -1,13 +1,17 @@
 package ha.thanh.pikerfree.fragments.home;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Handler;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +67,7 @@ class HomePresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         user = dataSnapshot.getValue(User.class);
                         mView.onGetUserDataDone(user);
+                        getUserImageLink(user.getAvatarLink());
                         getPostData(user.getPosts());
                     }
 
@@ -75,14 +80,23 @@ class HomePresenter {
         });
     }
 
-    void getLocalData() {
-        String userName;
-        String userAddress;
-        userName = mModel.getUserNameStringFromSharePf();
-        userAddress = mModel.getUserAddressStringFromSharePf();
-        mView.onLocalDataReady(userName, userAddress, mModel.getLocalImageStringFromSharePf());
+    String getUserId() {
+        return user.getId();
     }
 
+    private void getUserImageLink(String link) {
+
+        StorageReference mStorageRef;
+        mStorageRef = FirebaseStorage.getInstance()
+                .getReference().child(link);
+        mStorageRef.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mView.getOwnerImageDone(uri);
+                    }
+                });
+    }
 
     private void getPostData(final ArrayList<Integer> posts) {
         if (posts != null) {

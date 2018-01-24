@@ -104,4 +104,9 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
         super.onDestroy();
         presenter.removeListener();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
