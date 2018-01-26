@@ -29,16 +29,8 @@
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_email_reset"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
-            android:hint="@string/input_email"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            style="@style/editTextPlate"
+            android:hint="@string/input_email" />
 
         <View
             android:layout_width="match_parent"
@@ -46,15 +38,10 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_reset"
+            style="@style/primaryButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/plate"
-            android:gravity="center"
-            android:text="@string/reset_pass"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:text="@string/reset_pass" />
 
     </LinearLayout>
 

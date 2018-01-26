@@ -11,30 +11,18 @@
     tools:context=".activities.newPost.NewPostActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center">
+        android:id="@+id/view_title"
+        style="@style/normalToolbar">
 
         <ImageView
-            android:id="@+id/ic_back"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_back"
-            android:tint="@color/white" />
+            android:id="@+id/img_back"
+            style="@style/toolbarBackButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:id="@+id/tv_title"
+            style="@style/toolbarTitle"
             android:text="@string/new_post"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:fontAssetName="Roboto-Regular.ttf" />
+            app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
 
 
@@ -42,41 +30,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/whiteShade"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/whiteShade"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/circle_green"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_title"
-                    android:tint="@color/green" />
+                    style="@style/circleIconImage"
+                    android:src="@drawable/ic_title" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_item_title"
+                    style="@style/primaryText"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
-                    android:background="@color/transparent"
                     android:hint="@string/title_of_item_hint"
-                    android:singleLine="true"
-                    android:textColor="@color/text_black_3"
-                    android:textColorHint="@color/GrayScale"
-                    android:textSize="18sp"
-                    app:fontAssetName="Roboto-Regular.ttf" />
+                    android:singleLine="true" />
             </LinearLayout>
 
             <View
@@ -119,28 +96,18 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/circle_green"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_more"
-                    android:tint="@color/green" />
+                    style="@style/circleIconImage"
+                    android:src="@drawable/ic_more" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_description"
+                    style="@style/primaryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="@color/transparent"
-                    android:gravity="top"
                     android:hint="@string/short_description"
                     android:inputType="textMultiLine"
-                    android:padding="@dimen/item_padding_small"
-                    android:textColor="@color/text_black_3"
-                    android:textColorHint="@color/GrayScale"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/item_padding_small" />
             </LinearLayout>
 
             <View
@@ -155,27 +122,17 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/circle_green"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_forward"
-                    android:tint="@color/green" />
+                    style="@style/circleIconImage"
+                    android:src="@drawable/ic_forward" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_select"
+                    style="@style/primaryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="@color/transparent"
-                    android:gravity="top"
                     android:hint="@string/select_a_category"
-                    android:padding="@dimen/item_padding_small"
-                    android:textColor="@color/text_black_3"
-                    android:textColorHint="@color/GrayScale"
-                    android:textSize="16sp"
-                    app:fontAssetName="Roboto-Regular.ttf" />
+                    android:padding="8dp" />
 
             </LinearLayout>
 
@@ -187,16 +144,12 @@
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/bnt_post_this"
+                style="@style/primaryButton"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:background="@drawable/plate"
-                android:gravity="center"
-                android:text="@string/post"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/post" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

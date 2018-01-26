@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -30,7 +28,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -143,7 +140,7 @@ public class NearByActivity extends AppCompatActivity
 
         btnListView.setClickable(false);
         btnMapView.setClickable(true);
-        btnMapView.setBackground(getDrawable(R.drawable.bg_rectangle_greeen_bold_right));
+        btnMapView.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
         btnListView.setTextColor(getResources().getColor(R.color.white));
         btnMapView.setTextColor(getResources().getColor(R.color.colorPrimary));
         btnListView.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));

@@ -138,7 +138,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         editTextKey.setHint("Search for post");
         tvSearchPost.setClickable(false);
         tvSearchUser.setClickable(true);
-        tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_greeen_bold_right));
+        tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
         tvSearchPost.setTextColor(getResources().getColor(R.color.white));
         tvSearchUser.setTextColor(getResources().getColor(R.color.colorPrimary));
         tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));

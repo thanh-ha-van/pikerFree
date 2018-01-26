@@ -21,33 +21,19 @@
             android:src="@drawable/piker"
             android:tint="@color/colorPrimary" />
 
-
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_email_login"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/editTextPlate"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
-            android:hint="@string/input_email"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            android:hint="@string/input_email" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_pass"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            style="@style/editTextPlate"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
             android:hint="@string/email"
-            android:inputType="textPassword"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            android:inputType="textPassword" />
+
         <ImageView
             android:id="@+id/tv_help"
             android:layout_width="24dp"
@@ -55,17 +41,14 @@
             android:layout_margin="5dp"
             android:src="@drawable/ic_info"
             android:tint="@color/white" />
+
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_in"
+            style="@style/primaryButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate"
-            android:gravity="center"
-            android:text="@string/login"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:text="@string/login" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"
@@ -77,27 +60,19 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_sign_up"
+            style="@style/secondaryButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@drawable/plate_green_bold"
-            android:gravity="center"
-            android:text="@string/sign_up"
-            android:textAllCaps="true"
-            android:textColor="@color/green"
-            android:textSize="16sp" />
+            android:text="@string/sign_up" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_forget"
+            style="@style/secondaryButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:background="@drawable/plate_green_bold"
-            android:gravity="center"
-            android:text="@string/forgot_password"
-            android:textAllCaps="true"
-            android:textColor="@color/green"
-            android:textSize="16sp" />
+            android:text="@string/forgot_password" />
 
 
     </LinearLayout>

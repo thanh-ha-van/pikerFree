@@ -14,13 +14,13 @@ android {
         exclude 'META-INF/LGPL2.1'
         exclude 'META-INF/LICENSE-FIREBASE.txt'
     }
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         applicationId "ha.thanh.pikerfree"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 120
         versionName '2.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
