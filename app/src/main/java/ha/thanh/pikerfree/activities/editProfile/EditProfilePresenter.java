@@ -13,8 +13,11 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -64,12 +67,21 @@ class EditProfilePresenter {
         this.isImagesChanged = true;
     }
 
-
     void getLocalData() {
-        userName = mModel.getUserNameStringFromSharePf();
-        userAddress = mModel.getUserAddressStringFromSharePf();
-        userPhone = mModel.getUserPhoneFromSharePf();
-        mView.onLocalDataReady(userName, userAddress, userPhone, mModel.getLocalImageStringFromSharePf());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                mView.onUserDataReady(user.getName(), user.getAddress(), user.getPhoneNumber());
+                getUserImageLink(user.getAvatarLink());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     void addTextChangeListener(final EditText etUserName, final EditText etUserAddress, final EditText etUserPhone) {
@@ -148,13 +160,27 @@ class EditProfilePresenter {
         dataUser.setName(userName);
     }
 
+    private void getUserImageLink(String link) {
+
+        StorageReference mStorageRef;
+        mStorageRef = FirebaseStorage.getInstance()
+                .getReference().child(link);
+        mStorageRef.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        mView.getOwnerImageDone(uri);
+                    }
+                });
+    }
+
     void saveLocal(Bitmap bitmapImage) {
 
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
 
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
 
-        File myPath = new File(directory, "profile.jpg");
+        File myPath = new File(directory, userId + "profile.jpg");
 
         FileOutputStream fos = null;
         try {
@@ -198,7 +224,6 @@ class EditProfilePresenter {
                                 public void onFailure(@NonNull Exception exception) {
                                     isUploadDone = true;
                                     checkIfCanHideDialog();
-                                    Log.e("editProfile", " upload file to server get error");
                                 }
                             });
                 }

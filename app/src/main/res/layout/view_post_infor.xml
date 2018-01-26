@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp">
-
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +32,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:layout_weight="2"
-            android:background="@drawable/bg_rectangle_greeen_bold_right"
+            android:background="@drawable/bg_rectangle_green_bold_right"
             android:gravity="center"
             android:text="Add to favorite"
             android:textAllCaps="true"
@@ -47,13 +45,8 @@
         android:layout_height="40dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_green"
-            android:padding="5dp"
-            android:src="@drawable/ic_title"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_title" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
@@ -80,14 +73,8 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/circle_green"
-            android:padding="6dp"
-            android:src="@drawable/ic_more"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_more" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_description"
@@ -111,13 +98,8 @@
         android:layout_height="40dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_green"
-            android:padding="6dp"
-            android:src="@drawable/ic_flash"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_flash" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_post_status"
@@ -139,19 +121,13 @@
         android:layout_height="40dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_green"
-            android:padding="6dp"
-            android:src="@drawable/ic_forward"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_forward" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_post_category"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
@@ -166,13 +142,8 @@
         android:layout_height="40dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_green"
-            android:padding="6dp"
-            android:src="@drawable/ic_time"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_time" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_day"
@@ -193,13 +164,8 @@
         android:layout_height="40dp">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_green"
-            android:padding="6dp"
-            android:src="@drawable/ic_placeholder"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_placeholder" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_distance"

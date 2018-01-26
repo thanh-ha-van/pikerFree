@@ -7,9 +7,12 @@ package ha.thanh.pikerfree.activities.splash;
 interface SplashInterface {
 
     interface RequiredViewOps {
+
         void onLoadConfigDone();
 
         void onNetworkFail();
+
+        void onAutoLoginFail();
     }
 
     interface RequiredPresenterOps {

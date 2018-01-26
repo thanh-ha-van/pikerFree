@@ -37,6 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.conversation.ConActivity;
 import ha.thanh.pikerfree.activities.editPost.EditPostActivity;
+import ha.thanh.pikerfree.activities.main.MainActivity;
 import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.CommentAdapter;
 import ha.thanh.pikerfree.adapters.ImageSlideAdapter;
@@ -121,6 +122,7 @@ public class PostActivity extends AppCompatActivity implements
     MapView mMapView;
 
     int postID;
+    int fromSplash = 0;
 
 
     private ImageSlideAdapter imageSlideAdapter;
@@ -139,9 +141,13 @@ public class PostActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_post);
         initData();
         initView();
-        mMapView.onCreate(savedInstanceState);
-        mMapView.onResume();
-        mMapView.getMapAsync(this);
+        try {
+            mMapView.onCreate(savedInstanceState);
+            mMapView.onResume();
+            mMapView.getMapAsync(this);
+        } catch (Exception e) {
+        }
+
     }
 
     @OnClick(R.id.btn_share)
@@ -209,6 +215,7 @@ public class PostActivity extends AppCompatActivity implements
         db = new PostDataHelper(this);
         Intent in = getIntent();
         postID = in.getIntExtra(Constants.POST_VIEW, 1);
+        fromSplash = in.getIntExtra(Constants.IS_FIRST_RUN, 0);
         mPresenter = new PostPresenter(this, this);
         mPresenter.getPostData(postID + "");
         mPresenter.getImageLinksFromId(postID + "");
@@ -237,6 +244,20 @@ public class PostActivity extends AppCompatActivity implements
     private void checkLocal() {
         if (db.hasObject(postID))
             tvSaveLocal.setText("Remove from favorite");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fromSplash == 1) {
+            startMain();
+        }
+        super.onBackPressed();
+    }
+
+    public void startMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -323,19 +344,26 @@ public class PostActivity extends AppCompatActivity implements
     }
 
     void updateMap(double lat, double lng) {
+
         if (lat == 0) {
             mMapView.setVisibility(View.GONE);
             return;
         }
         LatLng sydney = new LatLng(lat, lng);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Post's location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+        if (googleMap != null) {
+            googleMap.addMarker(new MarkerOptions().position(sydney)
+                    .title("Post's location"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+            try {
+                googleMap.setMyLocationEnabled(true);
+            } catch (SecurityException e) {
+                e.getMessage();
+            }
+        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         this.googleMap = googleMap;
     }
 

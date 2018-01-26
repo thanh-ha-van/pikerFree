@@ -51,12 +51,11 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
         initData();
         initView();
         return view;
-
     }
 
     @OnClick(R.id.btn_search)
-    public void onbtnSearchClicked(){
-        if(editTextSearchKey.getText().toString().equalsIgnoreCase(""))
+    public void onbtnSearchClicked() {
+        if (editTextSearchKey.getText().toString().equalsIgnoreCase(""))
             return;
         Intent intent = new Intent(this.getContext(), SearchActivity.class);
         intent.putExtra(Constants.POST_SEARCH, editTextSearchKey.getText().toString());
@@ -64,17 +63,22 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
         startActivity(intent);
     }
 
-
-
     @Override
     public void onResume() {
         super.onResume();
-        presenter.loadAllConversation();
     }
 
+    public void refreshLayout() {
+        try {
+            adapter.notifyDataSetChanged();
+        } catch (Exception e) {
+
+        }
+    }
 
     private void initData() {
         presenter = new MessagePresenter(this.getContext(), this);
+        presenter.loadAllConversation();
     }
 
     private void initView() {
@@ -85,7 +89,6 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvConversation.setLayoutManager(layoutManager);
         rvConversation.setAdapter(adapter);
-
     }
 
     @Override
@@ -108,4 +111,5 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
     public void onGetConversationFail(String error) {
 
     }
+
 }

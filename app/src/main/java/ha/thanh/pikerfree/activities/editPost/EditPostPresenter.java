@@ -30,21 +30,17 @@ class EditPostPresenter {
 
 
     private EditPostInterface.RequiredViewOps mView;
-    private EditPostModel mModel;
     private List<String> imagePostList;
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
     private List<ImagePost> imageLocalList;
     private Post post;
     private Handler handler;
-    private Context con;
     private int postID;
     int selectedCategory = 8;
 
     EditPostPresenter(Context context, EditPostInterface.RequiredViewOps mView) {
         this.mView = mView;
-        this.con = context;
-        mModel = new EditPostModel(context);
         initData();
     }
 

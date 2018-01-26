@@ -10,31 +10,16 @@
     android:orientation="vertical"
     tools:context=".activities.newPost.NewPostActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center">
+    <LinearLayout style="@style/normalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:padding="12dp"
-            android:src="@drawable/ic_back"
-            android:tint="@color/white" />
+            style="@style/toolbarBackButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            style="@style/toolbarTitle"
             android:text="@string/edit_post"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:fontAssetName="Roboto-Regular.ttf" />
+            app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
 
     <ScrollView
@@ -74,8 +59,7 @@
                     android:singleLine="true"
                     android:textColor="@color/text_black_3"
                     android:textColorHint="@color/GrayScale"
-                    android:textSize="18sp"
-                    app:fontAssetName="Roboto-Regular.ttf" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -101,7 +85,6 @@
                 android:text="Change Images"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:tint="@color/white" />
 
             <android.support.v7.widget.RecyclerView
@@ -228,18 +211,11 @@
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/btn_save_edit_post"
+                style="@style/primaryButton"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/plate"
-                android:gravity="center"
-                android:text="@string/save"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_margin="20dp"
+                android:text="@string/save" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

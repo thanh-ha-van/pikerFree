@@ -2,12 +2,6 @@ package ha.thanh.pikerfree.activities.viewListPost;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
-
-import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
-import com.firebase.geofire.GeoQuery;
-import com.firebase.geofire.GeoQueryEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.constants.Globals;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.dataHelper.PostDataHelper;
 
@@ -99,8 +92,7 @@ class ViewListPostPresenter {
         } else if (currentCategory == Constants.CATE_RECENT) {
             // search recent posts
             searchRecent();
-        }
-        else if (currentCategory == Constants.CATE_LOCAL) {
+        } else if (currentCategory == Constants.CATE_LOCAL) {
             getLocal();
         }
     }
@@ -159,8 +151,10 @@ class ViewListPostPresenter {
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.add(dataSnapshot.getValue(Post.class));
-                mView.onGetPostDone();
+                if (dataSnapshot.exists()) {
+                    postList.add(dataSnapshot.getValue(Post.class));
+                    mView.onGetPostDone();
+                }
             }
 
             @Override

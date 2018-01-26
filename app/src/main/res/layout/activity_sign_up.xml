@@ -16,71 +16,46 @@
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_email"
+            style="@style/editTextPlate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
-            android:hint="@string/input_email"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            android:hint="Email..."
+            android:inputType="textEmailAddress" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_user_name"
+            style="@style/editTextPlate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
-            android:hint="@string/input_username"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            android:hint="@string/input_username" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_pass"
+            style="@style/editTextPlate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
             android:hint="@string/email"
-            android:inputType="textPassword"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            android:inputType="textPassword" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/et_pass_confirm"
+            style="@style/editTextPlate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:background="@drawable/plate_brown_shade"
             android:hint="@string/password_confirm"
-            android:inputType="textPassword"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/GrayScale"
-            android:textSize="16sp" />
+            android:inputType="textPassword" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_sign_up"
+            style="@style/primaryButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/plate"
-            android:gravity="center"
-            android:text="@string/sign_up"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10dp"
+            android:text="@string/sign_up" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"
@@ -92,16 +67,11 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_in"
+            style="@style/secondaryButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/plate_green_bold"
-            android:gravity="center"
-            android:text="@string/login"
-            android:textAllCaps="true"
-            android:textColor="@color/green"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="5dp"
+            android:text="@string/login" />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,9 +1,7 @@
 package ha.thanh.pikerfree.adapters;
 
 import android.content.Context;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +29,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.Comment;
 import ha.thanh.pikerfree.models.User;
-import ha.thanh.pikerfree.utils.Utils;
-
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder> {
 
@@ -100,25 +96,43 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         final String itemUser = dataSet.get(position).getIdUser();
-        FirebaseStorage
-                .getInstance()
-                .getReference()
-                .child("userImages")
-                .child(itemUser + ".jpg").getDownloadUrl()
-                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Glide.with(mConText)
-                                .load(uri)
-                                .apply(new RequestOptions()
-                                        .placeholder(R.drawable.loading)
-                                        .centerCrop()
-                                        .dontAnimate()
-                                        .override(100, 100)
-                                        .dontTransform())
-                                .into(holder.OpImage);
-                    }
-                });
+
+        final DatabaseReference userPref;
+        userPref = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(itemUser).child("avatarLink");
+        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    String link = dataSnapshot.getValue(String.class);
+                    FirebaseStorage
+                            .getInstance()
+                            .getReference()
+                            .child(link).getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(mConText)
+                                            .load(uri)
+                                            .apply(new RequestOptions()
+                                                    .placeholder(R.drawable.ic_user)
+                                                    .centerCrop()
+                                                    .dontAnimate()
+                                                    .override(100, 100)
+                                                    .dontTransform())
+                                            .into(holder.OpImage);
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         if (ownerId.equalsIgnoreCase(userId)) {// owner have right to delete all comment
             holder.btnOptions.setVisibility(View.VISIBLE);
             holder.btnOptions.setOnClickListener(new View.OnClickListener() {

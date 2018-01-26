@@ -13,34 +13,17 @@
 
         <LinearLayout
             android:id="@+id/view_title"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/colorPrimary"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/normalToolbar">
 
             <ImageView
                 android:id="@+id/img_back"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:padding="12dp"
-                android:src="@drawable/ic_back"
-                android:tint="@color/white" />
+                style="@style/toolbarBackButton" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/tv_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="46dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:text="Privacy and term"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:fontAssetName="Roboto-Regular.ttf" />
+                style="@style/toolbarTitle"
+                android:text="@string/privacy"
+                app:fontAssetName="Roboto-Bold.ttf" />
         </LinearLayout>
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -50,8 +33,7 @@
             android:padding="10dp"
             android:text="@string/term_of_use"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:fontAssetName="Roboto-Regular.ttf" />
+            android:textSize="18sp"/>
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"

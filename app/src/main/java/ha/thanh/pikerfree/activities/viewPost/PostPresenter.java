@@ -119,6 +119,7 @@ class PostPresenter {
                 postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         post = dataSnapshot.getValue(Post.class);
                         if (post.getComments() != null)
                             comments.addAll(post.getComments());
@@ -181,7 +182,8 @@ class PostPresenter {
                             user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                             requestingUsers.add(user);
                             mView.onGetRequestingUserDone(2);
-                            mView.onUserGranted();
+                            if (user.getId().equalsIgnoreCase(mModel.getUserIdFromSharePref()))
+                                mView.onUserGranted();
                         }
 
                         @Override
@@ -378,9 +380,11 @@ class PostPresenter {
                         userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                User user = dataSnapshot.getValue(User.class);
-                                requestingUsers.add(user);
-                                mView.onGetRequestingUserDone(1);
+                                if (dataSnapshot.exists()) {
+                                    User user = dataSnapshot.getValue(User.class);
+                                    requestingUsers.add(user);
+                                    mView.onGetRequestingUserDone(1);
+                                }
                             }
 
                             @Override

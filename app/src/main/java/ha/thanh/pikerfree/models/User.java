@@ -13,7 +13,7 @@ public class User {
     private String name;
     private String address;
     private String phoneNumber;
-    private String avatarLink = "userImages/default_profile.jgp";
+    private String avatarLink = "userImages/default_profile.jpg";
     private String email = "";
     private ArrayList<Integer> posts;
     private ArrayList<String> mess;

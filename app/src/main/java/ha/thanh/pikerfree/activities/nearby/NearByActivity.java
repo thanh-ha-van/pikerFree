@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -30,7 +28,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -143,7 +140,7 @@ public class NearByActivity extends AppCompatActivity
 
         btnListView.setClickable(false);
         btnMapView.setClickable(true);
-        btnMapView.setBackground(getDrawable(R.drawable.bg_rectangle_greeen_bold_right));
+        btnMapView.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
         btnListView.setTextColor(getResources().getColor(R.color.white));
         btnMapView.setTextColor(getResources().getColor(R.color.colorPrimary));
         btnListView.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));
@@ -175,9 +172,6 @@ public class NearByActivity extends AppCompatActivity
 
     @OnClick(R.id.ic_back)
     public void goback() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(Constants.DISTANCE, distance);
-        editor.apply();
         onBackPressed();
     }
 
@@ -194,25 +188,42 @@ public class NearByActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBackPressed() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(Constants.DISTANCE, distance);
+        editor.commit();
+        super.onBackPressed();
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
 
         this.googleMap = googleMap;
         googleMap.setOnInfoWindowClickListener(this);
         LatLng sydney = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+        try {
+            googleMap.setMyLocationEnabled(true);
+        } catch (SecurityException e) {
+            e.getMessage();
+        }
     }
 
     void updateMap() {
         googleMap.clear();
         for (Post post : postList
                 ) {
-            CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this, post);
-            googleMap.setInfoWindowAdapter(adapter);
-            LatLng sydney = new LatLng(post.getLocation().latitude, post.getLocation().longitude);
-            googleMap.addMarker(new MarkerOptions().position(sydney)
-                    .title(post.getTitle())
-                    .snippet(post.getPostId() + "")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            try {
+                CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this, post);
+                googleMap.setInfoWindowAdapter(adapter);
+                LatLng sydney = new LatLng(post.getLocation().latitude, post.getLocation().longitude);
+                googleMap.addMarker(new MarkerOptions().position(sydney)
+                        .title(post.getTitle())
+                        .snippet(post.getPostId() + "")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            } catch (Exception e) {
+                e.toString();
+            }
         }
     }
 
@@ -226,9 +237,13 @@ public class NearByActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(this, PostActivity.class);
-        intent.putExtra(Constants.POST_VIEW, Integer.valueOf(postList.get(position).getPostId()));
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, PostActivity.class);
+            intent.putExtra(Constants.POST_VIEW, Integer.valueOf(postList.get(position).getPostId()));
+            startActivity(intent);
+        } catch (Exception e) {
+            alertDialog.showAlertDialog("Error", "Can not complete your action.");
+        }
     }
 
     private void setTimeOut() {
@@ -260,10 +275,12 @@ public class NearByActivity extends AppCompatActivity
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.add(dataSnapshot.getValue(Post.class));
-                postAdapter.notifyDataSetChanged();
-                updateMap();
-                onHasResult();
+                if (dataSnapshot.exists()) {
+                    postList.add(dataSnapshot.getValue(Post.class));
+                    postAdapter.notifyDataSetChanged();
+                    updateMap();
+                    onHasResult();
+                }
             }
 
             @Override

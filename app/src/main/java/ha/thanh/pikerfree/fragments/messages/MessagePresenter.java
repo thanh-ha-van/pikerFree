@@ -12,13 +12,11 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
-import ha.thanh.pikerfree.dataHelper.SQLiteMess;
-import ha.thanh.pikerfree.dataHelper.MessageDataHelper;
 
 
 class MessagePresenter {
@@ -27,10 +25,8 @@ class MessagePresenter {
     private Handler handler;
     private FirebaseDatabase database;
     private List<Conversation> conversationList;
-    private List<SQLiteMess> localConList;
     private List<String> conversationIdList;
     private String userId;
-    private MessageDataHelper messageDataHelper;
 
     List<Conversation> getConversationList() {
         if (conversationList != null)
@@ -43,22 +39,17 @@ class MessagePresenter {
         handler = new Handler();
         conversationList = new ArrayList<>();
         conversationIdList = new ArrayList<>();
-        localConList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        messageDataHelper = new MessageDataHelper(context);
-        localConList = messageDataHelper.getAllMess();
     }
 
     void loadAllConversation() {
         if (conversationList != null)
             conversationList.clear();
-        if (conversationIdList != null)
-            conversationIdList.clear();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                DatabaseReference userPref;
+                final DatabaseReference userPref;
                 userPref = database
                         .getReference("users")
                         .child(userId)
@@ -69,9 +60,11 @@ class MessagePresenter {
 
                         GenericTypeIndicator<ArrayList<String>> t = new GenericTypeIndicator<ArrayList<String>>() {
                         };
-                        conversationIdList = dataSnapshot.getValue(t);
-
+                        conversationIdList.clear();
+                        if (dataSnapshot.getValue(t) != null)
+                            conversationIdList.addAll(dataSnapshot.getValue(t));
                         getConversations();
+                        userPref.removeEventListener(this);
                     }
 
                     @Override
@@ -84,16 +77,19 @@ class MessagePresenter {
     }
 
     private void getConversations() {
+        conversationList.clear();
         if (conversationIdList != null)
             for (int i = 0; i < conversationIdList.size(); i++) {
-                DatabaseReference conversationPref = database
+                final DatabaseReference conversationPref = database
                         .getReference(Constants.CONVERSATION).child(conversationIdList.get(i));
                 conversationPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
                         Conversation conversation = dataSnapshot.getValue(Conversation.class);
                         conversationList.add(conversation);
-                        mView.onGetConversationDone();
+                        Collections.sort(conversationList);
+                        mView.onGetConversationDone();}
                     }
 
                     @Override

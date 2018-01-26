@@ -75,7 +75,7 @@ public class ChangePassActivity extends AppCompatActivity {
                     user.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (!task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 waitingDialog.hideDialog();
                                 alertDialog.showAlertDialog("Successful", "Your password had been changed.");
                             } else {

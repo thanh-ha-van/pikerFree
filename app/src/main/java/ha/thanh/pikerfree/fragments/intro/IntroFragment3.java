@@ -17,11 +17,8 @@ public class IntroFragment3 extends IntroFragment {
     @BindView(R.id.iv_character)
     View viewCharacter;
 
-    @BindViews({R.id.tv_word_challenge, R.id.tv_message_2, R.id.tv_message_3})
-    View[] viewMessages;
     @BindViews({R.id.iv_image_1, R.id.iv_image_2, R.id.iv_image_3, R.id.iv_image_4})
     View[] viewImages;
-
 
     @Nullable
     @Override
@@ -33,9 +30,7 @@ public class IntroFragment3 extends IntroFragment {
 
     @Override
     public void animationViewPage() {
-        viewMessages[0].animate().setStartDelay(800).alpha(1).setDuration(500);
-        viewMessages[1].animate().setStartDelay(1000).alpha(1).setDuration(500);
-        viewMessages[2].animate().setStartDelay(900).alpha(1).setDuration(500);
+
         viewImages[0].animate().setStartDelay(1200).alpha(1).setDuration(500);
         viewImages[1].animate().setStartDelay(1500).alpha(1).setDuration(500);
         viewImages[2].animate().setStartDelay(1200).alpha(1).setDuration(500);
@@ -48,10 +43,6 @@ public class IntroFragment3 extends IntroFragment {
         if (viewCharacter != null) {
             viewCharacter.clearAnimation();
             viewCharacter.setAlpha(0);
-            for (View viewMessage : viewMessages) {
-                viewMessage.clearAnimation();
-                viewMessage.setAlpha(0);
-            }
             for (View viewImage : viewImages) {
                 viewImage.clearAnimation();
                 viewImage.setAlpha(0);

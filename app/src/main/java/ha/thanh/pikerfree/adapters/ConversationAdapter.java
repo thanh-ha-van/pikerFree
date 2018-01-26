@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,6 +27,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.Constants;
+import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.models.User;
@@ -54,8 +54,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         handler = new Handler();
     }
 
-    // todo get OP Image, name from op id
-    // todo get LastMess data from last mess id
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.op_status)
@@ -63,11 +61,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         @BindView(R.id.op_pic)
         CircleImageView OpImage;
         @BindView(R.id.tv_last_mess)
-        TextView tvLastMess;
+        CustomTextView tvLastMess;
         @BindView(R.id.tv_time)
-        TextView tvTime;
+        CustomTextView tvTime;
         @BindView(R.id.tv_userName)
-        TextView tvOpName;
+        CustomTextView tvOpName;
+        @BindView(R.id.ic_new)
+        CustomTextView tvNewCount;
 
         MyViewHolder(View view) {
             super(view);
@@ -96,30 +96,45 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         final String user2Id = getOpString(position);
         // get op images
-        FirebaseStorage
-                .getInstance()
-                .getReference()
-                .child("userImages")
-                .child(user2Id + ".jpg").getDownloadUrl()
-                .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        try {
-                            Glide.with(mConText)
-                                    .load(uri)
-                                    .apply(new RequestOptions()
-                                            .placeholder(R.drawable.loading)
-                                            .centerCrop()
-                                            .dontAnimate()
-                                            .override(100, 100)
-                                            .dontTransform())
-                                    .into(holder.OpImage);
-                        } catch (IllegalArgumentException e) {
-                            e.getMessage();
-                        }
-                    }
-                });
+        final DatabaseReference userPref;
+        userPref = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(user2Id).child("avatarLink");
+        userPref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String link = dataSnapshot.getValue(String.class);
+                    FirebaseStorage
+                            .getInstance()
+                            .getReference()
+                            .child(link).getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    try {
+                                        Glide.with(mConText)
+                                                .load(uri)
+                                                .apply(new RequestOptions()
+                                                        .placeholder(R.drawable.loading)
+                                                        .centerCrop()
+                                                        .dontAnimate()
+                                                        .override(100, 100)
+                                                        .dontTransform())
+                                                .into(holder.OpImage);
+                                    } catch (Exception e) {
+                                    }
+                                }
+                            });
+                }
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         // Get OP name
         handler.post(new Runnable() {
             @Override
@@ -131,12 +146,16 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 userPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        holder.tvOpName.setText(user.getName());
-                        user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
-                        if (user.isOnline())
-                            holder.opStatus.setImageResource(R.drawable.bg_circle_check);
-                        else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
+                        if (dataSnapshot.exists()) {
+                            User user = dataSnapshot.getValue(User.class);
+                            holder.tvOpName.setText(user.getName());
+                            user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
+                            if (user.isOnline())
+                                holder.opStatus.setImageResource(R.drawable.bg_circle_check);
+                            else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
+                        } else {
+                            holder.tvOpName.setText("Error");
+                        }
                     }
 
                     @Override
@@ -160,9 +179,14 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             messPref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Message mess = dataSnapshot.getValue(Message.class);
-                    holder.tvLastMess.setText(mess.getText());
-                    holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
+                    if (dataSnapshot.exists()) {
+                        Message mess = dataSnapshot.getValue(Message.class);
+                        holder.tvLastMess.setText(mess.getText());
+                        holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
+                    } else {
+                        holder.tvLastMess.setText("Error");
+                        holder.tvTime.setText("Error");
+                    }
                 }
 
                 @Override
@@ -170,6 +194,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
                 }
             });
+        }
+        int news = dataSet.get(position).getLastMessId() - getOwnLastMes(position);
+        if (news != 0) {
+            holder.tvNewCount.setVisibility(View.VISIBLE);
+            holder.tvNewCount.setText(news + "");
+            holder.tvLastMess.setTextColor(mConText.getResources().getColor(R.color.black));
         }
 
     }
@@ -183,6 +213,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         if (dataSet.get(position).getIdUser1().equals(currentUserId))
             return dataSet.get(position).getIdUser2();
         return dataSet.get(position).getIdUser1();
+    }
+
+    private int getOwnLastMes(int position) {
+        if (dataSet.get(position).getIdUser1().equals(currentUserId))
+            return dataSet.get(position).getLastUser1Mess();
+        return dataSet.get(position).getLastUser2Mess();
     }
 
     public interface ItemClickListener {

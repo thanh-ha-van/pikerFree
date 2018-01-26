@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,7 +14,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.common.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +138,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         editTextKey.setHint("Search for post");
         tvSearchPost.setClickable(false);
         tvSearchUser.setClickable(true);
-        tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_greeen_bold_right));
+        tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
         tvSearchPost.setTextColor(getResources().getColor(R.color.white));
         tvSearchUser.setTextColor(getResources().getColor(R.color.colorPrimary));
         tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));
@@ -283,7 +281,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         postTitlePref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists()) return;
+                if (!dataSnapshot.exists()) return;
                 String string = dataSnapshot.getValue(String.class);
                 if (string.toLowerCase().contains(key.toLowerCase())) {
                     getPostByID(i);
@@ -305,9 +303,11 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         postRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.add(dataSnapshot.getValue(Post.class));
-                postAdapter.notifyDataSetChanged();
-                onHasResult();
+                if (dataSnapshot.exists()) {
+                    postList.add(dataSnapshot.getValue(Post.class));
+                    postAdapter.notifyDataSetChanged();
+                    onHasResult();
+                }
             }
 
             @Override

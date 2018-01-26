@@ -65,13 +65,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.tvName.setText(userList.get(position).getName());
-        if (userList.get(position).getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-            holder.tvName.setText(userList.get(position).getName() + " (You)");
-        if (userList.get(position).isOnline())
-            holder.opStatus.setImageResource(R.drawable.bg_circle_check);
-        else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
-        getUserImageLink(userList.get(position).getAvatarLink(), holder.imgItemImage);
+        try {
+            holder.tvName.setText(userList.get(position).getName());
+            if (userList.get(position).getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                holder.tvName.setText(userList.get(position).getName() + " (You)");
+            if (userList.get(position).isOnline())
+                holder.opStatus.setImageResource(R.drawable.bg_circle_check);
+            else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
+            getUserImageLink(userList.get(position).getAvatarLink(), holder.imgItemImage);
+        } catch (Exception e) {
+
+        }
     }
 
     private void getUserImageLink(String link, final ImageView imageView) {
@@ -85,7 +89,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
                             Glide.with(context)
                                     .load(uri)
                                     .apply(new RequestOptions()
-                                            .error(R.drawable.action_button_bg)
+                                            .error(R.drawable.ic_user)
                                             .centerCrop()
                                             .dontAnimate()
                                             .override(200, 200)

@@ -19,7 +19,6 @@
         android:padding="5dp"
         android:textColor="@color/colorAccent"
         android:textSize="16sp" />
-s
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:id="@+id/tv_title"
@@ -30,8 +29,7 @@ s
         android:textAllCaps="true"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:fontAssetName="Roboto-Regular.ttf" />
+        app:fontAssetName="Roboto-Bold.ttf" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,5 +1,7 @@
 package ha.thanh.pikerfree.activities.editProfile;
 
+import android.net.Uri;
+
 /**
  * Created by HaVan on 9/10/2017.
  */
@@ -12,6 +14,8 @@ public interface EditProfileInterface {
 
         void hideDialog();
 
-        void onLocalDataReady(String name, String address, String userPhone, String filepath);
+        void onUserDataReady(String name, String address, String userPhone);
+
+        void getOwnerImageDone(Uri link);
     }
 }

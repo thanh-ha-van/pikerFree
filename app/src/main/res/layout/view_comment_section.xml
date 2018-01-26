@@ -11,14 +11,8 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/circle_green"
-            android:padding="6dp"
-            android:src="@drawable/ic_speech"
-            android:tint="@color/green" />
+            style="@style/circleIconImage"
+            android:src="@drawable/ic_speech" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"
@@ -28,7 +22,7 @@
             android:text="Comments:"
             android:textColor="@color/text_black_3"
             android:textSize="16sp"
-            app:fontAssetName="Roboto-Regular.ttf" />
+            app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -82,8 +76,4 @@
         android:text="No comment on this post"
         android:textColor="@color/orange"
         android:textSize="16sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
 </LinearLayout>

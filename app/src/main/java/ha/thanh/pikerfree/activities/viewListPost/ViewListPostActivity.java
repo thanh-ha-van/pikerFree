@@ -52,7 +52,6 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
         adapter = new PostAdapter(this, presenter.getPostList(), this, presenter.getUserLat(), presenter.getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        layoutManager.setStackFromEnd(true);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
     }
@@ -86,5 +85,10 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
 
         waitingDialog.hideDialog();
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -38,17 +38,19 @@ public class ImageSlideAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.item_image_slide, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.img_item_image);
+        try {
+            Glide.with(this.mContext)
+                    .load(mList.get(position))
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.background)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(400, 270)
+                            .dontTransform())
+                    .into(imageView);
 
-        Glide.with(this.mContext)
-                .load(mList.get(position))
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.background)
-                        .centerCrop()
-                        .dontAnimate()
-                        .override(400, 270)
-                        .dontTransform())
-                .into(imageView);
-
+        } catch (Exception e) {
+        }
         container.addView(itemView);
 
         return itemView;

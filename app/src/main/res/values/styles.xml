@@ -6,4 +6,112 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="primaryButton">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/plate</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="secondaryButton">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/plate_green_bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="toolbarTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">46dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="titleAtrText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="normalToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="toolbarBackButton">
+        <item name="android:layout_width">46dp</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:contentDescription">@string/back</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:src">@drawable/ic_back</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="editTextPlate">
+        <item name="android:background">@drawable/plate_brown_shade</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/GrayScale</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="primaryText">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/text_black_3</item>
+        <item name="android:textColorHint">@color/GrayScale</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="circleIconImage">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:tint">@color/green</item>
+    </style>
+
+    <style name="categoryTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="categoryImage">
+        <item name="android:layout_width">33dp</item>
+        <item name="android:layout_height">33dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="rightButton">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:src">@drawable/ic_right_arrow</item>
+        <item name="android:tint">@color/GrayScale</item>
+    </style>
+
 </resources>

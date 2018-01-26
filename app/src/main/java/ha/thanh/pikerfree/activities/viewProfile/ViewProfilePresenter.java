@@ -29,6 +29,13 @@ public class ViewProfilePresenter {
     private FirebaseDatabase database;
     private List<Post> postList;
     private String currentUserId;
+    private List<String> followingIdList;
+    private List<User> folowingUserList;
+
+    public List<User> getFolowingUserList() {
+        return folowingUserList;
+    }
+
     private GPSTracker gpsTracker;
     private User user;
 
@@ -41,6 +48,8 @@ public class ViewProfilePresenter {
         this.currentUserId = currentUserId;
         handler = new Handler();
         postList = new ArrayList<>();
+        followingIdList = new ArrayList<>();
+        folowingUserList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         gpsTracker = new GPSTracker(context);
     }
@@ -65,7 +74,7 @@ public class ViewProfilePresenter {
             }
             list.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
             user.setRatedUsers(list);
-            double newRate = Math.round((((rate + list.size() * user.getRating()) / (list.size() + 1) * 100) * 10) / 10.0);
+            double newRate = Math.round((((rate + list.size() * user.getRating()) / (list.size() + 1) * 10) * 10) / 100.0);
             user.setRating(newRate);
             updateUser(newRate);
         } else {
@@ -110,11 +119,15 @@ public class ViewProfilePresenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         user = dataSnapshot.getValue(User.class);
                         user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
-                        checkFollowStatus();
                         mView.onGetUserDataDone(user);
                         getUserImageLink(user.getAvatarLink());
-                        getPostData(user.getPosts());
-
+                        if (user.getId().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            mView.onIsMyProfile();
+                            getFollowingUser();
+                        } else {
+                            checkFollowStatus();
+                            getPostData(user.getPosts());
+                        }
                     }
 
                     @Override
@@ -126,6 +139,36 @@ public class ViewProfilePresenter {
         });
     }
 
+    private void getFollowingUser() {
+
+        if(user.getFollowingUsers() != null)
+        followingIdList.addAll(user.getFollowingUsers());
+        for (String id : followingIdList
+             ) {
+            DatabaseReference postRef;
+            postRef = database
+                    .getReference("users")
+                    .child(id);
+            postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        folowingUserList.add(dataSnapshot.getValue(User.class));
+                        mView.getFollowingUserDone();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    List<String> getFllowingLisst(){
+        return followingIdList;
+    }
     private void checkFollowStatus() {
         List<String> followingUsers = new ArrayList<>();
         if (user.getFollowingUsers() != null)
@@ -202,8 +245,10 @@ public class ViewProfilePresenter {
                 postRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        postList.add(dataSnapshot.getValue(Post.class));
-                        mView.onGetUserPostsDone();
+                        if (dataSnapshot.exists()) {
+                            postList.add(dataSnapshot.getValue(Post.class));
+                            mView.onGetUserPostsDone();
+                        }
                     }
 
                     @Override

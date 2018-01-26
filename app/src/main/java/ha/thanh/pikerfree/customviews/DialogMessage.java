@@ -10,22 +10,20 @@ import ha.thanh.pikerfree.R;
 
 
 public class DialogMessage {
-    AlertDialog alertDialog;
-    Context context;
-    TextView tvMessage, tvActionNagetive, tvActionPositive;
-    OnClickButton onClickButton;
+    private AlertDialog alertDialog;
+    private TextView tvMessage;
+    private OnClickButton onClickButton;
 
 
     public DialogMessage(Context context) {
-        this.context = context;
         LayoutInflater _inflater = LayoutInflater.from(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View view = _inflater.inflate(R.layout.dialog_message, null);
-        tvMessage = (TextView) view.findViewById(R.id.tv_message);
-        tvActionNagetive = (TextView) view.findViewById(R.id.tv_action_nagetive);
-        tvActionPositive = (TextView) view.findViewById(R.id.tv_action_positive);
+        View view = _inflater.inflate(R.layout.view_yes_no_dialog, null);
+        tvMessage = view.findViewById(R.id.tv_content);
+        TextView tvActionNegative = view.findViewById(R.id.btn_cancel_dialog);
+        TextView tvActionPositive = view.findViewById(R.id.btn_ok_dialog);
 
-        tvActionNagetive.setOnClickListener(onClickListener);
+        tvActionNegative.setOnClickListener(onClickListener);
         tvActionPositive.setOnClickListener(onClickListener);
         builder.setView(view);
         alertDialog = builder.create();
@@ -36,15 +34,15 @@ public class DialogMessage {
     }
 
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (onClickButton != null) {
                 switch (view.getId()) {
-                    case R.id.tv_action_nagetive:
+                    case R.id.btn_cancel_dialog:
                         onClickButton.onClickNegative();
                         break;
-                    case R.id.tv_action_positive:
+                    case R.id.btn_ok_dialog:
                         onClickButton.onClickPositive();
                         break;
                 }
@@ -56,14 +54,6 @@ public class DialogMessage {
 
     public void setMessage(String message) {
         tvMessage.setText(message);
-    }
-
-    public void setTextNagetiveButton(int resource) {
-        tvActionNagetive.setText(resource);
-    }
-
-    public void setTextPositiveButton(int resource) {
-        tvActionPositive.setText(resource);
     }
 
 

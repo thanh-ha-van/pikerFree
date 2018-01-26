@@ -26,5 +26,9 @@ public class ViewProfileInterface {
         void onUnFollowSuccess(String inform);
 
         void onAlreadyFollow();
+
+        void onIsMyProfile();
+
+        void getFollowingUserDone();
     }
 }

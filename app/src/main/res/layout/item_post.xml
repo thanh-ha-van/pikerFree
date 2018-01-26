@@ -1,99 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="8dp"
     android:layout_marginEnd="10dp"
     android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@color/colorPrimaryDark">
+        android:layout_height="60dp">
 
-        <ImageView
-            android:id="@+id/img_post_image"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@drawable/background"
-            android:scaleType="centerCrop" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/owner_pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_user"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignBottom="@id/img_post_image"
-            android:background="@color/shade"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp"
-            android:weightSum="4">
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_owner_name"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:lines="1"
-                app:fontAssetName="Roboto-Regular.ttf"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:fontAssetName="Roboto-Bold.ttf" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_time" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_day"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="4dp"
-                    android:paddingStart="4dp"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black_3"
+                    android:textSize="12sp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="10dp"
-                    android:src="@drawable/seclected_dot" />
-
-                <ha.thanh.pikerfree.customviews.CustomTextView
-                    android:id="@+id/tv_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingEnd="4dp"
-                    android:paddingStart="4dp"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="10dp"
-                    android:src="@drawable/seclected_dot" />
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_placeholder" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_distance"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="4dp"
-                    android:paddingStart="4dp"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black_3"
+                    android:textSize="12sp" />
             </LinearLayout>
+
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:fontAssetName="Roboto-Bold.ttf" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:textAllCaps="true"
+        android:textColor="@color/text_black_3"
+        android:textSize="14sp"
+        app:fontAssetName="Roboto-Bold.ttf" />
+
+    <ha.thanh.pikerfree.customviews.CustomTextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:ellipsize="end"
+        android:maxLines="3" />
+
+    <ImageView
+        android:id="@+id/img_post_image"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/background"
+        android:scaleType="centerCrop" />
+
 </LinearLayout>

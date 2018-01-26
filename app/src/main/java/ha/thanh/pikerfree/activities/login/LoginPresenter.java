@@ -52,7 +52,23 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
 
     void checkLogIn() {
         if (auth.getCurrentUser() != null) {
-            mView.onLogInSuccess();
+            FirebaseDatabase
+                    .getInstance()
+                    .getReference()
+                    .child("users")
+                    .child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        mView.onLogInSuccess();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 

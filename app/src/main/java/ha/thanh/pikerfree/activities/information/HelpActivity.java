@@ -16,7 +16,7 @@ public class HelpActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.img_back)
+    @OnClick(R.id.ic_back)
     public void goback() {
         onBackPressed();
     }

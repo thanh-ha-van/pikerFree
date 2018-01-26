@@ -7,19 +7,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/gray"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
 
         <ha.thanh.pikerfree.customviews.CustomEditText
             android:id="@+id/tv_search_post"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@drawable/plate_small_corner"
-            android:hint="Search for post..."
-            android:paddingStart="10dp"
+            android:hint="@string/search_hint"
             android:paddingEnd="10dp"
+            android:paddingStart="10dp"
             android:singleLine="true"
             android:textColor="@color/text_black_3"
             android:textColorHint="@color/GrayScale"
@@ -29,10 +29,10 @@
             android:id="@+id/btn_search"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:background="@color/gray"
+            android:background="@color/colorPrimary"
             android:padding="14dp"
             android:src="@drawable/ic_search"
-            android:tint="@color/colorPrimaryDark" />
+            android:tint="@color/white" />
 
     </LinearLayout>
 
@@ -45,9 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:background="@color/gray">
 
         <LinearLayout
             android:id="@+id/near_by"
@@ -58,22 +56,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Near by"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/nearby" />
 
             <ImageView
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_placeholder"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_placeholder" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,22 +72,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Recent"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/recent" />
 
             <ImageView
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_time"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_time" />
         </LinearLayout>
 
     </LinearLayout>
@@ -108,9 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:background="@color/gray">
 
         <LinearLayout
             android:id="@+id/accessories"
@@ -120,22 +96,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Accessories"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/accessories" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_hanger"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_hanger" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,22 +113,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Baby and toys"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/baby_toy" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_stroller"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_stroller" />
         </LinearLayout>
 
     </LinearLayout>
@@ -171,9 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:background="@color/gray">
 
         <LinearLayout
             android:id="@+id/cloths"
@@ -184,22 +138,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Cloths"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/cloths" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_coat"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_coat" />
         </LinearLayout>
 
         <LinearLayout
@@ -210,22 +154,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Electronics"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/electronics" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_idea"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_idea" />
         </LinearLayout>
 
     </LinearLayout>
@@ -234,9 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:background="@color/gray">
 
         <LinearLayout
             android:id="@+id/groceries"
@@ -246,22 +178,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Groceries"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/groceries" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_shopping_basket"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_shopping_basket" />
         </LinearLayout>
 
         <LinearLayout
@@ -273,22 +195,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Home and living"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/home_living" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_house"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_house" />
         </LinearLayout>
 
     </LinearLayout>
@@ -297,9 +209,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:background="@color/gray">
 
         <LinearLayout
             android:id="@+id/pet"
@@ -310,22 +220,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Pets"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/pets" />
 
             <ImageView
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_rabbit"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_rabbit" />
         </LinearLayout>
 
         <LinearLayout
@@ -336,22 +236,12 @@
             android:orientation="vertical">
 
             <ha.thanh.pikerfree.customviews.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:gravity="center"
-                android:text="Others"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                style="@style/categoryTitle"
+                android:text="@string/others" />
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_more"
-                android:tint="@color/colorPrimaryDark" />
+                style="@style/categoryImage"
+                android:src="@drawable/ic_more" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

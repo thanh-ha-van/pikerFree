@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.fragments.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.editProfile.EditProfileActivity;
 import ha.thanh.pikerfree.activities.newPost.NewPostActivity;
 import ha.thanh.pikerfree.activities.viewPost.PostActivity;
+import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.PostAdapter;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
@@ -70,7 +72,6 @@ public class HomeFragment extends Fragment
                 homePresenter.getUserLng());
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        layoutManager.setStackFromEnd(true);
         rvPost.setLayoutManager(layoutManager);
         rvPost.setAdapter(adapter);
 
@@ -78,14 +79,18 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onItemClick(int position) {
-        Intent in = new Intent(this.getContext(), PostActivity.class);
-        in.putExtra(Constants.POST_VIEW, homePresenter.getPostList().get(position).getPostId());
-        startActivity(in);
+        try {
+            Intent in = new Intent(this.getContext(), PostActivity.class);
+            in.putExtra(Constants.POST_VIEW, homePresenter.getPostList().get(position).getPostId());
+            startActivity(in);
+        } catch (IndexOutOfBoundsException e) {
+            e.getCause();
+        }
+
     }
 
     private void initData() {
         homePresenter = new HomePresenter(this.getContext(), this);
-        homePresenter.getLocalData();
     }
 
     @OnClick(R.id.btn_new_post)
@@ -105,12 +110,34 @@ public class HomeFragment extends Fragment
     }
 
     @Override
-    public void onNoGPS() {
+    public void getOwnerImageDone(Uri link) {
+        try {
+            Glide.with(this)
+                    .load(link)
+                    .apply(new RequestOptions()
+                            .error(R.drawable.ic_user)
+                            .centerCrop()
+                            .dontAnimate()
+                            .override(150, 150)
+                            .dontTransform())
+                    .into(userImage);
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
+        }
+    }
 
+    @OnClick(R.id.view_user)
+    public void goGoMyProfile(){
+        Intent intent = new Intent(this.getContext(), ViewProfileActivity.class);
+        intent.putExtra(Constants.USER_ID, homePresenter.getUserId());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onNoGPS() {
 
         CustomAlertDialog alertDialog = new CustomAlertDialog(this.getActivity());
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
-
         alertDialog.showAlertDialog("GPS is off", "Please turn on your GPS so we can determine your posts distance");
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
@@ -122,25 +149,8 @@ public class HomeFragment extends Fragment
     }
 
     @Override
-    public void onLocalDataReady(String name, String address, String filepath) {
-        tvUserName.setText(name);
-        File imgFile = new File(filepath);
-        if (imgFile.exists()) {
-            Glide.with(this)
-                    .load(imgFile)
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.loading)
-                            .centerCrop()
-                            .dontAnimate()
-                            .override(160, 160)
-                            .dontTransform())
-                    .into(userImage);
-        }
-    }
-
-    @Override
     public void onGetUserDataDone(User user) {
-        // get user data from server. do nothing. lol
+        tvUserName.setText(user.getName());
     }
 
     @Override

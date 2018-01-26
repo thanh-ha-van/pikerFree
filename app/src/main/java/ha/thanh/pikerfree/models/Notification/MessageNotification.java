@@ -7,9 +7,14 @@ package ha.thanh.pikerfree.models.Notification;
 public class MessageNotification {
 
     // use this when need to push notification to user when they have new message and they are offline.
+
+    // noi dung cua notification
     private String body;
+    // nguoi gui notification (userid)
     private String from;
+    // nguoi nhan notification (userid)
     private String to;
+    // time của notification
     private double timestamp;
 
     public MessageNotification(String body, String from, String to, double timestamp) {

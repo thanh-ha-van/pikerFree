@@ -2,12 +2,11 @@
 <resources>
     <color name="colorPrimary">#129FEF</color>
     <color name="blueShade">#AA129FEF</color>
-    <color name="colorPrimaryDark">#1b2349</color>
+    <color name="colorPrimaryDark">#096091</color>
     <color name="colorAccent">#4C515C</color>
     <color name="white">#FFFFFF</color>
     <color name="whiteShade">#A0FFFFFF</color>
-    <color name="gray">#E0E0E0</color>
-    <color name="shade">#80000000</color>
+    <color name="gray">#EEEEEE</color>
     <color name="gray_2">#C2C2C2</color>
     <color name="text_black_3">#4C515C</color>
     <color name="transparent">#00FFFFFF</color>
