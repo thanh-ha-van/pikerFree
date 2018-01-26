@@ -15,7 +15,7 @@
         style="@style/normalToolbar">
 
         <ImageView
-            android:id="@+id/img_back"
+            android:id="@+id/ic_back"
             style="@style/toolbarBackButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView

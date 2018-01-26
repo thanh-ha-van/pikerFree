@@ -25,7 +25,8 @@ public class CustomTextView extends android.support.v7.widget.AppCompatTextView 
     }
 
     private void applyAttributes(Context context, AttributeSet attrs) {
-        Typeface fontDefault = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto_Light.ttf");
+
+        Typeface fontDefault = Typeface.createFromAsset(getContext().getAssets(), "fonts/OpenSans-Regular.ttf");
         this.setTypeface(fontDefault);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CustomTextView);
         final int N = a.getIndexCount();
@@ -34,7 +35,7 @@ public class CustomTextView extends android.support.v7.widget.AppCompatTextView 
             switch (attr) {
                 case R.styleable.CustomTextView_fontAssetName:
                     try {
-                        Typeface font = Typeface.createFromAsset(getResources().getAssets(), a.getString(attr));
+                        Typeface font = Typeface.createFromAsset(getResources().getAssets(), "fonts/" + a.getString(attr));
                         if (font != null) {
                             this.setTypeface(font);
                         }

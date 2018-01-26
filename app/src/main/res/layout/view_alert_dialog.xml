@@ -42,5 +42,5 @@
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:fontAssetName="Roboto-Regular.ttf" />
+        app:fontAssetName="Roboto-Bold.ttf" />
 </RelativeLayout>

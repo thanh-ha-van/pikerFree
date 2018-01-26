@@ -18,13 +18,12 @@ public class HandlePermission {
     private static final String[] PERMISSIONS = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,};
     private Activity mActivity;
     private DialogMessage dialogMessage;
     private CallbackRequestPermission callbackRequestPermission;
-    public static final int REQUEST_ID_PERMISSION = 123;
+    private static final int REQUEST_ID_PERMISSION = 123;
 
     public HandlePermission(Activity context, CallbackRequestPermission callbackRequestPermision) {
         mActivity = context;
@@ -35,7 +34,7 @@ public class HandlePermission {
         }
     }
 
-    public boolean askPermission() {
+    private boolean askPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             List<String> requestPermission = new ArrayList<>();
             for (int i = 0; i < PERMISSIONS.length; i++) {
@@ -93,7 +92,7 @@ public class HandlePermission {
         dialogMessage.showDialog();
     }
 
-    public void startInstalledAppDetailsActivity() {
+    private void startInstalledAppDetailsActivity() {
         final Intent settingActivity = new Intent();
         settingActivity.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         settingActivity.addCategory(Intent.CATEGORY_DEFAULT);

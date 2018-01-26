@@ -18,10 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="Share the world"
+        android:text="@string/slogan"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <View
         android:layout_width="170dp"
@@ -32,18 +32,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:padding="4dp"
-        android:visibility="gone"
         android:background="@drawable/plate_brown_shade"
+        android:padding="8dp"
         android:textAlignment="center"
         android:textColor="@color/red"
-        android:textSize="16sp" />
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="Version 2.0"
+        android:text="@string/version"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="12sp" />
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="From university of Information Technology"
+        android:text="@string/from_uit"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="12sp" />

@@ -28,7 +28,7 @@
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favorite posts"
+                android:text="@string/favorite_list"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
@@ -41,7 +41,6 @@
                 android:gravity="center"
                 android:paddingEnd="7dp"
                 android:paddingStart="7dp"
-                android:text="1"
                 android:textColor="@color/white" />
 
             <View
@@ -49,11 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_right_arrow"
-                android:tint="@color/GrayScale" />
+            <ImageView style="@style/rightButton" />
         </LinearLayout>
 
         <View
@@ -75,7 +70,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notification"
+                android:text="@string/notification"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
@@ -88,7 +83,6 @@
                 android:gravity="center"
                 android:paddingEnd="7dp"
                 android:paddingStart="7dp"
-                android:text="1"
                 android:textColor="@color/white" />
 
             <View
@@ -96,11 +90,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_right_arrow"
-                android:tint="@color/GrayScale" />
+            <ImageView style="@style/rightButton" />
         </LinearLayout>
 
         <View
@@ -109,6 +99,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:background="@color/gray" />
+
         <LinearLayout
             android:id="@+id/view_privacy"
             android:layout_width="match_parent"
@@ -121,15 +112,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Privacy and term"
+                android:text="@string/privacy"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_right_arrow"
-                android:tint="@color/GrayScale" />
+            <ImageView style="@style/rightButton" />
         </LinearLayout>
 
 
@@ -152,15 +139,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="About"
+                android:text="@string/about_us"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_right_arrow"
-                android:tint="@color/GrayScale" />
+            <ImageView style="@style/rightButton" />
         </LinearLayout>
 
         <View
@@ -182,15 +165,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Help"
+                android:text="@string/help_and_tip"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_right_arrow"
-                android:tint="@color/GrayScale" />
+            <ImageView style="@style/rightButton" />
         </LinearLayout>
 
         <View
@@ -212,15 +191,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Manage account"
+                android:text="@string/manage"
                 android:textColor="@color/text_black_3"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_right_arrow"
-                android:tint="@color/GrayScale" />
+            <ImageView style="@style/rightButton" />
         </LinearLayout>
 
         <View

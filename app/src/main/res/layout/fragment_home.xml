@@ -35,7 +35,7 @@
             android:paddingStart="20dp"
             android:textColor="@color/text_black_3"
             android:textSize="18sp"
-            app:fontAssetName="Roboto-Regular.ttf" />
+            app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
 
     <LinearLayout

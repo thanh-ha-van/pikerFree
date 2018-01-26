@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAllCaps="true"
-        app:fontAssetName="Roboto-Regular.ttf"
+        app:fontAssetName="Roboto-Bold.ttf"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 

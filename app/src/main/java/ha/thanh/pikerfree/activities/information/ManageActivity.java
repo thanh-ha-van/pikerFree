@@ -42,7 +42,7 @@ public class ManageActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.img_back)
+    @OnClick(R.id.ic_back)
     public void getBack() {
         onBackPressed();
     }

@@ -29,8 +29,7 @@
         android:padding="16dp"
         android:text="@string/about_team"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        app:fontAssetName="Roboto-Regular.ttf" />
+        android:textSize="18sp"/>
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"

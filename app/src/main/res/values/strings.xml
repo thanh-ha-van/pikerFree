@@ -42,6 +42,17 @@
     <string name="edit_post">Edit post</string>
     <string name="status_close">Closed</string>
     <string name="select_a_category">Select a category</string>
+    <string name="others">Others</string>
+    <string name="pets">Pets</string>
+    <string name="home_living">Home - Living</string>
+    <string name="groceries">Groceries</string>
+    <string name="electronics">Electronics</string>
+    <string name="cloths">Cloths</string>
+    <string name="baby_toy">Toys</string>
+    <string name="recent">Recent</string>
+    <string name="accessories">Accessories</string>
+    <string name="favorite_list">Favorite list</string>
+    <string name="about_us">About us</string>
 
 
     <!-- for view of post -->
@@ -77,6 +88,13 @@
     <string name="map_view">Map view</string>
     <string name="distance">Distance</string>
     <string name="notification">Notification</string>
+    <string name="search_hint">Search&#8230;</string>
+    <string name="search_option">Which do you want to search?</string>
+    <string name="user">User</string>
+    <string name="slogan">Share with the world</string>
+    <string name="version">Version 2.0</string>
+    <string name="from_uit">From university of Information Technology</string>
+    <string name="privacy">Privacy and term</string>
 
     <!-- download and upload service-->
 

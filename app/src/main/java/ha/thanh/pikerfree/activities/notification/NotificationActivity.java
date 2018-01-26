@@ -93,7 +93,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
         }
     }
 
-    @OnClick(R.id.img_back)
+    @OnClick(R.id.ic_back)
     public void getBack() {
         onBackPressed();
     }
