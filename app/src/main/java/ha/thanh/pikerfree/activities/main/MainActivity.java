@@ -1,41 +1,30 @@
 package ha.thanh.pikerfree.activities.main;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ha.thanh.pikerfree.R;
-import ha.thanh.pikerfree.activities.viewPost.PostActivity;
-import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.ViewPagerAdapter;
-import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
-import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
-import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
 import ha.thanh.pikerfree.fragments.home.HomeFragment;
 import ha.thanh.pikerfree.fragments.messages.MessageFragment;
 import ha.thanh.pikerfree.fragments.news.NewsFragment;
 import ha.thanh.pikerfree.fragments.settings.SettingFragment;
 import ha.thanh.pikerfree.otherHandle.HandlePermission;
-import ha.thanh.pikerfree.utils.Utils;
 
 
 public class MainActivity extends AppCompatActivity implements HandlePermission.CallbackRequestPermission {
@@ -44,9 +33,51 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
     BottomNavigationView bottomNavigationView;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.action_summary:
+                            viewPager.setCurrentItem(0);
+                            break;
+                        case R.id.action_quest:
+                            viewPager.setCurrentItem(1);
+                            break;
+                        case R.id.action_message:
+                            viewPager.setCurrentItem(2);
+                            break;
+                        case R.id.action_setting:
+                            viewPager.setCurrentItem(3);
+                            break;
+                    }
+                    return false;
+                }
+            };
     private MenuItem prevMenuItem;
-    private HandlePermission handlePermission;
+    ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (prevMenuItem != null) {
+                prevMenuItem.setChecked(false);
+            } else {
+                bottomNavigationView.getMenu().getItem(0).setChecked(false);
+            }
+            bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+    private HandlePermission handlePermission;
     private List<Fragment> fragments;
     private HomeFragment homeFragment;
     private MessageFragment messageFragment;
@@ -78,51 +109,6 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
                         .getUid())
                 .child("isOnline").setValue(true);
     }
-
-    BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.action_summary:
-                            viewPager.setCurrentItem(0);
-                            break;
-                        case R.id.action_quest:
-                            viewPager.setCurrentItem(1);
-                            break;
-                        case R.id.action_message:
-                            viewPager.setCurrentItem(2);
-                            break;
-                        case R.id.action_setting:
-                            viewPager.setCurrentItem(3);
-                            break;
-                    }
-                    return false;
-                }
-            };
-
-    ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (prevMenuItem != null) {
-                prevMenuItem.setChecked(false);
-            } else {
-                bottomNavigationView.getMenu().getItem(0).setChecked(false);
-            }
-            bottomNavigationView.getMenu().getItem(position).setChecked(true);
-            prevMenuItem = bottomNavigationView.getMenu().getItem(position);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 
     private void setupViewPager(ViewPager viewPager) {
         fragments = new ArrayList<>();
@@ -176,4 +162,5 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         super.onResume();
         messageFragment.refreshLayout();
     }
+
 }

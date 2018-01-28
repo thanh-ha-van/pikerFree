@@ -3,15 +3,13 @@ package ha.thanh.pikerfree.activities.viewPost;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -25,7 +23,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +47,9 @@ import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.customviews.EditCommentDialog;
 import ha.thanh.pikerfree.customviews.UserInforDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+import ha.thanh.pikerfree.dataHelper.PostDataHelper;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
-import ha.thanh.pikerfree.dataHelper.PostDataHelper;
 import ha.thanh.pikerfree.utils.Utils;
 
 import static com.facebook.share.widget.ShareDialog.canShow;
@@ -123,8 +120,7 @@ public class PostActivity extends AppCompatActivity implements
 
     int postID;
     int fromSplash = 0;
-
-
+    PostDataHelper db;
     private ImageSlideAdapter imageSlideAdapter;
     private UserAdapter userAdapter;
     private CommentAdapter commentAdapter;
@@ -133,7 +129,6 @@ public class PostActivity extends AppCompatActivity implements
     private CustomYesNoDialog confirmDialog;
     private CustomAlertDialog alertDialog;
     private GoogleMap googleMap;
-    PostDataHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,14 +157,14 @@ public class PostActivity extends AppCompatActivity implements
     public void doAddToFavList() {
 
         alertDialog.setListener(null);
-        if (tvSaveLocal.getText().toString().equalsIgnoreCase("Add to favorite")) {
+        if (tvSaveLocal.getText().toString().equalsIgnoreCase(getResources().getString(R.string.add_to_favorite))) {
             db.addPost(postID);
-            alertDialog.showAlertDialog("Completed", "This post was added to your favorite list");
-            tvSaveLocal.setText("Remove from favorite");
+            alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.add_fav_mess));
+            tvSaveLocal.setText(getResources().getString(R.string.remove_from_favorite));
         } else {
             db.deletePost(postID);
-            alertDialog.showAlertDialog("Completed", "This post was removed from your favorite list");
-            tvSaveLocal.setText("Add to favorite");
+            alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.remove_fav_mess));
+            tvSaveLocal.setText(getResources().getString(R.string.add_to_favorite));
         }
     }
 
@@ -243,7 +238,7 @@ public class PostActivity extends AppCompatActivity implements
 
     private void checkLocal() {
         if (db.hasObject(postID))
-            tvSaveLocal.setText("Remove from favorite");
+            tvSaveLocal.setText(getResources().getString(R.string.remove_fav_mess));
     }
 
     @Override
@@ -252,17 +247,20 @@ public class PostActivity extends AppCompatActivity implements
             startMain();
         }
         super.onBackPressed();
+
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
     @Override
     public void onUserGranted() {
-        alertDialog.showAlertDialog("Granted", "The owner of this post had granted you this post. This mean you are chosen by the owner to receive the items. Please contact the owner to get the items. Our mission here is complete.\nHave a nice day!");
+        alertDialog.showAlertDialog(getResources().getString(R.string.granted), getResources().getString(R.string.granted_mess));
     }
 
     @Override
@@ -274,7 +272,7 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onCommentDelete(final int position) {
 
-        confirmDialog.showAlertDialog("Comfirm", "Do you want to delete this comment?");
+        confirmDialog.showAlertDialog(getResources().getString(R.string.confirm), getResources().getString(R.string.confirm_delete));
         confirmDialog.setListener(null);
         confirmDialog.setListener(new CustomYesNoDialog.YesNoInterFace() {
             @Override
@@ -294,9 +292,9 @@ public class PostActivity extends AppCompatActivity implements
         requestingUserView.setVisibility(View.VISIBLE);
         userAdapter.notifyDataSetChanged();
         if (type == 1) {
-            tvRequestingUsers.setText("Requesting user list:");
+            tvRequestingUsers.setText(getResources().getString(R.string.requesting_user));
         } else {
-            tvRequestingUsers.setText("Granted user");
+            tvRequestingUsers.setText(getResources().getString(R.string.granted_user));
         }
     }
 
@@ -332,7 +330,7 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onDeleteCommentDone() {
-        alertDialog.showAlertDialog("Deleted", "Your comment has been deleted");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.complete_comment));
     }
 
     @Override
@@ -352,7 +350,7 @@ public class PostActivity extends AppCompatActivity implements
         LatLng sydney = new LatLng(lat, lng);
         if (googleMap != null) {
             googleMap.addMarker(new MarkerOptions().position(sydney)
-                    .title("Post's location"));
+                    .title(getResources().getString(R.string.post_location)));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
             try {
                 googleMap.setMyLocationEnabled(true);
@@ -417,18 +415,19 @@ public class PostActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, EditPostActivity.class);
         intent.putExtra(Constants.POST_VIEW, id);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
     @Override
     public void onShowError(String error) {
-        alertDialog.showAlertDialog("Error", error);
+        alertDialog.showAlertDialog(getResources().getString(R.string.error), error);
     }
 
     @Override
     public void onDeleteDone() {
-        alertDialog.showAlertDialog("Deleted",
-                "Your post has been deleted. Press ok and back to previous screen.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed),
+                getResources().getString(R.string.click_to_back));
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {
@@ -486,7 +485,7 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void onAlreadyRequested() {
-        alertDialog.showAlertDialog("Uh oh!", "You already send the request before.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.already_sent_rq));
         alertDialog.setListener(null);
         waitingDialog.hideDialog();
     }
@@ -494,7 +493,7 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onRequestSent() {
 
-        alertDialog.showAlertDialog("Done", "Your request has been sent to owner. Now just wait for their response.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.complete_send_rq));
         alertDialog.setListener(null);
         waitingDialog.hideDialog();
         userAdapter.notifyDataSetChanged();
@@ -502,7 +501,7 @@ public class PostActivity extends AppCompatActivity implements
 
     @Override
     public void showConfirmDialog(String mess) {
-        confirmDialog.showAlertDialog("Confirm", mess);
+        confirmDialog.showAlertDialog(getResources().getString(R.string.confirm), mess);
     }
 
     @Override
@@ -511,6 +510,7 @@ public class PostActivity extends AppCompatActivity implements
         intent.putExtra(Constants.U_ID_1, id1);
         intent.putExtra(Constants.U_ID_2, id2);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
@@ -519,6 +519,7 @@ public class PostActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, ViewProfileActivity.class);
         intent.putExtra(Constants.USER_ID, id);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -527,6 +528,7 @@ public class PostActivity extends AppCompatActivity implements
         intent.putExtra(Constants.U_ID_1, id);
         intent.putExtra(Constants.U_ID_2, FirebaseAuth.getInstance().getCurrentUser().getUid());
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -538,7 +540,7 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void onGrantedDone(final String userId) {
         waitingDialog.hideDialog();
-        alertDialog.showAlertDialog("Done", "You just decide to give item in this post to user. We now will provide you information of this user. Click OK to go to their profile. Please contact them to discus where and when for you to give the item. We will notify them about this even. Have a nice day!");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.complete_choose_receiver));
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {
@@ -564,7 +566,6 @@ public class PostActivity extends AppCompatActivity implements
             waitingDialog.hideDialog();
             dialog.show(content);
         } else {
-            Log.d("Activity", "you cannot share photos :(");
         }
     }
 

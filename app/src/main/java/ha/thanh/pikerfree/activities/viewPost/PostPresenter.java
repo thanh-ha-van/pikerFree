@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Comment;
 import ha.thanh.pikerfree.models.Notification.MessageNotification;
@@ -32,6 +33,7 @@ import ha.thanh.pikerfree.utils.Utils;
 
 class PostPresenter {
 
+    boolean isUserOwner = false;
     private PostInterface.RequiredViewOps mView;
     private PostModel mModel;
     private List<String> imagePostList;
@@ -43,11 +45,12 @@ class PostPresenter {
     private List<Comment> comments;
     private Post post;
     private Handler handler;
-    boolean isUserOwner = false;
     private int postID;
     private int currentEditingComment = -1;
+    private Context context;
 
     PostPresenter(Context context, PostInterface.RequiredViewOps mView) {
+        this.context = context;
         this.mView = mView;
         mModel = new PostModel(context);
         initData();
@@ -213,7 +216,7 @@ class PostPresenter {
                 updateRequestingUserList();
                 uploadRequestNotification();
             } else
-                mView.onShowError("This post is closed by owner so you can not send request anymore");
+                mView.onShowError(context.getResources().getString(R.string.post_is_closed));
         }
     }
 
@@ -293,7 +296,7 @@ class PostPresenter {
     private void editPost() {
         if (post.getStatus() == Constants.STATUS_OPEN)
             mView.OnGoToEdit(post.getPostId());
-        else mView.onShowError("This post is already closed so you can not edit this anymore.");
+        else mView.onShowError(context.getResources().getString(R.string.post_can_not_edit));
     }
 
     private void initChat() {
@@ -333,8 +336,8 @@ class PostPresenter {
 
     String getStatus() {
         if (post.getStatus() == 1)
-            return "Opening";
-        return "Closed";
+            return context.getResources().getString(R.string.opening);
+        return context.getResources().getString(R.string.closed);
     }
 
     private void getOwnerData(final String UserId) {

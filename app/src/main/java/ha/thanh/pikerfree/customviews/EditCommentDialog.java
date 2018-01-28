@@ -14,14 +14,8 @@ public class EditCommentDialog {
     private optionInterface interFace;
 
 
-    public interface optionInterface {
-
-        void onSaveEdit(String id);
-
-    }
-
     public EditCommentDialog(Activity activity, optionInterface yesNoInterFace) {
-        alertDialog = new Dialog(activity);
+        alertDialog = new Dialog(activity, R.style.PauseDialog);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -32,10 +26,10 @@ public class EditCommentDialog {
 
     public void showAlertDialog(final String userID) {
 
-        final CustomEditText content = (CustomEditText) alertDialog.findViewById(R.id.et_content);
+        final CustomEditText content = alertDialog.findViewById(R.id.et_content);
         content.setText(userID);
-        CustomTextView btnOK = (CustomTextView) alertDialog.findViewById(R.id.btn_ok_dialog);
-        CustomTextView btnCancel = (CustomTextView) alertDialog.findViewById(R.id.btn_cancel_dialog);
+        CustomTextView btnOK = alertDialog.findViewById(R.id.btn_ok_dialog);
+        CustomTextView btnCancel = alertDialog.findViewById(R.id.btn_cancel_dialog);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,5 +46,11 @@ public class EditCommentDialog {
         });
 
         alertDialog.show();
+    }
+
+    public interface optionInterface {
+
+        void onSaveEdit(String id);
+
     }
 }

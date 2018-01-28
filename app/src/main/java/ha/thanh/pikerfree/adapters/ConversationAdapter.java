@@ -54,36 +54,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         handler = new Handler();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.op_status)
-        ImageView opStatus;
-        @BindView(R.id.op_pic)
-        CircleImageView OpImage;
-        @BindView(R.id.tv_last_mess)
-        CustomTextView tvLastMess;
-        @BindView(R.id.tv_time)
-        CustomTextView tvTime;
-        @BindView(R.id.tv_userName)
-        CustomTextView tvOpName;
-        @BindView(R.id.ic_new)
-        CustomTextView tvNewCount;
-
-        MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-            if (mClickListener != null) {
-                mClickListener.onItemClick(getAdapterPosition());
-            }
-        }
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -167,8 +137,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         });
         // Get last mess data
         if (dataSet.get(position).getLastMessId() == 0) {
-            holder.tvLastMess.setText("No message on this conversation");
-            holder.tvTime.setText("N/A");
+            holder.tvLastMess.setText(mConText.getResources().getString(R.string.no_more));
+            holder.tvTime.setText(mConText.getResources().getString(R.string.na));
         } else {
             final DatabaseReference messPref;
             messPref = database
@@ -184,8 +154,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                         holder.tvLastMess.setText(mess.getText());
                         holder.tvTime.setText(Utils.getTimeInHour(mess.getTime()));
                     } else {
-                        holder.tvLastMess.setText("Error");
-                        holder.tvTime.setText("Error");
+                        holder.tvLastMess.setText(mConText.getResources().getString(R.string.error));
+                        holder.tvTime.setText(mConText.getResources().getString(R.string.error));
                     }
                 }
 
@@ -223,5 +193,35 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     public interface ItemClickListener {
         void onItemClick(int position);
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.op_status)
+        ImageView opStatus;
+        @BindView(R.id.op_pic)
+        CircleImageView OpImage;
+        @BindView(R.id.tv_last_mess)
+        CustomTextView tvLastMess;
+        @BindView(R.id.tv_time)
+        CustomTextView tvTime;
+        @BindView(R.id.tv_userName)
+        CustomTextView tvOpName;
+        @BindView(R.id.ic_new)
+        CustomTextView tvNewCount;
+
+        MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            if (mClickListener != null) {
+                mClickListener.onItemClick(getAdapterPosition());
+            }
+        }
     }
 }

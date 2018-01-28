@@ -31,7 +31,7 @@
             android:id="@+id/et_pass"
             style="@style/editTextPlate"
             android:layout_margin="8dp"
-            android:hint="@string/email"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <ImageView

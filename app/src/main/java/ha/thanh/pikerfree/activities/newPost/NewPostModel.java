@@ -16,12 +16,14 @@ public class NewPostModel {
         this.gpsTracker = new GPSTracker(context);
     }
 
-    boolean canGetLocation(){
+    boolean canGetLocation() {
         return gpsTracker.canGetLocation();
     }
-    void stopUssingGPS(){
+
+    void stopUssingGPS() {
         gpsTracker.stopUsingGPS();
     }
+
     double getUserLat() {
         return gpsTracker.getLatitude();
     }

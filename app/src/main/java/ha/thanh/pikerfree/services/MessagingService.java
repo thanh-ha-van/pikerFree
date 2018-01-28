@@ -4,7 +4,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -62,7 +61,6 @@ public class MessagingService extends FirebaseMessagingService {
         }
         sendNotification(title, mess, type, dataId);
     }
-
 
 
     private void sendNotification(String notificationTitle, String notificationBody, String type, String id) {

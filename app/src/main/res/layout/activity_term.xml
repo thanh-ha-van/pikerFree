@@ -16,7 +16,7 @@
             style="@style/normalToolbar">
 
             <ImageView
-                android:id="@+id/img_back"
+                android:id="@+id/ic_back"
                 style="@style/toolbarBackButton" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
@@ -33,7 +33,7 @@
             android:padding="10dp"
             android:text="@string/term_of_use"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:layout_width="match_parent"

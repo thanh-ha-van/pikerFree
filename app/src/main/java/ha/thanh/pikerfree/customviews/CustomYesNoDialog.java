@@ -3,13 +3,10 @@ package ha.thanh.pikerfree.customviews;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import ha.thanh.pikerfree.R;
 
 /**
@@ -21,56 +18,63 @@ public class CustomYesNoDialog {
     private Dialog alertDialog;
     private YesNoInterFace interFace;
 
-    public interface YesNoInterFace {
-
-        void onYesClicked();
-
-        void onNoClicked();
-    }
-
     public CustomYesNoDialog(Activity activity, YesNoInterFace yesNoInterFace) {
-        alertDialog = new Dialog(activity);
+        alertDialog = new Dialog(activity, R.style.PauseDialog);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        if (alertDialog.getWindow() != null)
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setContentView(R.layout.view_yes_no_dialog);
         this.interFace = yesNoInterFace;
     }
 
-    public void setListener(YesNoInterFace yesNoInterFace){
+    public void setListener(YesNoInterFace yesNoInterFace) {
         this.interFace = yesNoInterFace;
     }
 
     public void showAlertDialog(String title, String message) {
 
-        CustomTextView tvContent = (CustomTextView) alertDialog.findViewById(R.id.tv_content);
-        CustomTextView tvTitle = (CustomTextView) alertDialog.findViewById(R.id.tv_title);
-        CustomTextView tvCancel = (CustomTextView) alertDialog.findViewById(R.id.btn_cancel_dialog);
-        CustomTextView tvOK = (CustomTextView) alertDialog.findViewById(R.id.btn_ok_dialog);
+        CustomTextView tvContent = alertDialog.findViewById(R.id.tv_content);
+        CustomTextView tvTitle = alertDialog.findViewById(R.id.tv_title);
+        CustomTextView tvCancel = alertDialog.findViewById(R.id.btn_cancel_dialog);
+        CustomTextView tvOK = alertDialog.findViewById(R.id.btn_ok_dialog);
         tvTitle.setText(title);
         tvContent.setText(message);
 
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
-                interFace.onNoClicked();
+                processAction(false);
             }
         });
-
 
         tvOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
-                interFace.onYesClicked();
+                processAction(true);
+
             }
         });
 
-
         alertDialog.show();
 
+    }
 
+    private void processAction(final boolean isOk) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 200);
+
+    }
+
+    public interface YesNoInterFace {
+
+        void onYesClicked();
+
+        void onNoClicked();
     }
 }

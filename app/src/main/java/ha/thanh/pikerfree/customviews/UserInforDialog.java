@@ -14,20 +14,12 @@ public class UserInforDialog {
     private optionInterface interFace;
 
 
-    public interface optionInterface {
-
-        void onViewProfile(String id);
-
-        void onSendMess(String id);
-
-        void onChoose(String id);
-    }
-
     public UserInforDialog(Activity activity, optionInterface yesNoInterFace) {
-        alertDialog = new Dialog(activity);
+        alertDialog = new Dialog(activity, R.style.PauseDialog);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        if (alertDialog.getWindow() != null)
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         alertDialog.setCanceledOnTouchOutside(true);
         alertDialog.setContentView(R.layout.view_multiple_dialog);
         this.interFace = yesNoInterFace;
@@ -35,10 +27,10 @@ public class UserInforDialog {
 
     public void showAlertDialog(String title, final String userID) {
 
-        CustomTextView tvTitle = (CustomTextView) alertDialog.findViewById(R.id.tv_title);
-        CustomTextView btnViewProfile = (CustomTextView) alertDialog.findViewById(R.id.btn_view_profile);
-        CustomTextView btnSendMess = (CustomTextView) alertDialog.findViewById(R.id.btn_send_mes);
-        CustomTextView btnChoose = (CustomTextView) alertDialog.findViewById(R.id.btn_choose);
+        CustomTextView tvTitle = alertDialog.findViewById(R.id.tv_title);
+        CustomTextView btnViewProfile = alertDialog.findViewById(R.id.btn_view_profile);
+        CustomTextView btnSendMess = alertDialog.findViewById(R.id.btn_send_mes);
+        CustomTextView btnChoose = alertDialog.findViewById(R.id.btn_choose);
         tvTitle.setText(title);
         btnViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,5 +57,14 @@ public class UserInforDialog {
             }
         });
         alertDialog.show();
+    }
+
+    public interface optionInterface {
+
+        void onViewProfile(String id);
+
+        void onSendMess(String id);
+
+        void onChoose(String id);
     }
 }

@@ -1,8 +1,8 @@
 package ha.thanh.pikerfree.activities.notification;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -17,18 +17,15 @@ import ha.thanh.pikerfree.activities.viewPost.PostActivity;
 import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.NotificationAdapter;
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.dataHelper.NotificationDataHelper;
 import ha.thanh.pikerfree.dataHelper.SQLiteNotification;
 
 public class NotificationActivity extends AppCompatActivity implements NotificationAdapter.CommentClickListener {
 
 
-    private List<SQLiteNotification> dataList;
-
     @BindView(R.id.rv_notification)
     RecyclerView rvNotification;
-
+    private List<SQLiteNotification> dataList;
     private NotificationAdapter adapter;
     private NotificationDataHelper dataHelper;
 
@@ -80,6 +77,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
                 intent = new Intent(this, ViewProfileActivity.class);
                 intent.putExtra(Constants.USER_ID, notification.getDataID());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case 3:
             case 4:
@@ -87,6 +85,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
                 intent = new Intent(this, PostActivity.class);
                 intent.putExtra(Constants.POST_VIEW, Integer.valueOf(notification.getDataID()));
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             default:
                 break;
@@ -96,6 +95,12 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
     @OnClick(R.id.ic_back)
     public void getBack() {
         onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
 }

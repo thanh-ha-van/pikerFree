@@ -22,20 +22,21 @@ public class CustomAlertDialog {
         alertDialog = new Dialog(activity);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        if (alertDialog.getWindow() != null)
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         alertDialog.setCanceledOnTouchOutside(true);
         alertDialog.setContentView(R.layout.view_alert_dialog);
     }
 
     public void showAlertDialog(String title, String message) {
 
-        TextView tvTitle = (TextView) alertDialog.findViewById(R.id.tv_title);
+        TextView tvTitle = alertDialog.findViewById(R.id.tv_title);
         tvTitle.setText(title);
 
-        TextView tvContent = (TextView) alertDialog.findViewById(R.id.tv_content);
+        TextView tvContent = alertDialog.findViewById(R.id.tv_content);
         tvContent.setText(message);
 
-        TextView tvCancel = (TextView) alertDialog.findViewById(R.id.btn_ok_dialog);
+        TextView tvCancel = alertDialog.findViewById(R.id.btn_ok_dialog);
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

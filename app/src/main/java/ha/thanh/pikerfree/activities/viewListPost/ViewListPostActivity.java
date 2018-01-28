@@ -1,8 +1,8 @@
 package ha.thanh.pikerfree.activities.viewListPost;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -25,9 +25,9 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     public RecyclerView rvPost;
     @BindView(R.id.tv_title)
     public CustomTextView tvTitle;
-    private ViewListPostPresenter presenter;
     PostAdapter adapter;
     WaitingDialog waitingDialog;
+    private ViewListPostPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     public void onNoResult() {
         waitingDialog.hideDialog();
         CustomAlertDialog customAlertDialog = new CustomAlertDialog(this);
-        customAlertDialog.showAlertDialog("Not found", "There is nothing to show you at this moment");
+        customAlertDialog.showAlertDialog(getResources().getString(R.string.no_data), getResources().getString(R.string.no_data_mess_2));
     }
 
     @Override
@@ -70,6 +70,7 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
             int id = presenter.getPostList().get(position).getPostId();
             in.putExtra(Constants.POST_VIEW, id);
             startActivity(in);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         } catch (Exception e) {
             e.getMessage();
         }
@@ -90,5 +91,6 @@ public class ViewListPostActivity extends AppCompatActivity implements ViewListP
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

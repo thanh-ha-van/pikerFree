@@ -12,6 +12,8 @@ import android.util.Log;
  */
 
 public class GPSTracker implements LocationListener {
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
     private final Context mContext;
     private boolean isGPSEnabled = false;
     private boolean isNetworkEnabled = false;
@@ -19,10 +21,6 @@ public class GPSTracker implements LocationListener {
     private Location location = null;
     private double latitude;
     private double longitude;
-
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
-
     private LocationManager locationManager;
 
     public GPSTracker(Context context) {

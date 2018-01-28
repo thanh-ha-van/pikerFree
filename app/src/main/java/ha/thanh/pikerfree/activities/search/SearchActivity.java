@@ -1,10 +1,10 @@
 package ha.thanh.pikerfree.activities.search;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -37,15 +37,6 @@ import ha.thanh.pikerfree.services.GPSTracker;
 
 public class SearchActivity extends AppCompatActivity implements UserAdapter.ItemClickListener, PostAdapter.ItemClickListener {
 
-    private FirebaseDatabase database;
-    private List<Post> postList;
-    private List<User> userList;
-    private int postCount = -1;
-    private String key;
-    private WaitingDialog waitingDialog;
-    private CustomAlertDialog alertDialog;
-    private GPSTracker gpsTracker;
-
     @BindView(R.id.search_post)
     CustomTextView tvSearchPost;
     @BindView(R.id.search_user)
@@ -56,7 +47,14 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
     RecyclerView rvPost;
     @BindView(R.id.rv_users)
     RecyclerView rvUsers;
-
+    private FirebaseDatabase database;
+    private List<Post> postList;
+    private List<User> userList;
+    private int postCount = -1;
+    private String key;
+    private WaitingDialog waitingDialog;
+    private CustomAlertDialog alertDialog;
+    private GPSTracker gpsTracker;
     private UserAdapter userAdapter;
     private PostAdapter postAdapter;
     private int type = 1;
@@ -97,11 +95,12 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
 
-        alertDialog.showAlertDialog("GPS is off", "Please turn on your GPS so you can search near by post.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.gps_off), getResources().getString(R.string.turn_gps));
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {
                 startActivity(new Intent(action));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
 
@@ -123,7 +122,6 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
     @OnClick(R.id.search_user)
     public void onSearchUserClicked() {
         type = 2;
-        editTextKey.setHint("Search for user");
         tvSearchPost.setClickable(true);
         tvSearchUser.setClickable(false);
         tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_right));
@@ -135,7 +133,6 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
     @OnClick(R.id.search_post)
     public void onSearchPostClicked() {
         type = 1;
-        editTextKey.setHint("Search for post");
         tvSearchPost.setClickable(false);
         tvSearchUser.setClickable(true);
         tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
@@ -206,6 +203,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         Intent intent = new Intent(this, ViewProfileActivity.class);
         intent.putExtra(Constants.USER_ID, userList.get(position).getId());
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -213,6 +211,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra(Constants.POST_VIEW, postList.get(position).getPostId());
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     private void getCurrentPostCount() {
@@ -266,7 +265,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
 
     private void onNoResult() {
         waitingDialog.hideDialog();
-        alertDialog.showAlertDialog("No result found", "Sorry, we can not find any data for your input, please try other key.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.no_data), getResources().getString(R.string.no_data_mess));
     }
 
     private void onHasResult() {
@@ -315,6 +314,12 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
 }

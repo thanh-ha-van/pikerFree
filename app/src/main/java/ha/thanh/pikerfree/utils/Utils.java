@@ -4,16 +4,10 @@ import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.Log;
 
-
-import com.firebase.client.Firebase;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 import ha.thanh.pikerfree.constants.Constants;

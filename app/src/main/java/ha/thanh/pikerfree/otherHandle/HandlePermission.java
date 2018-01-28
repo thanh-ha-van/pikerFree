@@ -20,10 +20,10 @@ public class HandlePermission {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,};
+    private static final int REQUEST_ID_PERMISSION = 123;
     private Activity mActivity;
     private DialogMessage dialogMessage;
     private CallbackRequestPermission callbackRequestPermission;
-    private static final int REQUEST_ID_PERMISSION = 123;
 
     public HandlePermission(Activity context, CallbackRequestPermission callbackRequestPermision) {
         mActivity = context;

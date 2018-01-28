@@ -34,7 +34,7 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
             mView.onNetworkFail();
     }
 
-    void checkLogIn() {
+    private void checkLogIn() {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseDatabase
                     .getInstance()
@@ -44,17 +44,19 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        mView.onLoadConfigDone();
-                    }
-                    else {
+                        mView.onAutoLoginDone();
+                    } else {
                         mView.onAutoLoginFail();
                     }
                 }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
             });
+        } else {
+            mView.onAutoLoginFail();
         }
     }
 
@@ -69,7 +71,9 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
 
     @Override
     public void loadConfigDone() {
-        checkLogIn();
+        if (isFirstRun()) mView.onFirstRun();
+        else
+            checkLogIn();
     }
 
 

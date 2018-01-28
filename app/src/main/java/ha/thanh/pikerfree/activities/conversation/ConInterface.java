@@ -9,7 +9,7 @@ import ha.thanh.pikerfree.models.User;
  * Created by HaVan on 10/16/2017.
  */
 
-public class ConInterface {
+class ConInterface {
     interface RequiredViewOps {
         void getOPDone(User user);
 

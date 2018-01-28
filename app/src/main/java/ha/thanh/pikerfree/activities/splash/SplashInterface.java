@@ -8,11 +8,13 @@ interface SplashInterface {
 
     interface RequiredViewOps {
 
-        void onLoadConfigDone();
+        void onAutoLoginDone();
 
         void onNetworkFail();
 
         void onAutoLoginFail();
+
+        void onFirstRun();
     }
 
     interface RequiredPresenterOps {

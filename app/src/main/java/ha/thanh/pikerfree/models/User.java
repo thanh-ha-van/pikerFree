@@ -26,6 +26,12 @@ public class User {
     public User() {
     }
 
+    public User(String id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
     public List<String> getFollowingUsers() {
         return followingUsers;
     }
@@ -72,12 +78,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public User(String id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
     }
 
     public ArrayList<String> getMess() {

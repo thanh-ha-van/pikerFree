@@ -41,7 +41,7 @@ public class IntroFragment5 extends IntroFragment {
     void startMainActivity() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         getActivity().finish();
     }
 

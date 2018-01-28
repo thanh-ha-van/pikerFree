@@ -2,19 +2,16 @@ package ha.thanh.pikerfree.activities.editProfile;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.io.File;
 import java.io.IOException;
 
 import butterknife.BindView;
@@ -27,6 +24,7 @@ import ha.thanh.pikerfree.customviews.WaitingDialog;
 
 public class EditProfileActivity extends AppCompatActivity implements EditProfileInterface.RequiredViewOps {
 
+    private static final int PICK_IMAGE_REQUEST = 234;
     @BindView(R.id.profile_image)
     public CircleImageView imageView;
     @BindView(R.id.et_user_name)
@@ -38,7 +36,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     private WaitingDialog waitingDialog;
     private Uri filePath;
     private Bitmap bitmap;
-    private static final int PICK_IMAGE_REQUEST = 234;
     private EditProfilePresenter profilePresenter;
     private boolean isPickedImage = false;
 
@@ -63,6 +60,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.btn_save)
@@ -105,13 +103,15 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void hideDialog() {
+
+        Toast.makeText(this, getResources().getString(R.string.completed), Toast.LENGTH_SHORT).show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 waitingDialog.hideDialog();
             }
-        }, 1000);
+        }, 200);
 
     }
 
@@ -141,5 +141,11 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         } catch (IllegalArgumentException e) {
             e.getMessage();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

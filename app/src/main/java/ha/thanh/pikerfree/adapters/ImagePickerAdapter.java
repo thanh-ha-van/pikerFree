@@ -30,27 +30,6 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
         mClickListener = listener;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.img_item_image)
-        ImageView imgItemImage;
-        @BindView(R.id.text_uploading)
-        TextView tvUploading;
-
-        MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) {
-                mClickListener.onAddImagesToAdapter();
-            }
-        }
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -87,6 +66,27 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
     public interface ItemClickListener {
         void onAddImagesToAdapter();
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.img_item_image)
+        ImageView imgItemImage;
+        @BindView(R.id.text_uploading)
+        TextView tvUploading;
+
+        MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) {
+                mClickListener.onAddImagesToAdapter();
+            }
+        }
     }
 
 }

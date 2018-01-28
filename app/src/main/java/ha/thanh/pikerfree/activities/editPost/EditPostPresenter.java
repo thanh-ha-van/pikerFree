@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.ImagePost;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.utils.Utils;
@@ -29,6 +30,7 @@ import ha.thanh.pikerfree.utils.Utils;
 class EditPostPresenter {
 
 
+    int selectedCategory = 8;
     private EditPostInterface.RequiredViewOps mView;
     private List<String> imagePostList;
     private StorageReference mStorageRef;
@@ -37,9 +39,11 @@ class EditPostPresenter {
     private Post post;
     private Handler handler;
     private int postID;
-    int selectedCategory = 8;
+    private Context context;
+    private int imageCount = 0;
 
     EditPostPresenter(Context context, EditPostInterface.RequiredViewOps mView) {
+        this.context = context;
         this.mView = mView;
         initData();
     }
@@ -59,8 +63,6 @@ class EditPostPresenter {
         post = new Post();
         handler = new Handler();
     }
-
-    private int imageCount = 0;
 
     void addAllImage(ArrayList<Image> imagesList) {
         for (int i = 0; i < imagesList.size(); i++) {
@@ -173,8 +175,8 @@ class EditPostPresenter {
 
     String getStatus() {
         if (post.getStatus() == 1)
-            return "Opening";
-        return "Closed";
+            return context.getResources().getString(R.string.opening);
+        return context.getResources().getString(R.string.closed);
     }
 
     void changeStatus(int status) {

@@ -1,8 +1,8 @@
 package ha.thanh.pikerfree.activities.signup;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -51,25 +51,25 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
         String passwordConfirm = etPassConfirm.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            alertDialog.showAlertDialog("Whoop!", "Email must not be empty");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.empty_email));
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            alertDialog.showAlertDialog("Whoop!", "Password must not be empty");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.empty_pass));
             return;
         }
 
         if (password.length() < 6) {
-            alertDialog.showAlertDialog("Whoop!", "Password must not be empty... and at least 6 characters");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.pass_weak));
             return;
         }
         if (!password.equals(passwordConfirm)) {
-            alertDialog.showAlertDialog("Whoop!", "Password confirm does not match");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.not_match));
             return;
         }
         if (TextUtils.isEmpty(username)) {
-            alertDialog.showAlertDialog("Whoop!", "Username must not be empty");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.user_name_empty));
             return;
         }
         waitingDialog.showDialog();
@@ -80,6 +80,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     @OnClick(R.id.btn_log_in)
     public void goToLogin() {
         startActivity(new Intent(this, LoginActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
@@ -97,6 +98,13 @@ public class SignUpActivity extends AppCompatActivity implements SignUpInterface
     public void onDoneProcess() {
         waitingDialog.hideDialog();
         startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

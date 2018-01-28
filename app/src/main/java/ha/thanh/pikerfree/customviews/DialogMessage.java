@@ -13,7 +13,22 @@ public class DialogMessage {
     private AlertDialog alertDialog;
     private TextView tvMessage;
     private OnClickButton onClickButton;
-
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (onClickButton != null) {
+                switch (view.getId()) {
+                    case R.id.btn_cancel_dialog:
+                        onClickButton.onClickNegative();
+                        break;
+                    case R.id.btn_ok_dialog:
+                        onClickButton.onClickPositive();
+                        break;
+                }
+            }
+            alertDialog.dismiss();
+        }
+    };
 
     public DialogMessage(Context context) {
         LayoutInflater _inflater = LayoutInflater.from(context);
@@ -32,25 +47,6 @@ public class DialogMessage {
     public void setOnClickButton(OnClickButton onClickButton) {
         this.onClickButton = onClickButton;
     }
-
-
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (onClickButton != null) {
-                switch (view.getId()) {
-                    case R.id.btn_cancel_dialog:
-                        onClickButton.onClickNegative();
-                        break;
-                    case R.id.btn_ok_dialog:
-                        onClickButton.onClickPositive();
-                        break;
-                }
-            }
-            alertDialog.dismiss();
-        }
-    };
-
 
     public void setMessage(String message) {
         tvMessage.setText(message);

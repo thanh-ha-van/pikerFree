@@ -14,12 +14,8 @@ public class RatingDialog {
     private optionInterface interFace;
 
 
-    public interface optionInterface {
-        void onReview(double rating);
-    }
-
     public RatingDialog(Activity activity, optionInterface interFace) {
-        alertDialog = new Dialog(activity);
+        alertDialog = new Dialog(activity, R.style.PauseDialog);
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -30,11 +26,11 @@ public class RatingDialog {
 
     public void showRatingDialog() {
 
-        CustomTextView rate1 = (CustomTextView) alertDialog.findViewById(R.id.rate_1);
-        CustomTextView rate2 = (CustomTextView) alertDialog.findViewById(R.id.rate_2);
-        CustomTextView rate3 = (CustomTextView) alertDialog.findViewById(R.id.rate_3);
-        CustomTextView rate4 = (CustomTextView) alertDialog.findViewById(R.id.rate_4);
-        CustomTextView rate5 = (CustomTextView) alertDialog.findViewById(R.id.rate_5);
+        CustomTextView rate1 = alertDialog.findViewById(R.id.rate_1);
+        CustomTextView rate2 = alertDialog.findViewById(R.id.rate_2);
+        CustomTextView rate3 = alertDialog.findViewById(R.id.rate_3);
+        CustomTextView rate4 = alertDialog.findViewById(R.id.rate_4);
+        CustomTextView rate5 = alertDialog.findViewById(R.id.rate_5);
 
         rate1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,5 +68,9 @@ public class RatingDialog {
             }
         });
         alertDialog.show();
+    }
+
+    public interface optionInterface {
+        void onReview(double rating);
     }
 }

@@ -28,16 +28,15 @@ import ha.thanh.pikerfree.fragments.intro.IntroFragment5;
 public class IntroActivity extends AppCompatActivity {
     @BindView(R.id.vp_intro)
     public ViewPager vpIntro;
-    private List<Fragment> introFragments;
     @BindView(R.id.layout_count_dot)
     public LinearLayout pager_indicator;
-    @BindView(R.id.view_title)
-    View viewTitle;
     @BindView(R.id.img_next)
     public ImageView imgNext;
     @BindView(R.id.img_back)
     public ImageView imgBack;
-
+    @BindView(R.id.view_title)
+    View viewTitle;
+    private List<Fragment> introFragments;
     private ImageView[] dots;
     private int currentPosition = 0;
 
@@ -147,4 +146,9 @@ public class IntroActivity extends AppCompatActivity {
             vpIntro.setCurrentItem(currentPosition - 1);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
 }

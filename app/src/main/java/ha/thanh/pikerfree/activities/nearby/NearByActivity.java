@@ -3,9 +3,9 @@ package ha.thanh.pikerfree.activities.nearby;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -53,12 +53,6 @@ public class NearByActivity extends AppCompatActivity
         GoogleMap.OnInfoWindowClickListener,
         OnMapReadyCallback {
 
-    private FirebaseDatabase database;
-    private List<Post> postList;
-    private WaitingDialog waitingDialog;
-    private CustomAlertDialog alertDialog;
-    private GPSTracker gpsTracker;
-
     @BindView(R.id.btn_list)
     CustomTextView btnListView;
     @BindView(R.id.btn_map)
@@ -69,7 +63,11 @@ public class NearByActivity extends AppCompatActivity
     CustomTextView tvDistance;
     @BindView(R.id.mapView)
     MapView mMapView;
-
+    private FirebaseDatabase database;
+    private List<Post> postList;
+    private WaitingDialog waitingDialog;
+    private CustomAlertDialog alertDialog;
+    private GPSTracker gpsTracker;
     private PostAdapter postAdapter;
     private GoogleMap googleMap;
     private SharedPreferences sharedPreferences;
@@ -111,6 +109,7 @@ public class NearByActivity extends AppCompatActivity
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra(Constants.POST_VIEW, Integer.valueOf(marker.getSnippet()));
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.btn_refresh)
@@ -193,6 +192,9 @@ public class NearByActivity extends AppCompatActivity
         editor.putInt(Constants.DISTANCE, distance);
         editor.commit();
         super.onBackPressed();
+
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
     }
 
     @Override
@@ -241,8 +243,9 @@ public class NearByActivity extends AppCompatActivity
             Intent intent = new Intent(this, PostActivity.class);
             intent.putExtra(Constants.POST_VIEW, Integer.valueOf(postList.get(position).getPostId()));
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         } catch (Exception e) {
-            alertDialog.showAlertDialog("Error", "Can not complete your action.");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.can_not_complete));
         }
     }
 
@@ -260,7 +263,7 @@ public class NearByActivity extends AppCompatActivity
 
     private void onNoResult() {
         waitingDialog.hideDialog();
-        alertDialog.showAlertDialog("No result found", "Sorry, we can not find any data for your input, please try other key.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.no_data), getResources().getString(R.string.no_data_mess));
     }
 
     private void onHasResult() {
@@ -348,4 +351,5 @@ public class NearByActivity extends AppCompatActivity
         super.onLowMemory();
         mMapView.onLowMemory();
     }
+
 }

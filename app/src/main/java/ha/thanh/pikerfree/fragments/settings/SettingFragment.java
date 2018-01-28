@@ -14,8 +14,8 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.information.AboutActivity;
 import ha.thanh.pikerfree.activities.information.HelpActivity;
 import ha.thanh.pikerfree.activities.information.ManageActivity;
-import ha.thanh.pikerfree.activities.notification.NotificationActivity;
 import ha.thanh.pikerfree.activities.information.TermActivity;
+import ha.thanh.pikerfree.activities.notification.NotificationActivity;
 import ha.thanh.pikerfree.activities.viewListPost.ViewListPostActivity;
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomTextView;
@@ -56,24 +56,28 @@ public class SettingFragment extends Fragment {
     public void goToPrivacy() {
         Intent intent = new Intent(this.getContext(), TermActivity.class);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.view_about)
     public void goToAbout() {
         Intent intent = new Intent(this.getContext(), AboutActivity.class);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.view_help)
     public void toToHelp() {
         Intent intent = new Intent(this.getContext(), HelpActivity.class);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.view_manage_account)
     public void LogOut() {
         Intent intent = new Intent(this.getContext(), ManageActivity.class);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
     }
 
@@ -82,11 +86,13 @@ public class SettingFragment extends Fragment {
         Intent intent = new Intent(this.getContext(), ViewListPostActivity.class);
         intent.putExtra(Constants.CATEGORY, Constants.CATE_LOCAL);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.view_notification)
     public void goToNotification() {
         Intent intent = new Intent(this.getContext(), NotificationActivity.class);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

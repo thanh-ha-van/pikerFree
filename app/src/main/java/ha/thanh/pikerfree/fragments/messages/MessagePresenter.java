@@ -28,12 +28,6 @@ class MessagePresenter {
     private List<String> conversationIdList;
     private String userId;
 
-    List<Conversation> getConversationList() {
-        if (conversationList != null)
-            return conversationList;
-        else return conversationList = new ArrayList<>();
-    }
-
     MessagePresenter(Context context, MessageInterface.RequiredViewOps mView) {
         this.mView = mView;
         handler = new Handler();
@@ -41,6 +35,12 @@ class MessagePresenter {
         conversationIdList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    List<Conversation> getConversationList() {
+        if (conversationList != null)
+            return conversationList;
+        else return conversationList = new ArrayList<>();
     }
 
     void loadAllConversation() {
@@ -85,11 +85,12 @@ class MessagePresenter {
                 conversationPref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                        Conversation conversation = dataSnapshot.getValue(Conversation.class);
-                        conversationList.add(conversation);
-                        Collections.sort(conversationList);
-                        mView.onGetConversationDone();}
+                        if (dataSnapshot.exists()) {
+                            Conversation conversation = dataSnapshot.getValue(Conversation.class);
+                            conversationList.add(conversation);
+                            Collections.sort(conversationList);
+                            mView.onGetConversationDone();
+                        }
                     }
 
                     @Override

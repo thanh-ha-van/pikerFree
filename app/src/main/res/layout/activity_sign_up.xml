@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:hint="Email..."
+            android:hint="@string/input_email"
             android:inputType="textEmailAddress" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="8dp"
-            android:hint="@string/email"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <ha.thanh.pikerfree.customviews.CustomEditText

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -18,7 +17,9 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.User;
 
 
@@ -35,27 +36,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         this.notifyDataSetChanged();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        ImageView imgItemImage;
-        TextView tvName;
-        ImageView opStatus;
-
-        MyViewHolder(View view) {
-            super(view);
-            imgItemImage = (ImageView) view.findViewById(R.id.owner_pic);
-            tvName = (TextView) view.findViewById(R.id.tv_owner_name);
-            opStatus = (ImageView) view.findViewById(R.id.op_status);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            mClickListener.onChooseUser(getAdapterPosition());
-
-        }
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -68,7 +48,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         try {
             holder.tvName.setText(userList.get(position).getName());
             if (userList.get(position).getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-                holder.tvName.setText(userList.get(position).getName() + " (You)");
+                holder.tvName.setText(userList.get(position).getName() + context.getResources().getString(R.string.you));
             if (userList.get(position).isOnline())
                 holder.opStatus.setImageResource(R.drawable.bg_circle_check);
             else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
@@ -111,6 +91,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
         void onChooseUser(int position);
 
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        CircleImageView imgItemImage;
+        CustomTextView tvName;
+        ImageView opStatus;
+
+        MyViewHolder(View view) {
+            super(view);
+            imgItemImage = view.findViewById(R.id.owner_pic);
+            tvName = view.findViewById(R.id.tv_owner_name);
+            opStatus = view.findViewById(R.id.op_status);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mClickListener.onChooseUser(getAdapterPosition());
+
+        }
     }
 }
 

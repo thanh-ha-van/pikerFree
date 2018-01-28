@@ -13,7 +13,7 @@ public class SQLiteMess {
     public SQLiteMess() {
     }
 
-    public SQLiteMess( int id, String conversationId, int lastMessId) {
+    public SQLiteMess(int id, String conversationId, int lastMessId) {
         this.id = id;
         this.conversationId = conversationId;
         this.lastMessId = lastMessId;

@@ -18,7 +18,7 @@ public class SQLiteNotification {
     // is read la trang thai cua notification voi user. user da doc notifcation hay chua
     private int isRead;
     // k them cai isSelected vao cung dc
-    private  boolean isSelected = false;
+    private boolean isSelected = false;
     // thoi gian cua notification
     private long timestamp;
 
@@ -29,6 +29,9 @@ public class SQLiteNotification {
         this.dataID = dataID;
         this.isRead = isRead;
         this.timestamp = timestamp;
+    }
+
+    public SQLiteNotification() {
     }
 
     public long getTimestamp() {
@@ -53,9 +56,6 @@ public class SQLiteNotification {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
-    }
-
-    public SQLiteNotification() {
     }
 
     public int getId() {

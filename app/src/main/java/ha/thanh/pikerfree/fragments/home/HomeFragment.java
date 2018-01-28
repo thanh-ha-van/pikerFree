@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.io.File;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,8 +41,8 @@ public class HomeFragment extends Fragment
     CustomTextView tvLoadingPost;
     @BindView(R.id.tv_no_data)
     CustomTextView tvNoData;
-    private HomePresenter homePresenter;
     PostAdapter adapter;
+    private HomePresenter homePresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +81,7 @@ public class HomeFragment extends Fragment
             Intent in = new Intent(this.getContext(), PostActivity.class);
             in.putExtra(Constants.POST_VIEW, homePresenter.getPostList().get(position).getPostId());
             startActivity(in);
+            this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         } catch (IndexOutOfBoundsException e) {
             e.getCause();
         }
@@ -96,11 +95,13 @@ public class HomeFragment extends Fragment
     @OnClick(R.id.btn_new_post)
     public void doNewPost() {
         startActivity(new Intent(this.getContext(), NewPostActivity.class));
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.btn_edit_profile)
     public void editProfile() {
         startActivity(new Intent(this.getContext(), EditProfileActivity.class));
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -121,16 +122,17 @@ public class HomeFragment extends Fragment
                             .override(150, 150)
                             .dontTransform())
                     .into(userImage);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             e.getMessage();
         }
     }
 
     @OnClick(R.id.view_user)
-    public void goGoMyProfile(){
+    public void goGoMyProfile() {
         Intent intent = new Intent(this.getContext(), ViewProfileActivity.class);
         intent.putExtra(Constants.USER_ID, homePresenter.getUserId());
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override

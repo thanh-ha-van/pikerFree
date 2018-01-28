@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteShade"
+    android:background="@color/white"
     android:overScrollMode="never">
 
     <LinearLayout
@@ -21,6 +21,7 @@
             android:id="@+id/view_favorite"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/color_white"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -62,6 +63,7 @@
             android:id="@+id/view_notification"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/color_white"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -104,6 +106,7 @@
             android:id="@+id/view_privacy"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/color_white"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -131,6 +134,7 @@
             android:id="@+id/view_about"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/color_white"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -157,6 +161,7 @@
             android:id="@+id/view_help"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/color_white"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
@@ -183,6 +188,7 @@
             android:id="@+id/view_manage_account"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@drawable/color_white"
             android:gravity="center"
             android:paddingEnd="16dp"
             android:paddingStart="16dp">

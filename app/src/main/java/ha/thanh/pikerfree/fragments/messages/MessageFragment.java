@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -61,6 +60,7 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
         intent.putExtra(Constants.POST_SEARCH, editTextSearchKey.getText().toString());
         intent.putExtra(Constants.CATEGORY, 2); //1 mean searching for user;
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -105,6 +105,7 @@ public class MessageFragment extends Fragment implements MessageInterface.Requir
         intent.putExtra(Constants.U_ID_1, conversation.getIdUser1());
         intent.putExtra(Constants.U_ID_2, conversation.getIdUser2());
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override

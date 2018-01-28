@@ -37,11 +37,9 @@ public class Conversation implements Comparable<Conversation> {
     public int compareTo(@NonNull Conversation f) {
         if (this.lastMessTime > f.lastMessTime) {
             return -1;
-        }
-        else if (this.lastMessTime < f.lastMessTime) {
+        } else if (this.lastMessTime < f.lastMessTime) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }

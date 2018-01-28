@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,10 +24,11 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 
+import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.User;
 
 
-public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
+class LoginPresenter {
 
     private LoginInterface.RequiredViewOps mView;
     private LoginModel mModel;
@@ -45,7 +45,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
     LoginPresenter(Activity activity, LoginInterface.RequiredViewOps mView) {
         this.mView = mView;
         this.activity = activity;
-        mModel = new LoginModel(activity.getApplicationContext(), this);
+        mModel = new LoginModel(activity.getApplicationContext());
         auth = FirebaseAuth.getInstance();
     }
 
@@ -59,7 +59,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                     .child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists()){
+                    if (dataSnapshot.exists()) {
                         mView.onLogInSuccess();
                     }
                 }
@@ -96,7 +96,7 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                     public void onFailure(@NonNull Exception e) {
                         {
                             mView.onHideWaitingDialog();
-                            mView.onShowAlert("Error", e.getMessage());
+                            mView.onShowAlert(activity.getResources().getString(R.string.error), e.getMessage());
                         }
                     }
                 });
@@ -114,7 +114,6 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     dataUser = dataSnapshot.getValue(User.class);
-                    Log.d("Login", " get Data from server " + dataUser.toString());
                     saveDataToLocal();
                     String instanceId = FirebaseInstanceId.getInstance().getToken();
                     database.getReference().child("users").child(dataUser.getId()).child("instanceId").setValue(instanceId);
@@ -149,12 +148,12 @@ public class LoginPresenter implements LoginInterface.RequiredPresenterOps {
         pathReference.getFile(myPath).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                Log.d("Login", "Got profile pic from server");
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Log.d("Login", exception.toString());
+
             }
         });
         mModel.saveDataLocal(dataUser, myPath.getAbsolutePath());

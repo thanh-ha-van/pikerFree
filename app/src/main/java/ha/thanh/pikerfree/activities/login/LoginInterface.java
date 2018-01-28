@@ -15,8 +15,4 @@ public interface LoginInterface {
 
         void onShowAlert(String title, String message);
     }
-
-    interface RequiredPresenterOps {
-
-    }
 }

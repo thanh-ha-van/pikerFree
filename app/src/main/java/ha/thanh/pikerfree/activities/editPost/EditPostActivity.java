@@ -1,9 +1,9 @@
 package ha.thanh.pikerfree.activities.editPost;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -32,11 +32,11 @@ import ha.thanh.pikerfree.utils.Utils;
 
 public class EditPostActivity extends AppCompatActivity implements EditPostInterface.RequiredViewOps {
 
-    @BindView(R.id.vp_image_slide)
-    ViewPager vpImageSlide;
+    public final static int SELECT_CODE = 101;
     @BindView(R.id.rv_images)
     public RecyclerView recyclerViewImage;
-
+    @BindView(R.id.vp_image_slide)
+    ViewPager vpImageSlide;
     @BindView(R.id.et_item_title)
     CustomEditText title;
     @BindView(R.id.et_description)
@@ -45,13 +45,10 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
     CustomTextView postStatus;
     @BindView(R.id.tv_post_category)
     CustomTextView tvCategory;
-
     @BindView(R.id.scroll_view)
     View scrollView;
-
     @BindView(R.id.edit_images)
     CustomTextView ChangeImg;
-
     private ImageSlideAdapter imageSlideAdapter;
     private ImagePickerAdapter imagePickerAdapter;
     private EditPostPresenter mPresenter;
@@ -90,7 +87,6 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         recyclerViewImage.setAdapter(imagePickerAdapter);
     }
 
-
     @OnClick(R.id.ic_back)
     public void getBack() {
         onBackPressed();
@@ -98,12 +94,12 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
 
     @OnClick(R.id.tv_post_status)
     public void changeStatus() {
-        if (postStatus.getText().toString().equalsIgnoreCase("opening")) {
-            postStatus.setText("Closed");
+        if (postStatus.getText().toString().equalsIgnoreCase(getResources().getString(R.string.opening))) {
+            postStatus.setText(getResources().getString(R.string.closed));
             postStatus.setTextColor(getResources().getColor(R.color.GrayScale));
             mPresenter.changeStatus(Constants.STATUS_CLOSE);
         } else {
-            postStatus.setText("Opening");
+            postStatus.setText(getResources().getString(R.string.opening));
             postStatus.setTextColor(getResources().getColor(R.color.green));
             mPresenter.changeStatus(Constants.STATUS_OPEN);
         }
@@ -111,7 +107,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
 
     @OnClick(R.id.ic_warning)
     public void showWarning() {
-        alertDialog.showAlertDialog("notice", "When you change the status to closed, other users can not send receiving request to you post any more.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.notice), getResources().getString(R.string.warning_close_post));
         alertDialog.setListener(null);
     }
 
@@ -121,11 +117,11 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         String des = description.getText().toString();
 
         if (TextUtils.isEmpty(tile)) {
-            alertDialog.showAlertDialog("Oop!", "Please enter the title for your item");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.warning_lack_title));
             return;
         }
         if (TextUtils.isEmpty(des)) {
-            alertDialog.showAlertDialog("Oop!", "Please enter some description");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.warning_lack_description));
             return;
         }
 
@@ -145,6 +141,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         params.setButtonTextColor(getResources().getColor(R.color.white));
         intent.putExtra(com.vlk.multimager.utils.Constants.KEY_PARAMS, params);
         startActivityForResult(intent, com.vlk.multimager.utils.Constants.TYPE_MULTI_PICKER);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -169,11 +166,10 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     @Override
     public void onPostDone() {
         waitingDialog.hideDialog();
-        alertDialog.showAlertDialog("Done", "Click ok to back to previous screen");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.click_to_back));
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {
@@ -198,12 +194,11 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         tvCategory.setText(Utils.getTextFromIntCategory(post.getCategory()));
     }
 
-    public final static int SELECT_CODE = 101;
-
     @OnClick(R.id.tv_post_category)
     public void startSelectActivity() {
         Intent intent = new Intent(this, SelectCategoryActivity.class);
         startActivityForResult(intent, SELECT_CODE);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
 
@@ -214,6 +209,12 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
 
     @Override
     public void getPostFail() {
-        alertDialog.showAlertDialog("Error", "Can not complete action");
+        alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.can_not_complete));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

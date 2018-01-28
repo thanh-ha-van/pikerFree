@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteShade"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -12,13 +12,13 @@
         style="@style/normalToolbar">
 
         <ImageView
-            android:id="@+id/img_back"
+            android:id="@+id/ic_back"
             style="@style/toolbarBackButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
             style="@style/toolbarTitle"
-            android:text="@string/about_team"
+            android:text="@string/about_us"
             app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
 
@@ -29,7 +29,7 @@
         android:padding="16dp"
         android:text="@string/about_team"
         android:textColor="@color/black"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"

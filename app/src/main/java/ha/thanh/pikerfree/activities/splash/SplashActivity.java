@@ -24,20 +24,42 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
 
     private static final int LOAD_SUCCESS = 1;
     private static final int LOAD_ERROR = 2;
+    @BindView(R.id.tv_network_error)
+    TextView tvNetworkError;
+    Intent intent;
     private Handler handler = new Handler();
     private boolean isFirstRun = true;
     private int statusLoadLanguage;
     private SplashPresenter mPresenter;
     private NotificationDataHelper dataHelper;
-    @BindView(R.id.tv_network_error)
-    TextView tvNetworkError;
-    Intent intent;
+    Runnable runnable = new Runnable() {
+
+        @Override
+        public void run() {
+            process();
+            if (!isFirstRun) {
+                if (statusLoadLanguage == LOAD_SUCCESS) {
+                    getIntentOfNotification(intent);
+                } else if (statusLoadLanguage == LOAD_ERROR) {
+                    tvNetworkError.setVisibility(View.VISIBLE);
+                    tvNetworkError.setText(getResources().getString(R.string.turn_network_on));
+                } else {
+                    handler.postDelayed(this, 100);
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+        handler = new Handler();
+
+    }
+
+    private void process() {
         dataHelper = new NotificationDataHelper(this);
         intent = getIntent();
         mPresenter = new SplashPresenter(SplashActivity.this, this);
@@ -77,6 +99,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
                 intent.putExtra(Constants.USER_ID, sqLiteNotification.getDataID());
                 intent.putExtra(Constants.IS_FIRST_RUN, 1);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 finish();
                 break;
             case 3:
@@ -86,6 +109,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
                 intent.putExtra(Constants.POST_VIEW, Integer.valueOf(sqLiteNotification.getDataID()));
                 intent.putExtra(Constants.IS_FIRST_RUN, 1);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 finish();
                 break;
             default:
@@ -97,28 +121,9 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     public void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
-
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (!isFirstRun) {
-                if (statusLoadLanguage == LOAD_SUCCESS) {
-                    getIntentOfNotification(intent);
-                } else if (statusLoadLanguage == LOAD_ERROR) {
-                    tvNetworkError.setVisibility(View.VISIBLE);
-                    tvNetworkError.setText(getResources().getString(R.string.turn_network_on));
-                } else {
-                    handler.postDelayed(this, 100);
-                }
-            } else {
-                startIntroActivity();
-                mPresenter.setIsFirstRun();
-            }
-        }
-    };
-
 
     private void startIntroActivity() {
         Intent intent = new Intent(this, IntroActivity.class);
@@ -140,8 +145,14 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     }
 
     @Override
-    public void onLoadConfigDone() {
+    public void onAutoLoginDone() {
         statusLoadLanguage = LOAD_SUCCESS;
+    }
+
+    @Override
+    public void onFirstRun() {
+        startIntroActivity();
+        mPresenter.setIsFirstRun();
     }
 
     @Override

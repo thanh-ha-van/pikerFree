@@ -3,19 +3,15 @@ package ha.thanh.pikerfree.activities.information;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.ButterKnife;
@@ -48,7 +44,6 @@ public class ManageActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick(R.id.view_log_out)
     public void LogOut() {
 
@@ -63,7 +58,7 @@ public class ManageActivity extends AppCompatActivity {
 
             }
         });
-        customYesNoDialog.showAlertDialog("Confirm", "Are you sure you want to log out?");
+        customYesNoDialog.showAlertDialog(getResources().getString(R.string.confirm), getResources().getString(R.string.confirm_log_out));
     }
 
 
@@ -71,6 +66,7 @@ public class ManageActivity extends AppCompatActivity {
     public void changePass() {
         Intent intent = new Intent(this, ChangePassActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.view_delete_account)
@@ -99,17 +95,18 @@ public class ManageActivity extends AppCompatActivity {
                     }
                 });
             }
+
             @Override
             public void onNoClicked() {
 
             }
         });
-        customYesNoDialog.showAlertDialog("Confirm", "Are you sure you want to delete your account?");
+        customYesNoDialog.showAlertDialog(getResources().getString(R.string.confirm), getResources().getString(R.string.confirm_delete_acc));
 
     }
 
     private void showFailed(String e) {
-        alertDialog.showAlertDialog("Error", e);
+        alertDialog.showAlertDialog(getResources().getString(R.string.error), e);
     }
 
     private void showSuccess() {
@@ -119,7 +116,7 @@ public class ManageActivity extends AppCompatActivity {
                 doLogOut();
             }
         });
-        alertDialog.showAlertDialog("Success", "Your account had been deleted from Piker.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.complete_delete_acc));
     }
 
     private void doLogOut() {
@@ -131,11 +128,18 @@ public class ManageActivity extends AppCompatActivity {
         edit.putString(Constants.USER_LNG, null);
         edit.putString(Constants.USER_NAME, null);
         edit.putString(Constants.USER_PROFILE_PIC_PATH, null);
-
+        edit.apply();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

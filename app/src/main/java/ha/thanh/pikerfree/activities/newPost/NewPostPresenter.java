@@ -36,14 +36,13 @@ import ha.thanh.pikerfree.utils.Utils;
 
 class NewPostPresenter {
 
+    int selectedCategory = 8;
     private NewPostInterface.RequiredViewOps mView;
     private NewPostModel mModel;
-
     private List<ImagePost> imagePostList;
     private StorageReference mStorageRef;
     private FirebaseDatabase database;
     private FirebaseUser firebaseUser;
-
     private ValueEventListener eventListener;
     private int postCount = -1;
     private int imageCount = 0;
@@ -55,7 +54,6 @@ class NewPostPresenter {
     private boolean isGetDataUser = false;
     private boolean isGetPostCount = false;
     private ArrayList<Integer> postList;
-    int selectedCategory = 8;
 
     NewPostPresenter(Context context, NewPostInterface.RequiredViewOps mView) {
 
@@ -70,7 +68,7 @@ class NewPostPresenter {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
         getCurrentPostCount();
-        if(!mModel.canGetLocation())
+        if (!mModel.canGetLocation())
             mView.onNoGPS();
     }
 
@@ -171,13 +169,10 @@ class NewPostPresenter {
                 postPref = database.getReference("posts").child(postCount + "");
                 postPref.setValue(post);
                 isUpdatedPostDatabase = true;
-                Log.e("thanh", "done save database post to server");
-
                 // save geofire data to search nearby object later
                 DatabaseReference ref = database.getReference("geofire");
                 GeoFire geoFire = new GeoFire(ref);
                 geoFire.setLocation(post.getPostId() + "", new GeoLocation(mModel.getUserLat(), mModel.getUserLng()));
-
                 checkIfCanHideDialog();
             }
         });
@@ -253,7 +248,6 @@ class NewPostPresenter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postCount = dataSnapshot.getValue(int.class);
-                Log.e("thanh", " get count = " + postCount);
                 isGetPostCount = true;
             }
 

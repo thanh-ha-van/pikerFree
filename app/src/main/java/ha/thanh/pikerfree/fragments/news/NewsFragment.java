@@ -44,13 +44,14 @@ public class NewsFragment extends Fragment
     }
 
     @OnClick(R.id.btn_search)
-    public void onbtnSearchClicked(){
-        if(editTextSearchKey.getText().toString().equalsIgnoreCase(""))
+    public void onbtnSearchClicked() {
+        if (editTextSearchKey.getText().toString().equalsIgnoreCase(""))
             return;
         Intent intent = new Intent(this.getContext(), SearchActivity.class);
         intent.putExtra(Constants.POST_SEARCH, editTextSearchKey.getText().toString());
         intent.putExtra(Constants.CATEGORY, 1); //1 mean searching for post;
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.accessories)
@@ -62,6 +63,7 @@ public class NewsFragment extends Fragment
     public void goToAC1() {
         Intent intent = new Intent(this.getContext(), NearByActivity.class);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.recent)
@@ -109,6 +111,7 @@ public class NewsFragment extends Fragment
         Intent intent = new Intent(this.getContext(), ViewListPostActivity.class);
         intent.putExtra(Constants.CATEGORY, category);
         startActivity(intent);
+        this.getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override

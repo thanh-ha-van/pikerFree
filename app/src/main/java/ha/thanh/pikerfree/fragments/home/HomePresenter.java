@@ -27,11 +27,6 @@ class HomePresenter {
     private Handler handler;
     private FirebaseDatabase database;
     private List<Post> postList;
-
-    List<Post> getPostList() {
-        return postList;
-    }
-
     private User user;
 
     HomePresenter(Context context, HomeInterface.RequiredViewOps mView) {
@@ -42,6 +37,10 @@ class HomePresenter {
         database = FirebaseDatabase.getInstance();
         if (!mModel.canGetLocation())
             mView.onNoGPS();
+    }
+
+    List<Post> getPostList() {
+        return postList;
     }
 
     double getUserLat() {

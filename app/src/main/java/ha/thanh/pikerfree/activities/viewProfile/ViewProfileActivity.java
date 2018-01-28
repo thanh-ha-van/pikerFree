@@ -2,8 +2,8 @@ package ha.thanh.pikerfree.activities.viewProfile;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,7 +26,6 @@ import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.RatingDialog;
-import ha.thanh.pikerfree.models.Conversation;
 import ha.thanh.pikerfree.models.User;
 
 public class ViewProfileActivity extends AppCompatActivity
@@ -35,14 +34,14 @@ public class ViewProfileActivity extends AppCompatActivity
         UserAdapter.ItemClickListener {
 
 
-    @BindView(R.id.op_status)
-    ImageView opStatus;
     @BindView(R.id.rv_my_post)
     public RecyclerView rvPost;
     @BindView(R.id.rv_my_followers)
     public RecyclerView rvFollowers;
     @BindView(R.id.profile_image)
     public CircleImageView userImage;
+    @BindView(R.id.op_status)
+    ImageView opStatus;
     @BindView(R.id.user_address)
     CustomTextView tvUserAddress;
     @BindView(R.id.user_name)
@@ -61,10 +60,10 @@ public class ViewProfileActivity extends AppCompatActivity
     CustomTextView tvRateNum;
     @BindView(R.id.user_email)
     CustomTextView tvEmail;
-    private ViewProfilePresenter presenter;
     PostAdapter adapter;
     UserAdapter userAdapter;
-    int fromSplast;
+    int fromSplash;
+    private ViewProfilePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +98,13 @@ public class ViewProfileActivity extends AppCompatActivity
     private void initData() {
         Intent intent = getIntent();
         String userId = intent.getStringExtra(Constants.USER_ID);
-        fromSplast = intent.getIntExtra(Constants.IS_FIRST_RUN, 0);
-
+        fromSplash = intent.getIntExtra(Constants.IS_FIRST_RUN, 0);
         presenter = new ViewProfilePresenter(this, this, userId);
     }
 
     @OnClick(R.id.btn_follow)
     public void followUser() {
-        if (followBtn.getText().toString().equalsIgnoreCase("follow"))
+        if (followBtn.getText().toString().equalsIgnoreCase(getResources().getString(R.string.follow)))
             presenter.followUser();
         else presenter.unfollowUser();
     }
@@ -117,21 +115,22 @@ public class ViewProfileActivity extends AppCompatActivity
         intent.putExtra(Constants.U_ID_1, presenter.getOPId());
         intent.putExtra(Constants.U_ID_2, presenter.getUserId());
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
     public void onUnFollowSuccess(String inform) {
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
-        alertDialog.showAlertDialog("Success", inform);
-        followBtn.setText("FOLLOW");
+        alertDialog.showAlertDialog(getResources().getString(R.string.success), inform);
+        followBtn.setText(getResources().getString(R.string.follow));
     }
 
     @Override
     public void onFollowSuccess(String inform) {
 
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
-        alertDialog.showAlertDialog("Success", inform);
-        followBtn.setText("UNFOLLOW");
+        alertDialog.showAlertDialog(getResources().getString(R.string.success), inform);
+        followBtn.setText(getResources().getString(R.string.un_follow));
     }
 
     @Override
@@ -146,7 +145,7 @@ public class ViewProfileActivity extends AppCompatActivity
     public void getFollowingUserDone() {
         rvFollowers.setVisibility(View.VISIBLE);
         tvNoData.setVisibility(View.GONE);
-        tvLoadingPost.setText("Your followers");
+        tvLoadingPost.setText(getResources().getString(R.string.your_follower));
         userAdapter.notifyDataSetChanged();
     }
 
@@ -156,6 +155,7 @@ public class ViewProfileActivity extends AppCompatActivity
         Intent intent = new Intent(this, ViewProfileActivity.class);
         intent.putExtra(Constants.USER_ID, presenter.getFllowingLisst().get(position));
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -166,15 +166,19 @@ public class ViewProfileActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (fromSplast == 1) {
+        if (fromSplash == 1) {
             startMain();
         }
         super.onBackPressed();
+
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
     }
 
     public void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
@@ -208,14 +212,14 @@ public class ViewProfileActivity extends AppCompatActivity
 
     @Override
     public void onAlreadyFollow() {
-        followBtn.setText("UNFOLLOW");
+        followBtn.setText(getResources().getString(R.string.un_follow));
     }
 
     @Override
     public void onGetUserPostsDone() {
         rvPost.setVisibility(View.VISIBLE);
         tvNoData.setVisibility(View.GONE);
-        tvLoadingPost.setText("User's posts");
+        tvLoadingPost.setText(getResources().getString(R.string.your_post));
         adapter.notifyDataSetChanged();
     }
 
@@ -224,6 +228,7 @@ public class ViewProfileActivity extends AppCompatActivity
         Intent in = new Intent(this, PostActivity.class);
         in.putExtra(Constants.POST_VIEW, presenter.getPostList().get(position).getPostId());
         startActivity(in);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.rating)
@@ -241,13 +246,13 @@ public class ViewProfileActivity extends AppCompatActivity
     @Override
     public void onRatingFail(String err) {
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
-        alertDialog.showAlertDialog("Error", err);
+        alertDialog.showAlertDialog(getResources().getString(R.string.error), err);
     }
 
     @Override
     public void onRatingDone(double newrate) {
         tvRateNum.setText(String.valueOf(newrate));
         CustomAlertDialog alertDialog = new CustomAlertDialog(this);
-        alertDialog.showAlertDialog("Done", "Successful");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), "");
     }
 }

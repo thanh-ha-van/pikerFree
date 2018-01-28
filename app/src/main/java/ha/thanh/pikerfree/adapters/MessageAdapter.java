@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 import ha.thanh.pikerfree.R;
+import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.models.Messages.Message;
 import ha.thanh.pikerfree.utils.Utils;
 
@@ -73,13 +73,13 @@ public class MessageAdapter extends RecyclerView.Adapter {
     }
 
     private class MessageHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText;
+        CustomTextView messageText, timeText;
 
         MessageHolder(View itemView) {
             super(itemView);
 
-            messageText = (TextView) itemView.findViewById(R.id.tv_mess_content);
-            timeText = (TextView) itemView.findViewById(R.id.tv_mess_time);
+            messageText = itemView.findViewById(R.id.tv_mess_content);
+            timeText = itemView.findViewById(R.id.tv_mess_time);
         }
 
         void bind(Message message, int position) {

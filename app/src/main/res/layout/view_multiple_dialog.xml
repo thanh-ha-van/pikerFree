@@ -29,7 +29,7 @@
         android:layout_margin="8dp"
         android:background="@drawable/plate_shade_blue"
         android:gravity="center"
-        android:text="VIEW PROFILE"
+        android:text="@string/view_profile"
         android:textColor="@color/white"
         android:textSize="18sp" />
 
@@ -40,7 +40,7 @@
         android:layout_margin="5dp"
         android:background="@drawable/plate_green_shade"
         android:gravity="center"
-        android:text="SEND MESSAGE"
+        android:text="@string/send_mess"
         android:textColor="@color/white"
         android:textSize="18sp" />
 
@@ -51,7 +51,7 @@
         android:layout_margin="8dp"
         android:background="@drawable/plate_orange_shade"
         android:gravity="center"
-        android:text="CHOOSE"
+        android:text="@string/choose"
         android:textColor="@color/white"
         android:textSize="18sp" />
 </LinearLayout>

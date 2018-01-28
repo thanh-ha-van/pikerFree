@@ -12,7 +12,7 @@
         style="@style/normalToolbar">
 
         <ImageView
-            android:id="@+id/img_back"
+            android:id="@+id/ic_back"
             style="@style/toolbarBackButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -27,6 +27,7 @@
         android:id="@+id/view_log_out"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@drawable/color_white"
         android:gravity="center"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
@@ -57,6 +58,7 @@
         android:id="@+id/view_change_pass"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@drawable/color_white"
         android:gravity="center"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
@@ -87,6 +89,7 @@
         android:id="@+id/view_delete_account"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@drawable/color_white"
         android:gravity="center"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">

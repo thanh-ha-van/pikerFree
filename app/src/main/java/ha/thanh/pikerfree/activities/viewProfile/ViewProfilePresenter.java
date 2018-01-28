@@ -17,6 +17,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.models.User;
@@ -31,19 +32,11 @@ public class ViewProfilePresenter {
     private String currentUserId;
     private List<String> followingIdList;
     private List<User> folowingUserList;
-
-    public List<User> getFolowingUserList() {
-        return folowingUserList;
-    }
-
+    private Context context;
     private GPSTracker gpsTracker;
     private User user;
-
-    List<Post> getPostList() {
-        return postList;
-    }
-
     ViewProfilePresenter(Context context, ViewProfileInterface.RequiredViewOps mView, String currentUserId) {
+        this.context = context;
         this.mView = mView;
         this.currentUserId = currentUserId;
         handler = new Handler();
@@ -52,6 +45,14 @@ public class ViewProfilePresenter {
         folowingUserList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         gpsTracker = new GPSTracker(context);
+    }
+
+    List<User> getFolowingUserList() {
+        return folowingUserList;
+    }
+
+    List<Post> getPostList() {
+        return postList;
     }
 
     String getOPId() {
@@ -68,7 +69,7 @@ public class ViewProfilePresenter {
         if (user.getRatedUsers() != null) {
             for (int i = 0; i < list.size(); i++) {
                 if (FirebaseAuth.getInstance().getCurrentUser().getUid().equalsIgnoreCase(list.get(i))) {
-                    mView.onRatingFail("You already review this user before");
+                    mView.onRatingFail(context.getResources().getString(R.string.already_review));
                     return;
                 }
             }
@@ -141,10 +142,10 @@ public class ViewProfilePresenter {
 
     private void getFollowingUser() {
 
-        if(user.getFollowingUsers() != null)
-        followingIdList.addAll(user.getFollowingUsers());
+        if (user.getFollowingUsers() != null)
+            followingIdList.addAll(user.getFollowingUsers());
         for (String id : followingIdList
-             ) {
+                ) {
             DatabaseReference postRef;
             postRef = database
                     .getReference("users")
@@ -166,9 +167,10 @@ public class ViewProfilePresenter {
         }
     }
 
-    List<String> getFllowingLisst(){
+    List<String> getFllowingLisst() {
         return followingIdList;
     }
+
     private void checkFollowStatus() {
         List<String> followingUsers = new ArrayList<>();
         if (user.getFollowingUsers() != null)
@@ -192,7 +194,7 @@ public class ViewProfilePresenter {
                 .child("followingUsers");
         databaseReference.setValue(followingUsers);
         uploadNotification(getOPId(), getUserId(), "followers", getUserId());
-        mView.onFollowSuccess("You now following this user, you will get notification when this user have new post.");
+        mView.onFollowSuccess(context.getResources().getString(R.string.follow_done_mess));
     }
 
 
@@ -218,7 +220,7 @@ public class ViewProfilePresenter {
                 .child(user.getId())
                 .child("followingUsers");
         databaseReference.setValue(followingUsers);
-        mView.onUnFollowSuccess("You now remove following to this user");
+        mView.onUnFollowSuccess(context.getResources().getString(R.string.unfollow_mess));
     }
 
     private void getUserImageLink(String link) {

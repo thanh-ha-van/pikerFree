@@ -9,7 +9,7 @@ import ha.thanh.pikerfree.constants.Constants;
  * Created by HaVan on 9/10/2017.
  */
 
- class EditProfileModel {
+class EditProfileModel {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 

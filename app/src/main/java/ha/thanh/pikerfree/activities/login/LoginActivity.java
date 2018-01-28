@@ -1,8 +1,8 @@
 package ha.thanh.pikerfree.activities.login;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -41,17 +41,19 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
     @OnClick(R.id.btn_sign_up)
     public void doSignUp() {
         startActivity(new Intent(this, SignUpActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
     @OnClick(R.id.tv_help)
-    public void showHelp(){
-        alertDialog.showAlertDialog("Help", "Username is email without suffixes. If you get trouble logging in please contact email thanhahvan1@gmail.com for help.");
+    public void showHelp() {
+        alertDialog.showAlertDialog(getResources().getString(R.string.help_log_in), getResources().getString(R.string.help_mess));
     }
 
     @OnClick(R.id.btn_forget)
     public void doForgetPassword() {
         startActivity(new Intent(LoginActivity.this, ForgetPassActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
@@ -62,11 +64,11 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
         final String password = etPass.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
-            alertDialog.showAlertDialog("Oop!", "Please enter your registered email address");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.empty_email));
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            alertDialog.showAlertDialog("Oop!", "Please enter your password");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.empty_pass));
             return;
         }
         waitingDialog.showDialog();
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
     public void startMain() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
 
@@ -96,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
 
     @Override
     public void onPasswordWeek() {
-        etPass.setError("Password must be at least 6 characters");
+        etPass.setError(getResources().getString(R.string.pass_weak));
     }
 
     @Override
@@ -108,5 +111,6 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.R
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

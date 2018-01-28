@@ -46,40 +46,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         this.lng = lng;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.img_post_image)
-        ImageView imgPostImage;
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.tv_day)
-        TextView tvDay;
-        @BindView(R.id.tv_status)
-        TextView tvStatus;
-        @BindView(R.id.tv_distance)
-        TextView tvDistance;
-        @BindView(R.id.tv_description)
-        TextView tvDes;
-        @BindView(R.id.tv_owner_name)
-        TextView tvOwnerName;
-        @BindView(R.id.owner_pic)
-        CircleImageView ownerPic;
-
-        MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-            if (mClickListener != null) {
-                mClickListener.onItemClick(getAdapterPosition());
-            }
-        }
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -211,9 +177,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     private String getTextFromStatus(int status) {
         switch (status) {
             case 1:
-                return mConText.getResources().getString(R.string.status_open);
+                return mConText.getResources().getString(R.string.opening);
             case 2:
-                return mConText.getResources().getString(R.string.status_close);
+                return mConText.getResources().getString(R.string.closed);
             default:
                 return "";
         }
@@ -226,6 +192,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
     public interface ItemClickListener {
         void onItemClick(int position);
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.img_post_image)
+        ImageView imgPostImage;
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+        @BindView(R.id.tv_day)
+        TextView tvDay;
+        @BindView(R.id.tv_status)
+        TextView tvStatus;
+        @BindView(R.id.tv_distance)
+        TextView tvDistance;
+        @BindView(R.id.tv_description)
+        TextView tvDes;
+        @BindView(R.id.tv_owner_name)
+        TextView tvOwnerName;
+        @BindView(R.id.owner_pic)
+        CircleImageView ownerPic;
+
+        MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            if (mClickListener != null) {
+                mClickListener.onItemClick(getAdapterPosition());
+            }
+        }
     }
 }
 

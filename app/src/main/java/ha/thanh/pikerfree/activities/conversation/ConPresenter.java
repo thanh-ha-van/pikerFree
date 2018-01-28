@@ -19,8 +19,8 @@ import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.models.Conversation;
-import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.Messages.Message;
+import ha.thanh.pikerfree.models.Notification.MessageNotification;
 import ha.thanh.pikerfree.models.User;
 import ha.thanh.pikerfree.utils.Utils;
 
@@ -44,9 +44,6 @@ class ConPresenter {
     private User OPUser;
     private boolean deleteOne = false, deleteOp = false;
 
-    String getOpId() {
-        return OPUser.getId();
-    }
 
     private int currentPull = 10;
     private int nextPull = 0;
@@ -57,9 +54,6 @@ class ConPresenter {
     private ArrayList<String> conversationList1;
     private ArrayList<String> conversationList2;
 
-    List<Message> getMessageList() {
-        return messageList;
-    }
 
     ConPresenter(Context context, ConInterface.RequiredViewOps mView, String id1, String id2) {
         this.mView = mView;
@@ -68,6 +62,16 @@ class ConPresenter {
         mModel = new ConModel(context);
         initData();
     }
+
+
+    List<Message> getMessageList() {
+        return messageList;
+    }
+
+    String getOpId() {
+        return OPUser.getId();
+    }
+
 
     private void initData() {
 

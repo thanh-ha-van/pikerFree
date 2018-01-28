@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.models.Comment;
-import ha.thanh.pikerfree.models.User;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder> {
 
@@ -46,43 +45,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         this.ownerId = OwnerId;
         this.userId = userID;
 
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.op_pic)
-        CircleImageView OpImage;
-        @BindView(R.id.tv_comment)
-        TextView tvComment;
-        @BindView(R.id.img_delete)
-        ImageView btnDelete;
-        @BindView(R.id.img_edit)
-        ImageView btnEdit;
-        @BindView(R.id.img_options)
-        ImageView btnOptions;
-
-        MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mClickListener.onCommentDelete(getAdapterPosition());
-                }
-            });
-            btnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mClickListener.onCommentEdit(getAdapterPosition());
-                }
-            });
-            tvComment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mClickListener.onCommentClicked(getAdapterPosition());
-                }
-            });
-        }
     }
 
     @Override
@@ -104,7 +66,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         userPref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     String link = dataSnapshot.getValue(String.class);
                     FirebaseStorage
                             .getInstance()
@@ -187,5 +149,42 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         void onCommentClicked(int position);
 
         void onCommentDelete(int position);
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.op_pic)
+        CircleImageView OpImage;
+        @BindView(R.id.tv_comment)
+        TextView tvComment;
+        @BindView(R.id.img_delete)
+        ImageView btnDelete;
+        @BindView(R.id.img_edit)
+        ImageView btnEdit;
+        @BindView(R.id.img_options)
+        ImageView btnOptions;
+
+        MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mClickListener.onCommentDelete(getAdapterPosition());
+                }
+            });
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mClickListener.onCommentEdit(getAdapterPosition());
+                }
+            });
+            tvComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mClickListener.onCommentClicked(getAdapterPosition());
+                }
+            });
+        }
     }
 }

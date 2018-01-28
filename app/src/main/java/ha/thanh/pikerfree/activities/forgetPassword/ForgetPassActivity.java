@@ -1,8 +1,8 @@
 package ha.thanh.pikerfree.activities.forgetPassword;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -21,10 +21,9 @@ public class ForgetPassActivity extends AppCompatActivity {
 
     @BindView(R.id.et_email_reset)
     EditText emailReset;
-
-    private FirebaseAuth auth;
     CustomAlertDialog alertDialog;
     WaitingDialog waitingDialog;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class ForgetPassActivity extends AppCompatActivity {
             String email = emailReset.getText().toString().trim();
 
             if (TextUtils.isEmpty(email)) {
-                alertDialog.showAlertDialog("Error", "Email must not be empty!");
+                alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.empty_email));
                 return;
             }
             waitingDialog.showDialog();
@@ -52,9 +51,9 @@ public class ForgetPassActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                alertDialog.showAlertDialog("Done", "We have sent you instructions to reset your password!");
+                                alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.we_sent_email));
                             } else {
-                                alertDialog.showAlertDialog("Failed", "Failed to send reset email!");
+                                alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.can_not_complete));
                             }
 
                             waitingDialog.hideDialog();
@@ -63,4 +62,9 @@ public class ForgetPassActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
 }

@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnFailureListener;

@@ -2,8 +2,8 @@ package ha.thanh.pikerfree.activities.selectCategory;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -40,6 +40,12 @@ public class SelectCategoryActivity extends AppCompatActivity implements Categor
         returnIntent.putExtra("selected", position + 1);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }
 

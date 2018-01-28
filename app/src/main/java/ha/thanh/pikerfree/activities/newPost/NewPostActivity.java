@@ -1,9 +1,9 @@
 package ha.thanh.pikerfree.activities.newPost;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -24,7 +24,6 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.selectCategory.SelectCategoryActivity;
 import ha.thanh.pikerfree.adapters.ImagePickerAdapter;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
-import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
 import ha.thanh.pikerfree.utils.Utils;
 
@@ -33,6 +32,7 @@ public class NewPostActivity extends AppCompatActivity
         implements NewPostInterface.RequiredViewOps,
         CustomAlertDialog.AlertListener {
 
+    public final static int SELECT_CODE = 101;
     @BindView(R.id.rv_images)
     public RecyclerView recyclerViewImage;
     @BindView(R.id.et_item_title)
@@ -41,13 +41,10 @@ public class NewPostActivity extends AppCompatActivity
     public TextView tvDescription;
     @BindView(R.id.tv_select)
     public TextView tvSelect;
-
     private NewPostPresenter mPresenter;
     private ImagePickerAdapter adapter;
-
     private WaitingDialog waitingDialog;
     private CustomAlertDialog alertDialog;
-    public final static int SELECT_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +88,7 @@ public class NewPostActivity extends AppCompatActivity
         params.setButtonTextColor(getResources().getColor(R.color.white));
         intent.putExtra(Constants.KEY_PARAMS, params);
         startActivityForResult(intent, Constants.TYPE_MULTI_PICKER);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @OnClick(R.id.bnt_post_this)
@@ -100,15 +98,15 @@ public class NewPostActivity extends AppCompatActivity
         String description = tvDescription.getText().toString();
         alertDialog.setListener(null);
         if (TextUtils.isEmpty(tile)) {
-            alertDialog.showAlertDialog("Oop!", "Please enter the title for your item");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.warning_lack_title));
             return;
         }
         if (TextUtils.isEmpty(description)) {
-            alertDialog.showAlertDialog("Oop!", "Please enter some description");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.warning_lack_description));
             return;
         }
         if (tvSelect.getText().equals(getResources().getString(R.string.select_a_category))) {
-            alertDialog.showAlertDialog("Oop!", "Please select a category for you post");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.warning_lack_category));
             return;
         }
 
@@ -120,19 +118,21 @@ public class NewPostActivity extends AppCompatActivity
     public void startSelectActivity() {
         Intent intent = new Intent(this, SelectCategoryActivity.class);
         startActivityForResult(intent, SELECT_CODE);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
     public void onNoGPS() {
 
-        CustomAlertDialog  alertDialog =  new CustomAlertDialog(this);
+        CustomAlertDialog alertDialog = new CustomAlertDialog(this);
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
 
-        alertDialog.showAlertDialog("GPS is off", "Please turn on your GPS so the other can see where your post is.");
+        alertDialog.showAlertDialog(getResources().getString(R.string.gps_off), getResources().getString(R.string.turn_gps));
         alertDialog.setListener(new CustomAlertDialog.AlertListener() {
             @Override
             public void onOkClicked() {
                 startActivity(new Intent(action));
+
             }
         });
     }
@@ -140,7 +140,7 @@ public class NewPostActivity extends AppCompatActivity
     @Override
     public void onPostDone() {
         waitingDialog.hideDialog();
-        alertDialog.showAlertDialog("Done", "Completed, Press OK to back to Main screen");
+        alertDialog.showAlertDialog(getResources().getString(R.string.completed), getResources().getString(R.string.click_to_back));
     }
 
     @Override
@@ -185,5 +185,11 @@ public class NewPostActivity extends AppCompatActivity
     @Override
     public void onOkClicked() {
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

@@ -2,6 +2,7 @@ package ha.thanh.pikerfree.activities.viewListPost;
 
 import android.content.Context;
 import android.os.Handler;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.models.Post;
 import ha.thanh.pikerfree.dataHelper.PostDataHelper;
+import ha.thanh.pikerfree.models.Post;
 
 
 class ViewListPostPresenter {
@@ -30,14 +31,24 @@ class ViewListPostPresenter {
     private int postCount = -1;
     private Context context;
 
-    void setCurrentCategory(int currentCategory) {
-        this.currentCategory = currentCategory;
-        hasCategory = true;
-        checkIfCanGetData();
+    ViewListPostPresenter(Context context, ViewListPostInterface.RequiredViewOps mView) {
+        this.mView = mView;
+        this.context = context;
+        mModel = new ViewListPostModel(context);
+        postList = new ArrayList<>();
+        database = FirebaseDatabase.getInstance();
+        handler = new Handler();
+        getCurrentPostCount();
     }
 
     int getCurrentCategory() {
         return currentCategory;
+    }
+
+    void setCurrentCategory(int currentCategory) {
+        this.currentCategory = currentCategory;
+        hasCategory = true;
+        checkIfCanGetData();
     }
 
     private void checkIfCanGetData() {
@@ -47,16 +58,6 @@ class ViewListPostPresenter {
 
     List<Post> getPostList() {
         return postList;
-    }
-
-    ViewListPostPresenter(Context context, ViewListPostInterface.RequiredViewOps mView) {
-        this.mView = mView;
-        this.context = context;
-        mModel = new ViewListPostModel(context);
-        postList = new ArrayList<>();
-        database = FirebaseDatabase.getInstance();
-        handler = new Handler();
-        getCurrentPostCount();
     }
 
     private void getCurrentPostCount() {
@@ -173,7 +174,7 @@ class ViewListPostPresenter {
                 if (postList.size() == 0)
                     mView.onNoResult();
             }
-        }, 6000);
+        }, 8000);
 
     }
 }

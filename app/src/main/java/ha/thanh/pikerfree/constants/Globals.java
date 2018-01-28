@@ -9,16 +9,15 @@ public class Globals {
     private Config config;
 
 
+    private Globals() {
+        config = new Config();
+    }
+
     public static Globals getIns() {
         if (ourInstance == null) {
             ourInstance = new Globals();
         }
         return ourInstance;
-    }
-
-
-    private Globals() {
-        config = new Config();
     }
 
     public Config getConfig() {

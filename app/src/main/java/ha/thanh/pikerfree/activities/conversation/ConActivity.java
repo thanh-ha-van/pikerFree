@@ -2,9 +2,9 @@ package ha.thanh.pikerfree.activities.conversation;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -21,7 +21,6 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.activities.viewProfile.ViewProfileActivity;
 import ha.thanh.pikerfree.adapters.MessageAdapter;
 import ha.thanh.pikerfree.constants.Constants;
-import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.CustomTextView;
 import ha.thanh.pikerfree.customviews.CustomYesNoDialog;
@@ -87,8 +86,9 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
             Intent intent = new Intent(this, ViewProfileActivity.class);
             intent.putExtra(Constants.USER_ID, presenter.getOpId());
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         } catch (Exception e) {
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,7 +109,7 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
             public void onNoClicked() {
             }
         });
-        customYesNoDialog.showAlertDialog("Confirm", "Are you sure that you want to delete this conversation?");
+        customYesNoDialog.showAlertDialog(getResources().getString(R.string.confirm), getResources().getString(R.string.confirm_delete));
     }
 
     @OnClick(R.id.ic_back)
@@ -140,7 +140,7 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
             e.getMessage();
         }
         swipeRefreshLayout.setRefreshing(false);
-        Toast.makeText(this, "No more messages", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.no_more), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -150,7 +150,7 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
 
     @Override
     public void onDeleteFailed() {
-        Toast.makeText(this, "Error deleteing this conversation", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -164,7 +164,7 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
 
     @Override
     public void onOpNotFound() {
-        OPName.setText("Deleted User");
+        OPName.setText(getResources().getString(R.string.deleted_user));
         opStatus.setImageResource(R.drawable.bg_circle_gray);
     }
 
@@ -189,5 +189,11 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

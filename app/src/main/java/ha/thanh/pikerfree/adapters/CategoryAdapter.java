@@ -22,26 +22,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         this.mClickListener = listener;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.tvSectionTitle)
-        TextView tvTitle;
-
-        MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-            if (mClickListener != null) {
-                mClickListener.onItemClick(getAdapterPosition());
-            }
-        }
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -61,5 +41,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     public interface ItemClickListener {
         void onItemClick(int position);
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.tvSectionTitle)
+        TextView tvTitle;
+
+        MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            if (mClickListener != null) {
+                mClickListener.onItemClick(getAdapterPosition());
+            }
+        }
     }
 }

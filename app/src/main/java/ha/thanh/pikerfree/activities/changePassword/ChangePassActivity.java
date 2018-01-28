@@ -1,8 +1,8 @@
 package ha.thanh.pikerfree.activities.changePassword;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +18,7 @@ import ha.thanh.pikerfree.R;
 import ha.thanh.pikerfree.customviews.CustomAlertDialog;
 import ha.thanh.pikerfree.customviews.CustomEditText;
 import ha.thanh.pikerfree.customviews.WaitingDialog;
+
 
 public class ChangePassActivity extends AppCompatActivity {
 
@@ -48,12 +49,16 @@ public class ChangePassActivity extends AppCompatActivity {
     @OnClick(R.id.btn_save)
 
     public void checkInfor() {
-        if (etCurrentPass.getText().toString().isEmpty() || etNewPass.getText().toString().isEmpty() || etPassConfirm.getText().toString().isEmpty()) {
-            alertDialog.showAlertDialog("Error", "Please fill all the inputs.");
+        if (etCurrentPass.getText().toString().isEmpty() ||
+                etNewPass.getText().toString().isEmpty() ||
+                etPassConfirm.getText().toString().isEmpty()) {
+            alertDialog.showAlertDialog(getResources().getString(R.string.error),
+                    getResources().getString(R.string.pls_fill_all));
             return;
         }
         if (!etNewPass.getText().toString().equals(etPassConfirm.getText().toString())) {
-            alertDialog.showAlertDialog("Error", "New password and it\'s confirm does not match.");
+            alertDialog.showAlertDialog(getResources().getString(R.string.error),
+                    getResources().getString(R.string.not_match));
             return;
         } else {
             waitingDialog.showDialog();
@@ -77,19 +82,25 @@ public class ChangePassActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 waitingDialog.hideDialog();
-                                alertDialog.showAlertDialog("Successful", "Your password had been changed.");
+                                alertDialog.showAlertDialog(getResources().getString(R.string.success), getResources().getString(R.string.change_success));
                             } else {
                                 waitingDialog.hideDialog();
-                                alertDialog.showAlertDialog("Error", "Sorry, we can not complete this action.");
+                                alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.can_not_complete));
                             }
                         }
                     });
                 } else {
                     waitingDialog.hideDialog();
-                    alertDialog.showAlertDialog("Error", "Authentication failed, please check again your old password.");
+                    alertDialog.showAlertDialog(getResources().getString(R.string.error), getResources().getString(R.string.fail_auth));
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }
 
