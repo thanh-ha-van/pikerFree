@@ -32,11 +32,15 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     private int statusLoadLanguage;
     private SplashPresenter mPresenter;
     private NotificationDataHelper dataHelper;
+    private boolean isRuned = false;
     Runnable runnable = new Runnable() {
 
         @Override
         public void run() {
+
+            if(!isRuned)
             process();
+            isRuned = true;
             if (!isFirstRun) {
                 if (statusLoadLanguage == LOAD_SUCCESS) {
                     getIntentOfNotification(intent);
@@ -55,6 +59,7 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
         handler = new Handler();
 
     }
@@ -152,7 +157,6 @@ public class SplashActivity extends AppCompatActivity implements SplashInterface
     @Override
     public void onFirstRun() {
         startIntroActivity();
-        mPresenter.setIsFirstRun();
     }
 
     @Override

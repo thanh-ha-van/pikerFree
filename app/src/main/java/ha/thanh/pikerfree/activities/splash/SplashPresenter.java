@@ -1,6 +1,7 @@
 package ha.thanh.pikerfree.activities.splash;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -9,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import ha.thanh.pikerfree.constants.Constants;
 import ha.thanh.pikerfree.constants.Globals;
 
 
@@ -64,17 +66,21 @@ class SplashPresenter implements SplashInterface.RequiredPresenterOps {
         return Globals.getIns().getConfig().isFirstRun();
     }
 
-    void setIsFirstRun() {
-        mModel.setIsFirstRun();
-    }
-
-
     @Override
     public void loadConfigDone() {
-        if (isFirstRun()) mView.onFirstRun();
+        if (isFirstRun()) {
+            mView.onFirstRun();
+            setIsFirstRun();
+        }
         else
             checkLogIn();
     }
-
+    void setIsFirstRun() {
+        SharedPreferences sPref;
+        sPref = context.getSharedPreferences(Constants.SETTING_CONFIG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putBoolean(Constants.IS_FIRST_RUN, false);
+        editor.apply();
+    }
 
 }

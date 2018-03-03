@@ -1,0 +1,199 @@
+<resources>
+
+    <!--master string-->
+    <string name="app_name">PikerFree</string>
+    <string name="facebook_app_id">152277168741117</string>
+    <string name="google_maps_key">AIzaSyASvnkW0G2hWn7G_p-y56PEfgNrvkO_kCE</string>
+
+    <!-- for the bottom navigation -->
+    <string name="text_summary">Hồ sơ</string>
+    <string name="text_quest">Mới</string>
+    <string name="text_message">Tin nhắn</string>
+    <string name="text_setting">Cài đặt</string>
+
+    <!-- for intro messages -->
+    <string name="intro_1">Một nhà thông thái đã từng nói rằng: "Đồ bỏ đi của người này có thể là mỏ vàng của kẻ khác."</string>
+    <string name="intro_2">Với ứng dụng này, bạn sẽ có một mạng xã hội để chia sẻ và nhận được các món đồ cũ tự mọi người.</string>
+    <string name="intro_3">Nếu bạn muốn cho đi một món đồ không dùng nữa, chỉ cần vài thao tác rất đơn giản là xong</string>
+    <string name="intro_4">Nếu bạn muốn tìm kiếm sự chia sẻ, chỉ cần chọn và ứng dụng sẽ giúp bạn làm điều đó.</string>
+    <string name="intro_5">PikerFree, Chia sẻ - Quan tâm - Đóng góp.</string>
+    <string name="start">Bắt đầu</string>
+
+    <!-- hints -->
+    <string name="title_of_item_hint">Tiêu đề&#8230;</string>
+    <string name="short_description">Mô tả&#8230;</string>
+    <string name="input_username">Tên người dùng&#8230;</string>
+    <string name="input_email">Email&#8230;</string>
+    <string name="password">Mật khẩu&#8230;</string>
+    <string name="password_confirm">Xác nhận mật khẩu&#8230;</string>
+    <string name="sync">Đang đồng bộ dữ liệu&#8230;</string>
+    <string name="add_comment">Thêm một bình luận&#8230;</string>
+    <string name="search_hint">Tìm kiếm&#8230;</string>
+    <string name="loading">Đang xử lý&#8230;</string>
+
+    <!--action-->
+    <string name="login">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="reset_pass">Đặt lại mật khẩu</string>
+    <string name="save">Lưu</string>
+    <string name="ok">OK</string>
+    <string name="share">Chia sẻ</string>
+    <string name="op_cancel">Hủy</string>
+    <string name="edit_comment">Chỉnh sửa bình luận</string>
+    <string name="send_mess">Gửi tin nhắn</string>
+    <string name="choose">Chọn</string>
+    <string name="comment">Bình luận</string>
+    <string name="view_profile">Xem hồ sơ</string>
+    <string name="add_to_favorite">Thêm vào yêu thích</string>
+    <string name="remove_from_favorite">Xóa khỏi yêu thích</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="rate_user">Đánh giá người dùng này</string>
+    <string name="post">Đăng bài</string>
+    <string name="new_post">Bài đăng mới</string>
+    <string name="edit_post">Chỉnh sửa</string>
+    <string name="select_a_category">Chọn một mục</string>
+    <string name="others">Khác</string>
+    <string name="pets">Vật nuôi</string>
+    <string name="home_living">Nhà cửa</string>
+    <string name="groceries">Đồ gia dụng</string>
+    <string name="electronics">Đồ điện tử</string>
+    <string name="cloths">Áo quần</string>
+    <string name="baby_toy">Đồ chơi</string>
+    <string name="recent">Mới đăng</string>
+    <string name="accessories">Phụ kiện</string>
+    <string name="favorite_list">Danh sách yêu thích</string>
+    <string name="about_us">Về chúng tôi</string>
+    <string name="chat">Nhắn tin</string>
+    <string name="granted">Đã được chọn</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="follow">Theo dõi</string>
+    <string name="un_follow">Bỏ theo dõi</string>
+    <string name="confirm_new_pass">Xác nhận mật khẩu mới</string>
+    <string name="your_post">Danh sách bài đăng:</string>
+    <string name="new_pass">Mật khẩu mới</string>
+    <string name="current_pass">Mật khẩu hiện tại</string>
+    <string name="change_pass">Đổi mật khẩu</string>
+    <string name="back">Trở về màn hình trước</string>
+    <string name="text_message_hint">Nhập tin nhắn&#8230;</string>
+    <string name="edit_profile">Sửa hồ sơ</string>
+    <string name="your_name">Tên của bạn</string>
+    <string name="your_phone">Số điện thoại của bạn</string>
+    <string name="your_address">Địa chỉ của bạn</string>
+    <string name="help_and_tip">Trợ giúp và mẹo</string>
+    <string name="help_log_in">Không thể đăng nhập</string>
+    <string name="manage">Quản lý tài khoản</string>
+    <string name="log_out">Đăng xuất</string>
+    <string name="delete_account">Xóa tài khoản</string>
+    <string name="nearby">Gần đây</string>
+    <string name="list_view">Danh sách</string>
+    <string name="map_view">Bản đồ</string>
+    <string name="distance">Phạm vi</string>
+    <string name="notification">Thông báo</string>
+    <string name="completed">Hoàn thành</string>
+    <string name="send_request">Gửi cờ</string>
+    <string name="meet_owner">Chủ bài đăng</string>
+    <string name="post_view">Bài đăng</string>
+    <string name="delete_this">Xóa</string>
+    <string name="edit_this">Sửa bài đăng</string>
+    <string name="closed">Đã đóng</string>
+    <string name="opening">Đang mở</string>
+    <string name="notice">Chú ý</string>
+
+    <!--inform-->
+    <string name="error">Lỗi</string>
+    <string name="no_data">Không thấy gì cả!</string>
+    <string name="we_need_email">Chúng tôi chỉ cần email mà bạn đã đăng ký trước đó để có thể đặt lại mật khẩu cho bạn</string>
+    <string name="no_have_account">Không có tài khoản? Hãy đăng ký.</string>
+    <string name="already_have_an_account">Đã có tài khoản rồi? Hãy đăng nhập.</string>
+    <string name="no_data_mess">Èo, không tìm thấy dữ liệu nào cả, thử lại xem nhé</string>
+    <string name="no_data_mess_2">Èo, không tìm thấy gì hết, có gì đó sai sai mà mình k biết tại sao ://</string>
+    <string name="remove_fav_mess">Đã xóa bài đăng khỏi danh sách ưa thích</string>
+    <string name="add_fav_mess">Đã thêm bài đăng vào danh sách ưa thích</string>
+
+    // review dialog
+    <string name="start_5">5 sao</string>
+    <string name="start_4">4 sao</string>
+    <string name="start_3">3 sao</string>
+    <string name="start_2">2 sao</string>
+    <string name="start_1">1 sao</string>
+
+    <string name="already_sent_rq">Bạn đã gửi cờ trước đó rồi</string>
+    <string name="empty_email">Email không được để trống</string>
+    <string name="empty_pass">Mật khẩu không được để trống</string>
+    <string name="pass_weak">Mật khẩu phải dài ít nhất 6 ký tự</string>
+    <string name="no_more">Đã hết tin nhắn</string>
+    <string name="na">N/A</string>
+    <string name="deleted_user">Người dùng đã bị xóa</string>
+    <string name="you"> (Bạn)</string>
+    <string name="tab_outside">Nhấn vào bên ngoài để tắt</string>
+    <string name="success">Thành công</string>
+    <string name="pls_fill_all">Cần điền đầy đủ các mục</string>
+    <string name="not_match">Mật khẩu và xác nhận mật khẩu không khớp nhau.</string>
+    <string name="already_review">Bạn đã đánh giá người dùng này rồi.</string>
+    <string name="follow_done_mess">Bây giờ bạn đang theo dõi người dùng này. Bạn sẽ nhận được thông báo khi người dùng này tạo bài đăng mới</string>
+    <string name="unfollow_mess">Bạn đã bỏ theo dõi người này</string>
+    <string name="change_success">Đã đổi mật khẩu thành công</string>
+    <string name="can_not_complete">Xin lỗi, không thể hoàn thành tác vụ này.</string>
+    <string name="fail_auth">Không thể xác thực, hãy kiểm tra lại mật khẩu cũ.</string>
+    <string name="help_mess">Hiện giờ chưa có đội hỗ trợ online nào hết. Nếu bạn gặp khó khăn nào xin vui lòng liên hệ trực tiếp với mình qua email thanhahvan1@gmail.com.</string>
+    <string name="user_name_empty">Tên người dùng không được để trống</string>
+    <string name="granted_mess">Chủ bài đăng đã chọn bạn.
+        Điều này có nghĩa là bạn đã được chọn để nhận các món đồ có trong mô tả của bài đăng.
+        Hãy chủ động liên lạc với chủ bài đăng để nhận các món đồ nhé. Nhiệm vụ của Piker đến đây là hết!</string>
+    <string name="confirm_log_out">Bạn có chắc là muốn đăng xuất không?</string>
+    <string name="confirm_delete_acc">Xóa tài khoản sẽ xóa vĩnh viễn mọi dữ liệu liên quan đến tài khoản của bạn.
+        Bạn có chắc là muốn xóa tài khoản không?</string>
+    <string name="confirm_request">Bấm OK để xác nhận gửi cờ đến bài đăng này</string>
+    <string name="confirm_delete">Bạn có chắc là muốn xóa cái này?</string>
+    <string name="you_own_this">Bạn là chủ bài đăng này!</string>
+    <string name="requesting_user">Người gửi cờ:</string>
+    <string name="granted_user">Người được chọn:</string>
+    <string name="no_requested_user">Không có cờ nào cả</string>
+
+    <string name="post_location">Địa điểm của bài đăng</string>
+    <string name="your_follower">Những người theo dõi bạn:</string>
+
+    <string name="search_option">Bạn muốn tìm kiếm loại nào?</string>
+    <string name="user">Người dùng</string>
+    <string name="slogan">Chia sẻ thế giới</string>
+    <string name="gps_off">GPS đang tắt</string>
+    <string name="turn_gps">Vui lòng bật GPS để hoàn tất tác vụ</string>
+    <string name="version">Phiên bản 2.0</string>
+    <string name="from_uit">Từ sinh viên trường Đại học Công nghệ Thông tin</string>
+    <string name="privacy">Điều khoản</string>
+    <string name="warning_lack_description">Vui lòng nhập mô tả cho bài đăng</string>
+    <string name="warning_lack_category">Vui lòng chọn mục cho bài đăng</string>
+    <string name="warning_lack_title">Vui lòng thêm tiêu đề cho bài đăng</string>
+    <string name="complete_choose_receiver">Bạn vừa chọn người để chia sẻ sản phẩm có trong bài đăng của mình.
+        Chúng tôi sẽ cũng cấp thông tin hồ sơ người dùng này để bạn liên lạc.
+        Vui lòng liên hệ với người này nếu được để quyết định việc cho nhận. Người dùng này sẽ được thông báo về sự kiện này. Chúc một ngày làm việc vui vẻ!</string>
+    <string name="post_is_closed">Bài đăng đã đóng nên bạn không thể gửi cờ nữa.</string>
+    <string name="post_can_not_edit">Bài đăng đã đóng nên bạn không thể sửa đổi nữa.</string>
+    <string name="complete_send_rq">Cờ của bạn đã được gửi cho chủ bài đăng này. Hãy chờ phản hồi từ chủ bài đăng nhé.</string>
+    <string name="complete_comment">Đã xóa bình luận</string>
+    <string name="complete_delete_acc">Tài khoản của bạn đã được xóa</string>
+    <string name="we_sent_email">Chúng tôi đã gửi thư đặt lại mật khẩu tới hộp thư của bạn.</string>
+    <string name="click_to_back">Cập nhật thành công. Chọn OK để trở về màn hình trước</string>
+    <string name="warning_close_post">Nếu bạn chuyển trạng thái bài đăng từ mở sang đóng, những người dùng khác không thể gửi cờ được nữa.</string>
+    <string name="turn_network_on">Vui lòng kết nối internet</string>
+
+    <!-- for information and upload service-->
+    <string name="term_of_use">Dưới đây là các hành vi của ứng dụng mà người dùng cần chú ý</string>
+    <string name="role1">Khi tạo một bài đăng mới, nếu GPS của thiết bị đang bật thì ứng dụng sẽ lấy vị trí hiện tại của thiết bị làm vị trí cho bài đăng</string>
+    <string name="role2">Vị trí của bài đăng sẽ được hiện thị với các người dùng khác.</string>
+    <string name="role3">Người dùng khác có thể xem được email, tên, số điện thoại và địa chỉ của bạn</string>
+    <string name="role4">Chỉ có bạn mới biết mật khẩu của mình, Admin không biết mật khẩu, Admin chỉ có thể giúp bạn đặt lại mật khẩu khi cần.</string>
+    <string name="role5">Người dùng không dược lạm dụng tin nhắn tới người dùng khác.</string>
+    <string name="role6">Người gửi cờ phải tôn trọng quyết định chọn của chủ bài đăng</string>
+    <string name="help2">Hãy chắc rằng tiêu đề của bài đăng thật ngắn gọn, mô tả đầy đủ và hình ảnh rõ ràng.</string>
+    <string name="help3">Bạn có thể trao đổi thêm về bài đăng thông qua bình luận và tin nhắn.</string>
+    <string name="help4">Chọn theo dõi người dùng sẽ tạo ra thông báo gửi đến thiết bị của bạn khi họ tạo bài đăng mới</string>
+    <string name="help5">Món đồ cũ hoặc không có giá trị sử dụng đối với bạn có thể rất có tiềm năng với người khác, và ngược lại.</string>
+    <string name="help6">Xin đừng ngần ngại chia sẻ, mọi người đến với Piker nhằm mục đích chia sẻ và đóng góp.</string>
+    <string name="about_team">Piker là đồ án tốt nghiệp của:</string>
+    <string name="about_team1">Hà Văn Thành - Lập trình viên Android</string>
+    <string name="about_team2">Phạm Thị Dung - Lập trình viên NodeJS</string>
+    <string name="about_team3">Liên hệ:\nSđt: +84 962 550 486\n
+        Email: thanhahvan1@gmail.com\nĐịa chỉ: Linh Trung - Thu Duc - HCM City - Viet Nam.</string>
+
+</resources>

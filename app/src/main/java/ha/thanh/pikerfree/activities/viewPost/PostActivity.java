@@ -141,6 +141,8 @@ public class PostActivity extends AppCompatActivity implements
             mMapView.onResume();
             mMapView.getMapAsync(this);
         } catch (Exception e) {
+
+            alertDialog.showAlertDialog(getResources().getString(R.string.error), e.getMessage());
         }
 
     }

@@ -1,7 +1,9 @@
 <resources>
+
+    <!--master string-->
     <string name="app_name">PikerFree</string>
     <string name="facebook_app_id">152277168741117</string>
-    <string name="google_maps_key">AIzaSyBzW0M_fyOxuSdoCtxZeHiyIELwbNL1p5M</string>
+    <string name="google_maps_key">AIzaSyASvnkW0G2hWn7G_p-y56PEfgNrvkO_kCE</string>
 
     <!-- for the bottom navigation -->
     <string name="text_summary">Profile</string>
@@ -17,68 +19,33 @@
     <string name="intro_5">PikerFree, sharing is caring.</string>
     <string name="start">Start</string>
 
-    <!-- dummy string. must be removed later -->
+    <!-- hints -->
     <string name="title_of_item_hint">Title&#8230;</string>
     <string name="short_description">Description&#8230;</string>
-
-    <!-- for login/out/ sign ... -->
     <string name="input_username">Username&#8230;</string>
-    <string name="user_name_empty">Username must not be empty</string>
     <string name="input_email">Email&#8230;</string>
     <string name="password">Password&#8230;</string>
     <string name="password_confirm">Confirm password&#8230;</string>
+    <string name="sync">Syncing data&#8230;</string>
+    <string name="add_comment">Add a comment&#8230;</string>
+    <string name="search_hint">Search&#8230;</string>
+
+    <!--action-->
     <string name="login">Log in</string>
     <string name="sign_up">Sign up</string>
-    <string name="we_need_email">We just need your registered email to send your email reset instructions.</string>
-    <string name="dont_have_account">Don\'t have an account? just sign up</string>
-    <string name="already_have_an_account">Already have an account? just log in</string>
-    <string name="forgot_password">Forget password</string>
     <string name="reset_pass">Reset password</string>
     <string name="save">Save</string>
-    <string name="no_data">Nothing here!</string>
-    <string name="no_data_mess">Sorry, we can not find any data for your input, please try other key</string>
-    <string name="no_data_mess_2">Sorry, we can not show you anything. Something\'s wrong and i don\'t know why :\\</string>
-    <string name="sync">Syncing data&#8230;</string>
     <string name="ok">OK</string>
     <string name="op_cancel">Cancel</string>
-    <string name="comment">Comment</string>
-    <string name="add_comment">Add a comment&#8230;</string>
     <string name="edit_comment">Edit comment</string>
     <string name="send_mess">Send message</string>
     <string name="choose">Choose</string>
+    <string name="comment">Comment</string>
     <string name="view_profile">View profile</string>
     <string name="add_to_favorite">Add to favorite</string>
     <string name="remove_from_favorite">Remove from favorite</string>
-    <string name="remove_fav_mess">This post has been removed from favorite</string>
-    <string name="add_fav_mess">This post has been added to favorite</string>
+    <string name="forgot_password">Forget password</string>
     <string name="rate_user">Rate this user</string>
-    <string name="start_5">5 star</string>
-    <string name="start_4">4 star</string>
-    <string name="start_3">3 star</string>
-    <string name="start_2">2 star</string>
-    <string name="start_1">1 star</string>
-    <string name="error">Error</string>
-    <string name="already_sent_rq">You already send the request before</string>
-    <string name="empty_email">Email must not be empty.</string>
-    <string name="empty_pass">Password must not be empty.</string>
-    <string name="pass_weak">Password must be at least 6 characters</string>
-    <string name="no_more">No more message</string>
-    <string name="na">N/A</string>
-    <string name="deleted_user">Deleted user</string>
-    <string name="you">%d (You)</string>
-    <string name="tab_outside">Tab outside to cancel dialog</string>
-    <string name="success">Successful</string>
-    <string name="pls_fill_all">Please fill all the inputs</string>
-    <string name="not_match">Password and it\'s confirm does not match.</string>
-    <string name="already_review">You already review this user before.</string>
-    <string name="follow_done_mess">"You are now following this user, you will get notification when this user have new post."</string>
-    <string name="unfollow_mess">You are now stop following this user.</string>
-    <string name="change_success">Your password had been changed successfully.</string>
-    <string name="can_not_complete">Sorry, we can not complete this action.</string>
-    <string name="fail_auth">Authentication failed, please check again your old password.</string>
-
-    <!-- for status of post -->
-
     <string name="post">Post this</string>
     <string name="new_post">New post</string>
     <string name="edit_post">Edit post</string>
@@ -94,30 +61,11 @@
     <string name="accessories">Accessories</string>
     <string name="favorite_list">Favorite list</string>
     <string name="about_us">About us</string>
-
-    <!-- for view of post -->
     <string name="chat">Chat</string>
     <string name="granted">Granted</string>
-    <string name="granted_mess">The owner of this post had granted you this post. This mean you are chosen by the owner to receive the items. Please contact the owner to get the items. Our mission here is complete.\nHave a nice day!</string>
     <string name="confirm">Confirm</string>
-    <string name="confirm_log_out">Are you sure you want to log out?</string>
-    <string name="confirm_delete_acc">This action will totally remove your data from system. Are you sure you want to delete your account?</string>
-    <string name="confirm_request">To confirm sending request to receive this item. Tap OK.</string>
-    <string name="confirm_delete">Are you sure you want to delete this?</string>
-    <string name="you_own_this">You are the owner of this post!</string>
-    <string name="delete_this">Delete</string>
-    <string name="edit_this">Edit post</string>
-    <string name="requesting_user">Requesting users:</string>
-    <string name="granted_user">Granted users:</string>
-    <string name="no_requested_user">No requesting users</string>
-    <string name="send_request">Request</string>
-    <string name="meet_owner">Meet the owner</string>
-    <string name="post_view">POST</string>
-    <string name="post_location">Post\'t location</string>
     <string name="follow">Follow</string>
     <string name="un_follow">Unfollow</string>
-    <string name="your_follower">Your followers:</string>
-
     <string name="confirm_new_pass">Confirm new password</string>
     <string name="your_post">Your posts:</string>
     <string name="new_pass">New password</string>
@@ -131,7 +79,6 @@
     <string name="your_address">Your address</string>
     <string name="help_and_tip">Help and tip</string>
     <string name="help_log_in">Trouble logging in</string>
-    <string name="help_mess">Currently we don\'t have any online support system yet. If you get trouble logging in please contact email thanhahvan1@gmail.com for help</string>
     <string name="manage">Manage account</string>
     <string name="log_out">Log out</string>
     <string name="delete_account">Delete account</string>
@@ -140,7 +87,73 @@
     <string name="map_view">Map view</string>
     <string name="distance">Distance</string>
     <string name="notification">Notification</string>
-    <string name="search_hint">Search&#8230;</string>
+    <string name="completed">Completed</string>
+    <string name="send_request">Request</string>
+    <string name="meet_owner">Meet the owner</string>
+    <string name="post_view">POST</string>
+    <string name="delete_this">Delete</string>
+    <string name="edit_this">Edit post</string>
+    <string name="closed">Closed</string>
+    <string name="opening">Opening</string>
+    <string name="notice">Notice</string>
+    <string name="loading">Processing&#8230;</string>
+    <string name="share">Share</string>
+    <!--inform-->
+    <string name="error">Error</string>
+    <string name="no_data">Nothing here!</string>
+    <string name="we_need_email">We just need your registered email to send your email reset instructions.</string>
+    <string name="no_have_account">Don\'t have an account? just sign up</string>
+    <string name="already_have_an_account">Already have an account? just log in</string>
+    <string name="no_data_mess">Sorry, we can not find any data for your input, please try other key</string>
+    <string name="no_data_mess_2">Sorry, we can not show you anything. Something\'s wrong and i don\'t know why :\\</string>
+    <string name="remove_fav_mess">This post has been removed from favorite</string>
+    <string name="add_fav_mess">This post has been added to favorite</string>
+
+    // review dialog
+    <string name="start_5">5 star</string>
+    <string name="start_4">4 star</string>
+    <string name="start_3">3 star</string>
+    <string name="start_2">2 star</string>
+    <string name="start_1">1 star</string>
+
+    <string name="already_sent_rq">You already send the request before</string>
+    <string name="empty_email">Email must not be empty.</string>
+    <string name="empty_pass">Password must not be empty.</string>
+    <string name="pass_weak">Password must be at least 6 characters</string>
+    <string name="no_more">No more message</string>
+    <string name="na">N/A</string>
+    <string name="deleted_user">Deleted user</string>
+    <string name="you"> (You)</string>
+    <string name="tab_outside">Tab outside to cancel dialog</string>
+    <string name="success">Successful</string>
+    <string name="pls_fill_all">Please fill all the inputs</string>
+    <string name="not_match">Password and it\'s confirm does not match.</string>
+    <string name="already_review">You already review this user before.</string>
+    <string name="follow_done_mess">"You are now following this user,
+        you will get notification when this user have new post."</string>
+    <string name="unfollow_mess">You are now stop following this user.</string>
+    <string name="change_success">Your password had been changed successfully.</string>
+    <string name="can_not_complete">Sorry, we can not complete this action.</string>
+    <string name="fail_auth">Authentication failed, please check again your old password.</string>
+    <string name="help_mess">Currently we don\'t have any online support system yet.
+        If you get trouble logging in please contact email thanhahvan1@gmail.com for help</string>
+    <string name="user_name_empty">Username must not be empty</string>
+    <string name="granted_mess">The owner of this post had granted you this post.
+        This mean you are chosen by the owner to receive the items.
+        Please contact the owner to get the items. Our mission here is complete.\nHave a nice day!</string>
+    <string name="confirm_log_out">Are you sure you want to log out?</string>
+    <string name="confirm_delete_acc">This action will totally remove your data from system.
+        Are you sure you want to delete your account?</string>
+    <string name="confirm_request">To confirm sending request to receive this item. Tap OK.</string>
+    <string name="confirm_delete">Are you sure you want to delete this?</string>
+    <string name="you_own_this">You are the owner of this post!</string>
+    <string name="requesting_user">Requesting users:</string>
+    <string name="granted_user">Granted users:</string>
+    <string name="no_requested_user">No requesting users</string>
+
+    <string name="post_location">Post\'t location</string>
+    <string name="your_follower">Your followers:</string>
+
     <string name="search_option">Which do you want to search?</string>
     <string name="user">User</string>
     <string name="slogan">Share with the world</string>
@@ -149,14 +162,14 @@
     <string name="version">Version 2.0</string>
     <string name="from_uit">From university of Information Technology</string>
     <string name="privacy">Privacy and term</string>
-    <string name="closed">Closed</string>
-    <string name="opening">Opening</string>
-    <string name="notice">Notice</string>
     <string name="warning_lack_description">Please enter the description for your post</string>
     <string name="warning_lack_category">Please choose a category for your post</string>
     <string name="warning_lack_title">Please enter the title for your post</string>
-    <string name="completed">Completed</string>
-    <string name="complete_choose_receiver">You just decide to give item in this post to user. We now will provide you information of this user. Click OK to go to their profile. Please contact them to discus where and when for you to give the item. We will notify them about this even. Have a nice day!</string>
+    <string name="complete_choose_receiver">You just decide to give item in this post to user.
+        We now will provide you information of this user.
+        Click OK to go to their profile.
+        Please contact them to discus where and when for you to give the item.
+        We will notify them about this even. Have a nice day!</string>
     <string name="post_is_closed">This post is closed by owner so you can not send request anymore"</string>
     <string name="post_can_not_edit">This post is closed so you can not edit anymore"</string>
     <string name="complete_send_rq">Your request has been sent to owner. Now just wait for their response.</string>
@@ -164,14 +177,11 @@
     <string name="complete_delete_acc">Your account had been deleted from Piker</string>
     <string name="we_sent_email">"We have sent you instructions to reset your password!"</string>
     <string name="click_to_back">We complete updating data. Tab OK to back to previous screen.</string>
-    <string name="warning_close_post">When you change the status to closed, other users can not send receiving request to you post any more</string>
-
-    <!-- download and upload service-->
-
+    <string name="warning_close_post">When you change the status to closed,
+        other users can not send receiving request to you post any more</string>
     <string name="turn_network_on">Please turn on your internet connection</string>
 
     <!-- for information and upload service-->
-
     <string name="term_of_use">Bellow are behavior of this application that user need to aware:</string>
     <string name="role1">When user create a new post, if user\'s location detector is turning on,
         then application will automatics track the current location of user's device.</string>
@@ -181,9 +191,6 @@
         clue of user password in the situation of user forgot password.</string>
     <string name="role5">User can\'t spam message to people.</string>
     <string name="role6">Requester must respect the choice of Post owner.</string>
-    <string name="role7">User email is reveal to other users.</string>
-    <string name="help1">When you create a new post, make sure your device is turn on location
-        service to make your post\'s location visible to others to help our service connect to seeker near you.</string>
     <string name="help2">Make sure the title is simple and the images you add to post is clear.</string>
     <string name="help3">Your description is fine anyway. Other people can ask you more through message.</string>
     <string name="help4">Choose to follow people will make it notify you when they have new post.</string>
@@ -192,6 +199,7 @@
     <string name="about_team">PikerFree is final year thesis of:</string>
     <string name="about_team1">Ha Van Thanh - Android developer</string>
     <string name="about_team2">Pham Thi Dung - Node JS developer</string>
-    <string name="about_team3">Contact:\nPhone: +84 962 550 486\nEmail: thanhahvan1@gmail.com\nAddress: Linh Trung - Thu Duc - HCM City - Viet Nam.</string>
+    <string name="about_team3">Contact:\nPhone: +84 962 550 486\n
+        Email: thanhahvan1@gmail.com\nAddress: Linh Trung - Thu Duc - HCM City - Viet Nam.</string>
 
 </resources>

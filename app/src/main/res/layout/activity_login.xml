@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="@string/dont_have_account"
+            android:text="@string/no_have_account"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="14sp" />
 

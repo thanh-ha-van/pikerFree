@@ -3,7 +3,6 @@ package ha.thanh.pikerfree.customviews;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 
@@ -45,29 +44,20 @@ public class CustomYesNoDialog {
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processAction(false);
+                interFace.onNoClicked();
+                alertDialog.dismiss();
             }
         });
 
         tvOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processAction(true);
-
+                interFace.onYesClicked();
+                alertDialog.dismiss();
             }
         });
 
         alertDialog.show();
-
-    }
-
-    private void processAction(final boolean isOk) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 200);
 
     }
 

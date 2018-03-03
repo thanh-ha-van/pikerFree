@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="Section">
+        <item>Phụ kiện</item>
+        <item>Đồ chơi</item>
+        <item>Áo quần</item>
+        <item>Đồ điện tử</item>
+        <item>Tạp hóa</item>
+        <item>Trong nhà</item>
+        <item>Thú nuôi</item>
+        <item>Khác</item>
+    </string-array>
+</resources>
