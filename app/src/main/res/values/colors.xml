@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#129FEF</color>
+    <color name="blue_light">#88cff7</color>
     <color name="blueShade">#AA129FEF</color>
     <color name="colorPrimaryDark">#096091</color>
     <color name="colorAccent">#4C515C</color>
