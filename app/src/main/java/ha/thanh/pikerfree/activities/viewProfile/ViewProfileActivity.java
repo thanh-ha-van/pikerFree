@@ -189,8 +189,8 @@ public class ViewProfileActivity extends AppCompatActivity
         tvPhone.setText(user.getPhoneNumber());
         tvRateNum.setText(String.valueOf(user.getRating()));
         tvEmail.setText(user.getEmail());
-        if (user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
-        else opStatus.setImageResource(R.drawable.bg_circle_gray);
+        if (user.isOnline()) opStatus.setImageResource(R.drawable.shape_circle_green);
+        else opStatus.setImageResource(R.drawable.shape_circle_gray);
     }
 
     @Override

@@ -104,7 +104,7 @@
                         android:layout_alignEnd="@+id/owner_pic"
                         android:layout_marginBottom="2dp"
                         android:layout_marginEnd="2dp"
-                        android:background="@drawable/bg_circle_white"
+                        android:background="@drawable/shape_circle_white"
                         android:padding="2dp" />
                 </RelativeLayout>
 
@@ -185,7 +185,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:background="@drawable/parallelogram"
+            android:background="@drawable/shape_parallelogram"
             android:gravity="center"
             android:text="@string/send_request"
             android:textAllCaps="true"

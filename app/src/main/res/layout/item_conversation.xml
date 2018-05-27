@@ -36,7 +36,7 @@
                 android:layout_alignEnd="@+id/op_pic"
                 android:layout_marginBottom="2dp"
                 android:layout_marginEnd="2dp"
-                android:background="@drawable/bg_circle_white"
+                android:background="@drawable/shape_circle_white"
                 android:padding="2dp" />
         </RelativeLayout>
 
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginStart="3dp"
-                    android:background="@drawable/bg_circle_red"
+                    android:background="@drawable/shape_circle_orange"
                     android:paddingEnd="6dp"
                     android:paddingStart="6dp"
                     android:textColor="@color/white"

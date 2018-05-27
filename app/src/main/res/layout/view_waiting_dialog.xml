@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="30dp"
-    android:background="@drawable/plate_brown_shade"
+    android:background="@drawable/shape_plate_brown"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp">

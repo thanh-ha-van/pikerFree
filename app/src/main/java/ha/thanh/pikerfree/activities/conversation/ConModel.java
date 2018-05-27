@@ -10,6 +10,7 @@ import ha.thanh.pikerfree.constants.Constants;
  */
 
 class ConModel {
+
     private SharedPreferences sharedPreferences;
 
     ConModel(Context context) {

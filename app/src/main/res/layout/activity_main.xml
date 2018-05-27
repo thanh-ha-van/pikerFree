@@ -23,7 +23,7 @@
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
         app:elevation="5dp"
-        app:itemIconTint="@drawable/bottom_navigation_color_selector"
-        app:itemTextColor="@drawable/bottom_navigation_color_selector"
+        app:itemIconTint="@drawable/cs_bottom_navigation"
+        app:itemTextColor="@drawable/cs_bottom_navigation"
         app:menu="@menu/bottom_navigation_main" />
 </LinearLayout>

@@ -75,7 +75,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:background="@drawable/plate_shade_blue"
+                android:background="@drawable/shape_plate_blue_shade"
                 android:gravity="center"
                 android:paddingEnd="30dp"
                 android:paddingStart="30dp"

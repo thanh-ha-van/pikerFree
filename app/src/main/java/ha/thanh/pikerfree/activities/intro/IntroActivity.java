@@ -112,9 +112,9 @@ public class IntroActivity extends AppCompatActivity {
     private void switchDot() {
         for (int i = 0; i < introFragments.size(); i++) {
             if (i == currentPosition)
-                dots[i].setImageResource(R.drawable.seclected_dot);
+                dots[i].setImageResource(R.drawable.shape_seclected_dot);
             else
-                dots[i].setImageResource(R.drawable.none_seclected_dot);
+                dots[i].setImageResource(R.drawable.shape_dot_selected);
         }
 
     }
@@ -123,7 +123,7 @@ public class IntroActivity extends AppCompatActivity {
         dots = new ImageView[introFragments.size()];
         for (int i = 0; i < introFragments.size(); i++) {
             dots[i] = new ImageView(this);
-            dots[i].setImageResource(R.drawable.none_seclected_dot);
+            dots[i].setImageResource(R.drawable.shape_dot_selected);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -131,7 +131,7 @@ public class IntroActivity extends AppCompatActivity {
             params.setMargins(6, 0, 6, 0);
             pager_indicator.addView(dots[i], params);
         }
-        dots[0].setImageResource(R.drawable.seclected_dot);
+        dots[0].setImageResource(R.drawable.shape_seclected_dot);
     }
 
     @OnClick(R.id.img_next)

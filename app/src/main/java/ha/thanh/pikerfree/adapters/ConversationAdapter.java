@@ -121,8 +121,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                             holder.tvOpName.setText(user.getName());
                             user.setOnline((Boolean) dataSnapshot.child("isOnline").getValue());
                             if (user.isOnline())
-                                holder.opStatus.setImageResource(R.drawable.bg_circle_check);
-                            else holder.opStatus.setImageResource(R.drawable.bg_circle_gray);
+                                holder.opStatus.setImageResource(R.drawable.shape_circle_green);
+                            else holder.opStatus.setImageResource(R.drawable.shape_circle_gray);
                         } else {
                             holder.tvOpName.setText("Error");
                         }

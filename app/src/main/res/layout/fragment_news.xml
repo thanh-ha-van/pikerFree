@@ -16,7 +16,7 @@
             android:layout_height="40dp"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/plate_small_corner"
+            android:background="@drawable/shape_plate_small_corner"
             android:hint="@string/search_hint"
             android:paddingEnd="10dp"
             android:paddingStart="10dp"

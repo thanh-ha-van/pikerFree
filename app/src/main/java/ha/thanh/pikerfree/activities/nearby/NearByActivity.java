@@ -139,10 +139,10 @@ public class NearByActivity extends AppCompatActivity
 
         btnListView.setClickable(false);
         btnMapView.setClickable(true);
-        btnMapView.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
+        btnMapView.setBackground(getDrawable(R.drawable.shape_rectangle_gray));
         btnListView.setTextColor(getResources().getColor(R.color.white));
         btnMapView.setTextColor(getResources().getColor(R.color.colorPrimary));
-        btnListView.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));
+        btnListView.setBackground(getDrawable(R.drawable.shape_rectangle_green));
         Animation slidein = AnimationUtils.loadAnimation(this, R.anim.slide_from_right);
         rvPost.setVisibility(View.VISIBLE);
         rvPost.setAnimation(slidein);
@@ -156,10 +156,10 @@ public class NearByActivity extends AppCompatActivity
 
         btnListView.setClickable(true);
         btnMapView.setClickable(false);
-        btnMapView.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_right));
+        btnMapView.setBackground(getDrawable(R.drawable.shape_rectangle_white));
         btnMapView.setTextColor(getResources().getColor(R.color.white));
         btnListView.setTextColor(getResources().getColor(R.color.colorPrimary));
-        btnListView.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_left));
+        btnListView.setBackground(getDrawable(R.drawable.shape_rectangle_white));
         Animation slidein = AnimationUtils.loadAnimation(this, R.anim.slide_from_right);
         mMapView.setVisibility(View.VISIBLE);
         mMapView.setAnimation(slidein);

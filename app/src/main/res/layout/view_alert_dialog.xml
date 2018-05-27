@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:background="@drawable/plate_brown_shade"
+    android:background="@drawable/shape_plate_brown"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -27,7 +27,7 @@
         android:layout_below="@+id/tv_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/plate_green_shade"
+        android:background="@drawable/shape_plate_green_shade"
         android:gravity="center"
         android:text="@string/ok"
         android:textColor="@color/white"

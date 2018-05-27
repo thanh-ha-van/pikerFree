@@ -55,7 +55,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/plate_brown_shade"
+            android:background="@drawable/shape_plate_brown"
             android:padding="8dp"
             android:src="@drawable/ic_delete_button"
             android:tint="@color/orange" />

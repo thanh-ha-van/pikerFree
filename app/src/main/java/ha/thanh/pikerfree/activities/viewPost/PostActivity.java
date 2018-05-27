@@ -406,8 +406,8 @@ public class PostActivity extends AppCompatActivity implements
     @Override
     public void getOwnerDone(User user) {
         ownerName.setText(user.getName());
-        if (user.isOnline()) opStatus.setImageResource(R.drawable.bg_circle_check);
-        else opStatus.setImageResource(R.drawable.bg_circle_gray);
+        if (user.isOnline()) opStatus.setImageResource(R.drawable.shape_circle_green);
+        else opStatus.setImageResource(R.drawable.shape_circle_gray);
         ownerRating.setText(user.getRating() + "");
     }
 

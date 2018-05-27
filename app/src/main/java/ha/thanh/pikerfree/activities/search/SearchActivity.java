@@ -124,10 +124,10 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         type = 2;
         tvSearchPost.setClickable(true);
         tvSearchUser.setClickable(false);
-        tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_right));
+        tvSearchUser.setBackground(getDrawable(R.drawable.shape_rectangle_white));
         tvSearchUser.setTextColor(getResources().getColor(R.color.white));
         tvSearchPost.setTextColor(getResources().getColor(R.color.colorPrimary));
-        tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_left));
+        tvSearchPost.setBackground(getDrawable(R.drawable.shape_rectangle_white));
     }
 
     @OnClick(R.id.search_post)
@@ -135,10 +135,10 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         type = 1;
         tvSearchPost.setClickable(false);
         tvSearchUser.setClickable(true);
-        tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
+        tvSearchUser.setBackground(getDrawable(R.drawable.shape_rectangle_gray));
         tvSearchPost.setTextColor(getResources().getColor(R.color.white));
         tvSearchUser.setTextColor(getResources().getColor(R.color.colorPrimary));
-        tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));
+        tvSearchPost.setBackground(getDrawable(R.drawable.shape_rectangle_green));
     }
 
     private void searchUserByString(final String key) {

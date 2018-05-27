@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@drawable/plate_brown_shade"
+            android:background="@drawable/shape_plate_brown"
             android:gravity="center_vertical"
             android:hint="@string/add_comment"
             android:maxLength="100"
@@ -58,7 +58,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/plate_brown_shade"
+            android:background="@drawable/shape_plate_brown"
             android:padding="5dp"
             android:src="@drawable/ic_paper_plane"
             android:tint="@color/GrayScale" />

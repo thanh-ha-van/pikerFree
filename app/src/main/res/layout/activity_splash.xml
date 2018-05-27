@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/plate_brown_shade"
+        android:background="@drawable/shape_plate_brown"
         android:padding="8dp"
         android:textAlignment="center"
         android:textColor="@color/red"

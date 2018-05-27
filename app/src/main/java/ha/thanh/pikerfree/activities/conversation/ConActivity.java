@@ -157,15 +157,15 @@ public class ConActivity extends AppCompatActivity implements ConInterface.Requi
     public void getOPDone(User user) {
         OPName.setText(user.getName());
         if (user.isOnline())
-            opStatus.setImageResource(R.drawable.bg_circle_check);
-        else opStatus.setImageResource(R.drawable.bg_circle_gray);
+            opStatus.setImageResource(R.drawable.shape_circle_green);
+        else opStatus.setImageResource(R.drawable.shape_circle_gray);
 
     }
 
     @Override
     public void onOpNotFound() {
         OPName.setText(getResources().getString(R.string.deleted_user));
-        opStatus.setImageResource(R.drawable.bg_circle_gray);
+        opStatus.setImageResource(R.drawable.shape_circle_gray);
     }
 
     @Override

@@ -54,7 +54,7 @@
                         android:layout_alignEnd="@+id/profile_image"
                         android:layout_marginBottom="5dp"
                         android:layout_marginEnd="5dp"
-                        android:background="@drawable/bg_circle_white"
+                        android:background="@drawable/shape_circle_white"
                         android:padding="2dp" />
                 </RelativeLayout>
 
@@ -120,7 +120,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_rectangle_green_bold"
+                android:background="@drawable/shape_rectangle_green"
                 android:gravity="center"
                 android:text="Follow"
                 android:textAllCaps="true"
@@ -133,7 +133,7 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_rectangle_green_bold_right"
+                android:background="@drawable/shape_rectangle_gray"
                 android:gravity="center"
                 android:text="Send message"
                 android:textAllCaps="true"

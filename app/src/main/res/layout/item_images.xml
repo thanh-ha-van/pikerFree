@@ -17,7 +17,7 @@
         android:id="@+id/text_uploading"
         android:layout_width="80dp"
         android:layout_height="20dp"
-        android:background="@drawable/plate_green_shade"
+        android:background="@drawable/shape_plate_green_shade"
         android:gravity="center"
         android:text="@string/com_facebook_loading"
         android:textColor="@color/white"

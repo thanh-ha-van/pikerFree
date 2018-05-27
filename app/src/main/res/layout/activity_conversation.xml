@@ -35,7 +35,7 @@
                 android:layout_height="12dp"
                 android:layout_alignBottom="@+id/img_op"
                 android:layout_alignEnd="@+id/img_op"
-                android:background="@drawable/bg_circle_white"
+                android:background="@drawable/shape_circle_white"
                 android:contentDescription="@string/app_name"
                 android:padding="2dp" />
         </RelativeLayout>
@@ -105,7 +105,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/plate_brown_shade"
+            android:background="@drawable/shape_plate_brown"
             android:contentDescription="@string/text_message"
             android:padding="7dp"
             android:src="@drawable/ic_paper_plane"
