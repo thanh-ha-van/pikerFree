@@ -22,7 +22,7 @@
             android:paddingStart="20dp"
             android:singleLine="true"
             android:textColor="@color/text_black_3"
-            android:textColorHint="@color/GrayScale"
+            android:textColorHint="@color/gray_50"
             android:textSize="16sp" />
 
         <ImageView
@@ -32,7 +32,7 @@
             android:background="@color/colorPrimary"
             android:padding="14dp"
             android:src="@drawable/ic_search"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
     </LinearLayout>
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -40,14 +40,14 @@
         android:layout_height="30dp"
         android:gravity="center"
         android:text="@string/search_option"
-        android:textColor="@color/GrayScale"
+        android:textColor="@color/gray_50"
         android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/whiteShade"
+        android:background="@color/white_50_opacity"
         android:orientation="horizontal"
         android:paddingBottom="10dp">
 
@@ -59,7 +59,7 @@
             android:gravity="center"
             android:text="@string/post_view"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/white_100"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView

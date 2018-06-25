@@ -125,7 +125,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         tvSearchPost.setClickable(true);
         tvSearchUser.setClickable(false);
         tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_right));
-        tvSearchUser.setTextColor(getResources().getColor(R.color.white));
+        tvSearchUser.setTextColor(getResources().getColor(R.color.white_100));
         tvSearchPost.setTextColor(getResources().getColor(R.color.colorPrimary));
         tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_white_bold_left));
     }
@@ -136,7 +136,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Ite
         tvSearchPost.setClickable(false);
         tvSearchUser.setClickable(true);
         tvSearchUser.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold_right));
-        tvSearchPost.setTextColor(getResources().getColor(R.color.white));
+        tvSearchPost.setTextColor(getResources().getColor(R.color.white_100));
         tvSearchUser.setTextColor(getResources().getColor(R.color.colorPrimary));
         tvSearchPost.setBackground(getDrawable(R.drawable.bg_rectangle_green_bold));
     }

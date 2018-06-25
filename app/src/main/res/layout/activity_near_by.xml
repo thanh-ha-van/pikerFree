@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteShade"
+    android:background="@color/white_50_opacity"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@color/whiteShade"
+        android:background="@color/white_50_opacity"
         android:orientation="horizontal">
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="@string/list_view"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/white_100"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -80,7 +80,7 @@
             android:background="@drawable/bg_rectangle_green_bold"
             android:padding="7dp"
             android:src="@drawable/ic_subtract"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_search_distance"
@@ -98,7 +98,7 @@
             android:background="@drawable/bg_rectangle_white_bold_right"
             android:padding="7dp"
             android:src="@drawable/ic_add"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <ImageView
             android:id="@+id/btn_refresh"
@@ -108,7 +108,7 @@
             android:background="@drawable/plate_shade_blue"
             android:padding="6dp"
             android:src="@drawable/ic_circular_arrow"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
     </LinearLayout>
 
     <View

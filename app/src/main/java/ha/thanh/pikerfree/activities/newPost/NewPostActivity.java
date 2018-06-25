@@ -85,7 +85,7 @@ public class NewPostActivity extends AppCompatActivity
         params.setPickerLimit(6);
         params.setToolbarColor(getResources().getColor(R.color.colorPrimary));
         params.setActionButtonColor(getResources().getColor(R.color.colorPrimary));
-        params.setButtonTextColor(getResources().getColor(R.color.white));
+        params.setButtonTextColor(getResources().getColor(R.color.white_100));
         intent.putExtra(Constants.KEY_PARAMS, params);
         startActivityForResult(intent, Constants.TYPE_MULTI_PICKER);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);

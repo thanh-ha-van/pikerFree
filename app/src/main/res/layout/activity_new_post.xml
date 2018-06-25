@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteShade"
+    android:background="@color/white_50_opacity"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activities.newPost.NewPostActivity">
@@ -80,9 +80,9 @@
                 android:paddingEnd="30dp"
                 android:paddingStart="30dp"
                 android:text="Add Images"
-                android:textColor="@color/white"
+                android:textColor="@color/white_100"
                 android:textSize="18sp"
-                android:tint="@color/white" />
+                android:tint="@color/white_100" />
 
 
             <View

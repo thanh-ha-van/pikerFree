@@ -16,7 +16,7 @@
             android:layout_height="50dp"
             android:padding="12dp"
             android:src="@drawable/ic_back"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <LinearLayout
             android:id="@+id/layout_count_dot"
@@ -37,7 +37,7 @@
             android:layout_height="50dp"
             android:padding="12dp"
             android:src="@drawable/ic_right_arrow"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

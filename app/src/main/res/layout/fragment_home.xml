@@ -43,7 +43,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/white_100"
         android:orientation="horizontal"
         android:paddingBottom="5dp"
         android:paddingTop="5dp">
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:text="@string/new_post"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/white_100"
             android:textSize="16sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -84,10 +84,10 @@
             android:id="@+id/tv_loading_post"
             android:layout_width="match_parent"
             android:layout_height="26dp"
-            android:background="@color/whiteShade"
+            android:background="@color/white_50_opacity"
             android:gravity="center"
             android:text="@string/sync"
-            android:textColor="@color/GrayScale"
+            android:textColor="@color/gray_50"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -109,7 +109,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/no_data"
-                android:textColor="@color/GrayScale" />
+                android:textColor="@color/gray_50" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

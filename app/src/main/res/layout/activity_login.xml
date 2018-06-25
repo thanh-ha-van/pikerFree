@@ -40,7 +40,7 @@
             android:layout_height="24dp"
             android:layout_margin="5dp"
             android:src="@drawable/ic_info"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_in"

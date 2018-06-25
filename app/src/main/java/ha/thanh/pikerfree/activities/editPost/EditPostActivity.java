@@ -96,7 +96,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
     public void changeStatus() {
         if (postStatus.getText().toString().equalsIgnoreCase(getResources().getString(R.string.opening))) {
             postStatus.setText(getResources().getString(R.string.closed));
-            postStatus.setTextColor(getResources().getColor(R.color.GrayScale));
+            postStatus.setTextColor(getResources().getColor(R.color.gray_50));
             mPresenter.changeStatus(Constants.STATUS_CLOSE);
         } else {
             postStatus.setText(getResources().getString(R.string.opening));
@@ -138,7 +138,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
         params.setPickerLimit(6);
         params.setToolbarColor(getResources().getColor(R.color.colorPrimaryDark));
         params.setActionButtonColor(getResources().getColor(R.color.colorAccent));
-        params.setButtonTextColor(getResources().getColor(R.color.white));
+        params.setButtonTextColor(getResources().getColor(R.color.white_100));
         intent.putExtra(com.vlk.multimager.utils.Constants.KEY_PARAMS, params);
         startActivityForResult(intent, com.vlk.multimager.utils.Constants.TYPE_MULTI_PICKER);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);

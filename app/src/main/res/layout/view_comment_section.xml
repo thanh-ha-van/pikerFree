@@ -61,7 +61,7 @@
             android:background="@drawable/plate_brown_shade"
             android:padding="5dp"
             android:src="@drawable/ic_paper_plane"
-            android:tint="@color/GrayScale" />
+            android:tint="@color/gray_50" />
     </LinearLayout>
 
     <ha.thanh.pikerfree.customviews.CustomTextView

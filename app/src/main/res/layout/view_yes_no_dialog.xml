@@ -47,7 +47,7 @@
             android:background="@drawable/plate_orange_shade"
             android:gravity="center"
             android:text="@string/op_cancel"
-            android:textColor="@color/white"
+            android:textColor="@color/white_100"
             android:textSize="18sp" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
@@ -57,7 +57,7 @@
             android:background="@drawable/plate_green_shade"
             android:gravity="center"
             android:text="@string/ok"
-            android:textColor="@color/white"
+            android:textColor="@color/white_100"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -20,7 +20,7 @@
         android:background="@drawable/plate_green_shade"
         android:gravity="center"
         android:text="@string/com_facebook_loading"
-        android:textColor="@color/white"
+        android:textColor="@color/white_100"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_item_image"
         app:layout_constraintLeft_toLeftOf="@+id/img_item_image"

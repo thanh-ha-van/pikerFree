@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="0dp"
         android:src="@drawable/piker"
-        android:tint="@color/white" />
+        android:tint="@color/white_100" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:padding="8dp"
         android:text="@string/slogan"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/white_100"
         android:textSize="16sp" />
 
     <View
@@ -45,7 +45,7 @@
         android:layout_gravity="bottom"
         android:text="@string/version"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/white_100"
         android:textSize="12sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -54,7 +54,7 @@
         android:layout_gravity="bottom"
         android:text="@string/from_uit"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/white_100"
         android:textSize="12sp" />
 
 </LinearLayout>

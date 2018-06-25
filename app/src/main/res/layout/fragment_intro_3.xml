@@ -37,7 +37,7 @@
             android:background="@drawable/bg_circle_check"
             android:padding="2dp"
             android:src="@drawable/ic_time"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <ImageView
             android:id="@+id/iv_image_2"
@@ -48,7 +48,7 @@
             android:background="@drawable/bg_circle_check"
             android:padding="3dp"
             android:src="@drawable/ic_title"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <ImageView
             android:id="@+id/iv_image_3"
@@ -59,7 +59,7 @@
             android:background="@drawable/bg_circle_check"
             android:padding="5dp"
             android:src="@drawable/ic_flash"
-            android:tint="@color/white" />
+            android:tint="@color/white_100" />
 
         <ImageView
             android:id="@+id/iv_image_4"
