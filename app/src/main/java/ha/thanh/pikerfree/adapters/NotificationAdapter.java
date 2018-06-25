@@ -42,7 +42,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.tvBody.setText(dataSet.get(position).getMess());
         if (dataSet.get(position).isRead() == 0) {
             holder.tvBody.setTextColor(context.getResources().getColor(R.color.black));
-            holder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.gray_70));
+            holder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.gray_50));
         } else {
             holder.tvBody.setTextColor(context.getResources().getColor(R.color.gray_50));
             holder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.white_100));

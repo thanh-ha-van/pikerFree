@@ -53,7 +53,7 @@
                     android:id="@+id/tv_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_black_3"
+                    android:textColor="@color/text_black_50"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -68,7 +68,7 @@
                     android:id="@+id/tv_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_black_3"
+                    android:textColor="@color/text_black_50"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -95,7 +95,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:textAllCaps="true"
-        android:textColor="@color/text_black_3"
+        android:textColor="@color/text_black_50"
         android:textSize="14sp"
         app:fontAssetName="Roboto-Bold.ttf" />
 

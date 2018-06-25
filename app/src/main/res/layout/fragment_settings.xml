@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/favorite_list"
-                android:textColor="@color/text_black_3"
+                android:textColor="@color/text_black_50"
                 android:textSize="16sp" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
@@ -57,7 +57,7 @@
             android:layout_height="1px"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_40" />
 
         <LinearLayout
             android:id="@+id/view_notification"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notification"
-                android:textColor="@color/text_black_3"
+                android:textColor="@color/text_black_50"
                 android:textSize="16sp" />
 
             <ha.thanh.pikerfree.customviews.CustomTextView
@@ -100,7 +100,7 @@
             android:layout_height="1px"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_40" />
 
         <LinearLayout
             android:id="@+id/view_privacy"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/privacy"
-                android:textColor="@color/text_black_3"
+                android:textColor="@color/text_black_50"
                 android:textSize="16sp" />
 
             <ImageView style="@style/rightButton" />
@@ -128,7 +128,7 @@
             android:layout_height="1px"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_40" />
 
         <LinearLayout
             android:id="@+id/view_about"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/about_us"
-                android:textColor="@color/text_black_3"
+                android:textColor="@color/text_black_50"
                 android:textSize="16sp" />
 
             <ImageView style="@style/rightButton" />
@@ -155,7 +155,7 @@
             android:layout_height="1px"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_40" />
 
         <LinearLayout
             android:id="@+id/view_help"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/help_and_tip"
-                android:textColor="@color/text_black_3"
+                android:textColor="@color/text_black_50"
                 android:textSize="16sp" />
 
             <ImageView style="@style/rightButton" />
@@ -182,7 +182,7 @@
             android:layout_height="1px"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_40" />
 
         <LinearLayout
             android:id="@+id/view_manage_account"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/manage"
-                android:textColor="@color/text_black_3"
+                android:textColor="@color/text_black_50"
                 android:textSize="16sp" />
 
             <ImageView style="@style/rightButton" />
@@ -209,7 +209,7 @@
             android:layout_height="1px"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray_40" />
 
     </LinearLayout>
 

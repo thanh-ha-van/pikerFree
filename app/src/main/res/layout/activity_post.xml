@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_gravity="center"
-                android:background="@color/gray" />
+                android:background="@color/gray_40" />
 
             <include
                 layout="@layout/view_post_infor"
