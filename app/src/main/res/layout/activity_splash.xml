@@ -35,7 +35,7 @@
         android:background="@drawable/plate_brown_shade"
         android:padding="8dp"
         android:textAlignment="center"
-        android:textColor="@color/red"
+        android:textColor="@color/red_50"
         android:textSize="14sp"
         android:visibility="gone" />
 

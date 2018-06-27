@@ -8,14 +8,14 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout style="@style/normalToolbar">
+    <LinearLayout style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
-            style="@style/toolbarTitle"
+            style="@style/LegendToolbar"
             android:text="@string/change_pass"
             app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
@@ -97,7 +97,7 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_save"
-            style="@style/primaryButton"
+            style="@style/ImmortalButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:text="@string/save" />

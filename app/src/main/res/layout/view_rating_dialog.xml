@@ -35,7 +35,7 @@
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:text="@string/start_5"
-        android:textColor="@color/green"
+        android:textColor="@color/green_70"
         android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -50,7 +50,7 @@
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:text="@string/start_4"
-        android:textColor="@color/green"
+        android:textColor="@color/green_70"
         android:textSize="18sp" />
 
 
@@ -66,7 +66,7 @@
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:text="@string/start_3"
-        android:textColor="@color/green"
+        android:textColor="@color/green_70"
         android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -81,7 +81,7 @@
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:text="@string/start_2"
-        android:textColor="@color/green"
+        android:textColor="@color/green_70"
         android:textSize="18sp" />
 
     <ha.thanh.pikerfree.customviews.CustomTextView
@@ -96,7 +96,7 @@
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:text="@string/start_1"
-        android:textColor="@color/green"
+        android:textColor="@color/green_70"
         android:textSize="18sp" />
 
 

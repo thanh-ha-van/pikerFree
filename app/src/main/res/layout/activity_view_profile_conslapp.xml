@@ -28,7 +28,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white_50_opacity"
+                android:background="@color/white_50_shade"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -109,7 +109,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white_50_opacity"
+            android:background="@color/white_50_shade"
             android:orientation="horizontal"
             android:paddingBottom="10dp"
             android:paddingTop="10dp">
@@ -157,7 +157,7 @@
                 android:id="@+id/tv_loading_post"
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
-                android:background="@color/white_50_opacity"
+                android:background="@color/white_50_shade"
                 android:gravity="center"
                 android:text="Syncing data..."
                 android:textColor="@color/gray_50"

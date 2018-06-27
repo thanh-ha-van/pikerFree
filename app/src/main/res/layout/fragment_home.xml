@@ -84,7 +84,7 @@
             android:id="@+id/tv_loading_post"
             android:layout_width="match_parent"
             android:layout_height="26dp"
-            android:background="@color/white_50_opacity"
+            android:background="@color/white_50_shade"
             android:gravity="center"
             android:text="@string/sync"
             android:textColor="@color/gray_50"

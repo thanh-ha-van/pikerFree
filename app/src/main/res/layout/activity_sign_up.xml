@@ -51,7 +51,7 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_sign_up"
-            style="@style/primaryButton"
+            style="@style/ImmortalButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -67,7 +67,7 @@
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/btn_log_in"
-            style="@style/secondaryButton"
+            style="@style/LegendButton"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"

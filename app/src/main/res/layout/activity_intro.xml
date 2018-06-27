@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/view_title"
-        style="@style/normalToolbar">
+        style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/img_back"

@@ -10,14 +10,14 @@
     android:orientation="vertical"
     tools:context=".activities.newPost.NewPostActivity">
 
-    <LinearLayout style="@style/normalToolbar">
+    <LinearLayout style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
-            style="@style/toolbarTitle"
+            style="@style/LegendToolbar"
             android:text="@string/edit_post"
             app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
@@ -32,7 +32,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white_50_opacity"
+            android:background="@color/white_50_shade"
             android:orientation="vertical">
 
             <LinearLayout
@@ -47,7 +47,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="5dp"
                     android:src="@drawable/ic_title"
-                    android:tint="@color/green" />
+                    android:tint="@color/green_70" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_item_title"
@@ -111,7 +111,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="5dp"
                     android:src="@drawable/ic_more"
-                    android:tint="@color/green" />
+                    android:tint="@color/green_70" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_description"
@@ -145,7 +145,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="10dp"
                     android:src="@drawable/ic_forward"
-                    android:tint="@color/green" />
+                    android:tint="@color/green_70" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_post_category"
@@ -179,7 +179,7 @@
                     android:background="@drawable/circle_green"
                     android:padding="10dp"
                     android:src="@drawable/ic_flash"
-                    android:tint="@color/green" />
+                    android:tint="@color/green_70" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_post_status"
@@ -190,7 +190,7 @@
                     android:background="@color/transparent"
                     android:gravity="top"
                     android:padding="@dimen/item_padding_small"
-                    android:textColor="@color/green"
+                    android:textColor="@color/green_70"
                     android:textSize="16sp" />
 
                 <ImageView
@@ -201,7 +201,7 @@
                     android:background="@drawable/circle_orrange"
                     android:padding="6dp"
                     android:src="@drawable/ic_warning_new"
-                    android:tint="@color/orange" />
+                    android:tint="@color/orange_70" />
             </LinearLayout>
 
             <View
@@ -211,7 +211,7 @@
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/btn_save_edit_post"
-                style="@style/primaryButton"
+                style="@style/ImmortalButton"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_margin="20dp"

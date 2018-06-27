@@ -64,8 +64,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.tvStatus.setText(getTextFromStatus(post.getStatus()));
             holder.tvDes.setText(post.getDescription());
             if (post.getStatus() == Constants.STATUS_CLOSE) {
-                holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.orange));
-            } else holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.green));
+                holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.orange_70));
+            } else holder.tvStatus.setTextColor(mConText.getResources().getColor(R.color.green_70));
 
             final DatabaseReference userImagePref;
             userImagePref = FirebaseDatabase.getInstance()

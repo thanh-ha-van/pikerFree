@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_50_opacity"
+    android:background="@color/white_50_shade"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/view_title"
-        style="@style/normalToolbar">
+        style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
-            style="@style/toolbarTitle"
+            style="@style/LegendToolbar"
             android:text="@string/manage"
             app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>

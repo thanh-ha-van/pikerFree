@@ -5,22 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_50_opacity"
+    android:background="@color/white_50_shade"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".activities.newPost.NewPostActivity">
 
     <LinearLayout
         android:id="@+id/view_title"
-        style="@style/normalToolbar">
+        style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
-            style="@style/toolbarTitle"
+            style="@style/LegendToolbar"
             android:text="@string/new_post"
             app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
@@ -43,12 +43,12 @@
                 android:layout_marginTop="20dp">
 
                 <ImageView
-                    style="@style/circleIconImage"
+                    style="@style/ImmortalCircleImage"
                     android:src="@drawable/ic_title" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_item_title"
-                    style="@style/primaryText"
+                    style="@style/ImmortalEditText"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
@@ -96,12 +96,12 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    style="@style/circleIconImage"
+                    style="@style/ImmortalCircleImage"
                     android:src="@drawable/ic_more" />
 
                 <ha.thanh.pikerfree.customviews.CustomEditText
                     android:id="@+id/et_description"
-                    style="@style/primaryText"
+                    style="@style/ImmortalEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -122,12 +122,12 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    style="@style/circleIconImage"
+                    style="@style/ImmortalCircleImage"
                     android:src="@drawable/ic_forward" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView
                     android:id="@+id/tv_select"
-                    style="@style/primaryText"
+                    style="@style/ImmortalEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -144,7 +144,7 @@
 
             <ha.thanh.pikerfree.customviews.CustomTextView
                 android:id="@+id/bnt_post_this"
-                style="@style/primaryButton"
+                style="@style/ImmortalButton"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="20dp"

@@ -100,7 +100,7 @@ public class EditPostActivity extends AppCompatActivity implements EditPostInter
             mPresenter.changeStatus(Constants.STATUS_CLOSE);
         } else {
             postStatus.setText(getResources().getString(R.string.opening));
-            postStatus.setTextColor(getResources().getColor(R.color.green));
+            postStatus.setTextColor(getResources().getColor(R.color.green_70));
             mPresenter.changeStatus(Constants.STATUS_OPEN);
         }
     }

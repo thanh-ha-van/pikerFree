@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_50_opacity"
+    android:background="@color/white_50_shade"
     android:fitsSystemWindows="false"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -12,15 +12,15 @@
 
     <LinearLayout
         android:id="@+id/view_title"
-        style="@style/normalToolbar">
+        style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
-            style="@style/toolbarTitle"
+            style="@style/LegendToolbar"
             android:text="@string/post_view"
             app:fontAssetName="Roboto-Bold.ttf" />
     </LinearLayout>
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-5dp"
-            android:background="@color/white_50_opacity"
+            android:background="@color/white_50_shade"
             android:orientation="vertical">
 
             <android.support.v4.view.ViewPager
@@ -57,7 +57,7 @@
                 android:layout_height="40dp">
 
                 <ImageView
-                    style="@style/circleIconImage"
+                    style="@style/ImmortalCircleImage"
                     android:src="@drawable/ic_noun" />
 
                 <ha.thanh.pikerfree.customviews.CustomTextView

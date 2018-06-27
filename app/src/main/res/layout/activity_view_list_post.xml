@@ -9,15 +9,15 @@
 
     <LinearLayout
         android:id="@+id/view_title"
-        style="@style/normalToolbar">
+        style="@style/ImmortalToolbar">
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <ha.thanh.pikerfree.customviews.CustomTextView
             android:id="@+id/tv_title"
-            style="@style/toolbarTitle"
+            style="@style/LegendToolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:fontAssetName="Roboto-Bold.ttf" />

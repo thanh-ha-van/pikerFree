@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/white_50_opacity"
+        android:background="@color/white_50_shade"
         android:orientation="horizontal"
         android:paddingBottom="10dp">
 

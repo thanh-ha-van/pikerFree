@@ -58,7 +58,7 @@
             android:background="@drawable/plate_brown_shade"
             android:padding="8dp"
             android:src="@drawable/ic_delete_button"
-            android:tint="@color/orange" />
+            android:tint="@color/orange_70" />
     </LinearLayout>
 
     <View

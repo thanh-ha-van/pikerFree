@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/ic_back"
-            style="@style/toolbarBackButton" />
+            style="@style/ToolbarLeftButton" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
